@@ -10,16 +10,29 @@ public class ObstacleInfo
     public float[] posX;
 }
 
+[System.Serializable]
+public class CollectableInfo
+{
+    public GameObject collectablePrefab;
+    public float[] posX;
+}
+
 public class SpawningObstacle2 : MonoBehaviour
 {
     public ObstacleInfo[] obstacles;
+    public CollectableInfo collectable;
 
-    public float spawnDelay = 1.4f; 
+    public float spawnObstacleDelay = 1.4f;
+    public float spawnCollectableDelay = 3f;
+
+    private GameObject newObstacle;
+    private GameObject newCollectable;
 
     void Start()
     {
         //adicionei um delay no primeiro parâmetro pra não começar já com objeto na cara
-        InvokeRepeating("SpawnObstacle", 1f, spawnDelay); 
+        InvokeRepeating("SpawnObstacle", 1f, spawnObstacleDelay); 
+        InvokeRepeating("SpawnCollectable", 1f, spawnCollectableDelay); 
     }
 
     void SpawnObstacle()
@@ -32,7 +45,16 @@ public class SpawningObstacle2 : MonoBehaviour
 
         Vector3 pos = new Vector3(obstacles[obstacle].posX[randomPosX], 0f, 100f);
 
-        Instantiate(obstacles[obstacle].prefab, pos, obstacles[obstacle].prefab.transform.rotation);
+        newObstacle = Instantiate(obstacles[obstacle].prefab, pos, obstacles[obstacle].prefab.transform.rotation);
+    }
+
+    void SpawnCollectable()
+    {
+        int randomPosX = Random.Range(0, collectable.posX.Length);
+
+        Vector3 pos = new Vector3(collectable.posX[randomPosX], 0f, 100f);
+
+        newCollectable = Instantiate(collectable.collectablePrefab, pos, Quaternion.identity);
     }
 }
 

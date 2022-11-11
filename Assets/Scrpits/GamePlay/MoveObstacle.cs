@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class MoveObstacle : MonoBehaviour
 {
-    public GameObject player;
+    GameObject player;
 
     float speed = 50f;
+
+    private void Start()
+    {
+        player = FindObjectOfType<PlayerController>().gameObject;
+    }
 
     // Update is called once per frame
     void Update()

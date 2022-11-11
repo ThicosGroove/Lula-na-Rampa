@@ -7,5 +7,8 @@ public static class Const
 
     public static int GAME_SCENE = 1;
 
+    public static string PLAYER_TAG = "Player";
+    public static string OBSTACLE_TAG = "Obstacle";
 
+    public static int SCORE_PER_COLLECTABLE = 1;
 }
