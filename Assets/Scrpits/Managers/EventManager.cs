@@ -17,26 +17,32 @@ namespace GameEvents
     {
         public static event UnityAction<int> ScoreGained;
         public static void OnScoreGained(int value) => ScoreGained?.Invoke(value);
+
+        public static event UnityAction<int> ChangeLevel;
+        public static void OnChangeLevel(int value) => ChangeLevel?.Invoke(value);
     }
 
-    //public static class GameplayEvents
-    //{
-    //    public static event UnityAction MainMenu;
-    //    public static void OnMainMenu() => MainMenu?.Invoke();
+    public static class GameplayEvents
+    {
+        public static event UnityAction StartNewLevel;
+        public static void OnStartNewLevel() => StartNewLevel?.Invoke();
 
-    //    public static event UnityAction PrePlay;
-    //    public static void OnPrePlay() => PrePlay?.Invoke();
+        //public static event UnityAction MainMenu;
+        //public static void OnMainMenu() => MainMenu?.Invoke();
 
-    //    public static event UnityAction GameStart;
-    //    public static void OnGameStart() => GameStart?.Invoke();
+        //public static event UnityAction PrePlay;
+        //public static void OnPrePlay() => PrePlay?.Invoke();
 
-    //    public static event UnityAction RestartGame;
-    //    public static void OnRestartGame() => RestartGame?.Invoke();
+        //public static event UnityAction GameStart;
+        //public static void OnGameStart() => GameStart?.Invoke();
 
-    //    public static event UnityAction RespawnPlayer;
-    //    public static void OnRespawnPlayer() => RespawnPlayer?.Invoke();
+        //public static event UnityAction RestartGame;
+        //public static void OnRestartGame() => RestartGame?.Invoke();
 
-    //}
+        //public static event UnityAction RespawnPlayer;
+        //public static void OnRespawnPlayer() => RespawnPlayer?.Invoke();
+
+    }
 
     //public static class UtilityEvents
     //{

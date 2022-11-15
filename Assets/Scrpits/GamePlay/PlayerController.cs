@@ -1,27 +1,54 @@
 ﻿using UnityEngine;
+using GameEvents;
 
+enum PlayerState
+{
+    IDLE,
+    PLAYING,
+    DEAD,
+    WIN
+}
+
+
+// CRIAR UM PLAYER ANIMATION HANDLER P LIDAR COM AS ANIMAÇÕES
 public class PlayerController : MonoBehaviour
 {
     public float laneDistance;
-    public float smooth;
+    public float slideSpeed;
     public bool gameOver;
 
     float height;
     int desiredLane;
 
+    int currentLevel;
+
+    PlayerState state;
+
     private void Awake()
     {
         height = transform.localScale.y / 2;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
+        state = PlayerState.PLAYING;
         desiredLane = 1;
     }
 
-    // Update is called once per frame
+    private void OnEnable()
+    {
+        ScoreEvents.ChangeLevel += updateSideSpeed;
+    }
+
+    private void OnDisable()
+    {
+        ScoreEvents.ChangeLevel -= updateSideSpeed;       
+    }
+
     void Update()
+    {
+        if (state != PlayerState.PLAYING) return;
+
+        Move();
+    }
+
+    private void Move()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
@@ -51,17 +78,43 @@ public class PlayerController : MonoBehaviour
             targetPosition += Vector3.right * laneDistance;
         }
 
-        transform.position = Vector3.Lerp(transform.position, targetPosition, smooth * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, slideSpeed * Time.deltaTime);
+    }
+
+    void updateSideSpeed(int newLevel)
+    {
+        currentLevel = newLevel;
+
+        switch (currentLevel)
+        {
+            case 1:
+                slideSpeed = GamePlayManager.Instance.playerSlideSpeed_Level_1;
+                break;
+            case 2:
+                slideSpeed = GamePlayManager.Instance.playerSlideSpeed_Level_2;
+                break;
+            case 3:
+                slideSpeed = GamePlayManager.Instance.playerSlideSpeed_Level_3;
+                break;
+            case 4:
+                slideSpeed = GamePlayManager.Instance.playerSlideSpeed_Level_4;
+                break;
+            case 5:
+                slideSpeed = GamePlayManager.Instance.playerSlideSpeed_Level_5;
+                break;
+            default:
+                break;
+        }
     }
 
     private void OnCollisionEnter(Collision other)
     {
+        if (!GamePlayManager.Instance.playerColliderOn) return;
+
         if (other.gameObject.CompareTag("Obstacle"))
         {
             gameOver = true;
-            Debug.Log("Game Over"); 
-            //particles
-            //sound
+            Debug.Log("Game Over");
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameEvents;
 
 [System.Serializable]
 public class ObstacleInfo
@@ -22,39 +23,114 @@ public class SpawningObstacle2 : MonoBehaviour
     public ObstacleInfo[] obstacles;
     public CollectableInfo collectable;
 
-    public float spawnObstacleDelay = 1.4f;
-    public float spawnCollectableDelay = 3f;
+    private int currentLevel;
+    private float currentSpeed;
+    private float spawnObstacleDelay;
+    private float spawnCollectableDelay = 3f;
 
     private GameObject newObstacle;
     private GameObject newCollectable;
 
+    private IEnumerator spawnObstacleCoroutine;
+    private IEnumerator spawnCollectableCoroutine;
+
+
     void Start()
     {
-        //adicionei um delay no primeiro parâmetro pra não começar já com objeto na cara
-        InvokeRepeating("SpawnObstacle", 1f, spawnObstacleDelay); 
-        InvokeRepeating("SpawnCollectable", 1f, spawnCollectableDelay); 
+        LevelUp(1);
+
+        spawnObstacleCoroutine = SpawnObstacle();
+        StartCoroutine(spawnObstacleCoroutine);
+
+        spawnCollectableCoroutine = SpawnCollectable();
+        StartCoroutine(spawnCollectableCoroutine);
     }
 
-    void SpawnObstacle()
+    private void OnEnable()
     {
-        //sorteia o objeto
-        int obstacle = Random.Range(0, obstacles.Length);
-
-        //sorteia a posição entre uma das possíveis para o objeto
-        int randomPosX = Random.Range(0, obstacles[obstacle].posX.Length);
-
-        Vector3 pos = new Vector3(obstacles[obstacle].posX[randomPosX], 0f, 100f);
-
-        newObstacle = Instantiate(obstacles[obstacle].prefab, pos, obstacles[obstacle].prefab.transform.rotation);
+        ScoreEvents.ChangeLevel += LevelUp;
+        GameplayEvents.StartNewLevel += StartNewSpawing;
     }
 
-    void SpawnCollectable()
+    private void OnDisable()
     {
-        int randomPosX = Random.Range(0, collectable.posX.Length);
+        ScoreEvents.ChangeLevel -= LevelUp;
+        GameplayEvents.StartNewLevel -= StartNewSpawing;
+    }
 
-        Vector3 pos = new Vector3(collectable.posX[randomPosX], 0f, 100f);
+    void LevelUp(int newLevel)
+    {
+        StopAllCoroutines();
 
-        newCollectable = Instantiate(collectable.collectablePrefab, pos, Quaternion.identity);
+        currentLevel = newLevel;
+
+        switch (currentLevel)
+        {
+            case 1:
+                currentSpeed = GamePlayManager.Instance.obstacleSpeed_Level_1;
+                spawnObstacleDelay = GamePlayManager.Instance.obstacleDelay_Level_1;
+                break;
+            case 2:
+                currentSpeed = GamePlayManager.Instance.obstacleSpeed_Level_2;
+                spawnObstacleDelay = GamePlayManager.Instance.obstacleDelay_Level_2;
+                break;
+            case 3:
+                currentSpeed = GamePlayManager.Instance.obstacleSpeed_Level_3;
+                spawnObstacleDelay = GamePlayManager.Instance.obstacleDelay_Level_3;
+                break;
+            case 4:
+                currentSpeed = GamePlayManager.Instance.obstacleSpeed_Level_4;
+                spawnObstacleDelay = GamePlayManager.Instance.obstacleDelay_Level_4;
+                break;
+            case 5:
+                currentSpeed = GamePlayManager.Instance.obstacleSpeed_Level_5;
+                spawnObstacleDelay = GamePlayManager.Instance.obstacleDelay_Level_5;
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void StartNewSpawing()
+    {
+        StartCoroutine(spawnObstacleCoroutine);
+        StartCoroutine(spawnCollectableCoroutine);
+    }
+
+    IEnumerator SpawnObstacle()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(spawnObstacleDelay);
+
+            //sorteia o objeto
+            int obstacle = Random.Range(0, obstacles.Length);
+
+            //sorteia a posição entre uma das possíveis para o objeto
+            int randomPosX = Random.Range(0, obstacles[obstacle].posX.Length);
+
+            Vector3 pos = new Vector3(obstacles[obstacle].posX[randomPosX], 0f, 200f);
+
+            newObstacle = Instantiate(obstacles[obstacle].prefab, pos, obstacles[obstacle].prefab.transform.rotation);
+            GamePlayManager.Instance.objList.Add(newObstacle.GetComponent<MoveObstacle>());
+            newObstacle.GetComponent<MoveObstacle>().speed = currentSpeed;
+        }
+    }
+
+    IEnumerator SpawnCollectable()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(spawnCollectableDelay);
+
+            int randomPosX = Random.Range(0, collectable.posX.Length);
+
+            Vector3 pos = new Vector3(collectable.posX[randomPosX], 0f, 200f);
+
+            newCollectable = Instantiate(collectable.collectablePrefab, pos, Quaternion.identity);
+            GamePlayManager.Instance.objList.Add(newCollectable.GetComponent<MoveObstacle>());
+            newCollectable.GetComponent<MoveObstacle>().speed = currentSpeed;
+        }  
     }
 }
 

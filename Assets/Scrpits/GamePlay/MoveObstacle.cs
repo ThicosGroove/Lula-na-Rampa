@@ -1,19 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameEvents;
 
 public class MoveObstacle : MonoBehaviour
 {
     GameObject player;
 
-    float speed = 50f;
+    [HideInInspector]
+    public float speed;
 
     private void Start()
     {
         player = FindObjectOfType<PlayerController>().gameObject;
     }
 
-    // Update is called once per frame
+    private void OnEnable()
+    {
+        ScoreEvents.ChangeLevel += DestroyOnNewLevel;
+    }
+
+    private void OnDisable()
+    {
+        ScoreEvents.ChangeLevel -= DestroyOnNewLevel;
+        
+    }
+
     void Update()
     {
         transform.Translate(Vector3.back * speed * Time.deltaTime);
@@ -24,7 +36,14 @@ public class MoveObstacle : MonoBehaviour
     {
         if(transform.position.z < player.transform.position.z - 10)
         {
+            GamePlayManager.Instance.objList.Remove(this);
             Destroy(this.gameObject);
         }
+    }
+
+    void DestroyOnNewLevel(int _)
+    {
+        GamePlayManager.Instance.objList.Remove(this);
+        Destroy(this.gameObject);
     }
 }

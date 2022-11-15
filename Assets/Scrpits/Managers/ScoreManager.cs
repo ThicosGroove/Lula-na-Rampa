@@ -18,12 +18,21 @@ public class ScoreManager : Singleton<ScoreManager>
 
     private void OnDisable()
     {
-        ScoreEvents.ScoreGained -= UpdateScore;       
+        ScoreEvents.ScoreGained -= UpdateScore;
     }
 
     void UpdateScore(int score)
     {
         totalScoreCurrentRun += score;
+
+        if (GamePlayManager.Instance.isNormalMode)
+        {
+            VerifyWin();
+        }
+        else
+        {
+        }
+        VerifyCurrentLevel();
     }
 
     private void VerifyWin()
@@ -33,6 +42,29 @@ public class ScoreManager : Singleton<ScoreManager>
         if (totalScoreCurrentRun >= 13)
         {
             // Update GameState WIN
+        }
+    }
+
+    private void VerifyCurrentLevel()
+    {
+        if (totalScoreCurrentRun == GamePlayManager.Instance.changeToLevel_2)
+        {
+            GamePlayManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_2);
+        }
+
+        if (totalScoreCurrentRun == GamePlayManager.Instance.changeToLevel_3)
+        {
+            GamePlayManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_3);
+        }
+
+        if (totalScoreCurrentRun == GamePlayManager.Instance.changeToLevel_4)
+        {
+            GamePlayManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_4);
+        }
+
+        if (totalScoreCurrentRun == GamePlayManager.Instance.changeToLevel_5)
+        {
+            GamePlayManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_5);
         }
     }
 }
