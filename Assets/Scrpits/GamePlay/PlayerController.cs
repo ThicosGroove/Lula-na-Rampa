@@ -9,20 +9,18 @@ enum PlayerState
     WIN
 }
 
-
 // CRIAR UM PLAYER ANIMATION HANDLER P LIDAR COM AS ANIMAÇÕES
 public class PlayerController : MonoBehaviour
 {
     public float laneDistance;
     public float slideSpeed;
-    public bool gameOver;
 
     float height;
     int desiredLane;
 
     int currentLevel;
 
-    PlayerState state;
+    [SerializeField] PlayerState state;
 
     private void Awake()
     {
@@ -31,14 +29,38 @@ public class PlayerController : MonoBehaviour
         desiredLane = 1;
     }
 
+    private void Start()
+    {
+        if (GamePlayManager.Instance.isNormalMode)
+        {
+            slideSpeed = GamePlayManager.Instance.normalSpeed;
+        }
+    }
+
     private void OnEnable()
     {
         ScoreEvents.ChangeLevel += updateSideSpeed;
+
+        GameplayEvents.Win += OnPlayerWin;
     }
 
     private void OnDisable()
     {
         ScoreEvents.ChangeLevel -= updateSideSpeed;       
+
+        GameplayEvents.Win -= OnPlayerWin;
+    }
+
+
+
+    private void UpdatePlayerState(PlayerState newState)
+    {
+        state = newState;
+
+        if (state != PlayerState.PLAYING)
+        {
+            slideSpeed = 0;
+        }
     }
 
     void Update()
@@ -81,6 +103,11 @@ public class PlayerController : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, targetPosition, slideSpeed * Time.deltaTime);
     }
 
+    void OnPlayerWin()
+    {
+        state = PlayerState.WIN;
+    }
+
     void updateSideSpeed(int newLevel)
     {
         currentLevel = newLevel;
@@ -111,10 +138,12 @@ public class PlayerController : MonoBehaviour
     {
         if (!GamePlayManager.Instance.playerColliderOn) return;
 
-        if (other.gameObject.CompareTag("Obstacle"))
+        if (other.gameObject.CompareTag(Const.OBSTACLE_TAG))
         {
-            gameOver = true;
+            UpdatePlayerState(PlayerState.DEAD);
+
             Debug.Log("Game Over");
+            GamePlayManager.Instance.UpdateGameState(GameStates.GAMEOVER);
         }
     }
 }

@@ -18,12 +18,15 @@ public class MoveObstacle : MonoBehaviour
     private void OnEnable()
     {
         ScoreEvents.ChangeLevel += DestroyOnNewLevel;
+        GameplayEvents.GameOver += DestroyOnGameOver;
+        GameplayEvents.Win += DestroyOnGameOver;
     }
 
     private void OnDisable()
     {
         ScoreEvents.ChangeLevel -= DestroyOnNewLevel;
-        
+        GameplayEvents.GameOver -= DestroyOnGameOver;       
+        GameplayEvents.Win -= DestroyOnGameOver;
     }
 
     void Update()
@@ -42,6 +45,12 @@ public class MoveObstacle : MonoBehaviour
     }
 
     void DestroyOnNewLevel(int _)
+    {
+        GamePlayManager.Instance.objList.Remove(this);
+        Destroy(this.gameObject);
+    }
+
+    void DestroyOnGameOver()
     {
         GamePlayManager.Instance.objList.Remove(this);
         Destroy(this.gameObject);

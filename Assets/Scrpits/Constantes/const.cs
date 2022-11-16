@@ -10,4 +10,6 @@ public static class Const
     public static string OBSTACLE_TAG = "Obstacle";
 
     public static int SCORE_PER_COLLECTABLE = 1;
+
+    public static string SCOREBOARD_NAME = "Global Scoreboard";
 }

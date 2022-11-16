@@ -5,14 +5,28 @@ using TMPro;
 
 public class InGameUIManager : MonoBehaviour
 {
+    [Header("Playing Panel")]
+    [SerializeField] GameObject OnPlayingPanel;
     [SerializeField] TMP_Text scoreText;
     [SerializeField] TMP_Text levelText;
+
+    [Header("Game Over Panel")]
+    [SerializeField] GameObject OnGameOverPanel;
+    [SerializeField] TMP_Text GameOverText;
+
+
+    [Header("WinPanel")]
+    [SerializeField] GameObject OnWinPanel;
+    [SerializeField] TMP_Text WinText;
 
     int totalScore;
     int currentLevel;
 
     void Start()
     {
+        CloseAllPanels();
+        OnPlayingPanel.SetActive(true);
+
         totalScore = 0;
         scoreText.text = "Estrelas: " + totalScore;
     }
@@ -21,12 +35,18 @@ public class InGameUIManager : MonoBehaviour
     {
         ScoreEvents.ScoreGained += UpdateScoreText;
         ScoreEvents.ChangeLevel += UpdateLevelText;
+
+        GameplayEvents.GameOver += OnGameOverUI;
+        GameplayEvents.Win += OnWinUI;
     }
 
     private void OnDisable()
     {
         ScoreEvents.ScoreGained -= UpdateScoreText;
         ScoreEvents.ChangeLevel -= UpdateLevelText;
+
+        GameplayEvents.GameOver -= OnGameOverUI;
+        GameplayEvents.Win -= OnWinUI;
     }
 
     private void UpdateScoreText(int score)
@@ -52,6 +72,32 @@ public class InGameUIManager : MonoBehaviour
 
         levelText.gameObject.SetActive(false);
         GameplayEvents.OnStartNewLevel();
+    }
+
+    private void OnGameOverUI()
+    {
+        CloseAllPanels();
+        OnGameOverPanel.SetActive(true);
+
+        GameOverText.text = "Game Over!!";
+    }
+
+
+    private void OnWinUI()
+    {
+        CloseAllPanels();
+        OnWinPanel.SetActive(true);
+
+        WinText.text = "You Win!!";
+    }
+
+
+
+    private void CloseAllPanels()
+    {
+        OnPlayingPanel.SetActive(false);
+        OnGameOverPanel.SetActive(false);
+        OnWinPanel.SetActive(false);
     }
 
 }

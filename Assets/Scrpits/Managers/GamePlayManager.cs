@@ -36,6 +36,12 @@ public class GamePlayManager : Singleton<GamePlayManager>
     [Header("Game Mode and Testing")]
     public bool isNormalMode;
     public bool playerColliderOn;
+    public int winScore;
+
+    [Header("Speed And Delay on Normal Mode")]
+    public float normalSpeed;
+    public float normalDelay;
+    public float playerNormal_SlideSpeed;
 
     [Header("Score per Level")]
     public int changeToLevel_2;
@@ -44,11 +50,11 @@ public class GamePlayManager : Singleton<GamePlayManager>
     public int changeToLevel_5;
 
     [Header("Obstacle Speed per Level")]
-    public float obstacleSpeed_Level_1;
-    public float obstacleSpeed_Level_2;
-    public float obstacleSpeed_Level_3;
-    public float obstacleSpeed_Level_4;
-    public float obstacleSpeed_Level_5;
+    public float currentSpeed_Level_1;
+    public float currentSpeed_Level_2;
+    public float currentSpeed_Level_3;
+    public float currentSpeed_Level_4;
+    public float currentSpeed_Level_5;
 
     [Header("Obstacle Spawn Delay per Level")]
     public float obstacleDelay_Level_1;
@@ -56,6 +62,13 @@ public class GamePlayManager : Singleton<GamePlayManager>
     public float obstacleDelay_Level_3;
     public float obstacleDelay_Level_4;
     public float obstacleDelay_Level_5;
+
+    [Header("Collectable Spawn Delay per Level")]
+    public float CollectableDelay_Level_1;
+    public float CollectableDelay_Level_2;
+    public float CollectableDelay_Level_3;
+    public float CollectableDelay_Level_4;
+    public float CollectableDelay_Level_5;
 
     [Header("Player Slide Speed per Level"),]
     public float playerSlideSpeed_Level_1;
@@ -101,14 +114,17 @@ public class GamePlayManager : Singleton<GamePlayManager>
             case GameStates.PREPLAY:
                 break;
             case GameStates.PLAYING:
+
                 break;
             case GameStates.OPTION_MENU:
                 break;
             case GameStates.PAUSED:
                 break;
             case GameStates.GAMEOVER:
+                GameplayEvents.OnGameOver();
                 break;
             case GameStates.WIN:
+                GameplayEvents.OnWin();
                 break;
             default:
                 break;

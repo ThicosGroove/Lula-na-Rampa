@@ -27,14 +27,18 @@ namespace GameEvents
         public static event UnityAction StartNewLevel;
         public static void OnStartNewLevel() => StartNewLevel?.Invoke();
 
+        public static event UnityAction GameOver;
+        public static void OnGameOver() => GameOver?.Invoke();
+
+        public static event UnityAction Win;
+        public static void OnWin() => Win?.Invoke();
+
         //public static event UnityAction MainMenu;
         //public static void OnMainMenu() => MainMenu?.Invoke();
 
         //public static event UnityAction PrePlay;
         //public static void OnPrePlay() => PrePlay?.Invoke();
 
-        //public static event UnityAction GameStart;
-        //public static void OnGameStart() => GameStart?.Invoke();
 
         //public static event UnityAction RestartGame;
         //public static void OnRestartGame() => RestartGame?.Invoke();

@@ -31,17 +31,17 @@ public class ScoreManager : Singleton<ScoreManager>
         }
         else
         {
+            VerifyCurrentLevel();
         }
-        VerifyCurrentLevel();
     }
 
     private void VerifyWin()
     {
-        // TEM QUE AJUSTAR O MODO DE JOGO
-        // SÓ TEM VITÓRIA NO MODO DE JOGO ESPECÍFICO
-        if (totalScoreCurrentRun >= 13)
+        if (totalScoreCurrentRun == GamePlayManager.Instance.winScore)
         {
-            // Update GameState WIN
+            Debug.LogWarning("Win");
+            GamePlayManager.Instance.UpdateGameState(GameStates.WIN);
+
         }
     }
 

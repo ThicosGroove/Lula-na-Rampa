@@ -40,26 +40,34 @@ public class SpawningObstacle2 : MonoBehaviour
         LevelUp(1);
 
         spawnObstacleCoroutine = SpawnObstacle();
-        StartCoroutine(spawnObstacleCoroutine);
+        //StartCoroutine(spawnObstacleCoroutine);
 
         spawnCollectableCoroutine = SpawnCollectable();
-        StartCoroutine(spawnCollectableCoroutine);
+        //StartCoroutine(spawnCollectableCoroutine);
     }
 
     private void OnEnable()
     {
         ScoreEvents.ChangeLevel += LevelUp;
+
         GameplayEvents.StartNewLevel += StartNewSpawing;
+        GameplayEvents.GameOver += StopAllTheCoroutines;
+        GameplayEvents.Win += StopAllTheCoroutines;
     }
 
     private void OnDisable()
     {
         ScoreEvents.ChangeLevel -= LevelUp;
+
         GameplayEvents.StartNewLevel -= StartNewSpawing;
+        GameplayEvents.GameOver -= StopAllTheCoroutines;
+        GameplayEvents.Win -= StopAllTheCoroutines;
     }
 
     void LevelUp(int newLevel)
     {
+        if (GamePlayManager.Instance.isNormalMode) return;
+
         StopAllCoroutines();
 
         currentLevel = newLevel;
@@ -67,23 +75,23 @@ public class SpawningObstacle2 : MonoBehaviour
         switch (currentLevel)
         {
             case 1:
-                currentSpeed = GamePlayManager.Instance.obstacleSpeed_Level_1;
+                currentSpeed = GamePlayManager.Instance.currentSpeed_Level_1;
                 spawnObstacleDelay = GamePlayManager.Instance.obstacleDelay_Level_1;
                 break;
             case 2:
-                currentSpeed = GamePlayManager.Instance.obstacleSpeed_Level_2;
+                currentSpeed = GamePlayManager.Instance.currentSpeed_Level_2;
                 spawnObstacleDelay = GamePlayManager.Instance.obstacleDelay_Level_2;
                 break;
             case 3:
-                currentSpeed = GamePlayManager.Instance.obstacleSpeed_Level_3;
+                currentSpeed = GamePlayManager.Instance.currentSpeed_Level_3;
                 spawnObstacleDelay = GamePlayManager.Instance.obstacleDelay_Level_3;
                 break;
             case 4:
-                currentSpeed = GamePlayManager.Instance.obstacleSpeed_Level_4;
+                currentSpeed = GamePlayManager.Instance.currentSpeed_Level_4;
                 spawnObstacleDelay = GamePlayManager.Instance.obstacleDelay_Level_4;
                 break;
             case 5:
-                currentSpeed = GamePlayManager.Instance.obstacleSpeed_Level_5;
+                currentSpeed = GamePlayManager.Instance.currentSpeed_Level_5;
                 spawnObstacleDelay = GamePlayManager.Instance.obstacleDelay_Level_5;
                 break;
             default:
@@ -93,8 +101,24 @@ public class SpawningObstacle2 : MonoBehaviour
 
     private void StartNewSpawing()
     {
+        if (GamePlayManager.Instance.isNormalMode)
+        {
+            currentSpeed = GamePlayManager.Instance.normalSpeed;
+            spawnCollectableDelay = GamePlayManager.Instance.normalDelay;
+        }
+        else
+        {
+            currentSpeed = GamePlayManager.Instance.currentSpeed_Level_1;
+            spawnObstacleDelay = GamePlayManager.Instance.obstacleDelay_Level_1;
+        }
+
         StartCoroutine(spawnObstacleCoroutine);
         StartCoroutine(spawnCollectableCoroutine);
+    }
+
+    private void StopAllTheCoroutines()
+    {
+        StopAllCoroutines();
     }
 
     IEnumerator SpawnObstacle()
@@ -130,7 +154,7 @@ public class SpawningObstacle2 : MonoBehaviour
             newCollectable = Instantiate(collectable.collectablePrefab, pos, Quaternion.identity);
             GamePlayManager.Instance.objList.Add(newCollectable.GetComponent<MoveObstacle>());
             newCollectable.GetComponent<MoveObstacle>().speed = currentSpeed;
-        }  
+        }
     }
 }
 
