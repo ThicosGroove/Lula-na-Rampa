@@ -23,7 +23,7 @@ public class PlayFabGameManager : Singleton<PlayFabGameManager>
 
     private void OnGameOver()
     {
-        if (PlayFabClientAPI.IsClientLoggedIn())
+        if (PlayFabClientAPI.IsClientLoggedIn() && !GamePlayManager.Instance.isNormalMode)
         {
             SendLeaderboard(ScoreManager.Instance.totalScoreCurrentRun);
             GetLeaderboard();

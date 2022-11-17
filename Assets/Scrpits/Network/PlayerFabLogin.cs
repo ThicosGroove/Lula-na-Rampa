@@ -24,12 +24,13 @@ public class PlayFabLogin : MonoBehaviour
         //var request = new LoginWithCustomIDRequest { CustomId = "GettingStartedGuide", CreateAccount = true };
         //PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
 
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
 
         if (PlayerPrefs.HasKey(Const.EMAIL))
         {
             userEmail = PlayerPrefs.GetString(Const.EMAIL);
             userPassword = PlayerPrefs.GetString(Const.PASSWORD);
+            userName = PlayerPrefs.GetString(Const.USERNAME);
             var request = new LoginWithEmailAddressRequest { Email = userEmail, Password = userPassword };
             PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
         }
@@ -45,7 +46,6 @@ public class PlayFabLogin : MonoBehaviour
                 var requestIOS = new LoginWithIOSDeviceIDRequest { DeviceId = ReturnMobileID(), CreateAccount = true };
                 PlayFabClientAPI.LoginWithIOSDeviceID(requestIOS, OnLoginMobileSuccess, OnLoginMobileFailure);
             }
-
         }
     }
 
@@ -54,6 +54,7 @@ public class PlayFabLogin : MonoBehaviour
         Debug.Log("Congratulations, you made your first successful API call!");
         PlayerPrefs.SetString(Const.EMAIL, userEmail);
         PlayerPrefs.SetString(Const.PASSWORD, userPassword);
+        PlayerPrefs.SetString(Const.USERNAME, userName);
         loginPanel.SetActive(false);
         recoverButton.SetActive(false);
         SceneManager.LoadScene(Const.GAME_SCENE);
@@ -71,6 +72,7 @@ public class PlayFabLogin : MonoBehaviour
         Debug.Log("Congratulations, you made your first successful API call!");
         PlayerPrefs.SetString(Const.EMAIL, userEmail);
         PlayerPrefs.SetString(Const.PASSWORD, userPassword);
+        PlayerPrefs.SetString(Const.USERNAME, userName);
         loginPanel.SetActive(false);
         recoverButton.SetActive(false);
         SceneManager.LoadScene(Const.GAME_SCENE);
@@ -140,6 +142,7 @@ public class PlayFabLogin : MonoBehaviour
         Debug.Log("Congratulations, you made your first successful API call!");
         PlayerPrefs.SetString(Const.EMAIL, userEmail);
         PlayerPrefs.SetString(Const.PASSWORD, userPassword);
+        PlayerPrefs.SetString(Const.USERNAME, userName);
         loginPanel.SetActive(false);
         recoverButton.SetActive(false);
         SceneManager.LoadScene(Const.GAME_SCENE);

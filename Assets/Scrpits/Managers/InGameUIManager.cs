@@ -10,10 +10,12 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] TMP_Text scoreText;
     [SerializeField] TMP_Text levelText;
 
-    [Header("Game Over Panel")]
-    [SerializeField] GameObject OnGameOverPanel;
-    [SerializeField] TMP_Text GameOverText;
+    [Header("Game Over Infinity Panel")]
+    [SerializeField] GameObject OnGameOverInfinityPanel;
 
+    [Header("Game Over Normal Panel")]
+    [SerializeField] GameObject OnGameOverNormalPanel;
+    [SerializeField] TMP_Text GameOverText;
 
     [Header("WinPanel")]
     [SerializeField] GameObject OnWinPanel;
@@ -64,7 +66,7 @@ public class InGameUIManager : MonoBehaviour
     }
 
     IEnumerator LevelTextDelay()
-    {        
+    {
         levelText.text = "Level " + currentLevel;
         levelText.gameObject.SetActive(true);
 
@@ -77,7 +79,15 @@ public class InGameUIManager : MonoBehaviour
     private void OnGameOverUI()
     {
         CloseAllPanels();
-        OnGameOverPanel.SetActive(true);
+
+        if (GamePlayManager.Instance.isNormalMode)
+        {
+            OnGameOverNormalPanel.SetActive(true);
+        }
+        else
+        {
+            OnGameOverInfinityPanel.SetActive(true);
+        }
 
         GameOverText.text = "Game Over!!";
     }
@@ -96,7 +106,8 @@ public class InGameUIManager : MonoBehaviour
     private void CloseAllPanels()
     {
         OnPlayingPanel.SetActive(false);
-        OnGameOverPanel.SetActive(false);
+        OnGameOverInfinityPanel.SetActive(false);
+        OnGameOverNormalPanel.SetActive(false);
         OnWinPanel.SetActive(false);
     }
 
