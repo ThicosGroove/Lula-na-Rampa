@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5292952491359883837}
   - component: {fileID: 9083629741513050644}
   - component: {fileID: 5292952491359883836}
-  - component: {fileID: -2147560452386495874}
+  - component: {fileID: -5240421358967244662}
   m_Layer: 0
   m_Name: Star Collectable
   m_TagString: Untagged
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c317d0e7e93f74b9adaf07ed749d21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-2147560452386495874
+--- !u!114 &-5240421358967244662
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,7 +135,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5292952491359883835}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2efa248103aefdd43b59091295bf0b8e, type: 3}
+  m_Script: {fileID: 11500000, guid: 850dafa627b8d3f47b218bdbc67795fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 0
+  amp: 0.05
+  freq: 3

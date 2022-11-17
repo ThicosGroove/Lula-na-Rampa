@@ -13,14 +13,17 @@ public class PlayFabGameManager : Singleton<PlayFabGameManager>
     }
 
     private void OnDisable()
-    {        
+    {
         GameplayEvents.GameOver -= OnGameOver;
     }
 
     private void OnGameOver()
     {
-        SendLeaderboard(ScoreManager.Instance.totalScoreCurrentRun);
-        GetLeaderboard();
+        if (PlayFabClientAPI.IsClientLoggedIn())
+        {
+            SendLeaderboard(ScoreManager.Instance.totalScoreCurrentRun);
+            GetLeaderboard();
+        }
     }
 
     private void SendLeaderboard(int score)

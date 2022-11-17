@@ -939,7 +939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentGameState: 0
   isNormalMode: 0
-  playerColliderOn: 1
+  playerColliderOn: 0
   winScore: 3
   normalSpeed: 80
   normalDelay: 0.8
@@ -1241,25 +1241,6 @@ LightingSettings:
   m_PVRFilteringAtrousPositionSigmaDirect: 0.5
   m_PVRFilteringAtrousPositionSigmaIndirect: 2
   m_PVRFilteringAtrousPositionSigmaAO: 1
---- !u!1 &1548046819 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5292952491359883835, guid: 3dcfa5d31424084438d239c37a9e1365,
-    type: 3}
-  m_PrefabInstance: {fileID: 5292952490625663960}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1548046825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1548046819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2efa248103aefdd43b59091295bf0b8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 50
 --- !u!1 &1752488251
 GameObject:
   m_ObjectHideFlags: 0
@@ -1734,7 +1715,7 @@ PrefabInstance:
     - target: {fileID: 5292952491359883824, guid: 3dcfa5d31424084438d239c37a9e1365,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15
+      value: -19.2
       objectReference: {fileID: 0}
     - target: {fileID: 5292952491359883824, guid: 3dcfa5d31424084438d239c37a9e1365,
         type: 3}
@@ -1744,7 +1725,7 @@ PrefabInstance:
     - target: {fileID: 5292952491359883824, guid: 3dcfa5d31424084438d239c37a9e1365,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 60.8
+      value: 61.8
       objectReference: {fileID: 0}
     - target: {fileID: 5292952491359883824, guid: 3dcfa5d31424084438d239c37a9e1365,
         type: 3}

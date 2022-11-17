@@ -149,11 +149,11 @@ public class SpawningObstacle2 : MonoBehaviour
 
             int randomPosX = Random.Range(0, collectable.posX.Length);
 
-            Vector3 pos = new Vector3(collectable.posX[randomPosX], 0f, 200f);
+            Vector3 pos = new Vector3(collectable.posX[randomPosX], 3f, 200f);
 
             newCollectable = Instantiate(collectable.collectablePrefab, pos, Quaternion.identity);
-            GamePlayManager.Instance.objList.Add(newCollectable.GetComponent<MoveObstacle>());
-            newCollectable.GetComponent<MoveObstacle>().speed = currentSpeed;
+            GamePlayManager.Instance.objList.Add(newCollectable.GetComponent<MoveCollectable>());
+            newCollectable.GetComponent<MoveCollectable>().speed = currentSpeed;
         }
     }
 }

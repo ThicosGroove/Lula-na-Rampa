@@ -81,7 +81,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
     public static event Action<CurrentLevelState> OnChangeLevelState;
 
     [HideInInspector]
-    public List<MoveObstacle> objList = new List<MoveObstacle>();
+    public List<MoveBase> objList = new List<MoveBase>();
 
     //protected override void Awake()
     //{
