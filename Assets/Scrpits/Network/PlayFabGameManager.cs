@@ -25,9 +25,15 @@ public class PlayFabGameManager : Singleton<PlayFabGameManager>
     {
         if (PlayFabClientAPI.IsClientLoggedIn() && !GamePlayManager.Instance.isNormalMode)
         {
-            SendLeaderboard(ScoreManager.Instance.totalScoreCurrentRun);
-            GetLeaderboard();
+            StartCoroutine(SendAndGetLeaderBoard()); 
         }
+    }
+
+    IEnumerator SendAndGetLeaderBoard()
+    {
+        SendLeaderboard(ScoreManager.Instance.totalScoreCurrentRun);
+        yield return new WaitForSeconds(0.5f);
+        GetLeaderboard();
     }
 
     private void SendLeaderboard(int score)
@@ -47,6 +53,12 @@ public class PlayFabGameManager : Singleton<PlayFabGameManager>
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnLeaderboardUpdate, OnError);
     }
 
+    void OnLeaderboardUpdate(UpdatePlayerStatisticsResult result)
+    {
+        Debug.Log("Successfull leaderboard sent");
+        
+    }
+
     private void GetLeaderboard()
     {
         var request = new GetLeaderboardRequest
@@ -57,7 +69,6 @@ public class PlayFabGameManager : Singleton<PlayFabGameManager>
         };
         PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardGet, OnError);
     }
-
 
     private void OnLeaderboardGet(GetLeaderboardResult result)
     {
@@ -71,7 +82,7 @@ public class PlayFabGameManager : Singleton<PlayFabGameManager>
             GameObject newGO = Instantiate(rowPrefab, rowsParent);
             TMP_Text[] texts = newGO.GetComponentsInChildren<TMP_Text>();
             texts[0].text = (player.Position + 1).ToString();
-            texts[1].text = player.PlayFabId;
+            texts[1].text = player.DisplayName;
             texts[2].text = player.StatValue.ToString();
 
             Debug.Log(player.Position + " " + player.DisplayName + " " + player.StatValue);
@@ -83,8 +94,4 @@ public class PlayFabGameManager : Singleton<PlayFabGameManager>
         Debug.Log(error.GenerateErrorReport());
     }
 
-    void OnLeaderboardUpdate(UpdatePlayerStatisticsResult result)
-    {
-        Debug.Log("Successfull leaderboard sent");
-    }
 }

@@ -12,17 +12,19 @@ public class PlayFabLogin : MonoBehaviour
     public GameObject loginPanel;
     public GameObject addLoginPanel;
     public GameObject recoverButton;
+    public GameObject mobileAutomaticPanel;
 
 
     public void Start()
     {
+        CloseAllPanels();
+
+
         //Note: Setting title Id here can be skipped if you have set the value in Editor Extensions already.
         if (string.IsNullOrEmpty(PlayFabSettings.TitleId))
         {
             PlayFabSettings.TitleId = Const.TITLE_ID; // Please change this value to your own titleId from PlayFab Game Manager
         }
-        //var request = new LoginWithCustomIDRequest { CustomId = "GettingStartedGuide", CreateAccount = true };
-        //PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
 
         //PlayerPrefs.DeleteAll();
 
@@ -31,32 +33,70 @@ public class PlayFabLogin : MonoBehaviour
             userEmail = PlayerPrefs.GetString(Const.EMAIL);
             userPassword = PlayerPrefs.GetString(Const.PASSWORD);
             userName = PlayerPrefs.GetString(Const.USERNAME);
-            var request = new LoginWithEmailAddressRequest { Email = userEmail, Password = userPassword };
+
+            var request = new LoginWithEmailAddressRequest
+            {
+                Email = userEmail,
+                Password = userPassword,
+                InfoRequestParameters = new GetPlayerCombinedInfoRequestParams { GetPlayerProfile = true }
+            };
+
             PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
         }
         else
         {
             if (Application.platform == RuntimePlatform.Android)
             {
-                var requestAndroid = new LoginWithAndroidDeviceIDRequest { AndroidDeviceId = ReturnMobileID(), CreateAccount = true };
-                PlayFabClientAPI.LoginWithAndroidDeviceID(requestAndroid, OnLoginMobileSuccess, OnLoginMobileFailure);            
+                var requestAndroid = new LoginWithAndroidDeviceIDRequest
+                {
+                    AndroidDeviceId = ReturnMobileID(),
+                    InfoRequestParameters = new GetPlayerCombinedInfoRequestParams { GetPlayerProfile = true },
+                    CreateAccount = true
+                };
+
+                PlayFabClientAPI.LoginWithAndroidDeviceID(requestAndroid, OnLoginMobileSuccess, OnLoginMobileFailure);
             }
             else if (Application.platform == RuntimePlatform.OSXEditor)
             {
-                var requestIOS = new LoginWithIOSDeviceIDRequest { DeviceId = ReturnMobileID(), CreateAccount = true };
+                var requestIOS = new LoginWithIOSDeviceIDRequest
+                {
+                    DeviceId = ReturnMobileID(),
+                    InfoRequestParameters = new GetPlayerCombinedInfoRequestParams { GetPlayerProfile = true },
+                    CreateAccount = true
+                };
+
                 PlayFabClientAPI.LoginWithIOSDeviceID(requestIOS, OnLoginMobileSuccess, OnLoginMobileFailure);
             }
         }
+
+        loginPanel.SetActive(true);
     }
 
     private void OnLoginSuccess(LoginResult result)
     {
-        Debug.Log("Congratulations, you made your first successful API call!");
+        CloseAllPanels();
+
         PlayerPrefs.SetString(Const.EMAIL, userEmail);
         PlayerPrefs.SetString(Const.PASSWORD, userPassword);
         PlayerPrefs.SetString(Const.USERNAME, userName);
-        loginPanel.SetActive(false);
-        recoverButton.SetActive(false);
+
+        var nameRequest = new UpdateUserTitleDisplayNameRequest { DisplayName = userName };
+        PlayFabClientAPI.UpdateUserTitleDisplayName(nameRequest, OnDisplayNameUpdate, OnDisplayNameUpdateError);
+
+        SceneManager.LoadScene(Const.GAME_SCENE);
+    }
+
+    private void OnRegisterSuccess(RegisterPlayFabUserResult result)
+    {
+        CloseAllPanels();
+
+        PlayerPrefs.SetString(Const.EMAIL, userEmail);
+        PlayerPrefs.SetString(Const.PASSWORD, userPassword);
+        PlayerPrefs.SetString(Const.USERNAME, userName);
+
+        var nameRequest = new UpdateUserTitleDisplayNameRequest { DisplayName = userName };
+        PlayFabClientAPI.UpdateUserTitleDisplayName(nameRequest, OnDisplayNameUpdate, OnDisplayNameUpdateError);
+
         SceneManager.LoadScene(Const.GAME_SCENE);
     }
 
@@ -64,18 +104,18 @@ public class PlayFabLogin : MonoBehaviour
     {
         Debug.Log("Congratulations, you made your first successful API call!");
         loginPanel.SetActive(false);
-        SceneManager.LoadScene(Const.GAME_SCENE);
-    }
 
-    private void OnRegisterSuccess(RegisterPlayFabUserResult result)
-    {
-        Debug.Log("Congratulations, you made your first successful API call!");
-        PlayerPrefs.SetString(Const.EMAIL, userEmail);
-        PlayerPrefs.SetString(Const.PASSWORD, userPassword);
-        PlayerPrefs.SetString(Const.USERNAME, userName);
-        loginPanel.SetActive(false);
-        recoverButton.SetActive(false);
-        SceneManager.LoadScene(Const.GAME_SCENE);
+        if (result.InfoResultPayload.PlayerProfile != null)
+        {
+            userName = result.InfoResultPayload.PlayerProfile.DisplayName;
+            SceneManager.LoadScene(Const.GAME_SCENE);
+        }
+
+        if (!PlayerPrefs.HasKey(Const.USERNAME))
+        {
+            CloseAllPanels();
+            mobileAutomaticPanel.SetActive(true);
+        }
     }
 
     private void OnLoginFailure(PlayFabError error)
@@ -109,10 +149,32 @@ public class PlayFabLogin : MonoBehaviour
         userPassword = passwordInput;
     }
 
-    public void OnCLickLogin()
+    public void OnClickLoginPC()
     {
-        var request = new LoginWithEmailAddressRequest { Email = userEmail, Password = userPassword };
-        PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
+        var request = new LoginWithEmailAddressRequest
+        {
+            Email = userEmail,
+            Password = userPassword,
+            InfoRequestParameters = new GetPlayerCombinedInfoRequestParams { GetPlayerProfile = true }
+        };
+
+        PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);      
+    }
+
+    public void OnCLickLoginMobile()
+    {
+        var request = new UpdateUserTitleDisplayNameRequest { DisplayName = userName };
+        PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnDisplayNameUpdateError);
+    }
+
+    void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result)
+    {
+        Debug.LogWarning("NOME CERTO " + result.DisplayName);
+    }
+
+    void OnDisplayNameUpdateError(PlayFabError error)
+    {
+        Debug.LogWarning("Nao conseguiu atualizar o nome " + error.ErrorMessage);
     }
 
     public void ClickOnPlayOffline()
@@ -146,5 +208,13 @@ public class PlayFabLogin : MonoBehaviour
         loginPanel.SetActive(false);
         recoverButton.SetActive(false);
         SceneManager.LoadScene(Const.GAME_SCENE);
+    }
+
+    private void CloseAllPanels()
+    {
+        loginPanel.SetActive(false);
+        addLoginPanel.SetActive(false);
+        mobileAutomaticPanel.SetActive(false);
+        recoverButton.SetActive(false);
     }
 }
