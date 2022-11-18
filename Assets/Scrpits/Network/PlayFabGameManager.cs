@@ -10,6 +10,10 @@ public class PlayFabGameManager : Singleton<PlayFabGameManager>
 {
     [SerializeField] GameObject rowPrefab;
     [SerializeField] Transform rowsParent;
+    [SerializeField] Transform currentPlayerRowParent;
+
+    private string player_Id;
+    private bool isOnTopScoreBoard;
 
     private void OnEnable()
     {
@@ -25,7 +29,7 @@ public class PlayFabGameManager : Singleton<PlayFabGameManager>
     {
         if (PlayFabClientAPI.IsClientLoggedIn() && !GamePlayManager.Instance.isNormalMode)
         {
-            StartCoroutine(SendAndGetLeaderBoard()); 
+            StartCoroutine(SendAndGetLeaderBoard());
         }
     }
 
@@ -56,7 +60,6 @@ public class PlayFabGameManager : Singleton<PlayFabGameManager>
     void OnLeaderboardUpdate(UpdatePlayerStatisticsResult result)
     {
         Debug.Log("Successfull leaderboard sent");
-        
     }
 
     private void GetLeaderboard()
@@ -65,7 +68,7 @@ public class PlayFabGameManager : Singleton<PlayFabGameManager>
         {
             StatisticName = Const.SCOREBOARD_NAME,
             StartPosition = 0,
-            MaxResultsCount = 10
+            MaxResultsCount = 5
         };
         PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardGet, OnError);
     }
@@ -79,13 +82,64 @@ public class PlayFabGameManager : Singleton<PlayFabGameManager>
 
         foreach (var player in result.Leaderboard)
         {
+            player_Id = PlayerPrefs.GetString(Const.PAYER_ID);
+
             GameObject newGO = Instantiate(rowPrefab, rowsParent);
             TMP_Text[] texts = newGO.GetComponentsInChildren<TMP_Text>();
             texts[0].text = (player.Position + 1).ToString();
             texts[1].text = player.DisplayName;
             texts[2].text = player.StatValue.ToString();
 
+            if (player_Id == player.PlayFabId)
+            {
+                texts[0].color = Color.cyan;
+                texts[1].color = Color.cyan;
+                texts[2].color = Color.cyan;
+
+                isOnTopScoreBoard = true;
+            }
+           
             Debug.Log(player.Position + " " + player.DisplayName + " " + player.StatValue);
+        }
+
+        GetLeaderboardAroundPlayer();
+    }
+
+    private void GetLeaderboardAroundPlayer()
+    {
+        var request = new GetLeaderboardAroundPlayerRequest
+        {
+            StatisticName = Const.SCOREBOARD_NAME,
+            MaxResultsCount = 1
+        };
+
+        PlayFabClientAPI.GetLeaderboardAroundPlayer(request, OnLeaderboardAroundPlayerGet, OnError);
+    }
+
+    void OnLeaderboardAroundPlayerGet(GetLeaderboardAroundPlayerResult result)
+    {
+        player_Id = PlayerPrefs.GetString(Const.PAYER_ID);
+
+        if (isOnTopScoreBoard) return;
+
+        foreach (var player in result.Leaderboard)
+        {
+            if (player.PlayFabId == player_Id)
+            {
+                GameObject newGO = Instantiate(rowPrefab, currentPlayerRowParent);
+                TMP_Text[] texts = newGO.GetComponentsInChildren<TMP_Text>();
+                texts[0].text = (player.Position + 1).ToString();
+                texts[1].text = player.DisplayName;
+                texts[2].text = player.StatValue.ToString();
+
+                texts[0].color = Color.cyan;
+                texts[1].color = Color.cyan;
+                texts[2].color = Color.cyan;
+
+                Debug.Log(player.Position + " " + player.DisplayName + " " + player.StatValue);
+
+                return;
+            }
         }
     }
 
