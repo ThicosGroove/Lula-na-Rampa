@@ -16,6 +16,7 @@ public abstract class MoveBase : MonoBehaviour
     private void OnEnable()
     {
         ScoreEvents.ChangeLevel += DestroyOnNewLevel;
+
         GameplayEvents.GameOver += DestroyOnGameOver;
         GameplayEvents.Win += DestroyOnGameOver;
     }
@@ -23,6 +24,7 @@ public abstract class MoveBase : MonoBehaviour
     private void OnDisable()
     {
         ScoreEvents.ChangeLevel -= DestroyOnNewLevel;
+
         GameplayEvents.GameOver -= DestroyOnGameOver;
         GameplayEvents.Win -= DestroyOnGameOver;
     }

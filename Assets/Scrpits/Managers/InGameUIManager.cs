@@ -67,7 +67,15 @@ public class InGameUIManager : MonoBehaviour
 
     IEnumerator LevelTextDelay()
     {
-        levelText.text = "Level " + currentLevel;
+        if (GamePlayManager.Instance.isNormalMode)
+        {
+            levelText.text = "Pegue a Faixa !!";
+        }
+        else
+        {
+            levelText.text = "Level " + currentLevel;
+        }
+
         levelText.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(1.5f);

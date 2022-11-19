@@ -37,13 +37,22 @@ public class SpawningObstacle2 : MonoBehaviour
 
     void Start()
     {
-        LevelUp(1);
-
         spawnObstacleCoroutine = SpawnObstacle();
         //StartCoroutine(spawnObstacleCoroutine);
 
         spawnCollectableCoroutine = SpawnCollectable();
         //StartCoroutine(spawnCollectableCoroutine);
+
+        if (!GamePlayManager.Instance.isNormalMode)
+        {
+            LevelUp(1);
+        }
+        else
+        {
+            LevelUp(3);
+        }
+
+        
     }
 
     private void OnEnable()
@@ -66,7 +75,7 @@ public class SpawningObstacle2 : MonoBehaviour
 
     void LevelUp(int newLevel)
     {
-        if (GamePlayManager.Instance.isNormalMode) return;
+        //if (GamePlayManager.Instance.isNormalMode) return;
 
         StopAllCoroutines();
 
@@ -105,11 +114,6 @@ public class SpawningObstacle2 : MonoBehaviour
         {
             currentSpeed = GamePlayManager.Instance.normalSpeed;
             spawnCollectableDelay = GamePlayManager.Instance.normalDelay;
-        }
-        else
-        {
-            currentSpeed = GamePlayManager.Instance.currentSpeed_Level_1;
-            spawnObstacleDelay = GamePlayManager.Instance.obstacleDelay_Level_1;
         }
 
         StartCoroutine(spawnObstacleCoroutine);

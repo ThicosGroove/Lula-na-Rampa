@@ -736,7 +736,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.72440743}
   m_AnchorMax: {x: 0.5, y: 0.72440743}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 599.7478, y: 107.003296}
+  m_SizeDelta: {x: 844.157, y: 107.0033}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &797642093
 MonoBehaviour:
@@ -852,7 +852,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &807782569
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1435,11 +1435,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGameState: 0
-  isNormalMode: 0
-  playerColliderOn: 1
+  isNormalMode: 1
+  playerColliderOn: 0
   winScore: 3
   normalSpeed: 80
-  normalDelay: 0.8
+  normalDelay: 2
   playerNormal_SlideSpeed: 5
   changeToLevel_2: 2
   changeToLevel_3: 5
@@ -1621,7 +1621,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1461368793
 RectTransform:
   m_ObjectHideFlags: 0
