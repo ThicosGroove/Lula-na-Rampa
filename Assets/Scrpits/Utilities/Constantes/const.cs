@@ -13,7 +13,9 @@ public static class Const
     public static string PLAYER_TAG = "Player";
     public static string OBSTACLE_TAG = "Obstacle";
 
+    //Game Play
     public static int SCORE_PER_COLLECTABLE = 1;
+    public static int PLAYER_INITIAL_LANE = 1;
 
     // PLAYFAB 
     public static string SCOREBOARD_NAME = "Global Scoreboard";

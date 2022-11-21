@@ -4,19 +4,30 @@ using GameEvents;
 enum PlayerState
 {
     IDLE,
+    JUMP,
+    SLIDING,
     PLAYING,
     DEAD,
     WIN
 }
 
 // CRIAR UM PLAYER ANIMATION HANDLER P LIDAR COM AS ANIMAÇÕES
+// MUDAR OS BOTOES
 public class PlayerController : MonoBehaviour
 {
-    public float laneDistance;
-    public float slideSpeed;
+    [SerializeField] float laneDistance;
+    [SerializeField] float slideSpeed;
+    [SerializeField] float jumpHeight;
+    [SerializeField] float jumpSpeed;
+
+    [SerializeField] Transform groundCheck;
+    [SerializeField] LayerMask groundMask;
 
     float height;
     int desiredLane;
+    Vector3 targetPosition;
+    Vector3 targetJumpPosition;
+    Vector3 jumpPosition;
 
     int currentLevel;
 
@@ -24,9 +35,9 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        height = transform.localScale.y / 2;
+        height = 3;
         state = PlayerState.PLAYING;
-        desiredLane = 1;
+        desiredLane = Const.PLAYER_INITIAL_LANE;
     }
 
     private void Start()
@@ -46,12 +57,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        ScoreEvents.ChangeLevel -= updateSideSpeed;       
+        ScoreEvents.ChangeLevel -= updateSideSpeed;
 
         GameplayEvents.Win -= OnPlayerWin;
     }
-
-
 
     private void UpdatePlayerState(PlayerState newState)
     {
@@ -60,14 +69,16 @@ public class PlayerController : MonoBehaviour
         if (state != PlayerState.PLAYING)
         {
             slideSpeed = 0;
+            jumpSpeed = 0;
         }
     }
 
     void Update()
     {
         if (state != PlayerState.PLAYING) return;
-
         Move();
+        Jump();
+        //CheckingGround();
     }
 
     private void Move()
@@ -89,24 +100,39 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        Vector3 targetPosition = transform.position.x * Vector3.zero + new Vector3(0, height, 0);
-
-        if (desiredLane == 0)
+        switch (desiredLane)
         {
-            targetPosition += Vector3.left * laneDistance;
-        }
-        if (desiredLane == 2)
-        {
-            targetPosition += Vector3.right * laneDistance;
+            case 0:
+                targetPosition = transform.position.x * Vector3.zero + Vector3.left * laneDistance + Vector3.up * height;
+                break;
+            case 1:
+                targetPosition = transform.position.x * Vector3.zero + Vector3.up * height;
+                break;
+            case 2:
+                targetPosition = transform.position.x * Vector3.zero + Vector3.right * laneDistance + Vector3.up * height;
+                break;
+            default:
+                break;
         }
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, slideSpeed * Time.deltaTime);
     }
 
-    void OnPlayerWin()
+    void Jump()
     {
-        state = PlayerState.WIN;
+        if (Input.GetKeyDown(KeyCode.UpArrow) && CheckingGround())
+        {
+            targetJumpPosition = Vector3.up * jumpHeight;
+        }
+
+        transform.Translate(targetJumpPosition * jumpSpeed * Time.deltaTime);
+
+        if (transform.position.y >= targetJumpPosition.y)
+        {
+            targetJumpPosition = Vector3.zero;
+        }
     }
+
 
     void updateSideSpeed(int newLevel)
     {
@@ -145,5 +171,25 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Game Over");
             GamePlayManager.Instance.UpdateGameState(GameStates.GAMEOVER);
         }
+    }
+
+    bool CheckingGround()
+    {
+        bool ray = Physics.CheckSphere(groundCheck.position, 1f, groundMask);
+
+        slideSpeed = jumpSpeed;
+        return ray;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+
+        Gizmos.DrawSphere(groundCheck.position, 1f);
+    }
+
+    void OnPlayerWin()
+    {
+        UpdatePlayerState(PlayerState.WIN);
     }
 }

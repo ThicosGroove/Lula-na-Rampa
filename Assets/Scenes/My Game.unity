@@ -1435,7 +1435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGameState: 0
-  isNormalMode: 1
+  isNormalMode: 0
   playerColliderOn: 0
   winScore: 3
   normalSpeed: 80
@@ -1521,7 +1521,7 @@ GameObject:
   - component: {fileID: 1456900619}
   - component: {fileID: 1456900618}
   - component: {fileID: 1456900617}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2863,12 +2863,12 @@ PrefabInstance:
     - target: {fileID: 1725827378496261665, guid: c139acdb72e17f64eb57faa92d7b8208,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1725827378496261665, guid: c139acdb72e17f64eb57faa92d7b8208,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.76
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1725827378496261665, guid: c139acdb72e17f64eb57faa92d7b8208,
         type: 3}
@@ -2924,6 +2924,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sideSpeed
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725827378496261678, guid: c139acdb72e17f64eb57faa92d7b8208,
+        type: 3}
+      propertyPath: jumpForce.y
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1725827378496261679, guid: c139acdb72e17f64eb57faa92d7b8208,
         type: 3}

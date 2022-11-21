@@ -62,7 +62,6 @@ public class InGameUIManager : MonoBehaviour
     {
         currentLevel = newLevel;
         StartCoroutine(LevelTextDelay());
-
     }
 
     IEnumerator LevelTextDelay()
@@ -100,7 +99,6 @@ public class InGameUIManager : MonoBehaviour
         GameOverText.text = "Game Over!!";
     }
 
-
     private void OnWinUI()
     {
         CloseAllPanels();
@@ -108,8 +106,6 @@ public class InGameUIManager : MonoBehaviour
 
         WinText.text = "You Win!!";
     }
-
-
 
     private void CloseAllPanels()
     {
