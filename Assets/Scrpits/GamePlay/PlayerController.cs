@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using GameEvents;
 
 enum PlayerState
@@ -27,7 +28,18 @@ public class PlayerController : MonoBehaviour
     int desiredLane;
     Vector3 targetPosition;
     Vector3 targetJumpPosition;
-    Vector3 jumpPosition;
+
+    // temporário até obj 3D
+    [SerializeField] Transform GFX_transform;  
+    [SerializeField] float GFX_ScaleOnRolling = 0.5f;
+    [SerializeField] float GFX_PositionOnRolling = -0.5f;
+    //
+
+    CapsuleCollider coll;
+    float colliderHeight = 1f;
+    float colliderCenter = -0.5f;
+    [SerializeField] float rollingDelay;
+    bool isRolling;
 
     int currentLevel;
 
@@ -38,6 +50,8 @@ public class PlayerController : MonoBehaviour
         height = 3;
         state = PlayerState.PLAYING;
         desiredLane = Const.PLAYER_INITIAL_LANE;
+
+        coll = GetComponent<CapsuleCollider>();
     }
 
     private void Start()
@@ -78,7 +92,7 @@ public class PlayerController : MonoBehaviour
         if (state != PlayerState.PLAYING) return;
         Move();
         Jump();
-        //CheckingGround();
+        Roll();
     }
 
     private void Move()
@@ -131,6 +145,56 @@ public class PlayerController : MonoBehaviour
         {
             targetJumpPosition = Vector3.zero;
         }
+    }
+
+    void Roll()
+    {
+
+        if (Input.GetKeyDown(KeyCode.DownArrow) && !isRolling && CheckingGround())
+        {
+            Debug.LogWarning("Rolou");
+
+            isRolling = true;
+            StartCoroutine(RollDelay());
+        }
+    }
+
+    IEnumerator RollDelay()
+    {
+        Vector3 normalColliderCenter = coll.center;
+        Vector3 colliderCenterOnRolling = new Vector3(0, colliderCenter, 0);
+
+        float normalColliderHeight = coll.height;
+        float colliderHeightOnRolling = colliderHeight;
+
+        coll.center = Vector3.Lerp(coll.center, colliderCenterOnRolling, 1f);
+        coll.height = Mathf.Lerp(coll.height, colliderHeightOnRolling, 1f);
+
+        //Temporário
+        Vector3 normalGFX_Position = Vector3.zero;
+        Vector3 newGXF_Position = new Vector3(0, GFX_PositionOnRolling, 0);
+
+        Vector3 normalGFX_Scale = Vector3.one;
+        Vector3 newGFX_Scale = new Vector3(1, GFX_ScaleOnRolling, 1);
+
+        GFX_transform.localPosition = Vector3.Lerp(normalGFX_Position, newGXF_Position, 1f);
+        GFX_transform.localScale = Vector3.Lerp(normalGFX_Scale, newGFX_Scale, 1f);
+        //
+
+        Debug.LogWarning("Abaixou");
+
+        yield return new WaitForSeconds(rollingDelay);
+
+        Debug.LogWarning("Levantou");
+        coll.height = Mathf.Lerp(coll.height, normalColliderHeight, 1f);
+        coll.center = Vector3.Lerp(coll.center, normalColliderCenter, 1f);
+
+        // Temp
+        GFX_transform.localPosition = Vector3.Lerp(newGXF_Position, normalGFX_Position, 1f);
+        GFX_transform.localScale = Vector3.Lerp(newGFX_Scale, normalGFX_Scale, 1f);
+        //
+
+        isRolling = false;
     }
 
 
