@@ -16,7 +16,20 @@ public class Collectable : MonoBehaviour, ICollectable
         Destroy(this.gameObject);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag(Const.OBSTACLE_TAG))
+    //    {
+    //        WrongSpawn();
+    //    }
+
+    //    if (collision.gameObject.CompareTag(Const.PLAYER_TAG))
+    //    {
+    //        CollectMe();
+    //    }
+    //}
+
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag(Const.OBSTACLE_TAG))
         {

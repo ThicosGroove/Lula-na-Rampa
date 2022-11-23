@@ -12,6 +12,8 @@ public class InGameUIManager : MonoBehaviour
 
     [Header("Game Over Infinity Panel")]
     [SerializeField] GameObject OnGameOverInfinityPanel;
+    [SerializeField] GameObject InsertNameForScoreBoardPanel;
+    [SerializeField] GameObject ScoreBoardBox;
 
     [Header("Game Over Normal Panel")]
     [SerializeField] GameObject OnGameOverNormalPanel;
@@ -91,9 +93,14 @@ public class InGameUIManager : MonoBehaviour
         {
             OnGameOverNormalPanel.SetActive(true);
         }
-        else
+        else if (PlayerPrefs.HasKey(Const.PLAYER_ID))
         {
             OnGameOverInfinityPanel.SetActive(true);
+            ScoreBoardBox.SetActive(true);
+        }
+        else
+        {
+            InsertNameForScoreBoardPanel.SetActive(true);
         }
 
         GameOverText.text = "Game Over!!";
@@ -111,8 +118,34 @@ public class InGameUIManager : MonoBehaviour
     {
         OnPlayingPanel.SetActive(false);
         OnGameOverInfinityPanel.SetActive(false);
+        InsertNameForScoreBoardPanel.SetActive(false);
+        ScoreBoardBox.SetActive(false);
         OnGameOverNormalPanel.SetActive(false);
         OnWinPanel.SetActive(false);
     }
 
+
+    #region Buttons
+    public void InsertNewName(string name)
+    {
+        // fazer uma chamada de evento para o Play Fab Game Manager
+        // On Display Name Update
+        PlayFabGameManager.Instance.OnUpdateDisplayNameRequest(name);
+    }
+
+    public void OnClickConfirmNameButton()
+    {
+        // Atualizar o nome do jogador lá no sistema
+        OnGameOverInfinityPanel.SetActive(true);
+        ScoreBoardBox.SetActive(true);
+    }
+
+    public void OnClickCancelButton()
+    {
+        // Deletar o jogador lá no sistema
+        // mostro o score board de qualquer forma??
+        // acho que sim, pra instigar a vontade do jogador
+    }
+
+    #endregion Buttons
 }

@@ -6,7 +6,7 @@ public static class Const
     public static string EMAIL = "EMAIL";
     public static string PASSWORD = "PASSWORD";
     public static string USERNAME = "USERNAME";
-    public static string PAYER_ID = "PLAYER_ID";
+    public static string PLAYER_ID = "PLAYER_ID";
 
     public static int GAME_SCENE = 1;
 
@@ -16,6 +16,8 @@ public static class Const
     //Game Play
     public static int SCORE_PER_COLLECTABLE = 1;
     public static int PLAYER_INITIAL_LANE = 1;
+    public static float LANE_DISTANCE = 15;
+
 
     // PLAYFAB 
     public static string SCOREBOARD_NAME = "Global Scoreboard";

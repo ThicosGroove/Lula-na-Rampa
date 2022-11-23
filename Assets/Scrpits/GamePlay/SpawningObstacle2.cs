@@ -50,9 +50,7 @@ public class SpawningObstacle2 : MonoBehaviour
         else
         {
             LevelUp(3);
-        }
-
-        
+        }      
     }
 
     private void OnEnable()

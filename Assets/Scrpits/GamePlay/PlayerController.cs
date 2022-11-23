@@ -15,43 +15,51 @@ enum PlayerState
 // CRIAR UM PLAYER ANIMATION HANDLER P LIDAR COM AS ANIMAÇÕES
 // MUDAR OS BOTOES
 public class PlayerController : MonoBehaviour
-{
-    [SerializeField] float laneDistance;
+{   
+    [Header("Player current State")]
+    [SerializeField] PlayerState state;
+
+    [Header("Gameplay parameters")]
     [SerializeField] float slideSpeed;
     [SerializeField] float jumpHeight;
     [SerializeField] float jumpSpeed;
+    [SerializeField] float rollingDelay;
 
+    [Header("Ground Check parameters")]
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundMask;
 
-    float height;
+    [Header("Graphics parameters")] // temporário até obj 3D
+    [SerializeField] Transform GFX_transform;  
+    [SerializeField] float GFX_ScaleOnRolling = 0.5f;
+    [SerializeField] float GFX_PositionOnRolling = -0.5f;
+    
+    // PRIVATES PARAMETERS
+    // position parameters
+    float height; 
     int desiredLane;
     Vector3 targetPosition;
     Vector3 targetJumpPosition;
 
-    // temporário até obj 3D
-    [SerializeField] Transform GFX_transform;  
-    [SerializeField] float GFX_ScaleOnRolling = 0.5f;
-    [SerializeField] float GFX_PositionOnRolling = -0.5f;
-    //
-
+    // collider / roll parameters
     CapsuleCollider coll;
     float colliderHeight = 1f;
     float colliderCenter = -0.5f;
-    [SerializeField] float rollingDelay;
     bool isRolling;
+    IEnumerator Rolling;
 
     int currentLevel;
 
-    [SerializeField] PlayerState state;
-
+    #region SetUp 
     private void Awake()
     {
         height = 3;
         state = PlayerState.PLAYING;
         desiredLane = Const.PLAYER_INITIAL_LANE;
 
+        Rolling = RollDelay();
         coll = GetComponent<CapsuleCollider>();
+        coll.isTrigger = true;
     }
 
     private void Start()
@@ -86,7 +94,9 @@ public class PlayerController : MonoBehaviour
             jumpSpeed = 0;
         }
     }
+    #endregion SetUp
 
+    #region Movement
     void Update()
     {
         if (state != PlayerState.PLAYING) return;
@@ -117,13 +127,13 @@ public class PlayerController : MonoBehaviour
         switch (desiredLane)
         {
             case 0:
-                targetPosition = transform.position.x * Vector3.zero + Vector3.left * laneDistance + Vector3.up * height;
+                targetPosition = transform.position.x * Vector3.zero + Vector3.left * Const.LANE_DISTANCE + Vector3.up * height;
                 break;
             case 1:
                 targetPosition = transform.position.x * Vector3.zero + Vector3.up * height;
                 break;
             case 2:
-                targetPosition = transform.position.x * Vector3.zero + Vector3.right * laneDistance + Vector3.up * height;
+                targetPosition = transform.position.x * Vector3.zero + Vector3.right * Const.LANE_DISTANCE + Vector3.up * height;
                 break;
             default:
                 break;
@@ -137,6 +147,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow) && CheckingGround())
         {
             targetJumpPosition = Vector3.up * jumpHeight;
+            //StopCoroutine(Rolling);
+            //isRolling = false;
         }
 
         transform.Translate(targetJumpPosition * jumpSpeed * Time.deltaTime);
@@ -149,11 +161,8 @@ public class PlayerController : MonoBehaviour
 
     void Roll()
     {
-
         if (Input.GetKeyDown(KeyCode.DownArrow) && !isRolling && CheckingGround())
         {
-            Debug.LogWarning("Rolou");
-
             isRolling = true;
             StartCoroutine(RollDelay());
         }
@@ -181,11 +190,8 @@ public class PlayerController : MonoBehaviour
         GFX_transform.localScale = Vector3.Lerp(normalGFX_Scale, newGFX_Scale, 1f);
         //
 
-        Debug.LogWarning("Abaixou");
-
         yield return new WaitForSeconds(rollingDelay);
 
-        Debug.LogWarning("Levantou");
         coll.height = Mathf.Lerp(coll.height, normalColliderHeight, 1f);
         coll.center = Vector3.Lerp(coll.center, normalColliderCenter, 1f);
 
@@ -223,8 +229,10 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
+    #endregion Movement
 
-    private void OnCollisionEnter(Collision other)
+    #region Colliders And Raycasts
+    private void OnTriggerEnter(Collider other)
     {
         if (!GamePlayManager.Instance.playerColliderOn) return;
 
@@ -256,4 +264,6 @@ public class PlayerController : MonoBehaviour
     {
         UpdatePlayerState(PlayerState.WIN);
     }
+    #endregion Colliders And Raycasts
+
 }

@@ -82,7 +82,7 @@ public class PlayFabGameManager : Singleton<PlayFabGameManager>
 
         foreach (var player in result.Leaderboard)
         {
-            player_Id = PlayerPrefs.GetString(Const.PAYER_ID);
+            player_Id = PlayerPrefs.GetString(Const.PLAYER_ID);
 
             GameObject newGO = Instantiate(rowPrefab, rowsParent);
             TMP_Text[] texts = newGO.GetComponentsInChildren<TMP_Text>();
@@ -118,7 +118,7 @@ public class PlayFabGameManager : Singleton<PlayFabGameManager>
 
     void OnLeaderboardAroundPlayerGet(GetLeaderboardAroundPlayerResult result)
     {
-        player_Id = PlayerPrefs.GetString(Const.PAYER_ID);
+        player_Id = PlayerPrefs.GetString(Const.PLAYER_ID);
 
         if (isOnTopScoreBoard) return;
 
@@ -143,9 +143,20 @@ public class PlayFabGameManager : Singleton<PlayFabGameManager>
         }
     }
 
+    public void OnUpdateDisplayNameRequest(string newName)
+    {
+        var request = new UpdateUserTitleDisplayNameRequest { DisplayName = newName};
+        PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnError);
+    }
+
+    void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result)
+    {
+        Debug.LogWarning("NOME CERTO " + result.DisplayName);
+
+    }
+
     void OnError(PlayFabError error)
     {
         Debug.Log(error.GenerateErrorReport());
     }
-
 }

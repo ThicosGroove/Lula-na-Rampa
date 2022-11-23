@@ -79,7 +79,7 @@ public class PlayFabLogin : MonoBehaviour
         PlayerPrefs.SetString(Const.EMAIL, userEmail);
         PlayerPrefs.SetString(Const.PASSWORD, userPassword);
         PlayerPrefs.SetString(Const.USERNAME, userName);
-        PlayerPrefs.SetString(Const.PAYER_ID, result.PlayFabId);
+        PlayerPrefs.SetString(Const.PLAYER_ID, result.PlayFabId);
 
         var nameRequest = new UpdateUserTitleDisplayNameRequest { DisplayName = userName };
         PlayFabClientAPI.UpdateUserTitleDisplayName(nameRequest, OnDisplayNameUpdate, OnDisplayNameUpdateError);
@@ -94,7 +94,7 @@ public class PlayFabLogin : MonoBehaviour
         PlayerPrefs.SetString(Const.EMAIL, userEmail);
         PlayerPrefs.SetString(Const.PASSWORD, userPassword);
         PlayerPrefs.SetString(Const.USERNAME, userName);
-        PlayerPrefs.SetString(Const.PAYER_ID, result.PlayFabId);
+        PlayerPrefs.SetString(Const.PLAYER_ID, result.PlayFabId);
 
         var nameRequest = new UpdateUserTitleDisplayNameRequest { DisplayName = userName };
         PlayFabClientAPI.UpdateUserTitleDisplayName(nameRequest, OnDisplayNameUpdate, OnDisplayNameUpdateError);
@@ -106,7 +106,7 @@ public class PlayFabLogin : MonoBehaviour
     {
         loginPanel.SetActive(false);
 
-        PlayerPrefs.SetString(Const.PAYER_ID, result.PlayFabId);
+        PlayerPrefs.SetString(Const.PLAYER_ID, result.PlayFabId);
 
         if (result.InfoResultPayload.PlayerProfile != null)
         {
