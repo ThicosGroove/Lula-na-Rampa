@@ -20,10 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerState state;
 
     [Header("Gameplay parameters")]
-    [SerializeField] float slideSpeed;
     [SerializeField] float jumpHeight;
-    [SerializeField] float jumpSpeed;
-    [SerializeField] float rollingDelay;
 
     [Header("Ground Check parameters")]
     [SerializeField] Transform groundCheck;
@@ -34,25 +31,29 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float GFX_ScaleOnRolling = 0.5f;
     [SerializeField] float GFX_PositionOnRolling = -0.5f;
 
-    // PRIVATES PARAMETERS
+    // PRIVATES PARAMETERS 
     // position parameters
     float height;
     int desiredLane;
     Vector3 targetPosition;
     Vector3 targetJumpPosition;
 
-    // collider / roll parameters
-    CapsuleCollider coll;
-    float colliderHeight = 1f;
-    float colliderCenter = -0.5f;
-    bool isRolling;
-    IEnumerator Rolling;
+    // move / jump parameters
+    float slideSpeed;
+    float jumpSpeed;
 
     // rotation parameters
     [SerializeField] float rotateBackDelay;
     [SerializeField] float rotateBackSpeed;
     float rotationAngleY = Const.PLAYER_ROTATION_MOVE;
     int isMoving = 0;
+
+    // collider / roll parameters
+    CapsuleCollider coll;
+    float colliderHeight = 1f;
+    float colliderCenter = -0.5f;
+    bool isRolling;
+    float rollingDelay;
 
     int currentLevel;
 
@@ -63,7 +64,6 @@ public class PlayerController : MonoBehaviour
         state = PlayerState.PLAYING;
         desiredLane = Const.PLAYER_INITIAL_LANE;
 
-        Rolling = RollDelay();
         coll = GetComponent<CapsuleCollider>();
         coll.isTrigger = true;
     }
@@ -164,6 +164,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    #region Rotation
     void GFX_Rotation()
     {
         if (isMoving != 0)
@@ -194,6 +195,9 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+    #endregion Rotation
+
+    #region Jump
     void Jump()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow) && CheckingGround())
@@ -208,7 +212,9 @@ public class PlayerController : MonoBehaviour
             targetJumpPosition = Vector3.zero;
         }
     }
+    #endregion Jump
 
+    #region Roll
     void Roll()
     {
         if (Input.GetKeyDown(KeyCode.DownArrow) && !isRolling && CheckingGround())
@@ -252,7 +258,7 @@ public class PlayerController : MonoBehaviour
 
         isRolling = false;
     }
-
+    #endregion Roll
 
     void updateSideSpeed(int newLevel)
     {
@@ -262,18 +268,28 @@ public class PlayerController : MonoBehaviour
         {
             case 1:
                 slideSpeed = GamePlayManager.Instance.playerSlideSpeed_Level_1;
+                jumpSpeed = GamePlayManager.Instance.playerJumpSpeed_Level_1;
+                rollingDelay = GamePlayManager.Instance.playerRollingDelay_Level_1;
                 break;
             case 2:
                 slideSpeed = GamePlayManager.Instance.playerSlideSpeed_Level_2;
+                jumpSpeed = GamePlayManager.Instance.playerJumpSpeed_Level_2;
+                rollingDelay = GamePlayManager.Instance.playerRollingDelay_Level_2;
                 break;
             case 3:
                 slideSpeed = GamePlayManager.Instance.playerSlideSpeed_Level_3;
+                jumpSpeed = GamePlayManager.Instance.playerJumpSpeed_Level_3;
+                rollingDelay = GamePlayManager.Instance.playerRollingDelay_Level_3;
                 break;
             case 4:
                 slideSpeed = GamePlayManager.Instance.playerSlideSpeed_Level_4;
+                jumpSpeed = GamePlayManager.Instance.playerJumpSpeed_Level_4;
+                rollingDelay = GamePlayManager.Instance.playerRollingDelay_Level_4;
                 break;
             case 5:
                 slideSpeed = GamePlayManager.Instance.playerSlideSpeed_Level_5;
+                jumpSpeed = GamePlayManager.Instance.playerJumpSpeed_Level_5;
+                rollingDelay = GamePlayManager.Instance.playerRollingDelay_Level_5;
                 break;
             default:
                 break;

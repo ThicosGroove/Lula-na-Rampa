@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using GameEvents;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class InGameUIManager : MonoBehaviour
 {
@@ -95,11 +96,15 @@ public class InGameUIManager : MonoBehaviour
         }
         else if (PlayerPrefs.HasKey(Const.PLAYER_ID))
         {
+
+            Debug.LogWarning("Tem Pref Key");
             OnGameOverInfinityPanel.SetActive(true);
             ScoreBoardBox.SetActive(true);
         }
         else
         {
+            Debug.LogWarning("Abriu confirm name panel");
+            OnGameOverInfinityPanel.SetActive(true);
             InsertNameForScoreBoardPanel.SetActive(true);
         }
 
@@ -138,6 +143,11 @@ public class InGameUIManager : MonoBehaviour
         // Atualizar o nome do jogador lá no sistema
         OnGameOverInfinityPanel.SetActive(true);
         ScoreBoardBox.SetActive(true);
+    }
+
+    public void OnClickPlayAgainButton()
+    {
+        SceneManager.LoadScene(1); // TEMPORÁRIO
     }
 
     public void OnClickCancelButton()

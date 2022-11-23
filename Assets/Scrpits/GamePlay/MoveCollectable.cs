@@ -9,6 +9,8 @@ public class MoveCollectable : MoveBase
 
     protected override void MoveBehaviour()
     {
-        transform.position = new Vector3(transform.position.x, (Mathf.Sin(Time.time * freq) * amp) + transform.position.y, transform.position.z);
+        transform.position = new Vector3(transform.position.x, (Mathf.Sin(Time.time * freq) * amp), transform.position.z);
+
+        // + transform.position.y
     }
 }

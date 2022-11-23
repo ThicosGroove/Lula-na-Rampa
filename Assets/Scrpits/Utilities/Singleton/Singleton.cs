@@ -30,7 +30,7 @@ public class Singleton<T> : MonoBehaviour where T : Component
         {
             // Debug.Log("Singleton " + typeof(T).Name + " successfully created on Awake.");
             instance = this as T;
-            DontDestroyOnLoad(this.gameObject);
+            //DontDestroyOnLoad(this.gameObject);
         }
         else
         {

@@ -36,6 +36,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
     [Header("Game Mode and Testing")]
     public bool isNormalMode;
     public bool playerColliderOn;
+    public bool testStartLevel_5;
     public int winScore;
 
     [Header("Speed And Delay on Normal Mode")]
@@ -77,6 +78,20 @@ public class GamePlayManager : Singleton<GamePlayManager>
     public float playerSlideSpeed_Level_4;
     public float playerSlideSpeed_Level_5;
 
+    [Header("Player Jump Speed per Level"),]
+    public float playerJumpSpeed_Level_1;
+    public float playerJumpSpeed_Level_2;
+    public float playerJumpSpeed_Level_3;
+    public float playerJumpSpeed_Level_4;
+    public float playerJumpSpeed_Level_5;
+
+    [Header("Player Rolling Delay per Level"),]
+    public float playerRollingDelay_Level_1;
+    public float playerRollingDelay_Level_2;
+    public float playerRollingDelay_Level_3;
+    public float playerRollingDelay_Level_4;
+    public float playerRollingDelay_Level_5;
+
     private CurrentLevelState currentLevel = CurrentLevelState.LEVEL_1;
     public static event Action<CurrentLevelState> OnChangeLevelState;
 
@@ -99,7 +114,15 @@ public class GamePlayManager : Singleton<GamePlayManager>
     private void Start()
     {
         UpdateGameState(GameStates.PLAYING); // Testing
-        UpdateLevel(CurrentLevelState.LEVEL_1);
+
+        if (testStartLevel_5)
+        {
+            ScoreEvents.OnChangeLevel(((int)CurrentLevelState.LEVEL_5));
+        }
+        else
+        {
+            UpdateLevel(CurrentLevelState.LEVEL_1);
+        }
     }
 
     public void UpdateGameState(GameStates newState)
@@ -131,8 +154,10 @@ public class GamePlayManager : Singleton<GamePlayManager>
         }
     }
 
-    public void UpdateLevel(CurrentLevelState newLevel) 
+    public void UpdateLevel(CurrentLevelState newLevel)
     {
+        if (testStartLevel_5) return;
+
         currentLevel = newLevel;
         OnChangeLevelState?.Invoke(newLevel);
 
@@ -157,7 +182,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
                 break;
         }
     }
-   
+
 
     //void MainMenu()
     //{
