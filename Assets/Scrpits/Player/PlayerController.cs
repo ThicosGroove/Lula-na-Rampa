@@ -106,12 +106,13 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (state != PlayerState.PLAYING) return;
-        Move();
+        MoveInput();
+        MoveHandle();
         Jump();
         Roll();
     }
 
-    private void Move()
+    public void MoveInput()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
@@ -138,8 +139,10 @@ public class PlayerController : MonoBehaviour
             isMoving = 2;
             GFX_Rotation();
         }
+    }
 
-
+    private void MoveHandle()
+    {
         switch (desiredLane)
         {
             case 0:
