@@ -15,7 +15,7 @@ enum PlayerState
 // CRIAR UM PLAYER ANIMATION HANDLER P LIDAR COM AS ANIMAÇÕES
 // MUDAR OS BOTOES
 public class PlayerController : MonoBehaviour
-{   
+{
     [Header("Player current State")]
     [SerializeField] PlayerState state;
 
@@ -30,13 +30,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundMask;
 
     [Header("Graphics parameters")] // temporário até obj 3D
-    [SerializeField] Transform GFX_transform;  
+    [SerializeField] Transform GFX_transform;
     [SerializeField] float GFX_ScaleOnRolling = 0.5f;
     [SerializeField] float GFX_PositionOnRolling = -0.5f;
-    
+
     // PRIVATES PARAMETERS
     // position parameters
-    float height; 
+    float height;
     int desiredLane;
     Vector3 targetPosition;
     Vector3 targetJumpPosition;
@@ -47,6 +47,12 @@ public class PlayerController : MonoBehaviour
     float colliderCenter = -0.5f;
     bool isRolling;
     IEnumerator Rolling;
+
+    // rotation parameters
+    [SerializeField] float rotateBackDelay;
+    [SerializeField] float rotateBackSpeed;
+    float rotationAngleY = Const.PLAYER_ROTATION_MOVE;
+    int isMoving = 0;
 
     int currentLevel;
 
@@ -113,7 +119,12 @@ public class PlayerController : MonoBehaviour
             if (desiredLane == 3)
             {
                 desiredLane = 2;
+                return;
             }
+
+            isMoving = 1;
+            GFX_Rotation();
+
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
@@ -121,8 +132,13 @@ public class PlayerController : MonoBehaviour
             if (desiredLane == -1)
             {
                 desiredLane = 0;
+                return;
             }
+
+            isMoving = 2;
+            GFX_Rotation();
         }
+
 
         switch (desiredLane)
         {
@@ -140,6 +156,42 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, slideSpeed * Time.deltaTime);
+
+        if (VerifyPosition(targetPosition))
+        {
+            isMoving = 0;
+            GFX_Rotation();
+        }
+    }
+
+    void GFX_Rotation()
+    {
+        if (isMoving != 0)
+        {
+            rotationAngleY = isMoving == 1 ? rotationAngleY : -rotationAngleY;
+            GFX_transform.Rotate(0, rotationAngleY, 0);
+            rotationAngleY = -rotationAngleY;
+        }
+        else
+        {
+            var lookForward = Quaternion.Euler(0, 0, 0);
+            GFX_transform.rotation = Quaternion.Slerp(GFX_transform.rotation, lookForward, rotateBackSpeed * Time.deltaTime);
+        }
+        rotationAngleY = Const.PLAYER_ROTATION_MOVE;
+    }
+
+    bool VerifyPosition(Vector3 newTargetPosition)
+    {
+        float targetMinX = newTargetPosition.x - rotateBackDelay;
+        float targetMaxX = newTargetPosition.x + rotateBackDelay;
+
+        bool isDirection = isMoving == 1 ? true : false; // true == Right   false == Left
+
+        if (isDirection && transform.position.x >= targetMinX) return true;
+
+        if (!isDirection && transform.position.x <= targetMaxX) return true;
+       
+        return false;
     }
 
     void Jump()
@@ -147,8 +199,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow) && CheckingGround())
         {
             targetJumpPosition = Vector3.up * jumpHeight;
-            //StopCoroutine(Rolling);
-            //isRolling = false;
         }
 
         transform.Translate(targetJumpPosition * jumpSpeed * Time.deltaTime);

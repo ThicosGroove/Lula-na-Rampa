@@ -81,7 +81,7 @@ MonoBehaviour:
   slideSpeed: 0
   jumpHeight: 13
   jumpSpeed: 5
-  rollingDelay: 0.8
+  rollingDelay: 0.7
   groundCheck: {fileID: 2671981966243121158}
   groundMask:
     serializedVersion: 2
@@ -89,6 +89,8 @@ MonoBehaviour:
   GFX_transform: {fileID: 7024203995404891402}
   GFX_ScaleOnRolling: 0.5
   GFX_PositionOnRolling: -0.5
+  rotateBackDelay: 5
+  rotateBackSpeed: 10
 --- !u!1 &2143968718047652392
 GameObject:
   m_ObjectHideFlags: 0

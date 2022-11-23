@@ -16,7 +16,9 @@ public static class Const
     //Game Play
     public static int SCORE_PER_COLLECTABLE = 1;
     public static int PLAYER_INITIAL_LANE = 1;
-    public static float LANE_DISTANCE = 15;
+    public static float LANE_DISTANCE = 15f;
+    public static float PLAYER_ROTATION_MOVE = 45f;
+
 
 
     // PLAYFAB 
