@@ -15,8 +15,9 @@ public class InputManager : Singleton<InputManager>
     private InputTouchControls inputActions;
     private Camera mainCamera;
 
-    private void Awake()
-    {       
+    protected override void Awake()
+    {
+        base.Awake();
         inputActions = new InputTouchControls();
         mainCamera = Camera.main;
     }
@@ -30,7 +31,6 @@ public class InputManager : Singleton<InputManager>
     {        
         inputActions.Disable();
     }
-
 
     void Start()
     {

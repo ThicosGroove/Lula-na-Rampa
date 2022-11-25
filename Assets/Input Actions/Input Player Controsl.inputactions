@@ -1,1 +1,67 @@
-{}
+{
+    "name": "Input Player Controsl",
+    "maps": [
+        {
+            "name": "Movement",
+            "id": "0f587e49-bff2-4cb3-84cb-fa6f734585ac",
+            "actions": [
+                {
+                    "name": "AWSD",
+                    "type": "Button",
+                    "id": "003b10f4-d90c-47f0-8b5b-b56b4e27b1f6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a34540a0-74de-4527-9d30-8dfd4ce19a57",
+                    "path": "<Keyboard>/d",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AWSD",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a1dbc306-9d04-4fe1-ab78-2947711e5880",
+                    "path": "<Keyboard>/a",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AWSD",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0018253e-492f-489f-975f-c192759fbfbb",
+                    "path": "<Keyboard>/s",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AWSD",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d15a610d-017e-4fa0-8e38-23bafc972b67",
+                    "path": "<Keyboard>/w",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AWSD",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

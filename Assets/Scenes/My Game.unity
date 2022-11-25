@@ -2202,7 +2202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentGameState: 0
   isNormalMode: 0
-  playerColliderOn: 0
+  playerColliderOn: 1
   testStartLevel_5: 0
   winScore: 3
   normalSpeed: 80
@@ -4086,6 +4086,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1421009501552025507, guid: c139acdb72e17f64eb57faa92d7b8208,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1421009501552025507, guid: c139acdb72e17f64eb57faa92d7b8208,
+        type: 3}
+      propertyPath: jumpHeight
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1421009501552025507, guid: c139acdb72e17f64eb57faa92d7b8208,
+        type: 3}
+      propertyPath: rotateBackDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1421009501552025507, guid: c139acdb72e17f64eb57faa92d7b8208,
+        type: 3}
+      propertyPath: rotateBackSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1421009501552025507, guid: c139acdb72e17f64eb57faa92d7b8208,
+        type: 3}
+      propertyPath: directionThreshold
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 1725827378496261665, guid: c139acdb72e17f64eb57faa92d7b8208,
         type: 3}
       propertyPath: m_RootOrder
@@ -4204,6 +4229,11 @@ PrefabInstance:
     - target: {fileID: 7024203995404891402, guid: c139acdb72e17f64eb57faa92d7b8208,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9134963213228494736, guid: c139acdb72e17f64eb57faa92d7b8208,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9134963213228494736, guid: c139acdb72e17f64eb57faa92d7b8208,

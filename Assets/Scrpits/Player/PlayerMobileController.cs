@@ -1,32 +1,22 @@
-﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using GameEvents;
 
-enum PlayerState
-{
-    IDLE,
-    JUMP,
-    SLIDING,
-    PLAYING,
-    DEAD,
-    WIN
-}
-
-// CRIAR UM PLAYER ANIMATION HANDLER P LIDAR COM AS ANIMAÇÕES
-// MUDAR OS BOTOES
-public class PlayerController : MonoBehaviour
+public class PlayerMobileController : MonoBehaviour
 {
     [Header("Player current State")]
     [SerializeField] PlayerState state;
 
     [Header("Gameplay parameters")]
     [SerializeField] float jumpHeight;
+    [SerializeField, Range(0f, 1f)] private float directionThreshold = .9f;
 
     [Header("Ground Check parameters")]
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundMask;
 
-    [Header("Graphics parameters")] // temporário até obj 3D
+    [Header("Graphics parameters")] // tempor�rio at� obj 3D
     [SerializeField] Transform GFX_transform;
     [SerializeField] float GFX_ScaleOnRolling = 0.5f;
     [SerializeField] float GFX_PositionOnRolling = -0.5f;
@@ -56,6 +46,9 @@ public class PlayerController : MonoBehaviour
     float rollingDelay;
 
     int currentLevel;
+
+    bool canMove;
+    bool canJump;
 
     #region SetUp 
     private void Awake()
@@ -106,11 +99,56 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (state != PlayerState.PLAYING) return;
-        MoveInput();
+        //MoveInput();
         MoveHandle();
         Jump();
-        Roll();
+        //Roll();
     }
+
+    public void SwipeDirection(Vector2 direction)
+    {
+        if (Vector2.Dot(Vector2.left, direction) > directionThreshold)
+        {
+            canMove = true;
+            Debug.LogWarning("Swipe Left");
+        }
+        else if (Vector2.Dot(Vector2.up, direction) > directionThreshold)
+        {
+            canJump = true;
+            Debug.LogWarning($"Can JUmp {canJump}");
+            Jump();
+        }
+        else if (Vector2.Dot(Vector2.right, direction) > directionThreshold)
+        {
+            canMove = true;
+            Debug.LogWarning("Swipe Right");
+        }
+        if (Vector2.Dot(Vector2.down, direction) > directionThreshold)
+        {
+            canMove = true;
+            Debug.LogWarning("Swipe Down");
+            Roll();
+        }
+
+            
+            canMove = false;
+
+    }
+
+
+    private void DesiredLane(int direction)
+    {
+        desiredLane += direction;
+        if (desiredLane == 3)
+        {
+            desiredLane = 2;
+            return;
+        }
+
+        isMoving = 1;
+        GFX_Rotation();
+    }
+
 
     public void MoveInput()
     {
@@ -196,7 +234,7 @@ public class PlayerController : MonoBehaviour
         if (isDirection && transform.position.x >= targetMinX) return true;
 
         if (!isDirection && transform.position.x <= targetMaxX) return true;
-       
+
         return false;
     }
 
@@ -205,7 +243,7 @@ public class PlayerController : MonoBehaviour
     #region Jump
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) && CheckingGround())
+        if (canJump && CheckingGround())
         {
             targetJumpPosition = Vector3.up * jumpHeight;
         }
@@ -214,15 +252,18 @@ public class PlayerController : MonoBehaviour
 
         if (transform.position.y >= targetJumpPosition.y)
         {
+            //Debug.LogWarning("Voltou");
             targetJumpPosition = Vector3.zero;
         }
+
+        canJump = false;
     }
     #endregion Jump
 
     #region Roll
     void Roll()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow) && !isRolling && CheckingGround())
+        if (!isRolling && CheckingGround())
         {
             isRolling = true;
             StartCoroutine(RollDelay());
@@ -240,7 +281,7 @@ public class PlayerController : MonoBehaviour
         coll.center = Vector3.Lerp(coll.center, colliderCenterOnRolling, 1f);
         coll.height = Mathf.Lerp(coll.height, colliderHeightOnRolling, 1f);
 
-        //Temporário
+        //Tempor�rio
         Vector3 normalGFX_Position = Vector3.zero;
         Vector3 newGXF_Position = new Vector3(0, GFX_PositionOnRolling, 0);
 
@@ -336,5 +377,12 @@ public class PlayerController : MonoBehaviour
         UpdatePlayerState(PlayerState.WIN);
     }
     #endregion Colliders And Raycasts
+
+
+
+  
+
+
+
 
 }
