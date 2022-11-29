@@ -82,24 +82,24 @@ public class SpawningObstacle2 : MonoBehaviour
         switch (currentLevel)
         {
             case 1:
-                currentSpeed = GamePlayManager.Instance.currentSpeed_Level_1;
-                spawnObstacleDelay = GamePlayManager.Instance.obstacleDelay_Level_1;
+                currentSpeed = LevelManager.Instance.obstacleSpeed_Level_1;
+                spawnObstacleDelay = LevelManager.Instance.obstacleSpawnDelay_Level_1;
                 break;
             case 2:
-                currentSpeed = GamePlayManager.Instance.currentSpeed_Level_2;
-                spawnObstacleDelay = GamePlayManager.Instance.obstacleDelay_Level_2;
+                currentSpeed = LevelManager.Instance.obstacleSpeed_Level_2;
+                spawnObstacleDelay = LevelManager.Instance.obstacleSpawnDelay_Level_2;
                 break;
             case 3:
-                currentSpeed = GamePlayManager.Instance.currentSpeed_Level_3;
-                spawnObstacleDelay = GamePlayManager.Instance.obstacleDelay_Level_3;
+                currentSpeed = LevelManager.Instance.obstacleSpeed_Level_3;
+                spawnObstacleDelay = LevelManager.Instance.obstacleSpawnDelay_Level_3;
                 break;
             case 4:
-                currentSpeed = GamePlayManager.Instance.currentSpeed_Level_4;
-                spawnObstacleDelay = GamePlayManager.Instance.obstacleDelay_Level_4;
+                currentSpeed = LevelManager.Instance.obstacleSpeed_Level_4;
+                spawnObstacleDelay = LevelManager.Instance.obstacleSpawnDelay_Level_4;
                 break;
             case 5:
-                currentSpeed = GamePlayManager.Instance.currentSpeed_Level_5;
-                spawnObstacleDelay = GamePlayManager.Instance.obstacleDelay_Level_5;
+                currentSpeed = LevelManager.Instance.obstacleSpeed_Level_5;
+                spawnObstacleDelay = LevelManager.Instance.obstacleSpawnDelay_Level_5;
                 break;
             default:
                 break;
@@ -110,8 +110,8 @@ public class SpawningObstacle2 : MonoBehaviour
     {
         if (GamePlayManager.Instance.isNormalMode)
         {
-            currentSpeed = GamePlayManager.Instance.normalSpeed;
-            spawnCollectableDelay = GamePlayManager.Instance.normalDelay;
+            currentSpeed = LevelManager.Instance.normalSpeed;
+            spawnCollectableDelay = LevelManager.Instance.normalDelay;
         }
 
         StartCoroutine(spawnObstacleCoroutine);

@@ -16,14 +16,7 @@ public enum GameStates
     WIN
 }
 
-public enum CurrentLevelState
-{
-    LEVEL_1 = 1,
-    LEVEL_2 = 2,
-    LEVEL_3 = 3,
-    LEVEL_4 = 4,
-    LEVEL_5
-}
+
 
 // Manager que controla a gameplay e providencia alguns métodos utilitários.
 [DefaultExecutionOrder(1)]
@@ -39,61 +32,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
     public bool testStartLevel_5;
     public int winScore;
 
-    [Header("Speed And Delay on Normal Mode")]
-    public float normalSpeed;
-    public float normalDelay;
-    public float playerNormal_SlideSpeed;
-
-    [Header("Score per Level")]
-    public int changeToLevel_2;
-    public int changeToLevel_3;
-    public int changeToLevel_4;
-    public int changeToLevel_5;
-
-    [Header("Obstacle Speed per Level")]
-    public float currentSpeed_Level_1;
-    public float currentSpeed_Level_2;
-    public float currentSpeed_Level_3;
-    public float currentSpeed_Level_4;
-    public float currentSpeed_Level_5;
-
-    [Header("Obstacle Spawn Delay per Level")]
-    public float obstacleDelay_Level_1;
-    public float obstacleDelay_Level_2;
-    public float obstacleDelay_Level_3;
-    public float obstacleDelay_Level_4;
-    public float obstacleDelay_Level_5;
-
-    [Header("Collectable Spawn Delay per Level")]
-    public float CollectableDelay_Level_1;
-    public float CollectableDelay_Level_2;
-    public float CollectableDelay_Level_3;
-    public float CollectableDelay_Level_4;
-    public float CollectableDelay_Level_5;
-
-    [Header("Player Slide Speed per Level"),]
-    public float playerSlideSpeed_Level_1;
-    public float playerSlideSpeed_Level_2;
-    public float playerSlideSpeed_Level_3;
-    public float playerSlideSpeed_Level_4;
-    public float playerSlideSpeed_Level_5;
-
-    [Header("Player Jump Speed per Level"),]
-    public float playerJumpSpeed_Level_1;
-    public float playerJumpSpeed_Level_2;
-    public float playerJumpSpeed_Level_3;
-    public float playerJumpSpeed_Level_4;
-    public float playerJumpSpeed_Level_5;
-
-    [Header("Player Rolling Delay per Level"),]
-    public float playerRollingDelay_Level_1;
-    public float playerRollingDelay_Level_2;
-    public float playerRollingDelay_Level_3;
-    public float playerRollingDelay_Level_4;
-    public float playerRollingDelay_Level_5;
-
-    private CurrentLevelState currentLevel = CurrentLevelState.LEVEL_1;
-    public static event Action<CurrentLevelState> OnChangeLevelState;
+ 
 
     [HideInInspector]
     public List<MoveBase> objList = new List<MoveBase>();
@@ -117,11 +56,11 @@ public class GamePlayManager : Singleton<GamePlayManager>
 
         if (testStartLevel_5)
         {
-            ScoreEvents.OnChangeLevel(((int)CurrentLevelState.LEVEL_5));
+            LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_5);
         }
         else
         {
-            UpdateLevel(CurrentLevelState.LEVEL_1);
+            LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_1);
         }
     }
 
@@ -154,34 +93,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
         }
     }
 
-    public void UpdateLevel(CurrentLevelState newLevel)
-    {
-        if (testStartLevel_5) return;
 
-        currentLevel = newLevel;
-        OnChangeLevelState?.Invoke(newLevel);
-
-        switch (currentLevel)
-        {
-            case CurrentLevelState.LEVEL_1:
-                ScoreEvents.OnChangeLevel(((int)CurrentLevelState.LEVEL_1));
-                break;
-            case CurrentLevelState.LEVEL_2:
-                ScoreEvents.OnChangeLevel(((int)CurrentLevelState.LEVEL_2));
-                break;
-            case CurrentLevelState.LEVEL_3:
-                ScoreEvents.OnChangeLevel(((int)CurrentLevelState.LEVEL_3));
-                break;
-            case CurrentLevelState.LEVEL_4:
-                ScoreEvents.OnChangeLevel(((int)CurrentLevelState.LEVEL_4));
-                break;
-            case CurrentLevelState.LEVEL_5:
-                ScoreEvents.OnChangeLevel(((int)CurrentLevelState.LEVEL_5));
-                break;
-            default:
-                break;
-        }
-    }
 
 
     //void MainMenu()

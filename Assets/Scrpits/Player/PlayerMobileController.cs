@@ -65,7 +65,7 @@ public class PlayerMobileController : MonoBehaviour
     {
         if (GamePlayManager.Instance.isNormalMode)
         {
-            slideSpeed = GamePlayManager.Instance.normalSpeed;
+            slideSpeed = LevelManager.Instance.normalSpeed;
         }
     }
 
@@ -313,29 +313,29 @@ public class PlayerMobileController : MonoBehaviour
         switch (currentLevel)
         {
             case 1:
-                slideSpeed = GamePlayManager.Instance.playerSlideSpeed_Level_1;
-                jumpSpeed = GamePlayManager.Instance.playerJumpSpeed_Level_1;
-                rollingDelay = GamePlayManager.Instance.playerRollingDelay_Level_1;
+                slideSpeed = LevelManager.Instance.playerSlideSpeed_Level_1;
+                jumpSpeed = LevelManager.Instance.playerJumpSpeed_Level_1;
+                rollingDelay = LevelManager.Instance.playerRollingDelay_Level_1;
                 break;
             case 2:
-                slideSpeed = GamePlayManager.Instance.playerSlideSpeed_Level_2;
-                jumpSpeed = GamePlayManager.Instance.playerJumpSpeed_Level_2;
-                rollingDelay = GamePlayManager.Instance.playerRollingDelay_Level_2;
+                slideSpeed = LevelManager.Instance.playerSlideSpeed_Level_2;
+                jumpSpeed = LevelManager.Instance.playerJumpSpeed_Level_2;
+                rollingDelay = LevelManager.Instance.playerRollingDelay_Level_2;
                 break;
             case 3:
-                slideSpeed = GamePlayManager.Instance.playerSlideSpeed_Level_3;
-                jumpSpeed = GamePlayManager.Instance.playerJumpSpeed_Level_3;
-                rollingDelay = GamePlayManager.Instance.playerRollingDelay_Level_3;
+                slideSpeed = LevelManager.Instance.playerSlideSpeed_Level_3;
+                jumpSpeed = LevelManager.Instance.playerJumpSpeed_Level_3;
+                rollingDelay = LevelManager.Instance.playerRollingDelay_Level_3;
                 break;
             case 4:
-                slideSpeed = GamePlayManager.Instance.playerSlideSpeed_Level_4;
-                jumpSpeed = GamePlayManager.Instance.playerJumpSpeed_Level_4;
-                rollingDelay = GamePlayManager.Instance.playerRollingDelay_Level_4;
+                slideSpeed = LevelManager.Instance.playerSlideSpeed_Level_4;
+                jumpSpeed = LevelManager.Instance.playerJumpSpeed_Level_4;
+                rollingDelay = LevelManager.Instance.playerRollingDelay_Level_4;
                 break;
             case 5:
-                slideSpeed = GamePlayManager.Instance.playerSlideSpeed_Level_5;
-                jumpSpeed = GamePlayManager.Instance.playerJumpSpeed_Level_5;
-                rollingDelay = GamePlayManager.Instance.playerRollingDelay_Level_5;
+                slideSpeed = LevelManager.Instance.playerSlideSpeed_Level_5;
+                jumpSpeed = LevelManager.Instance.playerJumpSpeed_Level_5;
+                rollingDelay = LevelManager.Instance.playerRollingDelay_Level_5;
                 break;
             default:
                 break;

@@ -83,7 +83,6 @@ public class InGameUIManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         levelText.gameObject.SetActive(false);
-        GameplayEvents.OnStartNewLevel();
     }
 
     private void OnGameOverUI()

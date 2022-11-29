@@ -47,24 +47,24 @@ public class ScoreManager : Singleton<ScoreManager>
 
     private void VerifyCurrentLevel()
     {
-        if (totalScoreCurrentRun == GamePlayManager.Instance.changeToLevel_2)
+        if (totalScoreCurrentRun == LevelManager.Instance.changeToLevel_2)
         {
-            GamePlayManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_2);
+            LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_2);
         }
 
-        if (totalScoreCurrentRun == GamePlayManager.Instance.changeToLevel_3)
+        if (totalScoreCurrentRun == LevelManager.Instance.changeToLevel_3)
         {
-            GamePlayManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_3);
+            LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_3);
         }
 
-        if (totalScoreCurrentRun == GamePlayManager.Instance.changeToLevel_4)
+        if (totalScoreCurrentRun == LevelManager.Instance.changeToLevel_4)
         {
-            GamePlayManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_4);
+            LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_4);
         }
 
-        if (totalScoreCurrentRun == GamePlayManager.Instance.changeToLevel_5)
+        if (totalScoreCurrentRun == LevelManager.Instance.changeToLevel_5)
         {
-            GamePlayManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_5);
+            LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_5);
         }
     }
 }
