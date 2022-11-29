@@ -72,21 +72,19 @@ public class PlayerController : MonoBehaviour
     {
         if (GamePlayManager.Instance.isNormalMode)
         {
-            slideSpeed = LevelManager.Instance.normalSpeed;
+            slideSpeed = LevelManager.Instance.current_playerSlideSpeed;
+            jumpSpeed = LevelManager.Instance.current_playerJumpSpeed;
+            rollingDelay = LevelManager.Instance.current_playerRollingSpeed;
         }
     }
 
     private void OnEnable()
     {
-        ScoreEvents.ChangeLevel += updateSideSpeed;
-
         GameplayEvents.Win += OnPlayerWin;
     }
 
     private void OnDisable()
     {
-        ScoreEvents.ChangeLevel -= updateSideSpeed;
-
         GameplayEvents.Win -= OnPlayerWin;
     }
 
@@ -110,6 +108,8 @@ public class PlayerController : MonoBehaviour
         MoveHandle();
         Jump();
         Roll();
+
+        updateSideSpeed();
     }
 
     public void MoveInput()
@@ -196,7 +196,7 @@ public class PlayerController : MonoBehaviour
         if (isDirection && transform.position.x >= targetMinX) return true;
 
         if (!isDirection && transform.position.x <= targetMaxX) return true;
-       
+
         return false;
     }
 
@@ -265,40 +265,11 @@ public class PlayerController : MonoBehaviour
     }
     #endregion Roll
 
-    void updateSideSpeed(int newLevel)
+    void updateSideSpeed()
     {
-        currentLevel = newLevel;
-
-        switch (currentLevel)
-        {
-            case 1:
-                slideSpeed = LevelManager.Instance.playerSlideSpeed_Level_1;
-                jumpSpeed = LevelManager.Instance.playerJumpSpeed_Level_1;
-                rollingDelay = LevelManager.Instance.playerRollingDelay_Level_1;
-                break;
-            case 2:
-                slideSpeed = LevelManager.Instance.playerSlideSpeed_Level_2;
-                jumpSpeed = LevelManager.Instance.playerJumpSpeed_Level_2;
-                rollingDelay = LevelManager.Instance.playerRollingDelay_Level_2;
-                break;
-            case 3:
-                slideSpeed = LevelManager.Instance.playerSlideSpeed_Level_3;
-                jumpSpeed = LevelManager.Instance.playerJumpSpeed_Level_3;
-                rollingDelay = LevelManager.Instance.playerRollingDelay_Level_3;
-                break;
-            case 4:
-                slideSpeed = LevelManager.Instance.playerSlideSpeed_Level_4;
-                jumpSpeed = LevelManager.Instance.playerJumpSpeed_Level_4;
-                rollingDelay = LevelManager.Instance.playerRollingDelay_Level_4;
-                break;
-            case 5:
-                slideSpeed = LevelManager.Instance.playerSlideSpeed_Level_5;
-                jumpSpeed = LevelManager.Instance.playerJumpSpeed_Level_5;
-                rollingDelay = LevelManager.Instance.playerRollingDelay_Level_5;
-                break;
-            default:
-                break;
-        }
+        slideSpeed = LevelManager.Instance.current_playerSlideSpeed;
+        jumpSpeed = LevelManager.Instance.current_playerJumpSpeed;
+        rollingDelay = LevelManager.Instance.current_playerRollingSpeed;
     }
     #endregion Movement
 

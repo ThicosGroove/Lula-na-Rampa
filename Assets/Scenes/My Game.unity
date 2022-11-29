@@ -677,12 +677,13 @@ MonoBehaviour:
     - 15
     - -15
   collectable:
-    collectablePrefab: {fileID: 5292952491359883835, guid: 3dcfa5d31424084438d239c37a9e1365,
+    collectablePrefab: {fileID: 1048021749357630140, guid: 3dcfa5d31424084438d239c37a9e1365,
       type: 3}
     posX:
     - -15
     - 0
     - 15
+  objSpawnDistance: 1000
 --- !u!4 &436440146
 Transform:
   m_ObjectHideFlags: 0
@@ -2270,35 +2271,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bb53e3123ac2af46b20e62dbec4c3e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lerpToNextLevel: 10
+  lerpToNextLevel: 0.1
   current_obstacleSpeed: 0
   current_obstacleSpawnDelay: 0
   current_collectableSpawnDelay: 0
   current_playerSlideSpeed: 0
   current_playerJumpSpeed: 0
   current_playerRollingSpeed: 0
-  normalSpeed: 75
-  normalDelay: 3
+  normalObstacleSpeed: 0
+  normalObstacleDelay: 0
   playerNormal_SlideSpeed: 5
-  changeToLevel_2: 1
-  changeToLevel_3: 2
-  changeToLevel_4: 3
-  changeToLevel_5: 4
+  playerNormal_JumpSpeed: 0
+  playerNormal_RollingSpeed: 0
+  changeToLevel_2: 13
+  changeToLevel_3: 26
+  changeToLevel_4: 39
+  changeToLevel_5: 52
   obstacleSpeed_Level_1: 75
   obstacleSpeed_Level_2: 90
   obstacleSpeed_Level_3: 100
   obstacleSpeed_Level_4: 120
   obstacleSpeed_Level_5: 150
-  obstacleSpawnDelay_Level_1: 3
-  obstacleSpawnDelay_Level_2: 3.5
-  obstacleSpawnDelay_Level_3: 4
-  obstacleSpawnDelay_Level_4: 5
-  obstacleSpawnDelay_Level_5: 5.5
-  collectableDelay_Level_1: 3
-  collectableDelay_Level_2: 3.5
-  collectableDelay_Level_3: 4
-  collectableDelay_Level_4: 5
-  collectableDelay_Level_5: 5.5
+  obstacleSpawnDelay_Level_1: 1.2
+  obstacleSpawnDelay_Level_2: 1
+  obstacleSpawnDelay_Level_3: 0.8
+  obstacleSpawnDelay_Level_4: 0.7
+  obstacleSpawnDelay_Level_5: 0.8
+  collectableDelay_Level_1: 1.2
+  collectableDelay_Level_2: 1
+  collectableDelay_Level_3: 0.8
+  collectableDelay_Level_4: 0.7
+  collectableDelay_Level_5: 0.8
   playerSlideSpeed_Level_1: 3
   playerSlideSpeed_Level_2: 5
   playerSlideSpeed_Level_3: 7

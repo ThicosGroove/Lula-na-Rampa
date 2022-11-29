@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Initialspeed: 200
+  speed: 0
 --- !u!1001 &7944480823204323506
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -140,6 +141,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Boi_GFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d69b3fdba5fa2e445ba6fd68a19e0492,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d69b3fdba5fa2e445ba6fd68a19e0492, type: 3}

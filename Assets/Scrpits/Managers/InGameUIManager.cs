@@ -63,6 +63,7 @@ public class InGameUIManager : MonoBehaviour
 
     private void UpdateLevelText(int newLevel)
     {
+        //Debug.LogWarning("Novo level UI");
         currentLevel = newLevel;
         StartCoroutine(LevelTextDelay());
     }
@@ -82,6 +83,7 @@ public class InGameUIManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
 
+        GameplayEvents.OnStartNewLevel();
         levelText.gameObject.SetActive(false);
     }
 

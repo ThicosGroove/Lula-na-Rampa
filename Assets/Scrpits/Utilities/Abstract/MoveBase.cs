@@ -7,7 +7,7 @@ public abstract class MoveBase : MonoBehaviour
 
     [SerializeField] float Initialspeed = 200f;
 
-    float speed;
+    public float speed;
 
     private void Start()
     {
@@ -48,7 +48,7 @@ public abstract class MoveBase : MonoBehaviour
     {
         if (transform.position.z < 200f)
         {
-            speed = 80f;
+            speed = LevelManager.Instance.current_obstacleSpeed;
         }
     }
 
@@ -65,7 +65,7 @@ public abstract class MoveBase : MonoBehaviour
 
     void DestroyOnNewLevel(int _)
     {
-        Debug.LogWarning("Nao destrói");
+        //Debug.LogWarning("Nao destrói");
         //GamePlayManager.Instance.objList.Remove(this);
         //Destroy(this.gameObject);
     }

@@ -65,7 +65,9 @@ public class PlayerMobileController : MonoBehaviour
     {
         if (GamePlayManager.Instance.isNormalMode)
         {
-            slideSpeed = LevelManager.Instance.normalSpeed;
+            slideSpeed = LevelManager.Instance.current_playerSlideSpeed;
+            jumpSpeed = LevelManager.Instance.current_playerJumpSpeed;
+            rollingDelay = LevelManager.Instance.current_playerRollingSpeed;
         }
     }
 
