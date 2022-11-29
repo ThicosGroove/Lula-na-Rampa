@@ -135,11 +135,10 @@ public class SpawningObstacle2 : MonoBehaviour
             //sorteia a posição entre uma das possíveis para o objeto
             int randomPosX = Random.Range(0, obstacles[obstacle].posX.Length);
 
-            Vector3 pos = new Vector3(obstacles[obstacle].posX[randomPosX], 0f, 200f);
+            Vector3 pos = new Vector3(obstacles[obstacle].posX[randomPosX], 0f, 1000f);
 
             newObstacle = Instantiate(obstacles[obstacle].prefab, pos, obstacles[obstacle].prefab.transform.rotation);
             GamePlayManager.Instance.objList.Add(newObstacle.GetComponent<MoveObstacle>());
-            newObstacle.GetComponent<MoveObstacle>().speed = currentSpeed;
         }
     }
 
@@ -155,7 +154,6 @@ public class SpawningObstacle2 : MonoBehaviour
 
             newCollectable = Instantiate(collectable.collectablePrefab, pos, Quaternion.identity);
             GamePlayManager.Instance.objList.Add(newCollectable.GetComponent<MoveCollectable>());
-            newCollectable.GetComponent<MoveCollectable>().speed = currentSpeed;
         }
     }
 }

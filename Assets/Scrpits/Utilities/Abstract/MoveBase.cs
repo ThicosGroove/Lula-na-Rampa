@@ -5,12 +5,14 @@ public abstract class MoveBase : MonoBehaviour
 {
     GameObject player;
 
-    [HideInInspector]
-    public float speed;
+    [SerializeField] float Initialspeed;
+
+    float speed;
 
     private void Start()
     {
         player = FindObjectOfType<PlayerController>().gameObject;
+        speed = Initialspeed;
     }
 
     private void OnEnable()
@@ -32,6 +34,7 @@ public abstract class MoveBase : MonoBehaviour
     void Update()
     {
         BasicMovement();
+        ReachSlowDownPoint();
         MoveBehaviour();
         DestroyObjOnLeaveScreen();
     }
@@ -39,6 +42,14 @@ public abstract class MoveBase : MonoBehaviour
     void BasicMovement()
     {
         transform.Translate(Vector3.back * speed * Time.deltaTime);
+    }
+
+    void ReachSlowDownPoint()
+    {
+        if (transform.position.z < 200f)
+        {
+            speed = GamePlayManager.Instance.no 
+        }
     }
 
     protected abstract void MoveBehaviour();
