@@ -56,7 +56,7 @@ public abstract class MoveBase : MonoBehaviour
 
     void DestroyObjOnLeaveScreen()
     {
-        if (transform.position.z < player.transform.position.z - 10)
+        if (transform.position.z < player.transform.position.z - 20f)
         {
             GamePlayManager.Instance.objList.Remove(this);
             Destroy(this.gameObject);

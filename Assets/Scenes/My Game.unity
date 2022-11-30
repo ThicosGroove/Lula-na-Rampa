@@ -670,11 +670,11 @@ MonoBehaviour:
     - 15
     - -15
   - name: Pneu
-    prefab: {fileID: 1501043989555501409, guid: 6c9832869a08e7f49a2f85a5e726aac1,
+    prefab: {fileID: 7810693052645778848, guid: 6c9832869a08e7f49a2f85a5e726aac1,
       type: 3}
     posX:
     - 0
-    - 15
+    - 13
     - -15
   collectable:
     collectablePrefab: {fileID: 1048021749357630140, guid: 3dcfa5d31424084438d239c37a9e1365,
@@ -1753,7 +1753,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 18.97
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1776,13 +1776,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.0500402, y: -0, z: -0, w: 0.9987472}
-  m_LocalPosition: {x: -0.5, y: 17.02, z: -25.31}
+  m_LocalRotation: {x: 0.010805886, y: -0, z: -0, w: 0.99994165}
+  m_LocalPosition: {x: 0, y: 29.2, z: -57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 5.737, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 1.238, y: 0, z: 0}
 --- !u!1 &1206638490
 GameObject:
   m_ObjectHideFlags: 0
@@ -2200,9 +2200,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentGameState: 0
   isNormalMode: 0
-  playerColliderOn: 0
+  playerColliderOn: 1
   testStartLevel_5: 0
-  winScore: 3
+  winScore: 13
   objList: []
 --- !u!4 &1346951836
 Transform:
@@ -2271,18 +2271,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bb53e3123ac2af46b20e62dbec4c3e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lerpToNextLevel: 0.1
+  lerpToNextLevel: 0.3
   current_obstacleSpeed: 0
   current_obstacleSpawnDelay: 0
   current_collectableSpawnDelay: 0
   current_playerSlideSpeed: 0
   current_playerJumpSpeed: 0
   current_playerRollingSpeed: 0
-  normalObstacleSpeed: 0
-  normalObstacleDelay: 0
+  normalObstacleSpeed: 75
+  normalObstacleDelay: 1
   playerNormal_SlideSpeed: 5
-  playerNormal_JumpSpeed: 0
-  playerNormal_RollingSpeed: 0
+  playerNormal_JumpSpeed: 5
+  playerNormal_RollingSpeed: 5
   changeToLevel_2: 13
   changeToLevel_3: 26
   changeToLevel_4: 39
@@ -2292,17 +2292,17 @@ MonoBehaviour:
   obstacleSpeed_Level_3: 100
   obstacleSpeed_Level_4: 120
   obstacleSpeed_Level_5: 150
-  obstacleSpawnDelay_Level_1: 1.2
-  obstacleSpawnDelay_Level_2: 1
+  obstacleSpawnDelay_Level_1: 1
+  obstacleSpawnDelay_Level_2: 0.9
   obstacleSpawnDelay_Level_3: 0.8
   obstacleSpawnDelay_Level_4: 0.7
-  obstacleSpawnDelay_Level_5: 0.8
-  collectableDelay_Level_1: 1.2
-  collectableDelay_Level_2: 1
+  obstacleSpawnDelay_Level_5: 0.6
+  collectableDelay_Level_1: 1
+  collectableDelay_Level_2: 0.9
   collectableDelay_Level_3: 0.8
   collectableDelay_Level_4: 0.7
-  collectableDelay_Level_5: 0.8
-  playerSlideSpeed_Level_1: 3
+  collectableDelay_Level_5: 0.6
+  playerSlideSpeed_Level_1: 5
   playerSlideSpeed_Level_2: 5
   playerSlideSpeed_Level_3: 7
   playerSlideSpeed_Level_4: 9
@@ -3672,7 +3672,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Over
+  m_text: "Voc\xEA Perdeu!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

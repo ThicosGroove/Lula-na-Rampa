@@ -109,7 +109,7 @@ public class InGameUIManager : MonoBehaviour
             InsertNameForScoreBoardPanel.SetActive(true);
         }
 
-        GameOverText.text = "Game Over!!";
+        GameOverText.text = "Perdeu!!";
     }
 
     private void OnWinUI()
@@ -117,7 +117,7 @@ public class InGameUIManager : MonoBehaviour
         CloseAllPanels();
         OnWinPanel.SetActive(true);
 
-        WinText.text = "You Win!!";
+        WinText.text = "Você Ganhou!!";
     }
 
     private void CloseAllPanels()

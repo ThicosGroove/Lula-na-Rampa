@@ -13,6 +13,7 @@ public class PlayFabLogin : MonoBehaviour
     public GameObject addLoginPanel;
     public GameObject recoverButton;
     public GameObject mobileAutomaticPanel;
+    public GameObject gameModePanel;
 
 
     public void Start()
@@ -84,7 +85,8 @@ public class PlayFabLogin : MonoBehaviour
         var nameRequest = new UpdateUserTitleDisplayNameRequest { DisplayName = userName };
         PlayFabClientAPI.UpdateUserTitleDisplayName(nameRequest, OnDisplayNameUpdate, OnDisplayNameUpdateError);
 
-        SceneManager.LoadScene(Const.GAME_SCENE);
+        //SceneManager.LoadScene(Const.GAME_SCENE);
+        GoToGameModePanel();
     }
 
     private void OnRegisterSuccess(RegisterPlayFabUserResult result)
@@ -99,7 +101,8 @@ public class PlayFabLogin : MonoBehaviour
         var nameRequest = new UpdateUserTitleDisplayNameRequest { DisplayName = userName };
         PlayFabClientAPI.UpdateUserTitleDisplayName(nameRequest, OnDisplayNameUpdate, OnDisplayNameUpdateError);
 
-        SceneManager.LoadScene(Const.GAME_SCENE);
+        //SceneManager.LoadScene(Const.GAME_SCENE);
+        GoToGameModePanel();
     }
 
     private void OnLoginMobileSuccess(LoginResult result)
@@ -111,7 +114,9 @@ public class PlayFabLogin : MonoBehaviour
         if (result.InfoResultPayload.PlayerProfile != null)
         {
             userName = result.InfoResultPayload.PlayerProfile.DisplayName;
-            SceneManager.LoadScene(Const.GAME_SCENE);
+
+            GoToGameModePanel();
+            //SceneManager.LoadScene(Const.GAME_SCENE);
         }
 
         if (!PlayerPrefs.HasKey(Const.USERNAME))
@@ -182,7 +187,8 @@ public class PlayFabLogin : MonoBehaviour
 
     public void ClickOnPlayOffline()
     {
-        SceneManager.LoadScene(Const.GAME_SCENE);
+        //SceneManager.LoadScene(Const.GAME_SCENE);
+        GoToGameModePanel();
     }
 
     public static string ReturnMobileID()
@@ -210,7 +216,14 @@ public class PlayFabLogin : MonoBehaviour
         PlayerPrefs.SetString(Const.USERNAME, userName);
         loginPanel.SetActive(false);
         recoverButton.SetActive(false);
-        SceneManager.LoadScene(Const.GAME_SCENE);
+
+        GoToGameModePanel();
+        //SceneManager.LoadScene(Const.GAME_SCENE);
+    }
+
+    private void GoToGameModePanel()
+    {
+        gameModePanel.SetActive(true);
     }
 
     private void CloseAllPanels()
@@ -219,5 +232,6 @@ public class PlayFabLogin : MonoBehaviour
         addLoginPanel.SetActive(false);
         mobileAutomaticPanel.SetActive(false);
         recoverButton.SetActive(false);
+        gameModePanel.SetActive(false);
     }
 }

@@ -16,8 +16,6 @@ public enum GameStates
     WIN
 }
 
-
-
 // Manager que controla a gameplay e providencia alguns métodos utilitários.
 [DefaultExecutionOrder(1)]
 public class GamePlayManager : Singleton<GamePlayManager>
@@ -33,7 +31,6 @@ public class GamePlayManager : Singleton<GamePlayManager>
     public int winScore;
 
  
-
     [HideInInspector]
     public List<MoveBase> objList = new List<MoveBase>();
 
@@ -52,6 +49,9 @@ public class GamePlayManager : Singleton<GamePlayManager>
 
     private void Start()
     {
+
+        isNormalMode = SaveManager.Instance.LoadFile().isNormalMode;
+
         UpdateGameState(GameStates.PLAYING); // Testing
 
         if (testStartLevel_5)

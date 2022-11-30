@@ -18,6 +18,7 @@ public class CollectableInfo
     public float[] posX;
 }
 
+[DefaultExecutionOrder(2)]
 public class SpawningObstacle2 : MonoBehaviour
 {
     public ObstacleInfo[] obstacles;
@@ -38,6 +39,9 @@ public class SpawningObstacle2 : MonoBehaviour
         {
             spawnObstacleDelay = LevelManager.Instance.normalObstacleDelay;
             spawnCollectableDelay = LevelManager.Instance.normalObstacleDelay;
+
+            Debug.LogWarning(spawnObstacleDelay);
+            Debug.LogWarning(spawnCollectableDelay);
         }
 
         StartCoroutine(SpawnObstacle());
@@ -60,6 +64,7 @@ public class SpawningObstacle2 : MonoBehaviour
 
     private void Update()
     {
+        
         if (GamePlayManager.Instance.isNormalMode) return;
         LevelUp();
     }

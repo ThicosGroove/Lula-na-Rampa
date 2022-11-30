@@ -19,7 +19,8 @@ public static class Const
     public static float LANE_DISTANCE = 15f;
     public static float PLAYER_ROTATION_MOVE = 45f;
 
-
+    // Save Files
+    public static string SAVE_FILE_PATH = "/saveFile.json";
 
     // PLAYFAB 
     public static string SCOREBOARD_NAME = "Global Scoreboard";
