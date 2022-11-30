@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        if (GamePlayManager.Instance.isNormalMode)
+        if (GamePlayManager.Instance.isNormalMode == true)
         {
             slideSpeed = LevelManager.Instance.current_playerSlideSpeed;
             jumpSpeed = LevelManager.Instance.current_playerJumpSpeed;

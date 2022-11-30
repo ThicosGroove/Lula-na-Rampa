@@ -27,7 +27,8 @@ public class PlayFabGameManager : Singleton<PlayFabGameManager>
 
     private void OnGameOver()
     {
-        if (PlayFabClientAPI.IsClientLoggedIn() && !GamePlayManager.Instance.isNormalMode)
+
+        if (PlayFabClientAPI.IsClientLoggedIn() && GamePlayManager.Instance.isNormalMode == false)
         {
             StartCoroutine(SendAndGetLeaderBoard());
         }
@@ -82,7 +83,7 @@ public class PlayFabGameManager : Singleton<PlayFabGameManager>
 
         foreach (var player in result.Leaderboard)
         {
-            player_Id = PlayerPrefs.GetString(Const.PLAYER_ID);
+            player_Id = SaveManager.Instance.LoadFile()._playerID;
 
             GameObject newGO = Instantiate(rowPrefab, rowsParent);
             TMP_Text[] texts = newGO.GetComponentsInChildren<TMP_Text>();
@@ -118,7 +119,7 @@ public class PlayFabGameManager : Singleton<PlayFabGameManager>
 
     void OnLeaderboardAroundPlayerGet(GetLeaderboardAroundPlayerResult result)
     {
-        player_Id = PlayerPrefs.GetString(Const.PLAYER_ID);
+        player_Id = SaveManager.Instance.LoadFile()._playerID;
 
         if (isOnTopScoreBoard) return;
 

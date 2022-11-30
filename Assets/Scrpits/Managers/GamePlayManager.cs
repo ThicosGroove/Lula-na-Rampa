@@ -25,12 +25,12 @@ public class GamePlayManager : Singleton<GamePlayManager>
     public static event Action<GameStates> OnGameStateChanged;
 
     [Header("Game Mode and Testing")]
-    public bool isNormalMode;
+    public bool? isNormalMode;
     public bool playerColliderOn;
     public bool testStartLevel_5;
     public int winScore;
 
- 
+
     [HideInInspector]
     public List<MoveBase> objList = new List<MoveBase>();
 
@@ -49,8 +49,10 @@ public class GamePlayManager : Singleton<GamePlayManager>
 
     private void Start()
     {
-
-        isNormalMode = SaveManager.Instance.LoadFile().isNormalMode;
+        if (SaveManager.Instance.LoadFile()._isNormalMode != null)
+        {
+            isNormalMode = SaveManager.Instance.LoadFile()._isNormalMode;
+        }
 
         UpdateGameState(GameStates.PLAYING); // Testing
 

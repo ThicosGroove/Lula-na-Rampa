@@ -86,7 +86,7 @@ public class LevelManager : Singleton<LevelManager>
 
     private void Start()
     {
-        if (GamePlayManager.Instance.isNormalMode)
+        if (GamePlayManager.Instance.isNormalMode == true)
         {
 
         }

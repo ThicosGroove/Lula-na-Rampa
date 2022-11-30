@@ -35,7 +35,7 @@ public class SpawningObstacle2 : MonoBehaviour
 
     void Start()
     {
-        if (GamePlayManager.Instance.isNormalMode)
+        if (GamePlayManager.Instance.isNormalMode == true)
         {
             spawnObstacleDelay = LevelManager.Instance.normalObstacleDelay;
             spawnCollectableDelay = LevelManager.Instance.normalObstacleDelay;
@@ -65,7 +65,7 @@ public class SpawningObstacle2 : MonoBehaviour
     private void Update()
     {
         
-        if (GamePlayManager.Instance.isNormalMode) return;
+        if (GamePlayManager.Instance.isNormalMode == true) return;
         LevelUp();
     }
 

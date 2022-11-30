@@ -2,6 +2,7 @@ using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class PlayFabLogin : MonoBehaviour
 {
@@ -27,13 +28,17 @@ public class PlayFabLogin : MonoBehaviour
             PlayFabSettings.TitleId = Const.TITLE_ID; // Please change this value to your own titleId from PlayFab Game Manager
         }
 
-        //PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();
 
-        if (PlayerPrefs.HasKey(Const.EMAIL))
+        if (File.Exists(Application.dataPath + Const.SAVE_FILE_PATH))
         {
+            userName = PlayerPrefs.GetString(Const.USERNAME);
             userEmail = PlayerPrefs.GetString(Const.EMAIL);
             userPassword = PlayerPrefs.GetString(Const.PASSWORD);
-            userName = PlayerPrefs.GetString(Const.USERNAME);
+
+            userName = SaveManager.Instance.LoadFile()._userName;
+            userEmail = SaveManager.Instance.LoadFile()._email;
+            userPassword = SaveManager.Instance.LoadFile()._password;
 
             var request = new LoginWithEmailAddressRequest
             {
@@ -42,7 +47,11 @@ public class PlayFabLogin : MonoBehaviour
                 InfoRequestParameters = new GetPlayerCombinedInfoRequestParams { GetPlayerProfile = true }
             };
 
-            PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
+
+            if (SaveManager.Instance.LoadFile()._keepMeConnected)
+            {
+                PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
+            }
         }
         else
         {
@@ -82,6 +91,12 @@ public class PlayFabLogin : MonoBehaviour
         PlayerPrefs.SetString(Const.USERNAME, userName);
         PlayerPrefs.SetString(Const.PLAYER_ID, result.PlayFabId);
 
+        SaveManager.Instance.playerData._userName = userName;
+        SaveManager.Instance.playerData._email = userEmail;
+        SaveManager.Instance.playerData._password = userPassword;
+        SaveManager.Instance.playerData._playerID = result.PlayFabId;
+        SaveManager.Instance.SaveData();
+
         var nameRequest = new UpdateUserTitleDisplayNameRequest { DisplayName = userName };
         PlayFabClientAPI.UpdateUserTitleDisplayName(nameRequest, OnDisplayNameUpdate, OnDisplayNameUpdateError);
 
@@ -98,6 +113,12 @@ public class PlayFabLogin : MonoBehaviour
         PlayerPrefs.SetString(Const.USERNAME, userName);
         PlayerPrefs.SetString(Const.PLAYER_ID, result.PlayFabId);
 
+        SaveManager.Instance.playerData._userName = userName;
+        SaveManager.Instance.playerData._email = userEmail;
+        SaveManager.Instance.playerData._password = userPassword;
+        SaveManager.Instance.playerData._playerID = result.PlayFabId;
+        SaveManager.Instance.SaveData();
+
         var nameRequest = new UpdateUserTitleDisplayNameRequest { DisplayName = userName };
         PlayFabClientAPI.UpdateUserTitleDisplayName(nameRequest, OnDisplayNameUpdate, OnDisplayNameUpdateError);
 
@@ -110,6 +131,8 @@ public class PlayFabLogin : MonoBehaviour
         loginPanel.SetActive(false);
 
         PlayerPrefs.SetString(Const.PLAYER_ID, result.PlayFabId);
+        SaveManager.Instance.playerData._playerID = result.PlayFabId;
+        SaveManager.Instance.SaveData();
 
         if (result.InfoResultPayload.PlayerProfile != null)
         {
@@ -166,7 +189,7 @@ public class PlayFabLogin : MonoBehaviour
             InfoRequestParameters = new GetPlayerCombinedInfoRequestParams { GetPlayerProfile = true }
         };
 
-        PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);      
+        PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
     }
 
     public void OnCLickLoginMobile()
@@ -214,6 +237,12 @@ public class PlayFabLogin : MonoBehaviour
         PlayerPrefs.SetString(Const.EMAIL, userEmail);
         PlayerPrefs.SetString(Const.PASSWORD, userPassword);
         PlayerPrefs.SetString(Const.USERNAME, userName);
+
+        SaveManager.Instance.playerData._userName = userName;
+        SaveManager.Instance.playerData._email = userEmail;
+        SaveManager.Instance.playerData._password = userPassword;
+        SaveManager.Instance.SaveData();
+
         loginPanel.SetActive(false);
         recoverButton.SetActive(false);
 

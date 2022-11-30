@@ -25,7 +25,7 @@ public class ScoreManager : Singleton<ScoreManager>
     {
         totalScoreCurrentRun += score;
 
-        if (GamePlayManager.Instance.isNormalMode)
+        if (GamePlayManager.Instance.isNormalMode == true)
         {
             VerifyWin();
         }

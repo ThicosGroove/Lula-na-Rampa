@@ -70,7 +70,7 @@ public class InGameUIManager : MonoBehaviour
 
     IEnumerator LevelTextDelay()
     {
-        if (GamePlayManager.Instance.isNormalMode)
+        if (GamePlayManager.Instance.isNormalMode == true)
         {
             levelText.text = "Pegue a Faixa !!";
         }
@@ -91,7 +91,7 @@ public class InGameUIManager : MonoBehaviour
     {
         CloseAllPanels();
 
-        if (GamePlayManager.Instance.isNormalMode)
+        if (GamePlayManager.Instance.isNormalMode == true)
         {
             OnGameOverNormalPanel.SetActive(true);
         }
