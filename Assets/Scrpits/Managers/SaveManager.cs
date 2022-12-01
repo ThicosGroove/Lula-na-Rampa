@@ -13,7 +13,7 @@ public class SaveManager : Singleton<SaveManager>
 
         if (!File.Exists(Application.dataPath + Const.SAVE_FILE_PATH))
         {
-            playerData._isNormalMode = true;
+            playerData._isNormalMode = false;
             playerData._userName = null;
             playerData._email = null;
             playerData._password = null;

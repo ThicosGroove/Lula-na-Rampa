@@ -5,11 +5,14 @@ public abstract class MoveBase : MonoBehaviour
 {
     GameObject player;
 
-    [SerializeField] float Initialspeed = 200f;
+    [SerializeField] float Initialspeed;
+    [SerializeField] protected float minDistanceToSlowDown;
 
-    public float speed;
+    protected float speed;
 
-    private void Start()
+    protected bool isInReach = false;
+
+    protected virtual void Start()
     {
         player = FindObjectOfType<PlayerController>().gameObject;
         speed = Initialspeed;
@@ -46,8 +49,9 @@ public abstract class MoveBase : MonoBehaviour
 
     void ReachSlowDownPoint()
     {
-        if (transform.position.z < 200f)
+        if (transform.position.z < minDistanceToSlowDown)
         {
+            isInReach = true;
             speed = LevelManager.Instance.current_obstacleSpeed;
         }
     }
@@ -56,7 +60,7 @@ public abstract class MoveBase : MonoBehaviour
 
     void DestroyObjOnLeaveScreen()
     {
-        if (transform.position.z < player.transform.position.z - 20f)
+        if (transform.position.z < player.transform.position.z - 50f)
         {
             GamePlayManager.Instance.objList.Remove(this);
             Destroy(this.gameObject);

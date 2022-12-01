@@ -28,14 +28,9 @@ public class PlayFabLogin : MonoBehaviour
             PlayFabSettings.TitleId = Const.TITLE_ID; // Please change this value to your own titleId from PlayFab Game Manager
         }
 
-        PlayerPrefs.DeleteAll();
 
         if (File.Exists(Application.dataPath + Const.SAVE_FILE_PATH))
         {
-            userName = PlayerPrefs.GetString(Const.USERNAME);
-            userEmail = PlayerPrefs.GetString(Const.EMAIL);
-            userPassword = PlayerPrefs.GetString(Const.PASSWORD);
-
             userName = SaveManager.Instance.LoadFile()._userName;
             userEmail = SaveManager.Instance.LoadFile()._email;
             userPassword = SaveManager.Instance.LoadFile()._password;
@@ -86,11 +81,6 @@ public class PlayFabLogin : MonoBehaviour
     {
         CloseAllPanels();
 
-        PlayerPrefs.SetString(Const.EMAIL, userEmail);
-        PlayerPrefs.SetString(Const.PASSWORD, userPassword);
-        PlayerPrefs.SetString(Const.USERNAME, userName);
-        PlayerPrefs.SetString(Const.PLAYER_ID, result.PlayFabId);
-
         SaveManager.Instance.playerData._userName = userName;
         SaveManager.Instance.playerData._email = userEmail;
         SaveManager.Instance.playerData._password = userPassword;
@@ -100,7 +90,6 @@ public class PlayFabLogin : MonoBehaviour
         var nameRequest = new UpdateUserTitleDisplayNameRequest { DisplayName = userName };
         PlayFabClientAPI.UpdateUserTitleDisplayName(nameRequest, OnDisplayNameUpdate, OnDisplayNameUpdateError);
 
-        //SceneManager.LoadScene(Const.GAME_SCENE);
         GoToGameModePanel();
     }
 
@@ -108,11 +97,6 @@ public class PlayFabLogin : MonoBehaviour
     {
         CloseAllPanels();
 
-        PlayerPrefs.SetString(Const.EMAIL, userEmail);
-        PlayerPrefs.SetString(Const.PASSWORD, userPassword);
-        PlayerPrefs.SetString(Const.USERNAME, userName);
-        PlayerPrefs.SetString(Const.PLAYER_ID, result.PlayFabId);
-
         SaveManager.Instance.playerData._userName = userName;
         SaveManager.Instance.playerData._email = userEmail;
         SaveManager.Instance.playerData._password = userPassword;
@@ -122,7 +106,6 @@ public class PlayFabLogin : MonoBehaviour
         var nameRequest = new UpdateUserTitleDisplayNameRequest { DisplayName = userName };
         PlayFabClientAPI.UpdateUserTitleDisplayName(nameRequest, OnDisplayNameUpdate, OnDisplayNameUpdateError);
 
-        //SceneManager.LoadScene(Const.GAME_SCENE);
         GoToGameModePanel();
     }
 
@@ -130,7 +113,6 @@ public class PlayFabLogin : MonoBehaviour
     {
         loginPanel.SetActive(false);
 
-        PlayerPrefs.SetString(Const.PLAYER_ID, result.PlayFabId);
         SaveManager.Instance.playerData._playerID = result.PlayFabId;
         SaveManager.Instance.SaveData();
 
@@ -139,7 +121,6 @@ public class PlayFabLogin : MonoBehaviour
             userName = result.InfoResultPayload.PlayerProfile.DisplayName;
 
             GoToGameModePanel();
-            //SceneManager.LoadScene(Const.GAME_SCENE);
         }
 
         if (!PlayerPrefs.HasKey(Const.USERNAME))
@@ -210,7 +191,6 @@ public class PlayFabLogin : MonoBehaviour
 
     public void ClickOnPlayOffline()
     {
-        //SceneManager.LoadScene(Const.GAME_SCENE);
         GoToGameModePanel();
     }
 
@@ -233,10 +213,6 @@ public class PlayFabLogin : MonoBehaviour
 
     private void OnAddLoginSuccess(AddUsernamePasswordResult result)
     {
-        Debug.Log("Congratulations, you made your first successful API call!");
-        PlayerPrefs.SetString(Const.EMAIL, userEmail);
-        PlayerPrefs.SetString(Const.PASSWORD, userPassword);
-        PlayerPrefs.SetString(Const.USERNAME, userName);
 
         SaveManager.Instance.playerData._userName = userName;
         SaveManager.Instance.playerData._email = userEmail;
@@ -247,7 +223,6 @@ public class PlayFabLogin : MonoBehaviour
         recoverButton.SetActive(false);
 
         GoToGameModePanel();
-        //SceneManager.LoadScene(Const.GAME_SCENE);
     }
 
     private void GoToGameModePanel()

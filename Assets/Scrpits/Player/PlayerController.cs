@@ -282,14 +282,13 @@ public class PlayerController : MonoBehaviour
         {
             UpdatePlayerState(PlayerState.DEAD);
 
-            Debug.Log("Game Over");
             GamePlayManager.Instance.UpdateGameState(GameStates.GAMEOVER);
         }
     }
 
     bool CheckingGround()
     {
-        bool ray = Physics.CheckSphere(groundCheck.position, 1f, groundMask);
+        bool ray = Physics.CheckSphere(groundCheck.position, 1.5f, groundMask);
 
         slideSpeed = jumpSpeed;
         return ray;
@@ -299,7 +298,7 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.green;
 
-        Gizmos.DrawSphere(groundCheck.position, 1f);
+        Gizmos.DrawSphere(groundCheck.position, 1.5f);
     }
 
     void OnPlayerWin()
