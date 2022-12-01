@@ -18,7 +18,7 @@ public class CollectableInfo
     public float[] posX;
 }
 
-[DefaultExecutionOrder(2)]
+[DefaultExecutionOrder(10)]
 public class SpawningObstacle2 : MonoBehaviour
 {
     public ObstacleInfo[] obstacles;
@@ -33,38 +33,41 @@ public class SpawningObstacle2 : MonoBehaviour
     private GameObject newCollectable;
 
 
+    private void Awake()
+    {
+    }
+
     void Start()
     {
         if (GamePlayManager.Instance.isNormalMode == true)
         {
             spawnObstacleDelay = LevelManager.Instance.normalObstacleDelay;
             spawnCollectableDelay = LevelManager.Instance.normalObstacleDelay;
-
-            Debug.LogWarning(spawnObstacleDelay);
-            Debug.LogWarning(spawnCollectableDelay);
+        }
+        else
+        {
+            spawnObstacleDelay = LevelManager.Instance.current_obstacleSpawnDelay;
+            spawnCollectableDelay = LevelManager.Instance.current_collectableSpawnDelay;
         }
 
         StartCoroutine(SpawnObstacle());
-        StartCoroutine(SpawnCollectable()); 
+        StartCoroutine(SpawnCollectable());
     }
 
     private void OnEnable()
     {
-        //GameplayEvents.StartNewLevel += StartNewSpawing;
         GameplayEvents.GameOver += StopAllTheCoroutines;
         GameplayEvents.Win += StopAllTheCoroutines;
     }
 
     private void OnDisable()
     {
-       // GameplayEvents.StartNewLevel -= StartNewSpawing;
         GameplayEvents.GameOver -= StopAllTheCoroutines;
         GameplayEvents.Win -= StopAllTheCoroutines;
     }
 
     private void Update()
     {
-        
         if (GamePlayManager.Instance.isNormalMode == true) return;
         LevelUp();
     }
@@ -74,7 +77,6 @@ public class SpawningObstacle2 : MonoBehaviour
         spawnObstacleDelay = LevelManager.Instance.current_obstacleSpawnDelay;
         spawnCollectableDelay = LevelManager.Instance.current_collectableSpawnDelay;
     }
-
 
     private void StopAllTheCoroutines()
     {

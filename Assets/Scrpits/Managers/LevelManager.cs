@@ -12,6 +12,7 @@ public enum CurrentLevelState
     LEVEL_5
 }
 
+[DefaultExecutionOrder(2)]
 public class LevelManager : Singleton<LevelManager>
 {
     private CurrentLevelState currentLevelState = CurrentLevelState.LEVEL_1;
@@ -88,7 +89,20 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (GamePlayManager.Instance.isNormalMode == true)
         {
-
+            current_obstacleSpeed = normalObstacleSpeed;
+            current_obstacleSpawnDelay = normalObstacleDelay;
+            current_collectableSpawnDelay = normalObstacleDelay;
+            current_playerSlideSpeed = playerNormal_SlideSpeed;
+            current_playerJumpSpeed = playerNormal_JumpSpeed;
+            current_playerRollingSpeed = playerNormal_RollingSpeed;
+        }
+        else
+        {
+            current_obstacleSpeed = obstacleSpeed_Level_1;
+            current_obstacleSpawnDelay = obstacleSpawnDelay_Level_1;
+            current_collectableSpawnDelay = collectableDelay_Level_1;
+            current_playerSlideSpeed = playerSlideSpeed_Level_1;
+            current_playerJumpSpeed = playerJumpSpeed_Level_1;
         }
     }
 
