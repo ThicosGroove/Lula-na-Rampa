@@ -5,8 +5,8 @@ public abstract class MoveBase : MonoBehaviour
 {
     GameObject player;
 
-    [SerializeField] float Initialspeed;
-    [SerializeField] protected float minDistanceToSlowDown;
+    [SerializeField] float Initialspeed = 200f;
+    [SerializeField] protected float minDistanceToSlowDown = 200f;
 
     protected float speed;
 

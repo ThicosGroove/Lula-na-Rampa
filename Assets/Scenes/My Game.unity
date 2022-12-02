@@ -681,13 +681,13 @@ MonoBehaviour:
     posX:
     - 0
   - name: "Caminh\xE3o Patriota"
-    prefab: {fileID: 1619413995124741965, guid: cd2006e9fbea03448b0c64523ec0d604,
+    prefab: {fileID: 3016741344685060480, guid: cd2006e9fbea03448b0c64523ec0d604,
       type: 3}
     posX:
     - 15
     - -15
   collectable:
-    collectablePrefab: {fileID: 1048021749357630140, guid: 3dcfa5d31424084438d239c37a9e1365,
+    collectablePrefab: {fileID: 6758563964536805240, guid: abfef453204048b40940b207ef24634b,
       type: 3}
     posX:
     - -15

@@ -28,4 +28,17 @@ public class Collectable : MonoBehaviour, ICollectable
             CollectMe();
         }
     }
+
+    private void OnTriggerStay(Collider collision)
+    {
+        if (collision.gameObject.CompareTag(Const.OBSTACLE_TAG))
+        {
+            WrongSpawn();
+        }
+
+        if (collision.gameObject.CompareTag(Const.PLAYER_TAG))
+        {
+            CollectMe();
+        }
+    }
 }
