@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using GameEvents;
 using System.Collections.Generic;
+using System.IO;
 
 public enum GameStates
 {
@@ -49,7 +50,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
 
     private void Start()
     {
-        if (SaveManager.Instance.LoadFile()._isNormalMode != null)
+        if (File.Exists(Application.dataPath + Const.SAVE_FILE_PATH))
         {
             isNormalMode = SaveManager.Instance.LoadFile()._isNormalMode;
         }

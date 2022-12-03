@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2582517970738314760}
   - component: {fileID: 1725827378496261678}
   - component: {fileID: 9134963213228494736}
-  - component: {fileID: 1421009501552025507}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -80,7 +79,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  jumpHeight: 13
+  jumpHeight: 16
+  directionThreshold: 0.5
   groundCheck: {fileID: 2671981966243121158}
   groundMask:
     serializedVersion: 2
@@ -102,32 +102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968a245824cb25441b5d0ce6dda6e918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistance: 0.2
-  maxTime: 1
---- !u!114 &1421009501552025507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1725827378496261679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25cce4ce65065814b8e515decf904dc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
-  jumpHeight: 0
-  directionThreshold: 0.9
-  groundCheck: {fileID: 2671981966243121158}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 64
-  GFX_transform: {fileID: 7024203995404891402}
-  GFX_ScaleOnRolling: 0.5
-  GFX_PositionOnRolling: -0.5
-  rotateBackDelay: 0
-  rotateBackSpeed: 0
+  minDistance: 0.01
+  maxTime: 0.7
 --- !u!1 &2143968718047652392
 GameObject:
   m_ObjectHideFlags: 0

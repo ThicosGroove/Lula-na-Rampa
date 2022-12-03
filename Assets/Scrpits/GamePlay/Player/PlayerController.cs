@@ -112,9 +112,10 @@ public class PlayerController : MonoBehaviour
 
     #region Movement
 
+    #region Mobilie
     public void SwipeDirection(Vector2 direction)
     {
-        if (Vector2.Dot(Vector2.left, direction) > directionThreshold)
+        if (Vector2.Dot(Vector2.left, direction) > directionThreshold) // Esquerda
         {
             desiredLane--;
             if (desiredLane == -1)
@@ -127,7 +128,7 @@ public class PlayerController : MonoBehaviour
             isMoving = 2;
             GFX_Rotation();
         }
-        else if (Vector2.Dot(Vector2.right, direction) > directionThreshold)
+        else if (Vector2.Dot(Vector2.right, direction) > directionThreshold) // Direita
         {
             desiredLane++;
             if (desiredLane == 3)
@@ -139,7 +140,7 @@ public class PlayerController : MonoBehaviour
             isMoving = 1;
             GFX_Rotation();
         }
-        else if (Vector2.Dot(Vector2.up, direction) > directionThreshold)
+        else if (Vector2.Dot(Vector2.up, direction) > directionThreshold) // Pulo
         {
 
             if (CheckingGround())
@@ -154,7 +155,7 @@ public class PlayerController : MonoBehaviour
                 targetJumpPosition = Vector3.zero;
             }
         }
-        if (Vector2.Dot(Vector2.down, direction) > directionThreshold)
+        if (Vector2.Dot(Vector2.down, direction) > directionThreshold) // Abaixar
         {
             if (!isRolling && CheckingGround())
             {
@@ -163,6 +164,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    #endregion Mobile
 
     void Update()
     {
@@ -175,6 +177,15 @@ public class PlayerController : MonoBehaviour
         updateSideSpeed();
     }
 
+    void updateSideSpeed()
+    {
+        slideSpeed = LevelManager.Instance.current_playerSlideSpeed;
+        jumpSpeed = LevelManager.Instance.current_playerJumpSpeed;
+        rollingDelay = LevelManager.Instance.current_playerRollingSpeed;
+    }
+
+
+    #region Sideways
     public void MoveInput()
     {
         if (input.Movement.Right.triggered)
@@ -206,8 +217,6 @@ public class PlayerController : MonoBehaviour
 
     private void MoveHandle()
     {
-        //Debug.LogWarning( "Move Handle " + desiredLane);
-
         switch (desiredLane)
         {
             case 0:
@@ -231,6 +240,7 @@ public class PlayerController : MonoBehaviour
             GFX_Rotation();
         }
     }
+    #endregion Sideways
 
     #region Rotation
     void GFX_Rotation()
@@ -329,15 +339,6 @@ public class PlayerController : MonoBehaviour
     }
     #endregion Roll
 
-    void updateSideSpeed()
-    {
-        slideSpeed = LevelManager.Instance.current_playerSlideSpeed;
-        jumpSpeed = LevelManager.Instance.current_playerJumpSpeed;
-        rollingDelay = LevelManager.Instance.current_playerRollingSpeed;
-    }
-
-
-
     #endregion Movement
 
     #region Colliders And Raycasts
@@ -368,10 +369,14 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawSphere(groundCheck.position, 1.5f);
     }
 
+    #endregion Colliders And Raycasts
+
     void OnPlayerWin()
     {
         UpdatePlayerState(PlayerState.WIN);
-    }
-    #endregion Colliders And Raycasts
 
+        // desabilita os inputs
+        // diminui a velocidade
+        // vai para a lane do meio
+    }
 }
