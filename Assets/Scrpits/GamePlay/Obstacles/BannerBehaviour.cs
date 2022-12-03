@@ -9,7 +9,7 @@ public class BannerBehaviour : MonoBehaviour
 
     string[] bannerText =
         {
-        "BURRO COM FORÇA (ARMADA)",
+        "BURROS COM FORÇA (ARMADA)",
         "S.O.S. E.T",
         "PAREM DE MIMIMI",
         "TERRA PLANA",

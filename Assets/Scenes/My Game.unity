@@ -679,8 +679,7 @@ MonoBehaviour:
     prefab: {fileID: 3289771557835313809, guid: 6c9832869a08e7f49a2f85a5e726aac1,
       type: 3}
     posX:
-    - 13
-    - -9
+    - 0
   - name: Door
     prefab: {fileID: 7858068780731967353, guid: 2e7bd5b14d6ddfd4bbc49071bf4b5c4f,
       type: 3}
