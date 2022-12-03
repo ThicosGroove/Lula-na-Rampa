@@ -7,7 +7,7 @@ public class SwipeDetection : MonoBehaviour
     [SerializeField] private float maxTime = 1f;
  
 
-    private PlayerMobileController playerMobileController;
+    private PlayerController playerController;
 
     private InputManager inputManager;
 
@@ -20,7 +20,7 @@ public class SwipeDetection : MonoBehaviour
     private void Awake()
     {
         inputManager = InputManager.Instance;
-        playerMobileController = GetComponent<PlayerMobileController>();
+        playerController = GetComponent<PlayerController>();
     }
 
     private void OnEnable()
@@ -58,7 +58,7 @@ public class SwipeDetection : MonoBehaviour
 
             Vector3 direction3D = endPosition - startPosition;
             Vector2 direction2D = new Vector2(direction3D.x, direction3D.y).normalized;
-            playerMobileController.SwipeDirection(direction2D);
+            playerController.SwipeDirection(direction2D);
         }
     }
 

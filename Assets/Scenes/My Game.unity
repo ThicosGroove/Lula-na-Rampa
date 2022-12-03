@@ -4260,18 +4260,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9134963213228494736, guid: c139acdb72e17f64eb57faa92d7b8208,
         type: 3}
+      propertyPath: maxTime
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9134963213228494736, guid: c139acdb72e17f64eb57faa92d7b8208,
+        type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9134963213228494736, guid: c139acdb72e17f64eb57faa92d7b8208,
         type: 3}
       propertyPath: minDistance
-      value: 0.1
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 9134963213228494736, guid: c139acdb72e17f64eb57faa92d7b8208,
         type: 3}
       propertyPath: directionThreshold
       value: 0.7
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1421009501552025507, guid: c139acdb72e17f64eb57faa92d7b8208, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c139acdb72e17f64eb57faa92d7b8208, type: 3}

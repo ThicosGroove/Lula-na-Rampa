@@ -6,9 +6,36 @@
             "id": "0f587e49-bff2-4cb3-84cb-fa6f734585ac",
             "actions": [
                 {
-                    "name": "AWSD",
+                    "name": "Right",
                     "type": "Button",
                     "id": "003b10f4-d90c-47f0-8b5b-b56b4e27b1f6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Left",
+                    "type": "Button",
+                    "id": "57c47fe7-ff25-4e17-b3d2-afce803639aa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "0b2e6e6e-cbe4-4c7c-a801-9d19b1cf16b9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Roll",
+                    "type": "Button",
+                    "id": "d2da3c41-d9e7-48c7-928d-fb05234b00b7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -23,40 +50,95 @@
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
-                    "action": "AWSD",
+                    "action": "Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "a1dbc306-9d04-4fe1-ab78-2947711e5880",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e09c9750-2662-4539-b4d5-11681249cd08",
                     "path": "<Keyboard>/a",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
-                    "action": "AWSD",
+                    "action": "Left",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "0018253e-492f-489f-975f-c192759fbfbb",
-                    "path": "<Keyboard>/s",
+                    "id": "d85385bf-0c35-4d17-af83-214b23fd9e94",
+                    "path": "<Keyboard>/leftArrow",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
-                    "action": "AWSD",
+                    "action": "Left",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "d15a610d-017e-4fa0-8e38-23bafc972b67",
+                    "id": "c2b020d5-d16f-43e0-8b6e-7c2b9adbf568",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "37626ccb-a46d-4d35-843d-238c8a97bb51",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9148ae04-af67-4048-b762-4f472dc5368a",
                     "path": "<Keyboard>/w",
-                    "interactions": "Press",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "AWSD",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "65218baa-73d0-45dc-9411-c1c18e9d32c9",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Roll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dd1bde05-27fe-45af-b517-cfbfcd08e03c",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Roll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

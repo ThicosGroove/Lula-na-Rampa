@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Gameplay parameters")]
     [SerializeField] float jumpHeight;
+    [SerializeField, Range(0f, 1f)] private float directionThreshold = .9f;
 
     [Header("Ground Check parameters")]
     [SerializeField] Transform groundCheck;
@@ -32,6 +33,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float GFX_PositionOnRolling = -0.5f;
 
     // PRIVATES PARAMETERS 
+    InputPlayerControsl input;
+
     // position parameters
     float height;
     int desiredLane;
@@ -41,6 +44,7 @@ public class PlayerController : MonoBehaviour
     // move / jump parameters
     float slideSpeed;
     float jumpSpeed;
+    bool canJump;
 
     // rotation parameters
     [SerializeField] float rotateBackDelay;
@@ -60,6 +64,8 @@ public class PlayerController : MonoBehaviour
     #region SetUp 
     private void Awake()
     {
+        input = new InputPlayerControsl();
+
         height = 3;
         state = PlayerState.PLAYING;
         desiredLane = Const.PLAYER_INITIAL_LANE;
@@ -81,11 +87,15 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         GameplayEvents.Win += OnPlayerWin;
+
+        input.Enable();
     }
 
     private void OnDisable()
     {
         GameplayEvents.Win -= OnPlayerWin;
+
+        input.Disable();
     }
 
     private void UpdatePlayerState(PlayerState newState)
@@ -101,20 +111,73 @@ public class PlayerController : MonoBehaviour
     #endregion SetUp
 
     #region Movement
+
+    public void SwipeDirection(Vector2 direction)
+    {
+        if (Vector2.Dot(Vector2.left, direction) > directionThreshold)
+        {
+            desiredLane--;
+            if (desiredLane == -1)
+            {
+                desiredLane = 0;
+                return;
+            }
+
+
+            isMoving = 2;
+            GFX_Rotation();
+        }
+        else if (Vector2.Dot(Vector2.right, direction) > directionThreshold)
+        {
+            desiredLane++;
+            if (desiredLane == 3)
+            {
+                desiredLane = 2;
+                return;
+            }
+
+            isMoving = 1;
+            GFX_Rotation();
+        }
+        else if (Vector2.Dot(Vector2.up, direction) > directionThreshold)
+        {
+
+            if (CheckingGround())
+            {
+                targetJumpPosition = Vector3.up * jumpHeight;
+            }
+
+            transform.Translate(targetJumpPosition * jumpSpeed * Time.deltaTime);
+
+            if (transform.position.y >= targetJumpPosition.y)
+            {
+                targetJumpPosition = Vector3.zero;
+            }
+        }
+        if (Vector2.Dot(Vector2.down, direction) > directionThreshold)
+        {
+            if (!isRolling && CheckingGround())
+            {
+                isRolling = true;
+                StartCoroutine(RollDelay());
+            }
+        }
+    }
+
     void Update()
     {
         if (state != PlayerState.PLAYING) return;
         MoveInput();
-        MoveHandle();
         Jump();
         Roll();
 
+        MoveHandle();
         updateSideSpeed();
     }
 
     public void MoveInput()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (input.Movement.Right.triggered)
         {
             desiredLane++;
             if (desiredLane == 3)
@@ -127,7 +190,7 @@ public class PlayerController : MonoBehaviour
             GFX_Rotation();
 
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (input.Movement.Left.triggered)
         {
             desiredLane--;
             if (desiredLane == -1)
@@ -141,10 +204,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-
     private void MoveHandle()
     {
+        //Debug.LogWarning( "Move Handle " + desiredLane);
+
         switch (desiredLane)
         {
             case 0:
@@ -205,7 +268,7 @@ public class PlayerController : MonoBehaviour
     #region Jump
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) && CheckingGround())
+        if (input.Movement.Jump.triggered && CheckingGround())
         {
             targetJumpPosition = Vector3.up * jumpHeight;
         }
@@ -216,13 +279,14 @@ public class PlayerController : MonoBehaviour
         {
             targetJumpPosition = Vector3.zero;
         }
+
     }
     #endregion Jump
 
     #region Roll
     void Roll()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow) && !isRolling && CheckingGround())
+        if (input.Movement.Roll.triggered && !isRolling && CheckingGround())
         {
             isRolling = true;
             StartCoroutine(RollDelay());
@@ -271,6 +335,9 @@ public class PlayerController : MonoBehaviour
         jumpSpeed = LevelManager.Instance.current_playerJumpSpeed;
         rollingDelay = LevelManager.Instance.current_playerRollingSpeed;
     }
+
+
+
     #endregion Movement
 
     #region Colliders And Raycasts
