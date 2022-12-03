@@ -651,48 +651,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 436440144}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef9160982a7ab4244ac6b8eb912f9910, type: 3}
+  m_Script: {fileID: 11500000, guid: 586db97db9522934684f302fdd3e9537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   obstacles:
-  - name: Vaca
-    prefab: {fileID: 6788670865546778113, guid: 6e79fa8a8d7fedf41bbda91ee0d6b813,
+  - name: Caminhao Patriota
+    prefab: {fileID: 3016741344685060480, guid: cd2006e9fbea03448b0c64523ec0d604,
       type: 3}
     posX:
-    - 0
-    - 15
+    - 13
     - -15
   - name: Boi
     prefab: {fileID: 7944480823083047988, guid: ba3f307508af7eb4995b530506eb8617,
       type: 3}
     posX:
-    - 0
     - 15
+    - 0
+    - -15
+  - name: Vaca
+    prefab: {fileID: 6788670865546778113, guid: 6e79fa8a8d7fedf41bbda91ee0d6b813,
+      type: 3}
+    posX:
+    - 15
+    - 0
     - -15
   - name: Pneu
     prefab: {fileID: 3289771557835313809, guid: 6c9832869a08e7f49a2f85a5e726aac1,
       type: 3}
     posX:
-    - -9
     - 13
+    - -9
   - name: Door
     prefab: {fileID: 7858068780731967353, guid: 2e7bd5b14d6ddfd4bbc49071bf4b5c4f,
       type: 3}
     posX:
     - 0
-  - name: "Caminh\xE3o Patriota"
-    prefab: {fileID: 3016741344685060480, guid: cd2006e9fbea03448b0c64523ec0d604,
-      type: 3}
-    posX:
-    - 15
-    - -15
   collectable:
     collectablePrefab: {fileID: 6758563964536805240, guid: abfef453204048b40940b207ef24634b,
       type: 3}
     posX:
-    - -15
-    - 0
     - 15
+    - 0
+    - -15
   objSpawnDistance: 1000
 --- !u!4 &436440146
 Transform:
@@ -706,7 +706,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &547264603
 GameObject:
@@ -1495,7 +1495,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &922380406
 GameObject:
@@ -2419,7 +2419,7 @@ Transform:
   m_LocalScale: {x: 100, y: 1, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1461368792
 GameObject:
@@ -2924,7 +2924,7 @@ RectTransform:
   - {fileID: 593706813}
   - {fileID: 1253677662}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
