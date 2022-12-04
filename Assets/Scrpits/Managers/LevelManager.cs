@@ -9,7 +9,7 @@ public enum CurrentLevelState
     LEVEL_2 = 2,
     LEVEL_3 = 3,
     LEVEL_4 = 4,
-    LEVEL_5
+    LEVEL_MAX
 }
 
 [DefaultExecutionOrder(2)]
@@ -139,7 +139,7 @@ public class LevelManager : Singleton<LevelManager>
                 }
                 break;
             case 5:
-                ScoreEvents.OnChangeLevel(((int)CurrentLevelState.LEVEL_5));
+                ScoreEvents.OnChangeLevel(((int)CurrentLevelState.LEVEL_MAX));
                 while (current_obstacleSpeed <= levelData[4].obstacle_Speed - 0.1f)
                 {
                     current_obstacleSpeed = Mathf.Lerp(current_obstacleSpeed, levelData[4].obstacle_Speed, (Time.deltaTime - timeToStart) * lerpToNextLevel);

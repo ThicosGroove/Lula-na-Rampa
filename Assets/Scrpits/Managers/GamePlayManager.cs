@@ -26,7 +26,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
     public static event Action<GameStates> OnGameStateChanged;
 
     [Header("Game Mode and Testing")]
-    public bool? isNormalMode;
+    public bool isNormalMode;
     public bool playerColliderOn;
     public bool testStartLevel_5;
     public int winScore;
@@ -46,7 +46,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
 
         if (testStartLevel_5)
         {
-            LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_5);
+            LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_MAX);
         }
         else
         {

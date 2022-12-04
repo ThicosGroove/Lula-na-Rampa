@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using GameEvents;
 using TMPro;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class InGameUIManager : MonoBehaviour
@@ -10,6 +11,10 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] GameObject OnPlayingPanel;
     [SerializeField] TMP_Text scoreText;
     [SerializeField] TMP_Text levelText;
+
+    [Header("Normal Mode UI")]
+    [SerializeField] GameObject progressBar;
+    [SerializeField] Image progressBar_Image;
 
     [Header("Game Over Infinity Panel")]
     [SerializeField] GameObject OnGameOverInfinityPanel;
@@ -31,6 +36,8 @@ public class InGameUIManager : MonoBehaviour
     {
         CloseAllPanels();
         OnPlayingPanel.SetActive(true);
+   
+        if (GamePlayManager.Instance.isNormalMode) progressBar.SetActive(true);
 
         totalScore = 0;
         scoreText.text = "Estrelas: " + totalScore;
@@ -52,6 +59,20 @@ public class InGameUIManager : MonoBehaviour
 
         GameplayEvents.GameOver -= OnGameOverUI;
         GameplayEvents.Win -= OnWinUI;
+    }
+
+    private void Update()
+    {
+        if (!GamePlayManager.Instance.isNormalMode)
+        {
+            UpdateProgressBar();
+        }
+    }
+
+    private void UpdateProgressBar()
+    {       
+        float fillAmount = totalScore / (float)GamePlayManager.Instance.winScore;
+        progressBar_Image.fillAmount = fillAmount;
     }
 
     private void UpdateScoreText(int score)
@@ -123,6 +144,7 @@ public class InGameUIManager : MonoBehaviour
     private void CloseAllPanels()
     {
         OnPlayingPanel.SetActive(false);
+        progressBar.SetActive(false);
         OnGameOverInfinityPanel.SetActive(false);
         InsertNameForScoreBoardPanel.SetActive(false);
         ScoreBoardBox.SetActive(false);

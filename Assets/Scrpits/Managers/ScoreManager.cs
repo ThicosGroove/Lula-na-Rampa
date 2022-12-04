@@ -64,7 +64,7 @@ public class ScoreManager : Singleton<ScoreManager>
 
         if (totalScoreCurrentRun == LevelManager.Instance.changeToLevel_5)
         {
-            LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_5);
+            LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_MAX);
         }
     }
 }
