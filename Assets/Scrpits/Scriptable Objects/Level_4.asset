@@ -21,4 +21,4 @@ MonoBehaviour:
   player_Slide_Speed: 9
   player_Jump_Speed: 8
   player_Roll_Speed: 0.6
-  speedMulti: 1.75
+  speedMulti: 1.7

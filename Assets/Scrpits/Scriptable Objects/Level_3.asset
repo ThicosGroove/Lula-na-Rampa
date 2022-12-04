@@ -16,9 +16,9 @@ MonoBehaviour:
   minDistChangeSpeed: 200
   obstacle_Initial_Speed: 220
   obstacle_Speed: 120
-  obstacle_Spawn_Delay: 0.8
-  collectable_Spawn_Delay: 0.8
+  obstacle_Spawn_Delay: 0.85
+  collectable_Spawn_Delay: 0.85
   player_Slide_Speed: 7
   player_Jump_Speed: 7.5
   player_Roll_Speed: 0.65
-  speedMulti: 1.75
+  speedMulti: 1.7

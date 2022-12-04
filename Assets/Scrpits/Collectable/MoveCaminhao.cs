@@ -6,7 +6,7 @@ public class MoveCaminhao : MoveBase
 {
     [SerializeField] LevelSO[] levelData;
 
-    float speedMultiplier;
+    [SerializeField] float speedMultiplier;
 
     protected override void Start()
     {
