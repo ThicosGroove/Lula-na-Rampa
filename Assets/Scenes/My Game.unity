@@ -443,7 +443,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &141147460
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2555,6 +2555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lerpToNextLevel: 0.3
+  current_obstacleInitialSpeed: 0
   current_obstacleSpeed: 0
   current_obstacleSpawnDelay: 0
   current_collectableSpawnDelay: 0
@@ -2569,7 +2570,12 @@ MonoBehaviour:
   changeToLevel_2: 1
   changeToLevel_3: 2
   changeToLevel_4: 7
-  changeToLevel_5: 50
+  changeToLevel_5: 10
+  obstacleInitialSpeed_Level_1: 0
+  obstacleInitialSpeed_Level_2: 0
+  obstacleInitialSpeed_Level_3: 0
+  obstacleInitialSpeed_Level_4: 0
+  obstacleInitialSpeed_Level_5: 0
   obstacleSpeed_Level_1: 90
   obstacleSpeed_Level_2: 100
   obstacleSpeed_Level_3: 120
@@ -4452,7 +4458,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

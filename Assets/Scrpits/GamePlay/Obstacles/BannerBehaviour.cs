@@ -16,7 +16,9 @@ public class BannerBehaviour : MonoBehaviour
         "SOMOS GADO",
         "CLOROQUINERS",
         "GOLPE MILITAR",
-        "PATRIOTÁRIOS"};
+        "PATRIOTÁRIOS",
+        "NÃO SOU COVEIRO"
+    };
 
 
     private void Start()

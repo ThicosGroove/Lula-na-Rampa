@@ -45,6 +45,7 @@ public abstract class MoveBase : MonoBehaviour
     void BasicMovement()
     {
         transform.Translate(Vector3.back * speed * Time.deltaTime);
+        speed = LevelManager.Instance.current_obstacleInitialSpeed;
     }
 
     void ReachSlowDownPoint()

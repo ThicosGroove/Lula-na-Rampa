@@ -17,7 +17,7 @@ public enum GameStates
     WIN
 }
 
-// Manager que controla a gameplay e providencia alguns métodos utilitários.
+
 [DefaultExecutionOrder(1)]
 public class GamePlayManager : Singleton<GamePlayManager>
 {
@@ -34,19 +34,6 @@ public class GamePlayManager : Singleton<GamePlayManager>
 
     [HideInInspector]
     public List<MoveBase> objList = new List<MoveBase>();
-
-    //protected override void Awake()
-    //{
-    //    base.Awake();
-
-    //    UtilityEvents.GamePauseToggle += Instance.OnGamePauseToggle;
-    //}
-
-    //private void OnApplicationQuit()
-    //{
-
-    //    UtilityEvents.GamePauseToggle -= Instance.OnGamePauseToggle;
-    //}
 
     private void Start()
     {
@@ -95,48 +82,4 @@ public class GamePlayManager : Singleton<GamePlayManager>
                 break;
         }
     }
-
-
-
-
-    //void MainMenu()
-    //{
-    //    GameplayEvents.OnMainMenu();
-    //    Time.timeScale = 1;
-    //}
-
-    //void PrePlay()
-    //{
-    //    GameplayEvents.OnPrePlay();
-    //}
-
-    //void GameStart()
-    //{
-    //    GameplayEvents.OnGameStart();
-    //    UpdateGameState(GameStates.PLAYING);
-    //}
-
-    //void GameOver()
-    //{
-    //    PlayerEvents.OnPlayerDeath();
-    //}
-
-    //void OnGamePauseToggle()
-    //{
-    //    if (currentGameState == GameStates.PREPLAY
-    //    || currentGameState == GameStates.GAMEOVER
-    //    || currentGameState == GameStates.MAIN_MENU) return;
-
-    //    if (currentGameState == GameStates.PAUSED)
-    //    {
-    //        UpdateGameState(GameStates.PLAYING);
-    //    }
-    //    else
-    //    {
-    //        UpdateGameState(GameStates.PAUSED);
-    //    }
-
-    //    Cursor.lockState = Cursor.lockState == CursorLockMode.Confined ? CursorLockMode.None : CursorLockMode.Confined;
-    //    Time.timeScale = 1 - Time.timeScale; // Se timescale for 0, retorna 1, caso seja 1, retorna 0.
-    //}
 }

@@ -22,6 +22,7 @@ public class LevelManager : Singleton<LevelManager>
     public float lerpToNextLevel;
 
     [Header("Current Variables Apply")]
+    public float current_obstacleInitialSpeed;
     public float current_obstacleSpeed;
     public float current_obstacleSpawnDelay;
     public float current_collectableSpawnDelay;
@@ -41,6 +42,13 @@ public class LevelManager : Singleton<LevelManager>
     public int changeToLevel_3;
     public int changeToLevel_4;
     public int changeToLevel_5;
+
+    [Header("Set Obstacle/Collectable Speed per Level")]
+    public float obstacleInitialSpeed_Level_1;
+    public float obstacleInitialSpeed_Level_2;
+    public float obstacleInitialSpeed_Level_3;
+    public float obstacleInitialSpeed_Level_4;
+    public float obstacleInitialSpeed_Level_5;
 
     [Header("Set Obstacle/Collectable Speed per Level")]
     public float obstacleSpeed_Level_1;
@@ -130,6 +138,7 @@ public class LevelManager : Singleton<LevelManager>
                 current_playerSlideSpeed = playerSlideSpeed_Level_1;
                 current_playerJumpSpeed = playerJumpSpeed_Level_1;
                 current_playerRollingSpeed = playerRollingDelay_Level_1;
+                current_obstacleInitialSpeed = obstacleInitialSpeed_Level_1;
                 ScoreEvents.OnChangeLevel(((int)CurrentLevelState.LEVEL_1));
                 break;
             case 2:
@@ -142,6 +151,7 @@ public class LevelManager : Singleton<LevelManager>
                     current_playerSlideSpeed = Mathf.Lerp(playerSlideSpeed_Level_1, playerSlideSpeed_Level_2, (Time.time - timeToStart) * lerpToNextLevel);
                     current_playerJumpSpeed = Mathf.Lerp(playerJumpSpeed_Level_1, playerJumpSpeed_Level_2, (Time.time - timeToStart) * lerpToNextLevel);
                     current_playerRollingSpeed = Mathf.Lerp(playerRollingDelay_Level_1, playerRollingDelay_Level_2, (Time.time - timeToStart) * lerpToNextLevel);
+                    current_obstacleInitialSpeed = Mathf.Lerp(obstacleInitialSpeed_Level_1, obstacleInitialSpeed_Level_2, (Time.time - timeToStart) * lerpToNextLevel);
                     yield return null;
                 }
                 break;
@@ -155,6 +165,7 @@ public class LevelManager : Singleton<LevelManager>
                     current_playerSlideSpeed = Mathf.Lerp(playerSlideSpeed_Level_2, playerSlideSpeed_Level_3, (Time.time - timeToStart) * lerpToNextLevel);
                     current_playerJumpSpeed = Mathf.Lerp(playerJumpSpeed_Level_2, playerJumpSpeed_Level_3, (Time.time - timeToStart) * lerpToNextLevel);
                     current_playerRollingSpeed = Mathf.Lerp(playerRollingDelay_Level_2, playerRollingDelay_Level_3, (Time.time - timeToStart) * lerpToNextLevel);
+                    current_obstacleInitialSpeed = Mathf.Lerp(obstacleInitialSpeed_Level_2, obstacleInitialSpeed_Level_3, (Time.time - timeToStart) * lerpToNextLevel);
                     yield return null;
                 }
                 break;
@@ -168,6 +179,7 @@ public class LevelManager : Singleton<LevelManager>
                     current_playerSlideSpeed = Mathf.Lerp(playerSlideSpeed_Level_3, playerSlideSpeed_Level_4, (Time.time - timeToStart) * lerpToNextLevel);
                     current_playerJumpSpeed = Mathf.Lerp(playerJumpSpeed_Level_3, playerJumpSpeed_Level_4, (Time.time - timeToStart) * lerpToNextLevel);
                     current_playerRollingSpeed = Mathf.Lerp(playerRollingDelay_Level_3, playerRollingDelay_Level_4, (Time.time - timeToStart) * lerpToNextLevel);
+                    current_obstacleInitialSpeed = Mathf.Lerp(obstacleInitialSpeed_Level_3, obstacleInitialSpeed_Level_4, (Time.time - timeToStart) * lerpToNextLevel);
                     yield return null;
                 }
                 break;
@@ -181,6 +193,7 @@ public class LevelManager : Singleton<LevelManager>
                     current_playerSlideSpeed = Mathf.Lerp(playerSlideSpeed_Level_4, playerSlideSpeed_Level_5, (Time.time - timeToStart) * lerpToNextLevel);
                     current_playerJumpSpeed = Mathf.Lerp(playerJumpSpeed_Level_4, playerJumpSpeed_Level_5, (Time.time - timeToStart) * lerpToNextLevel);
                     current_playerRollingSpeed = Mathf.Lerp(playerRollingDelay_Level_4, playerRollingDelay_Level_5, (Time.time - timeToStart) * lerpToNextLevel);
+                    current_obstacleInitialSpeed = Mathf.Lerp(obstacleInitialSpeed_Level_5, obstacleInitialSpeed_Level_5, (Time.time - timeToStart) * lerpToNextLevel);
                     yield return null;
                 }
                 break;
