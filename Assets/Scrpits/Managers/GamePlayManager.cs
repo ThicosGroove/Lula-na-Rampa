@@ -9,6 +9,7 @@ using System.IO;
 public enum GameStates
 {
     PAUSED,
+    RESUME,
     PREPLAY,
     GAMEOVER,
     MAIN_MENU,
@@ -31,6 +32,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
     public bool testStartLevel_5;
     public int winScore;
 
+    public bool isGamePaused;
 
     [HideInInspector]
     public List<MoveBase> objList = new List<MoveBase>();
@@ -66,11 +68,18 @@ public class GamePlayManager : Singleton<GamePlayManager>
             case GameStates.PREPLAY:
                 break;
             case GameStates.PLAYING:
-
+                
                 break;
             case GameStates.OPTION_MENU:
                 break;
             case GameStates.PAUSED:
+                isGamePaused = true;
+                UtilityEvents.OnGamePause();
+                break;
+            case GameStates.RESUME:
+                isGamePaused = false;
+                UtilityEvents.OnGameResume();
+                UpdateGameState(GameStates.PLAYING);
                 break;
             case GameStates.GAMEOVER:
                 GameplayEvents.OnGameOver();

@@ -57,7 +57,7 @@ public class InGameUIManager : MonoBehaviour
 
 
     private void UpdateProgressBar()
-    {       
+    {
         // 13 diferentes sprites
     }
 
@@ -163,6 +163,18 @@ public class InGameUIManager : MonoBehaviour
         // Deletar o jogador lá no sistema
         // mostro o score board de qualquer forma??
         // acho que sim, pra instigar a vontade do jogador
+    }
+
+    public void OnClickPauseButton()
+    {
+        if (!GamePlayManager.Instance.isGamePaused)
+        {
+            GamePlayManager.Instance.UpdateGameState(GameStates.PAUSED);
+        }
+        else
+        {
+            GamePlayManager.Instance.UpdateGameState(GameStates.RESUME);
+        }
     }
 
     #endregion Buttons

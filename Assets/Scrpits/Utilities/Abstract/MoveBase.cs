@@ -10,6 +10,8 @@ public abstract class MoveBase : MonoBehaviour
 
     protected bool isInReach = false;
 
+    private float previousSpeed;
+
     protected virtual void Start()
     {
         player = FindObjectOfType<PlayerController>().gameObject;
@@ -22,6 +24,9 @@ public abstract class MoveBase : MonoBehaviour
 
         GameplayEvents.GameOver += DestroyOnGameOver;
         GameplayEvents.Win += DestroyOnGameOver;
+
+        UtilityEvents.GamePause += StopMovement;
+        UtilityEvents.GameResume += ResumeMovement;
     }
 
     private void OnDisable()
@@ -30,6 +35,9 @@ public abstract class MoveBase : MonoBehaviour
 
         GameplayEvents.GameOver -= DestroyOnGameOver;
         GameplayEvents.Win -= DestroyOnGameOver;
+
+        UtilityEvents.GamePause -= StopMovement;
+        UtilityEvents.GameResume -= ResumeMovement;
     }
 
     void Update()
@@ -43,7 +51,6 @@ public abstract class MoveBase : MonoBehaviour
     void BasicMovement()
     {
         transform.Translate(Vector3.back * speed * Time.deltaTime);
-
     }
 
     void ReachSlowDownPoint()
@@ -77,5 +84,16 @@ public abstract class MoveBase : MonoBehaviour
     {
         GamePlayManager.Instance.objList.Remove(this);
         Destroy(this.gameObject);
+    }
+
+    void StopMovement()
+    {
+        previousSpeed = speed;
+        speed = 0;
+    }
+
+    void ResumeMovement()
+    {
+        speed = previousSpeed;
     }
 }

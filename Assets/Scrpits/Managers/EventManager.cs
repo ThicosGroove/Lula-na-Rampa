@@ -48,21 +48,24 @@ namespace GameEvents
 
     }
 
-    //public static class UtilityEvents
-    //{
+    public static class UtilityEvents
+    {
     //    public static event UnityAction<GameObject> SpawnPlayerEvent;
     //    public static void OnSpawnPlayerEvent(GameObject player) => SpawnPlayerEvent?.Invoke(player);
 
     //    public static event UnityAction SaveGame;
     //    public static void OnSaveGame() => SaveGame?.Invoke();
 
-    //    public static event UnityAction GamePauseToggle;
-    //    public static void OnGamePauseToggle() => GamePauseToggle?.Invoke();
+        public static event UnityAction GamePause;
+        public static void OnGamePause() => GamePause?.Invoke();
+
+        public static event UnityAction GameResume;
+        public static void OnGameResume() => GameResume?.Invoke();
 
     //    public static event UnityAction<bool> SFXToggle;
     //    public static void OnMuteSFXToggle(bool isMute) => SFXToggle?.Invoke(isMute);
 
     //    public static event UnityAction<bool> BGMusicToggle;
     //    public static void OnBGMusicToggle(bool isMute) => BGMusicToggle?.Invoke(isMute);
-    //}
+    }
 }

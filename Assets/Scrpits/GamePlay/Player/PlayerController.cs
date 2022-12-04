@@ -115,6 +115,8 @@ public class PlayerController : MonoBehaviour
     #region Mobilie
     public void SwipeDirection(Vector2 direction)
     {
+        if (GamePlayManager.Instance.isGamePaused) return;            
+
         if (Vector2.Dot(Vector2.left, direction) > directionThreshold) // Esquerda
         {
             desiredLane--;
@@ -168,7 +170,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (state != PlayerState.PLAYING) return;
+        if (state != PlayerState.PLAYING || GamePlayManager.Instance.isGamePaused) return;
         MoveInput();
         Jump();
         Roll();

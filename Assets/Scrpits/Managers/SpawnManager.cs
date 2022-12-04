@@ -58,12 +58,18 @@ public class SpawnManager : MonoBehaviour
     {
         GameplayEvents.GameOver += StopAllTheCoroutines;
         GameplayEvents.Win += StopAllTheCoroutines;
+
+        UtilityEvents.GamePause += StopAllTheCoroutines;
+        UtilityEvents.GameResume += ResumeAllCoroutines;
     }
 
     private void OnDisable()
     {
         GameplayEvents.GameOver -= StopAllTheCoroutines;
         GameplayEvents.Win -= StopAllTheCoroutines;
+
+        UtilityEvents.GamePause -= StopAllTheCoroutines;
+        UtilityEvents.GameResume -= ResumeAllCoroutines;
     }
 
     private void Update()
@@ -81,6 +87,14 @@ public class SpawnManager : MonoBehaviour
     private void StopAllTheCoroutines()
     {
         StopAllCoroutines();
+    }
+
+    private void ResumeAllCoroutines()
+    {
+        //Remaining timer
+
+        StartCoroutine(SpawnObstacle());
+        StartCoroutine(SpawnCollectable());
     }
 
     IEnumerator SpawnObstacle()

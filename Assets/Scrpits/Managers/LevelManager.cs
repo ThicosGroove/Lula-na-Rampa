@@ -45,6 +45,21 @@ public class LevelManager : Singleton<LevelManager>
     public int changeToLevel_4;
     public int changeToLevel_5;
 
+
+    private float previousSpeed;
+
+    private void OnEnable()
+    {
+        UtilityEvents.GamePause += StopMovement;
+        UtilityEvents.GameResume += ResumeMovement;
+    }
+
+    private void OnDisable()
+    {
+        UtilityEvents.GamePause -= StopMovement;
+        UtilityEvents.GameResume -= ResumeMovement;       
+    }
+
     private void Start()
     {
         if (GamePlayManager.Instance.isNormalMode == true)
@@ -84,8 +99,13 @@ public class LevelManager : Singleton<LevelManager>
         float timeToStart = Time.time;
 
         ScoreEvents.OnChangeLevel(currentLevel);
+
+
+
         while (current_obstacleSpeed <= levelData[currentLevel].obstacle_Speed - 0.5f)
         {
+            if (GamePlayManager.Instance.isGamePaused) break;
+
             current_obstacleInitialSpeed = Mathf.Lerp(current_obstacleInitialSpeed, levelData[currentLevel - 1].obstacle_Initial_Speed, (Time.deltaTime - timeToStart) * lerpToNextLevel);
             current_obstacleSpeed = Mathf.Lerp(current_obstacleSpeed, levelData[currentLevel - 1].obstacle_Speed, (Time.deltaTime - timeToStart) * lerpToNextLevel);
             current_obstacleSpawnDelay = Mathf.Lerp(current_obstacleSpawnDelay, levelData[currentLevel - 1].obstacle_Spawn_Delay, (Time.deltaTime - timeToStart) * lerpToNextLevel);
@@ -99,4 +119,16 @@ public class LevelManager : Singleton<LevelManager>
 
         yield return null;
     }
+
+    private void StopMovement()
+    {
+        previousSpeed = current_obstacleSpeed;
+        current_obstacleSpeed = 0;
+    }
+
+    private void ResumeMovement()
+    {
+        current_obstacleSpeed = previousSpeed;
+    }
+
 }
