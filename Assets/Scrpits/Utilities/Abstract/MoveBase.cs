@@ -5,9 +5,7 @@ public abstract class MoveBase : MonoBehaviour
 {
     GameObject player;
 
-    [SerializeField] float Initialspeed = 200f;
-    [SerializeField] protected float minDistanceToSlowDown = 200f;
-
+    protected float minDist = 200f;
     protected float speed;
 
     protected bool isInReach = false;
@@ -15,7 +13,7 @@ public abstract class MoveBase : MonoBehaviour
     protected virtual void Start()
     {
         player = FindObjectOfType<PlayerController>().gameObject;
-        speed = Initialspeed;
+        speed = LevelManager.Instance.current_obstacleInitialSpeed;
     }
 
     private void OnEnable()
@@ -45,12 +43,12 @@ public abstract class MoveBase : MonoBehaviour
     void BasicMovement()
     {
         transform.Translate(Vector3.back * speed * Time.deltaTime);
-        speed = LevelManager.Instance.current_obstacleInitialSpeed;
+
     }
 
     void ReachSlowDownPoint()
     {
-        if (transform.position.z < minDistanceToSlowDown)
+        if (transform.position.z < minDist)
         {
             isInReach = true;
             speed = LevelManager.Instance.current_obstacleSpeed;

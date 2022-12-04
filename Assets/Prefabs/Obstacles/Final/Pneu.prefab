@@ -730,7 +730,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2efa248103aefdd43b59091295bf0b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Initialspeed: 200
+  levelData:
+  - {fileID: 11400000, guid: 77dbedd713a1e834fb9863b53daa7189, type: 2}
+  - {fileID: 11400000, guid: 4b3b55858345f3345b900adf861537be, type: 2}
+  - {fileID: 11400000, guid: bc9d3318f1a07be4fbd1f06be68f20d7, type: 2}
+  - {fileID: 11400000, guid: 353b4003099b1d84a9cd43b9af1adc56, type: 2}
+  - {fileID: 11400000, guid: ba4f6a27841a1fa4d9053346f1c9c3cd, type: 2}
   minDistanceToSlowDown: 200
 --- !u!1 &4594655961234004054
 GameObject:

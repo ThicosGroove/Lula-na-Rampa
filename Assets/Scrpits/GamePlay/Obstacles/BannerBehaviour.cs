@@ -10,14 +10,23 @@ public class BannerBehaviour : MonoBehaviour
     string[] bannerText =
         {
         "BURROS COM FORÇA (ARMADA)",
-        "S.O.S. E.T",
+        "S.O.S. E.T.",
         "PAREM DE MIMIMI",
         "TERRA PLANA",
         "SOMOS GADO",
         "CLOROQUINERS",
         "GOLPE MILITAR",
         "PATRIOTÁRIOS",
-        "NÃO SOU COVEIRO"
+        "NÃO SOU COVEIRO",
+        "BROCHAS E CORNOS",
+        "PERDEMOS, MANÉ",
+        "IDOSOS DE ZAP",
+        "INTERVENÇÃO PSIQUIÁTRICA JÁ",
+        "TAVA NO ZAP",
+        "CANETA BIC NA MÃO E OZÔNIO NO TOBA",
+        "SÓ O VIAGRA SALVA",
+        "MAIS 72 HORAS, AGUARDEM!",
+        "PENDRIVE DAS ARÁBIAS"
     };
 
 

@@ -2554,6 +2554,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bb53e3123ac2af46b20e62dbec4c3e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelData:
+  - {fileID: 11400000, guid: 77dbedd713a1e834fb9863b53daa7189, type: 2}
+  - {fileID: 11400000, guid: 4b3b55858345f3345b900adf861537be, type: 2}
+  - {fileID: 11400000, guid: bc9d3318f1a07be4fbd1f06be68f20d7, type: 2}
+  - {fileID: 11400000, guid: 353b4003099b1d84a9cd43b9af1adc56, type: 2}
+  - {fileID: 11400000, guid: ba4f6a27841a1fa4d9053346f1c9c3cd, type: 2}
   lerpToNextLevel: 0.3
   current_obstacleInitialSpeed: 0
   current_obstacleSpeed: 0
@@ -2567,45 +2573,10 @@ MonoBehaviour:
   playerNormal_SlideSpeed: 5
   playerNormal_JumpSpeed: 5
   playerNormal_RollingSpeed: 0.8
-  changeToLevel_2: 1
-  changeToLevel_3: 2
-  changeToLevel_4: 7
-  changeToLevel_5: 10
-  obstacleInitialSpeed_Level_1: 0
-  obstacleInitialSpeed_Level_2: 0
-  obstacleInitialSpeed_Level_3: 0
-  obstacleInitialSpeed_Level_4: 0
-  obstacleInitialSpeed_Level_5: 0
-  obstacleSpeed_Level_1: 90
-  obstacleSpeed_Level_2: 100
-  obstacleSpeed_Level_3: 120
-  obstacleSpeed_Level_4: 150
-  obstacleSpeed_Level_5: 180
-  obstacleSpawnDelay_Level_1: 1
-  obstacleSpawnDelay_Level_2: 0.9
-  obstacleSpawnDelay_Level_3: 0.8
-  obstacleSpawnDelay_Level_4: 0.7
-  obstacleSpawnDelay_Level_5: 0.6
-  collectableDelay_Level_1: 1
-  collectableDelay_Level_2: 0.9
-  collectableDelay_Level_3: 0.8
-  collectableDelay_Level_4: 0.7
-  collectableDelay_Level_5: 0.6
-  playerSlideSpeed_Level_1: 5
-  playerSlideSpeed_Level_2: 5
-  playerSlideSpeed_Level_3: 7
-  playerSlideSpeed_Level_4: 9
-  playerSlideSpeed_Level_5: 10
-  playerJumpSpeed_Level_1: 5
-  playerJumpSpeed_Level_2: 6
-  playerJumpSpeed_Level_3: 7.5
-  playerJumpSpeed_Level_4: 8
-  playerJumpSpeed_Level_5: 10
-  playerRollingDelay_Level_1: 0.8
-  playerRollingDelay_Level_2: 0.8
-  playerRollingDelay_Level_3: 0.65
-  playerRollingDelay_Level_4: 0.6
-  playerRollingDelay_Level_5: 0.5
+  changeToLevel_2: 50
+  changeToLevel_3: 60
+  changeToLevel_4: 70
+  changeToLevel_5: 80
 --- !u!1 &1456900616
 GameObject:
   m_ObjectHideFlags: 0

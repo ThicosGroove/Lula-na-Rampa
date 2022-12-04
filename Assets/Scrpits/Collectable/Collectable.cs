@@ -35,10 +35,5 @@ public class Collectable : MonoBehaviour, ICollectable
         {
             WrongSpawn();
         }
-
-        if (collision.gameObject.CompareTag(Const.PLAYER_TAG))
-        {
-            CollectMe();
-        }
     }
 }
