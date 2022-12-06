@@ -12,6 +12,9 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] TMP_Text scoreText;
     [SerializeField] TMP_Text levelText;
 
+    [Header("Pause Panel")]
+    [SerializeField] GameObject OnPausePanel;
+
     [Header("Game Over Infinity Panel")]
     [SerializeField] GameObject OnGameOverInfinityPanel;
     [SerializeField] GameObject InsertNameForScoreBoardPanel;
@@ -70,7 +73,6 @@ public class InGameUIManager : MonoBehaviour
 
     private void UpdateLevelText(int newLevel)
     {
-        //Debug.LogWarning("Novo level UI");
         currentLevel = newLevel;
         StartCoroutine(LevelTextDelay());
     }
@@ -97,15 +99,14 @@ public class InGameUIManager : MonoBehaviour
     private void OnGameOverUI()
     {
         CloseAllPanels();
+        OnPlayingPanel.SetActive(true);
 
         if (GamePlayManager.Instance.isNormalMode == true)
         {
             OnGameOverNormalPanel.SetActive(true);
         }
-        else if (PlayerPrefs.HasKey(Const.PLAYER_ID))
+        else if (SaveManager.Instance.LoadFile()._playerID != null)
         {
-
-            Debug.LogWarning("Tem Pref Key");
             OnGameOverInfinityPanel.SetActive(true);
             ScoreBoardBox.SetActive(true);
         }
@@ -130,6 +131,7 @@ public class InGameUIManager : MonoBehaviour
     private void CloseAllPanels()
     {
         OnPlayingPanel.SetActive(false);
+        OnPausePanel.SetActive(false);
         OnGameOverInfinityPanel.SetActive(false);
         InsertNameForScoreBoardPanel.SetActive(false);
         ScoreBoardBox.SetActive(false);
@@ -170,11 +172,23 @@ public class InGameUIManager : MonoBehaviour
         if (!GamePlayManager.Instance.isGamePaused)
         {
             GamePlayManager.Instance.UpdateGameState(GameStates.PAUSED);
+            OnPausePanel.SetActive(true);
         }
         else
         {
             GamePlayManager.Instance.UpdateGameState(GameStates.RESUME);
+            OnPausePanel.SetActive(false);
         }
+    }
+
+    public void OnClickReturnToMenuButton()
+    {
+        SceneManager.LoadScene(Const.HOME_SCENE);
+    }
+
+    public void OnClickQuitButton()
+    {
+        Application.Quit();
     }
 
     #endregion Buttons

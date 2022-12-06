@@ -32,6 +32,8 @@ public class SpawnManager : MonoBehaviour
     private GameObject newObstacle;
     private GameObject newCollectable;
 
+    private float timeLeftSpawnObstacle;
+    private float timeLeftSpawnCollectable;
 
     private void Awake()
     {
@@ -86,6 +88,8 @@ public class SpawnManager : MonoBehaviour
 
     private void StopAllTheCoroutines()
     {
+
+
         StopAllCoroutines();
     }
 
@@ -111,12 +115,16 @@ public class SpawnManager : MonoBehaviour
 
         GamePlayManager.Instance.objList.Add(newObstacle.GetComponent<MoveObstacle>());
 
+        timeLeftSpawnObstacle += Time.time;
+
         yield return new WaitForSeconds(spawnObstacleDelay);
         StartCoroutine(SpawnObstacle());
     }
 
     IEnumerator SpawnCollectable()
     {
+        timeLeftSpawnCollectable = spawnCollectableDelay;
+
         int randomPosX = Random.Range(0, collectable.posX.Length);
 
         Vector3 pos = new Vector3(collectable.posX[randomPosX], 0f, objSpawnDistance);
@@ -124,8 +132,33 @@ public class SpawnManager : MonoBehaviour
         newCollectable = Instantiate(collectable.collectablePrefab, pos, Quaternion.identity);
         GamePlayManager.Instance.objList.Add(newCollectable.GetComponent<MoveCollectable>());
 
-        yield return new WaitForSeconds(spawnCollectableDelay);
+
+        while (timeLeftSpawnCollectable > 0f)
+        {
+
+            timeLeftSpawnCollectable -= Time.deltaTime;
+            yield return null;
+        }
+
+        spawnObstacleDelay = VerifyingTimeLeftSpanwCollectable();
+
+        //yield return new WaitForSeconds(spawnCollectableDelay);
         StartCoroutine(SpawnCollectable());
+    }
+
+
+    private float VerifyingTimeLeftSpanwObstacle()
+    {
+        if (timeLeftSpawnObstacle != 0) return timeLeftSpawnObstacle;
+
+        return spawnObstacleDelay;
+    }
+
+    private float VerifyingTimeLeftSpanwCollectable()
+    {
+        if (timeLeftSpawnCollectable != 0) return timeLeftSpawnCollectable;
+
+        return spawnCollectableDelay;
     }
 }
 

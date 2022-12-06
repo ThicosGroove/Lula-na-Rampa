@@ -76,8 +76,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850dafa627b8d3f47b218bdbc67795fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Initialspeed: 200
-  minDistanceToSlowDown: 200
   freqPosition: 10
   ampPosition: 0.01
   freqRotationZ: 5
@@ -139,7 +137,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 648415bb853d00a47a2b04f431be705c,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9990483
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 648415bb853d00a47a2b04f431be705c,
         type: 3}
@@ -154,7 +152,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 648415bb853d00a47a2b04f431be705c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.043619405
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 648415bb853d00a47a2b04f431be705c,
         type: 3}
@@ -169,7 +167,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 648415bb853d00a47a2b04f431be705c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 648415bb853d00a47a2b04f431be705c,
         type: 3}

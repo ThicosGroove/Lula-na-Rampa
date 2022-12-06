@@ -8,6 +8,7 @@ public static class Const
     public static string USERNAME = "USERNAME";
     public static string PLAYER_ID = "PLAYER_ID";
 
+    public static int HOME_SCENE = 0;
     public static int GAME_SCENE = 1;
 
     public static string PLAYER_TAG = "Player";
