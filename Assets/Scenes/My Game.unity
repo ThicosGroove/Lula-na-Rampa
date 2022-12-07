@@ -1132,31 +1132,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 547264603}
   m_CullTransparentMesh: 1
---- !u!1 &548447780 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7713501730817978872, guid: c139acdb72e17f64eb57faa92d7b8208,
-    type: 3}
-  m_PrefabInstance: {fileID: 1725827378560363643}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &548447781
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 548447780}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0af845e3fc203784585093500974a155, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &555240329
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,6 +1186,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &556745758 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5847379854369022121, guid: c139acdb72e17f64eb57faa92d7b8208,
+    type: 3}
+  m_PrefabInstance: {fileID: 1725827378560363643}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &558449494
 GameObject:
   m_ObjectHideFlags: 0
@@ -3320,7 +3301,7 @@ MonoBehaviour:
   changeToLevel_2: 1
   changeToLevel_3: 2
   changeToLevel_4: 3
-  changeToLevel_5: 80
+  changeToLevel_5: 4
 --- !u!1 &1364178540
 GameObject:
   m_ObjectHideFlags: 0
@@ -5638,7 +5619,7 @@ PrefabInstance:
         type: 3}
       propertyPath: GFX_transform
       value: 
-      objectReference: {fileID: 1725827378560363644}
+      objectReference: {fileID: 556745758}
     - target: {fileID: 1725827378496261678, guid: c139acdb72e17f64eb57faa92d7b8208,
         type: 3}
       propertyPath: directionThreshold
@@ -5679,6 +5660,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5847379854369022121, guid: c139acdb72e17f64eb57faa92d7b8208,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6935556999680912194, guid: c139acdb72e17f64eb57faa92d7b8208,
         type: 3}
       propertyPath: m_RootOrder
@@ -5717,9 +5703,3 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1421009501552025507, guid: c139acdb72e17f64eb57faa92d7b8208, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c139acdb72e17f64eb57faa92d7b8208, type: 3}
---- !u!4 &1725827378560363644 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6935556999680912194, guid: c139acdb72e17f64eb57faa92d7b8208,
-    type: 3}
-  m_PrefabInstance: {fileID: 1725827378560363643}
-  m_PrefabAsset: {fileID: 0}

@@ -19,6 +19,6 @@ MonoBehaviour:
   obstacle_Spawn_Delay: 0.7
   collectable_Spawn_Delay: 0.7
   player_Slide_Speed: 9
-  player_Jump_Speed: 8
+  player_Jump_Speed: 8.5
   player_Roll_Speed: 0.6
   speedMulti: 1.7

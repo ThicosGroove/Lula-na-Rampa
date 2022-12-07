@@ -58,8 +58,8 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (GamePlayManager.Instance.isNormalMode == true)
         {
-            current_obstacleInitialSpeed = levelData[0].obstacle_Initial_Speed; ;
-            current_obstacleSpeed = levelData[0].obstacle_Speed; ;
+            current_obstacleInitialSpeed = levelData[0].obstacle_Initial_Speed;
+            current_obstacleSpeed = levelData[0].obstacle_Speed;
             current_obstacleSpawnDelay = levelData[0].obstacle_Spawn_Delay;
             current_collectableSpawnDelay = levelData[0].collectable_Spawn_Delay; ;
             current_playerSlideSpeed = levelData[0].player_Slide_Speed;
@@ -97,25 +97,14 @@ public class LevelManager : Singleton<LevelManager>
 
         ScoreEvents.OnChangeLevel(currentLevel);
 
-        while (current_obstacleSpeed <= levelData[currentLevel + 1].obstacle_Speed - 0.5f)
-        {
-
-            Debug.LogWarning($"Está lerpando");
-
-            if (GamePlayManager.Instance.isGamePaused) break;
-
-            current_obstacleInitialSpeed = Mathf.Lerp(current_obstacleInitialSpeed, levelData[currentLevel].obstacle_Initial_Speed, (Time.deltaTime - timeToStart) * lerpToNextLevel);
-            current_obstacleSpeed = Mathf.Lerp(current_obstacleSpeed, levelData[currentLevel].obstacle_Speed, (Time.deltaTime - timeToStart) * lerpToNextLevel);
-            current_obstacleSpawnDelay = Mathf.Lerp(current_obstacleSpawnDelay, levelData[currentLevel].obstacle_Spawn_Delay, (Time.deltaTime - timeToStart) * lerpToNextLevel);
-            current_collectableSpawnDelay = Mathf.Lerp(current_collectableSpawnDelay, levelData[currentLevel].collectable_Spawn_Delay, (Time.deltaTime - timeToStart) * lerpToNextLevel);
-            current_playerSlideSpeed = Mathf.Lerp(current_playerSlideSpeed, levelData[currentLevel].player_Slide_Speed, (Time.deltaTime - timeToStart) * lerpToNextLevel);
-            current_playerJumpSpeed = Mathf.Lerp(current_playerJumpSpeed, levelData[currentLevel].player_Jump_Speed, (Time.deltaTime - timeToStart) * lerpToNextLevel);
-            current_playerRollingSpeed = Mathf.Lerp(current_playerRollingSpeed, levelData[currentLevel].player_Roll_Speed, (Time.deltaTime - timeToStart) * lerpToNextLevel);
-            current_caminhaoMulti = Mathf.Lerp(current_caminhaoMulti, levelData[currentLevel].speedMulti, (Time.deltaTime - timeToStart) * lerpToNextLevel);
-            yield return null;
-        }
-
-
+        current_obstacleInitialSpeed = levelData[currentLevel].obstacle_Initial_Speed;
+        current_obstacleSpeed = levelData[currentLevel].obstacle_Speed;
+        current_obstacleSpawnDelay = levelData[currentLevel].obstacle_Spawn_Delay;
+        current_collectableSpawnDelay = levelData[currentLevel].collectable_Spawn_Delay;
+        current_playerSlideSpeed = levelData[currentLevel].player_Slide_Speed;
+        current_playerJumpSpeed = levelData[currentLevel].player_Jump_Speed;
+        current_playerRollingSpeed = levelData[currentLevel].player_Roll_Speed;
+        current_caminhaoMulti = levelData[currentLevel].speedMulti;
         yield return null;
     }
 

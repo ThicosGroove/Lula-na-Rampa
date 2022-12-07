@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
     #region Mobilie
     public void SwipeDirection(Vector2 direction)
     {
-        if (GamePlayManager.Instance.isGamePaused) return;            
+        if (GamePlayManager.Instance.isGamePaused) return;
 
         if (Vector2.Dot(Vector2.left, direction) > directionThreshold) // Esquerda
         {
@@ -150,12 +150,12 @@ public class PlayerController : MonoBehaviour
                 targetJumpPosition = Vector3.up * jumpHeight;
             }
 
-            transform.Translate(targetJumpPosition * jumpSpeed * Time.deltaTime);
+            //transform.Translate(targetJumpPosition * jumpSpeed * Time.deltaTime);
 
-            if (transform.position.y >= targetJumpPosition.y)
-            {
-                targetJumpPosition = Vector3.zero;
-            }
+            //if (transform.position.y >= targetJumpPosition.y)
+            //{
+            //    targetJumpPosition = Vector3.zero;
+            //}
         }
         if (Vector2.Dot(Vector2.down, direction) > directionThreshold) // Abaixar
         {
@@ -281,17 +281,16 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         if (input.Movement.Jump.triggered && CheckingGround())
-        {
+        {        
             targetJumpPosition = Vector3.up * jumpHeight;
         }
 
         transform.Translate(targetJumpPosition * jumpSpeed * Time.deltaTime);
 
-        if (transform.position.y >= targetJumpPosition.y)
+        if (transform.position.y >= jumpHeight && !CheckingGround())
         {
             targetJumpPosition = Vector3.zero;
         }
-
     }
     #endregion Jump
 
