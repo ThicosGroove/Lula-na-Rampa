@@ -9,7 +9,8 @@ public static class Const
     public static string PLAYER_ID = "PLAYER_ID";
 
     public static int HOME_SCENE = 0;
-    public static int GAME_SCENE = 1;
+    public static int MAIN_MENU_SCENE = 1;
+    public static int GAME_SCENE = 2;
 
     public static string PLAYER_TAG = "Player";
     public static string OBSTACLE_TAG = "Obstacle";

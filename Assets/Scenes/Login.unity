@@ -4804,7 +4804,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1312833156
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4895,9 +4895,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423245d966df05d4bb045adfa55d02e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameModePanel: {fileID: 1312833155}
-  logInPanel: {fileID: 1718231655}
-  playButton: {fileID: 144632561}
   useName_Text: {fileID: 1424156590}
   email_Text: {fileID: 1057477140}
   password_Text: {fileID: 960981696}
@@ -6679,7 +6676,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1718231656
 RectTransform:
   m_ObjectHideFlags: 0
