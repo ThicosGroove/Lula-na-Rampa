@@ -1186,12 +1186,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &556745758 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5847379854369022121, guid: c139acdb72e17f64eb57faa92d7b8208,
-    type: 3}
-  m_PrefabInstance: {fileID: 1725827378560363643}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &558449494
 GameObject:
   m_ObjectHideFlags: 0
@@ -2251,6 +2245,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 1.238, y: 0, z: 0}
+--- !u!4 &1062786934 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5620704593805469361, guid: c139acdb72e17f64eb57faa92d7b8208,
+    type: 3}
+  m_PrefabInstance: {fileID: 1725827378560363643}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1101990829
 GameObject:
   m_ObjectHideFlags: 0
@@ -5619,7 +5619,7 @@ PrefabInstance:
         type: 3}
       propertyPath: GFX_transform
       value: 
-      objectReference: {fileID: 556745758}
+      objectReference: {fileID: 1062786934}
     - target: {fileID: 1725827378496261678, guid: c139acdb72e17f64eb57faa92d7b8208,
         type: 3}
       propertyPath: directionThreshold
