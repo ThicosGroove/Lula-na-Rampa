@@ -16,7 +16,6 @@ public class SaveManager : Singleton<SaveManager>
             playerData._isNormalMode = false;
             playerData._userName = null;
             playerData._email = null;
-            playerData._password = null;
             playerData._playerID = null;
             playerData._keepMeConnected = false;
 
@@ -26,7 +25,6 @@ public class SaveManager : Singleton<SaveManager>
         playerData._isNormalMode = LoadFile()._isNormalMode;
         playerData._userName = LoadFile()._userName;
         playerData._email = LoadFile()._email;
-        playerData._password = LoadFile()._password;
         playerData._playerID = LoadFile()._playerID;
         playerData._keepMeConnected = LoadFile()._keepMeConnected;
     }
@@ -53,7 +51,6 @@ public class SaveManager : Singleton<SaveManager>
 
         public string _userName;
         public string _email;
-        public string _password;
         public string _playerID;
 
         public bool _keepMeConnected;

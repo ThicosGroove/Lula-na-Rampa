@@ -18,7 +18,6 @@ public class InLobbyUIManager : MonoBehaviour
         {     
             useName_Text.GetComponent<TMP_InputField>().text = SaveManager.Instance.LoadFile()._userName;
             email_Text.GetComponent<TMP_InputField>().text = SaveManager.Instance.LoadFile()._email;
-            password_Text.GetComponent<TMP_InputField>().text = SaveManager.Instance.LoadFile()._password;
         }
     }
 

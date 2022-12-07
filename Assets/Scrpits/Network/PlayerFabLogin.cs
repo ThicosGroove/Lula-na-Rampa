@@ -1,241 +1,241 @@
-using PlayFab;
-using PlayFab.ClientModels;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using System.IO;
+//using PlayFab;
+//using PlayFab.ClientModels;
+//using UnityEngine;
+//using UnityEngine.SceneManagement;
+//using System.IO;
 
-public class PlayFabLogin : MonoBehaviour
-{
-    private string userName;
-    private string userEmail;
-    private string userPassword;
+//public class PlayFabLogin : MonoBehaviour
+//{
+//    private string userName;
+//    private string userEmail;
+//    private string userPassword;
 
-    public GameObject loginPanel;
-    public GameObject addLoginPanel;
-    public GameObject recoverButton;
-    public GameObject mobileAutomaticPanel;
-    public GameObject gameModePanel;
-
-
-    public void Start()
-    {
-        CloseAllPanels();
+//    public GameObject loginPanel;
+//    public GameObject addLoginPanel;
+//    public GameObject recoverButton;
+//    public GameObject mobileAutomaticPanel;
+//    public GameObject gameModePanel;
 
 
-        //Note: Setting title Id here can be skipped if you have set the value in Editor Extensions already.
-        if (string.IsNullOrEmpty(PlayFabSettings.TitleId))
-        {
-            PlayFabSettings.TitleId = Const.TITLE_ID; // Please change this value to your own titleId from PlayFab Game Manager
-        }
+//    public void Start()
+//    {
+//        CloseAllPanels();
 
 
-        if (File.Exists(Application.dataPath + Const.SAVE_FILE_PATH))
-        {
-            userName = SaveManager.Instance.LoadFile()._userName;
-            userEmail = SaveManager.Instance.LoadFile()._email;
-            userPassword = SaveManager.Instance.LoadFile()._password;
-
-            var request = new LoginWithEmailAddressRequest
-            {
-                Email = userEmail,
-                Password = userPassword,
-                InfoRequestParameters = new GetPlayerCombinedInfoRequestParams { GetPlayerProfile = true }
-            };
+//        //Note: Setting title Id here can be skipped if you have set the value in Editor Extensions already.
+//        if (string.IsNullOrEmpty(PlayFabSettings.TitleId))
+//        {
+//            PlayFabSettings.TitleId = Const.TITLE_ID; // Please change this value to your own titleId from PlayFab Game Manager
+//        }
 
 
-            if (SaveManager.Instance.LoadFile()._keepMeConnected)
-            {
-                PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
-            }
-        }
-        else
-        {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                var requestAndroid = new LoginWithAndroidDeviceIDRequest
-                {
-                    AndroidDeviceId = ReturnMobileID(),
-                    InfoRequestParameters = new GetPlayerCombinedInfoRequestParams { GetPlayerProfile = true },
-                    CreateAccount = true
-                };
+//        if (File.Exists(Application.dataPath + Const.SAVE_FILE_PATH))
+//        {
+//            userName = SaveManager.Instance.LoadFile()._userName;
+//            userEmail = SaveManager.Instance.LoadFile()._email;
+//            userPassword = SaveManager.Instance.LoadFile()._password;
 
-                PlayFabClientAPI.LoginWithAndroidDeviceID(requestAndroid, OnLoginMobileSuccess, OnLoginMobileFailure);
-            }
-            else if (Application.platform == RuntimePlatform.OSXEditor)
-            {
-                var requestIOS = new LoginWithIOSDeviceIDRequest
-                {
-                    DeviceId = ReturnMobileID(),
-                    InfoRequestParameters = new GetPlayerCombinedInfoRequestParams { GetPlayerProfile = true },
-                    CreateAccount = true
-                };
+//            var request = new LoginWithEmailAddressRequest
+//            {
+//                Email = userEmail,
+//                Password = userPassword,
+//                InfoRequestParameters = new GetPlayerCombinedInfoRequestParams { GetPlayerProfile = true }
+//            };
 
-                PlayFabClientAPI.LoginWithIOSDeviceID(requestIOS, OnLoginMobileSuccess, OnLoginMobileFailure);
-            }
-        }
 
-        loginPanel.SetActive(true);
-    }
+//            if (SaveManager.Instance.LoadFile()._keepMeConnected)
+//            {
+//                PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
+//            }
+//        }
+//        else
+//        {
+//            if (Application.platform == RuntimePlatform.Android)
+//            {
+//                var requestAndroid = new LoginWithAndroidDeviceIDRequest
+//                {
+//                    AndroidDeviceId = ReturnMobileID(),
+//                    InfoRequestParameters = new GetPlayerCombinedInfoRequestParams { GetPlayerProfile = true },
+//                    CreateAccount = true
+//                };
 
-    private void OnLoginSuccess(LoginResult result)
-    {
-        CloseAllPanels();
+//                PlayFabClientAPI.LoginWithAndroidDeviceID(requestAndroid, OnLoginMobileSuccess, OnLoginMobileFailure);
+//            }
+//            else if (Application.platform == RuntimePlatform.OSXEditor)
+//            {
+//                var requestIOS = new LoginWithIOSDeviceIDRequest
+//                {
+//                    DeviceId = ReturnMobileID(),
+//                    InfoRequestParameters = new GetPlayerCombinedInfoRequestParams { GetPlayerProfile = true },
+//                    CreateAccount = true
+//                };
 
-        SaveManager.Instance.playerData._userName = userName;
-        SaveManager.Instance.playerData._email = userEmail;
-        SaveManager.Instance.playerData._password = userPassword;
-        SaveManager.Instance.playerData._playerID = result.PlayFabId;
-        SaveManager.Instance.SaveData();
+//                PlayFabClientAPI.LoginWithIOSDeviceID(requestIOS, OnLoginMobileSuccess, OnLoginMobileFailure);
+//            }
+//        }
 
-        var nameRequest = new UpdateUserTitleDisplayNameRequest { DisplayName = userName };
-        PlayFabClientAPI.UpdateUserTitleDisplayName(nameRequest, OnDisplayNameUpdate, OnDisplayNameUpdateError);
+//        loginPanel.SetActive(true);
+//    }
 
-        GoToGameModePanel();
-    }
+//    private void OnLoginSuccess(LoginResult result)
+//    {
+//        CloseAllPanels();
 
-    private void OnRegisterSuccess(RegisterPlayFabUserResult result)
-    {
-        CloseAllPanels();
+//        SaveManager.Instance.playerData._userName = userName;
+//        SaveManager.Instance.playerData._email = userEmail;
+//        SaveManager.Instance.playerData._password = userPassword;
+//        SaveManager.Instance.playerData._playerID = result.PlayFabId;
+//        SaveManager.Instance.SaveData();
 
-        SaveManager.Instance.playerData._userName = userName;
-        SaveManager.Instance.playerData._email = userEmail;
-        SaveManager.Instance.playerData._password = userPassword;
-        SaveManager.Instance.playerData._playerID = result.PlayFabId;
-        SaveManager.Instance.SaveData();
+//        var nameRequest = new UpdateUserTitleDisplayNameRequest { DisplayName = userName };
+//        PlayFabClientAPI.UpdateUserTitleDisplayName(nameRequest, OnDisplayNameUpdate, OnDisplayNameUpdateError);
 
-        var nameRequest = new UpdateUserTitleDisplayNameRequest { DisplayName = userName };
-        PlayFabClientAPI.UpdateUserTitleDisplayName(nameRequest, OnDisplayNameUpdate, OnDisplayNameUpdateError);
+//        GoToGameModePanel();
+//    }
 
-        GoToGameModePanel();
-    }
+//    private void OnRegisterSuccess(RegisterPlayFabUserResult result)
+//    {
+//        CloseAllPanels();
 
-    private void OnLoginMobileSuccess(LoginResult result)
-    {
-        loginPanel.SetActive(false);
+//        SaveManager.Instance.playerData._userName = userName;
+//        SaveManager.Instance.playerData._email = userEmail;
+//        SaveManager.Instance.playerData._password = userPassword;
+//        SaveManager.Instance.playerData._playerID = result.PlayFabId;
+//        SaveManager.Instance.SaveData();
 
-        SaveManager.Instance.playerData._playerID = result.PlayFabId;
-        SaveManager.Instance.SaveData();
+//        var nameRequest = new UpdateUserTitleDisplayNameRequest { DisplayName = userName };
+//        PlayFabClientAPI.UpdateUserTitleDisplayName(nameRequest, OnDisplayNameUpdate, OnDisplayNameUpdateError);
 
-        if (result.InfoResultPayload.PlayerProfile != null)
-        {
-            userName = result.InfoResultPayload.PlayerProfile.DisplayName;
+//        GoToGameModePanel();
+//    }
 
-            GoToGameModePanel();
-        }
+//    private void OnLoginMobileSuccess(LoginResult result)
+//    {
+//        loginPanel.SetActive(false);
 
-        if (!PlayerPrefs.HasKey(Const.USERNAME))
-        {
-            CloseAllPanels();
-            mobileAutomaticPanel.SetActive(true);
-        }
-    }
+//        SaveManager.Instance.playerData._playerID = result.PlayFabId;
+//        SaveManager.Instance.SaveData();
 
-    private void OnLoginFailure(PlayFabError error)
-    {
-        var registerRequest = new RegisterPlayFabUserRequest { Email = userEmail, Password = userPassword, Username = userName };
-        PlayFabClientAPI.RegisterPlayFabUser(registerRequest, OnRegisterSuccess, OnRegisterFailure);
-    }
+//        if (result.InfoResultPayload.PlayerProfile != null)
+//        {
+//            userName = result.InfoResultPayload.PlayerProfile.DisplayName;
 
-    private void OnLoginMobileFailure(PlayFabError error)
-    {
-        Debug.LogError(error.GenerateErrorReport());
-    }
+//            GoToGameModePanel();
+//        }
 
-    private void OnRegisterFailure(PlayFabError error)
-    {
-        Debug.LogError(error.GenerateErrorReport());
-    }
+//        if (!PlayerPrefs.HasKey(Const.USERNAME))
+//        {
+//            CloseAllPanels();
+//            mobileAutomaticPanel.SetActive(true);
+//        }
+//    }
 
-    public void GetUserName(string userNameInput)
-    {
-        userName = userNameInput;
-    }
+//    private void OnLoginFailure(PlayFabError error)
+//    {
+//        var registerRequest = new RegisterPlayFabUserRequest { Email = userEmail, Password = userPassword, Username = userName };
+//        PlayFabClientAPI.RegisterPlayFabUser(registerRequest, OnRegisterSuccess, OnRegisterFailure);
+//    }
 
-    public void GetUserEmail(string emailInput)
-    {
-        userEmail = emailInput;
-    }
+//    private void OnLoginMobileFailure(PlayFabError error)
+//    {
+//        Debug.LogError(error.GenerateErrorReport());
+//    }
 
-    public void GetUserPassword(string passwordInput)
-    {
-        userPassword = passwordInput;
-    }
+//    private void OnRegisterFailure(PlayFabError error)
+//    {
+//        Debug.LogError(error.GenerateErrorReport());
+//    }
 
-    public void OnClickLoginPC()
-    {
-        var request = new LoginWithEmailAddressRequest
-        {
-            Email = userEmail,
-            Password = userPassword,
-            InfoRequestParameters = new GetPlayerCombinedInfoRequestParams { GetPlayerProfile = true }
-        };
+//    public void GetUserName(string userNameInput)
+//    {
+//        userName = userNameInput;
+//    }
 
-        PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
-    }
+//    public void GetUserEmail(string emailInput)
+//    {
+//        userEmail = emailInput;
+//    }
 
-    public void OnCLickLoginMobile()
-    {
-        var request = new UpdateUserTitleDisplayNameRequest { DisplayName = userName };
-        PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnDisplayNameUpdateError);
-    }
+//    public void GetUserPassword(string passwordInput)
+//    {
+//        userPassword = passwordInput;
+//    }
 
-    void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result)
-    {
-        Debug.LogWarning("NOME CERTO " + result.DisplayName);
-    }
+//    public void OnClickLoginPC()
+//    {
+//        var request = new LoginWithEmailAddressRequest
+//        {
+//            Email = userEmail,
+//            Password = userPassword,
+//            InfoRequestParameters = new GetPlayerCombinedInfoRequestParams { GetPlayerProfile = true }
+//        };
 
-    void OnDisplayNameUpdateError(PlayFabError error)
-    {
-        Debug.LogWarning("Nao conseguiu atualizar o nome " + error.ErrorMessage);
-    }
+//        PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
+//    }
 
-    public void ClickOnPlayOffline()
-    {
-        GoToGameModePanel();
-    }
+//    public void OnCLickLoginMobile()
+//    {
+//        var request = new UpdateUserTitleDisplayNameRequest { DisplayName = userName };
+//        PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnDisplayNameUpdateError);
+//    }
 
-    public static string ReturnMobileID()
-    {
-        string deviceID = SystemInfo.deviceUniqueIdentifier;
-        return deviceID;
-    }
+//    void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result)
+//    {
+//        Debug.LogWarning("NOME CERTO " + result.DisplayName);
+//    }
 
-    public void OpenAddLogin()
-    {
-        addLoginPanel.SetActive(true);
-    }
+//    void OnDisplayNameUpdateError(PlayFabError error)
+//    {
+//        Debug.LogWarning("Nao conseguiu atualizar o nome " + error.ErrorMessage);
+//    }
 
-    public void OnClickAddLogin()
-    {
-        var addLoginRequest = new AddUsernamePasswordRequest { Email = userEmail, Password = userPassword, Username = userName };
-        PlayFabClientAPI.AddUsernamePassword(addLoginRequest, OnAddLoginSuccess, OnRegisterFailure);
-    }
+//    public void ClickOnPlayOffline()
+//    {
+//        GoToGameModePanel();
+//    }
 
-    private void OnAddLoginSuccess(AddUsernamePasswordResult result)
-    {
+//    public static string ReturnMobileID()
+//    {
+//        string deviceID = SystemInfo.deviceUniqueIdentifier;
+//        return deviceID;
+//    }
 
-        SaveManager.Instance.playerData._userName = userName;
-        SaveManager.Instance.playerData._email = userEmail;
-        SaveManager.Instance.playerData._password = userPassword;
-        SaveManager.Instance.SaveData();
+//    public void OpenAddLogin()
+//    {
+//        addLoginPanel.SetActive(true);
+//    }
 
-        loginPanel.SetActive(false);
-        recoverButton.SetActive(false);
+//    public void OnClickAddLogin()
+//    {
+//        var addLoginRequest = new AddUsernamePasswordRequest { Email = userEmail, Password = userPassword, Username = userName };
+//        PlayFabClientAPI.AddUsernamePassword(addLoginRequest, OnAddLoginSuccess, OnRegisterFailure);
+//    }
 
-        GoToGameModePanel();
-    }
+//    private void OnAddLoginSuccess(AddUsernamePasswordResult result)
+//    {
 
-    private void GoToGameModePanel()
-    {
-        gameModePanel.SetActive(true);
-    }
+//        SaveManager.Instance.playerData._userName = userName;
+//        SaveManager.Instance.playerData._email = userEmail;
+//        SaveManager.Instance.playerData._password = userPassword;
+//        SaveManager.Instance.SaveData();
 
-    private void CloseAllPanels()
-    {
-        loginPanel.SetActive(false);
-        addLoginPanel.SetActive(false);
-        mobileAutomaticPanel.SetActive(false);
-        recoverButton.SetActive(false);
-        gameModePanel.SetActive(false);
-    }
-}
+//        loginPanel.SetActive(false);
+//        recoverButton.SetActive(false);
+
+//        GoToGameModePanel();
+//    }
+
+//    private void GoToGameModePanel()
+//    {
+//        gameModePanel.SetActive(true);
+//    }
+
+//    private void CloseAllPanels()
+//    {
+//        loginPanel.SetActive(false);
+//        addLoginPanel.SetActive(false);
+//        mobileAutomaticPanel.SetActive(false);
+//        recoverButton.SetActive(false);
+//        gameModePanel.SetActive(false);
+//    }
+//}
