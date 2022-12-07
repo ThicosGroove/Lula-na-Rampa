@@ -3228,7 +3228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentGameState: 0
   isNormalMode: 0
-  playerColliderOn: 1
+  playerColliderOn: 0
   testStartLevel_5: 0
   winScore: 13
   isGamePaused: 0
@@ -3301,6 +3301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelData:
+  - {fileID: 11400000, guid: e1dadbe233ad66b4db9a915454b54558, type: 2}
   - {fileID: 11400000, guid: 77dbedd713a1e834fb9863b53daa7189, type: 2}
   - {fileID: 11400000, guid: 4b3b55858345f3345b900adf861537be, type: 2}
   - {fileID: 11400000, guid: bc9d3318f1a07be4fbd1f06be68f20d7, type: 2}
@@ -3315,11 +3316,7 @@ MonoBehaviour:
   current_playerSlideSpeed: 0
   current_playerJumpSpeed: 0
   current_playerRollingSpeed: 0
-  normalObstacleSpeed: 75
-  normalObstacleDelay: 1
-  playerNormal_SlideSpeed: 5
-  playerNormal_JumpSpeed: 5
-  playerNormal_RollingSpeed: 0.8
+  current_caminhaoMulti: 0
   changeToLevel_2: 1
   changeToLevel_3: 2
   changeToLevel_4: 3

@@ -41,16 +41,8 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        if (GamePlayManager.Instance.isNormalMode == true)
-        {
-            spawnObstacleDelay = LevelManager.Instance.normalObstacleDelay;
-            spawnCollectableDelay = LevelManager.Instance.normalObstacleDelay;
-        }
-        else
-        {
-            spawnObstacleDelay = LevelManager.Instance.current_obstacleSpawnDelay;
-            spawnCollectableDelay = LevelManager.Instance.current_collectableSpawnDelay;
-        }
+        spawnObstacleDelay = LevelManager.Instance.current_obstacleSpawnDelay;
+        spawnCollectableDelay = LevelManager.Instance.current_collectableSpawnDelay;
 
         StartCoroutine(SpawnObstacle());
         StartCoroutine(SpawnCollectable());
@@ -123,8 +115,6 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnCollectable()
     {
-        timeLeftSpawnCollectable = spawnCollectableDelay;
-
         int randomPosX = Random.Range(0, collectable.posX.Length);
 
         Vector3 pos = new Vector3(collectable.posX[randomPosX], 0f, objSpawnDistance);
@@ -133,16 +123,7 @@ public class SpawnManager : MonoBehaviour
         GamePlayManager.Instance.objList.Add(newCollectable.GetComponent<MoveCollectable>());
 
 
-        while (timeLeftSpawnCollectable > 0f)
-        {
-
-            timeLeftSpawnCollectable -= Time.deltaTime;
-            yield return null;
-        }
-
-        spawnObstacleDelay = VerifyingTimeLeftSpanwCollectable();
-
-        //yield return new WaitForSeconds(spawnCollectableDelay);
+        yield return new WaitForSeconds(spawnCollectableDelay);
         StartCoroutine(SpawnCollectable());
     }
 

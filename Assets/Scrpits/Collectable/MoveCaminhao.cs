@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class MoveCaminhao : MoveBase
 {
-    [SerializeField] LevelSO[] levelData;
-
     [SerializeField] float speedMultiplier;
 
     protected override void Start()
     {
         base.Start();
-        speedMultiplier = levelData[LevelManager.Instance.currentLevel - 1].speedMulti;
+        speedMultiplier = LevelManager.Instance.current_caminhaoMulti;
     }
 
     protected override void MoveBehaviour()

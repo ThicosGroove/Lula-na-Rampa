@@ -320,7 +320,7 @@ public class PlayerController : MonoBehaviour
         Vector3 normalGFX_Position = Vector3.zero;
         Vector3 newGXF_Position = new Vector3(0, GFX_PositionOnRolling, 0);
 
-        Vector3 normalGFX_Scale = Vector3.one;
+        Vector3 normalGFX_Scale = GFX_transform.localScale;
         Vector3 newGFX_Scale = new Vector3(1, GFX_ScaleOnRolling, 1);
 
         GFX_transform.localPosition = Vector3.Lerp(normalGFX_Position, newGXF_Position, 1f);
