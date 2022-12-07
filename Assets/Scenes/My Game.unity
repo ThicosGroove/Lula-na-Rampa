@@ -546,6 +546,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 144238746}
   m_CullTransparentMesh: 1
+--- !u!114 &190163798 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1725827378496261678, guid: c139acdb72e17f64eb57faa92d7b8208,
+    type: 3}
+  m_PrefabInstance: {fileID: 1725827378560363643}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a37a8cee93ae84eb7d477bb083d183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &277596968
 GameObject:
   m_ObjectHideFlags: 0
@@ -2526,6 +2538,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1107995777}
   m_CullTransparentMesh: 1
+--- !u!1 &1150081427 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4993103994111802379, guid: c139acdb72e17f64eb57faa92d7b8208,
+    type: 3}
+  m_PrefabInstance: {fileID: 1725827378560363643}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1150081428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150081427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 215dc4970693aaf45ba13a95076f7099, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 190163798}
 --- !u!1 &1206638490
 GameObject:
   m_ObjectHideFlags: 0
@@ -3301,7 +3332,7 @@ MonoBehaviour:
   changeToLevel_2: 1
   changeToLevel_3: 2
   changeToLevel_4: 3
-  changeToLevel_5: 4
+  changeToLevel_5: 80
 --- !u!1 &1364178540
 GameObject:
   m_ObjectHideFlags: 0
@@ -5639,6 +5670,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003499095581969271, guid: c139acdb72e17f64eb57faa92d7b8208,
+        type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 565093e6dd767374785a82a2f7ac9ff8, type: 3}
+    - target: {fileID: 2003499095581969271, guid: c139acdb72e17f64eb57faa92d7b8208,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2582517970738314760, guid: c139acdb72e17f64eb57faa92d7b8208,
         type: 3}

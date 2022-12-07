@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     // move / jump parameters
     float slideSpeed;
     float jumpSpeed;
-    bool canJump;
+    public bool isJump;
 
     // rotation parameters
     [SerializeField] float rotateBackDelay;
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
     CapsuleCollider coll;
     float colliderHeight = 1f;
     float colliderCenter = -0.5f;
-    bool isRolling;
+    public bool isRolling;
     float rollingDelay;
 
     int currentLevel;
@@ -144,18 +144,18 @@ public class PlayerController : MonoBehaviour
         }
         else if (Vector2.Dot(Vector2.up, direction) > directionThreshold) // Pulo
         {
-
             if (CheckingGround())
             {
                 targetJumpPosition = Vector3.up * jumpHeight;
+                isJump = true;
             }
 
-            //transform.Translate(targetJumpPosition * jumpSpeed * Time.deltaTime);
+            transform.Translate(targetJumpPosition * jumpSpeed * Time.deltaTime);
 
-            //if (transform.position.y >= targetJumpPosition.y)
-            //{
-            //    targetJumpPosition = Vector3.zero;
-            //}
+            if (transform.position.y >= targetJumpPosition.y && !CheckingGround())
+            {
+                targetJumpPosition = Vector3.zero;
+            }
         }
         if (Vector2.Dot(Vector2.down, direction) > directionThreshold) // Abaixar
         {
@@ -281,7 +281,8 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         if (input.Movement.Jump.triggered && CheckingGround())
-        {        
+        {
+            isJump = true;
             targetJumpPosition = Vector3.up * jumpHeight;
         }
 
@@ -315,26 +316,11 @@ public class PlayerController : MonoBehaviour
         coll.center = Vector3.Lerp(coll.center, colliderCenterOnRolling, 1f);
         coll.height = Mathf.Lerp(coll.height, colliderHeightOnRolling, 1f);
 
-        //Temporário
-        Vector3 normalGFX_Position = Vector3.zero;
-        Vector3 newGXF_Position = new Vector3(0, GFX_PositionOnRolling, 0);
-
-        Vector3 normalGFX_Scale = GFX_transform.localScale;
-        Vector3 newGFX_Scale = new Vector3(1, GFX_ScaleOnRolling, 1);
-
-        GFX_transform.localPosition = Vector3.Lerp(normalGFX_Position, newGXF_Position, 1f);
-        GFX_transform.localScale = Vector3.Lerp(normalGFX_Scale, newGFX_Scale, 1f);
-        //
 
         yield return new WaitForSeconds(rollingDelay);
 
         coll.height = Mathf.Lerp(coll.height, normalColliderHeight, 1f);
         coll.center = Vector3.Lerp(coll.center, normalColliderCenter, 1f);
-
-        // Temp
-        GFX_transform.localPosition = Vector3.Lerp(newGXF_Position, normalGFX_Position, 1f);
-        GFX_transform.localScale = Vector3.Lerp(newGFX_Scale, normalGFX_Scale, 1f);
-        //
 
         isRolling = false;
     }
