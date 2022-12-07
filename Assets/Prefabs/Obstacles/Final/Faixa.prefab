@@ -247,6 +247,8 @@ GameObject:
   - component: {fileID: 2222353358637941447}
   - component: {fileID: 5392225754857147057}
   - component: {fileID: 7809976268835018800}
+  - component: {fileID: 7863283794588771835}
+  - component: {fileID: 172359419581009416}
   m_Layer: 0
   m_Name: Faixa
   m_TagString: Obstacle
@@ -307,6 +309,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayBaneer: {fileID: 6395491805414936951}
+--- !u!65 &7863283794588771835
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7864290718697336466}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.600997, y: 6.0798216, z: 1}
+  m_Center: {x: -19.758026, y: 2.5399108, z: 0}
+--- !u!65 &172359419581009416
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7864290718697336466}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.0408115, y: 6.0974827, z: 0.8879137}
+  m_Center: {x: 19.263386, y: 2.5487418, z: -0.056043267}
 --- !u!1001 &185520119930865117
 PrefabInstance:
   m_ObjectHideFlags: 0

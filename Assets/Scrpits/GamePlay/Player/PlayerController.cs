@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
     {
         input = new InputPlayerControsl();
 
-        height = 3;
+        height = 0;
         state = PlayerState.PLAYING;
         desiredLane = Const.PLAYER_INITIAL_LANE;
 
