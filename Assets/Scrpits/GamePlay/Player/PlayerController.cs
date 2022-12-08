@@ -147,7 +147,7 @@ public class PlayerController : MonoBehaviour
             if (CheckingGround())
             {
                 targetJumpPosition = Vector3.up * jumpHeight;
-                isJump = true;
+                //isJump = true;
             }
 
             transform.Translate(targetJumpPosition * jumpSpeed * Time.deltaTime);
@@ -282,8 +282,17 @@ public class PlayerController : MonoBehaviour
     {
         if (input.Movement.Jump.triggered && CheckingGround())
         {
-            isJump = true;
             targetJumpPosition = Vector3.up * jumpHeight;
+        }
+
+        if (transform.position.y > 2)
+        {
+            isJump = true;
+        }
+
+        else
+        {
+            isJump = false;
         }
 
         transform.Translate(targetJumpPosition * jumpSpeed * Time.deltaTime);

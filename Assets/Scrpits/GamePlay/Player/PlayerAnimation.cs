@@ -18,10 +18,11 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (playerController.isJump)
         {
-            Debug.LogWarning("Pulou");
-
             anim.SetBool("IsJump", true);
-            StartCoroutine(JumpAnimationDelay());
+        }
+        else
+        {
+            anim.SetBool("IsJump", false);
         }
 
 
@@ -33,13 +34,5 @@ public class PlayerAnimation : MonoBehaviour
         {
             anim.SetBool("IsRoll", false);
         }
-    }
-
-    IEnumerator JumpAnimationDelay()
-    {
-        yield return new WaitForSeconds(1f);
-
-        playerController.isJump = false;
-        anim.SetBool("IsJump", false);
     }
 }
