@@ -11,11 +11,14 @@ public abstract class MoveBase : MonoBehaviour
     protected bool isInReach = false;
 
     private float previousSpeed;
+    private bool hasReach;
 
     protected virtual void Start()
     {
         player = FindObjectOfType<PlayerController>().gameObject;
         speed = LevelManager.Instance.current_obstacleInitialSpeed;
+
+        hasReach = GamePlayManager.Instance.hasReach;
     }
 
     private void OnEnable()

@@ -3240,10 +3240,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentGameState: 0
   isNormalMode: 0
-  playerColliderOn: 1
+  playerColliderOn: 0
   testStartLevel_5: 0
   winScore: 13
   isGamePaused: 0
+  hasReach: 0
   objList: []
 --- !u!4 &1346951836
 Transform:
@@ -3329,7 +3330,7 @@ MonoBehaviour:
   current_playerJumpSpeed: 0
   current_playerRollingSpeed: 0
   current_caminhaoMulti: 0
-  changeToLevel_2: 1
+  changeToLevel_2: 10
   changeToLevel_3: 20
   changeToLevel_4: 40
   changeToLevel_5: 80
@@ -5689,7 +5690,7 @@ PrefabInstance:
     - target: {fileID: 2582517970738314760, guid: c139acdb72e17f64eb57faa92d7b8208,
         type: 3}
       propertyPath: m_Height
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2582517970738314760, guid: c139acdb72e17f64eb57faa92d7b8208,
         type: 3}
@@ -5699,12 +5700,27 @@ PrefabInstance:
     - target: {fileID: 2582517970738314760, guid: c139acdb72e17f64eb57faa92d7b8208,
         type: 3}
       propertyPath: m_Center.y
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2671981966243121158, guid: c139acdb72e17f64eb57faa92d7b8208,
         type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620704593805469361, guid: c139acdb72e17f64eb57faa92d7b8208,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620704593805469361, guid: c139acdb72e17f64eb57faa92d7b8208,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620704593805469361, guid: c139acdb72e17f64eb57faa92d7b8208,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 5847379854369022121, guid: c139acdb72e17f64eb57faa92d7b8208,
         type: 3}

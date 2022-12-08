@@ -33,6 +33,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
     public int winScore;
 
     public bool isGamePaused;
+    public bool hasReach = false;
 
     [HideInInspector]
     public List<MoveBase> objList = new List<MoveBase>();
@@ -55,6 +56,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
             LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_1);
         }
     }
+
 
     public void UpdateGameState(GameStates newState)
     {

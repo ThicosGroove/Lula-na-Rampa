@@ -58,14 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f91ca5049300bac478ac7fa0d8ffa7ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelData:
-  - {fileID: 11400000, guid: e1dadbe233ad66b4db9a915454b54558, type: 2}
-  - {fileID: 11400000, guid: 77dbedd713a1e834fb9863b53daa7189, type: 2}
-  - {fileID: 11400000, guid: 4b3b55858345f3345b900adf861537be, type: 2}
-  - {fileID: 11400000, guid: bc9d3318f1a07be4fbd1f06be68f20d7, type: 2}
-  - {fileID: 11400000, guid: 353b4003099b1d84a9cd43b9af1adc56, type: 2}
-  - {fileID: 11400000, guid: ba4f6a27841a1fa4d9053346f1c9c3cd, type: 2}
-  speedMultiplier: 0
+  distToAccelerate: 100
 --- !u!1001 &5926994671942490259
 PrefabInstance:
   m_ObjectHideFlags: 0

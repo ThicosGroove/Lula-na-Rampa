@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveCaminhao : MoveBase
 {
-    [SerializeField] float speedMultiplier;
+    float speedMultiplier;
 
     protected override void Start()
     {
