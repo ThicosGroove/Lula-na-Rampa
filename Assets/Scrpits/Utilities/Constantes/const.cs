@@ -21,6 +21,10 @@ public static class Const
     public static float LANE_DISTANCE = 15f;
     public static float PLAYER_ROTATION_MOVE = 45f;
 
+    //Animation
+    public static string JUMP_ANIMATION = "IsJump";
+    public static string ROLL_ANIMATION = "IsRoll";
+
     // Save Files
     public static string SAVE_FILE_PATH = "/saveFile.json";
 

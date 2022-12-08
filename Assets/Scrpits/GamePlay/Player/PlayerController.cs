@@ -152,6 +152,7 @@ public class PlayerController : MonoBehaviour
 
             transform.Translate(targetJumpPosition * jumpSpeed * Time.deltaTime);
 
+  
             if (transform.position.y >= targetJumpPosition.y && !CheckingGround())
             {
                 targetJumpPosition = Vector3.zero;
@@ -164,6 +165,12 @@ public class PlayerController : MonoBehaviour
                 isRolling = true;
                 StartCoroutine(RollDelay());
             }
+
+            if (Vector2.Dot(Vector2.down, direction) > directionThreshold && !CheckingGround())
+            {
+                targetJumpPosition = Vector3.zero;
+            }
+
         }
     }
     #endregion Mobile
@@ -285,7 +292,7 @@ public class PlayerController : MonoBehaviour
             targetJumpPosition = Vector3.up * jumpHeight;
         }
 
-        if (transform.position.y > 2)
+        if (transform.position.y > 1)
         {
             isJump = true;
         }
@@ -296,6 +303,11 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.Translate(targetJumpPosition * jumpSpeed * Time.deltaTime);
+
+        if (input.Movement.Roll.triggered && !CheckingGround())
+        {
+            targetJumpPosition = Vector3.zero;
+        }
 
         if (transform.position.y >= jumpHeight && !CheckingGround())
         {

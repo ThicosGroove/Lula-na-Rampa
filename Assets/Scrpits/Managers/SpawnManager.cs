@@ -35,10 +35,6 @@ public class SpawnManager : MonoBehaviour
     private float timeLeftSpawnObstacle;
     private float timeLeftSpawnCollectable;
 
-    private void Awake()
-    {
-    }
-
     void Start()
     {
         spawnObstacleDelay = LevelManager.Instance.current_obstacleSpawnDelay;
@@ -80,8 +76,6 @@ public class SpawnManager : MonoBehaviour
 
     private void StopAllTheCoroutines()
     {
-
-
         StopAllCoroutines();
     }
 
@@ -95,28 +89,23 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnObstacle()
     {
-        //sorteia o objeto
         int obstacle = Random.Range(0, obstacles.Length);
-
-        //sorteia a posição entre uma das possíveis para o objeto
         int randomPosX = Random.Range(0, obstacles[obstacle].posX.Length);
-
         Vector3 pos = new Vector3(obstacles[obstacle].posX[randomPosX], 0f, objSpawnDistance);
 
         newObstacle = Instantiate(obstacles[obstacle].prefab, pos, obstacles[obstacle].prefab.transform.rotation);
-
         GamePlayManager.Instance.objList.Add(newObstacle.GetComponent<MoveObstacle>());
 
-        timeLeftSpawnObstacle += Time.time;
-
         yield return new WaitForSeconds(spawnObstacleDelay);
+
+        timeLeftSpawnObstacle = spawnObstacleDelay;
+
         StartCoroutine(SpawnObstacle());
     }
 
     IEnumerator SpawnCollectable()
     {
         int randomPosX = Random.Range(0, collectable.posX.Length);
-
         Vector3 pos = new Vector3(collectable.posX[randomPosX], 0f, objSpawnDistance);
 
         newCollectable = Instantiate(collectable.collectablePrefab, pos, Quaternion.identity);

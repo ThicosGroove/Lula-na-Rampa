@@ -3240,7 +3240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentGameState: 0
   isNormalMode: 0
-  playerColliderOn: 0
+  playerColliderOn: 1
   testStartLevel_5: 0
   winScore: 13
   isGamePaused: 0

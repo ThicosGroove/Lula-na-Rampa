@@ -18,21 +18,23 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (playerController.isJump)
         {
-            anim.SetBool("IsJump", true);
+            anim.SetBool(Const.JUMP_ANIMATION, true);
         }
         else
         {
-            anim.SetBool("IsJump", false);
+            anim.SetBool(Const.JUMP_ANIMATION, false);
         }
 
 
         if (playerController.isRolling)
         {
-            anim.SetBool("IsRoll", true);
+            anim.SetBool(Const.ROLL_ANIMATION, true);
         }
         else
         {
-            anim.SetBool("IsRoll", false);
+            anim.SetBool(Const.ROLL_ANIMATION, false);
         }
+
+        
     }
 }

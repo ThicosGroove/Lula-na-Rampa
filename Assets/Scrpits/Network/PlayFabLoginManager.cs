@@ -150,7 +150,7 @@ public class PlayFabLoginManager : MonoBehaviour
 
     private void OnLoginFailure(PlayFabError error)
     {
-        //error_text.text = error.ErrorMessage;
+        error_text.text = "Email não encontrado\n Cadastre-se com esse e-mail\n" + error.ErrorMessage;
         Debug.LogWarning(error.ErrorMessage);
     }
 
@@ -172,11 +172,13 @@ public class PlayFabLoginManager : MonoBehaviour
     public void GetUserName(string userNameInput)
     {
         userName = userNameInput;
+        TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default);
     }
 
     public void GetUserEmail(string emailInput)
     {
         userEmail = emailInput;
+        TouchScreenKeyboard.Open("", TouchScreenKeyboardType.EmailAddress);
     }
     #endregion Inputs
 
