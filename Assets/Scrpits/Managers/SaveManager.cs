@@ -3,9 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class SaveManager : Singleton<SaveManager>
+public class SaveManager : MonoBehaviour
 {
     public PlayerData playerData;
+
+    #region SINGLETON PATTERN
+    public static SaveManager instance;
+    public static SaveManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = GameObject.FindObjectOfType<SaveManager>();
+
+                if (instance == null)
+                {
+                    GameObject container = new GameObject("SaveManager");
+                    instance = container.AddComponent<SaveManager>();
+                }
+            }
+
+            return instance;
+        }
+    }
+    #endregion
+
+
+    private void Awake()
+    {
+        // if the singleton hasn't been initialized yet
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;//Avoid doing anything else
+        }
+
+        instance = this;
+        DontDestroyOnLoad(this.gameObject);
+    }
+
+
 
     private void Start()
     {

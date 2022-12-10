@@ -988,6 +988,12 @@ MonoBehaviour:
       type: 3}
     posX:
     - 0
+  - name: Dois Gados
+    prefab: {fileID: 6833066449440278259, guid: e37c8c02ac953954dbc0bdea02445cd6,
+      type: 3}
+    posX:
+    - 9
+    - -9
   collectable:
     collectablePrefab: {fileID: 6758563964536805240, guid: abfef453204048b40940b207ef24634b,
       type: 3}
@@ -2252,12 +2258,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.008726558, y: 0, z: 0, w: 0.999962}
-  m_LocalPosition: {x: 0, y: 26, z: -47}
+  m_LocalPosition: {x: 0, y: 30, z: -54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 11, y: 48, z: 359}
+  m_LocalEulerAnglesHint: {x: 1, y: 0, z: 0}
 --- !u!95 &963194229
 Animator:
   serializedVersion: 3
@@ -3260,7 +3266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentGameState: 0
   isNormalMode: 0
-  playerColliderOn: 1
+  playerColliderOn: 0
   testStartLevel_5: 0
   winScore: 13
   isGamePaused: 0
@@ -3351,8 +3357,8 @@ MonoBehaviour:
   current_playerRollingSpeed: 0
   current_caminhaoMulti: 0
   changeToLevel_2: 1
-  changeToLevel_3: 20
-  changeToLevel_4: 40
+  changeToLevel_3: 2
+  changeToLevel_4: 3
   changeToLevel_5: 80
 --- !u!1 &1364178540
 GameObject:

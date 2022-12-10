@@ -74,6 +74,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        state = PlayerState.IDLE;
+
         if (GamePlayManager.Instance.isNormalMode == true)
         {
             slideSpeed = LevelManager.Instance.current_playerSlideSpeed;
@@ -84,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
+        GameplayEvents.StartNewLevel += GameStart;
         GameplayEvents.Win += OnPlayerWin;
 
         input.Enable();
@@ -91,9 +94,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
+        GameplayEvents.StartNewLevel -= GameStart;
         GameplayEvents.Win -= OnPlayerWin;
 
         input.Disable();
+    }
+
+    private void GameStart()
+    {
+        UpdatePlayerState(PlayerState.PLAYING);
     }
 
     private void UpdatePlayerState(PlayerState newState)
@@ -252,6 +261,8 @@ public class PlayerController : MonoBehaviour
     #region Rotation
     void GFX_Rotation()
     {
+        if (state != PlayerState.PLAYING) return;
+
         if (isMoving != 0)
         {
             rotationAngleY = isMoving == 1 ? rotationAngleY : -rotationAngleY;

@@ -37,7 +37,8 @@ public class InGameUIManager : MonoBehaviour
         OnPlayingPanel.SetActive(true);
 
         totalScore = 0;
-        scoreText.text = "Estrelas: " + totalScore;
+        scoreText.text = "";
+        levelText.text = "";
     }
 
     private void OnEnable()
@@ -79,6 +80,12 @@ public class InGameUIManager : MonoBehaviour
 
     IEnumerator LevelTextDelay()
     {
+        if (currentLevel == 1)
+        {
+            yield return new WaitForSeconds(6.5f); // Tempo total da cutscene
+        }
+
+
         if (GamePlayManager.Instance.isNormalMode == true)
         {
             levelText.text = "Pegue a Faixa !!";
@@ -88,6 +95,7 @@ public class InGameUIManager : MonoBehaviour
             levelText.text = "Level " + currentLevel;
         }
 
+        scoreText.text = "Estrelas: " + totalScore;
         levelText.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(1.5f);
@@ -183,7 +191,7 @@ public class InGameUIManager : MonoBehaviour
 
     public void OnClickReturnToMenuButton()
     {
-        SceneManager.LoadScene(Const.HOME_SCENE);
+        SceneManager.LoadScene(Const.MAIN_MENU_SCENE);
     }
 
     public void OnClickQuitButton()
