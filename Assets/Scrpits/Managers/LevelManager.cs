@@ -12,7 +12,7 @@ public enum CurrentLevelState
     LEVEL_MAX
 }
 
-[DefaultExecutionOrder(2)]
+[DefaultExecutionOrder(-1)]
 public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField] LevelSO[] levelData;
@@ -93,7 +93,6 @@ public class LevelManager : Singleton<LevelManager>
 
         currentLevel = level;
         Debug.LogWarning($"Mudou level {currentLevel}");
-        float timeToStart = Time.time;
 
         ScoreEvents.OnChangeLevel(currentLevel);
 

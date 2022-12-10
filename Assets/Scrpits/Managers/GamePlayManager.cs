@@ -38,14 +38,15 @@ public class GamePlayManager : Singleton<GamePlayManager>
     [HideInInspector]
     public List<MoveBase> objList = new List<MoveBase>();
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
+        UpdateGameState(GameStates.PLAYING);
+
         if (File.Exists(Application.dataPath + Const.SAVE_FILE_PATH))
         {
             isNormalMode = SaveManager.Instance.LoadFile()._isNormalMode;
         }
-
-        UpdateGameState(GameStates.PLAYING); // Testing
 
         if (testStartLevel_5)
         {

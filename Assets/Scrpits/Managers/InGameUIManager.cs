@@ -157,7 +157,7 @@ public class InGameUIManager : MonoBehaviour
 
     public void OnClickPlayAgainButton()
     {
-        //SceneManager.LoadScene(); // TEMPORÁRIO
+        SceneManager.LoadScene(Const.GAME_SCENE); // TEMPORÁRIO
     }
 
     public void OnClickCancelButton()

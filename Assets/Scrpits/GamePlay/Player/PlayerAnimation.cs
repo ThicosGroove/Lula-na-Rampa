@@ -33,8 +33,6 @@ public class PlayerAnimation : MonoBehaviour
         else
         {
             anim.SetBool(Const.ROLL_ANIMATION, false);
-        }
-
-        
+        }        
     }
 }

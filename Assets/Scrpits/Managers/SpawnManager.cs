@@ -32,8 +32,9 @@ public class SpawnManager : MonoBehaviour
     private GameObject newObstacle;
     private GameObject newCollectable;
 
-    private float timeLeftSpawnObstacle;
-    private float timeLeftSpawnCollectable;
+    private float myTimerObstacle, myTimerCollectable;
+    private float stopTimerObstacle, stopTimerCollectable;
+    private float newtimerObstacle, newTimerCollectable;
 
     void Start()
     {
@@ -41,7 +42,9 @@ public class SpawnManager : MonoBehaviour
         spawnCollectableDelay = LevelManager.Instance.current_collectableSpawnDelay;
 
         StartCoroutine(SpawnObstacle());
-        StartCoroutine(SpawnCollectable());
+
+        myTimerObstacle = spawnObstacleDelay;
+        myTimerCollectable = spawnCollectableDelay;
     }
 
     private void OnEnable()
@@ -64,6 +67,8 @@ public class SpawnManager : MonoBehaviour
 
     private void Update()
     {
+        SetSpawnTimer();
+
         if (GamePlayManager.Instance.isNormalMode == true) return;
         LevelUp();
     }
@@ -77,58 +82,72 @@ public class SpawnManager : MonoBehaviour
     private void StopAllTheCoroutines()
     {
         StopAllCoroutines();
+
+        stopTimerObstacle = myTimerObstacle;
+        newtimerObstacle = spawnObstacleDelay - stopTimerObstacle;
+
+        //stopTimerCollectable = myTimerCollectable;
+        //newTimerCollectable = spawnCollectableDelay - stopTimerCollectable;
     }
 
     private void ResumeAllCoroutines()
     {
-        //Remaining timer
-
         StartCoroutine(SpawnObstacle());
-        StartCoroutine(SpawnCollectable());
     }
 
     IEnumerator SpawnObstacle()
     {
+        yield return new WaitForSeconds(newtimerObstacle);
+
         int obstacle = Random.Range(0, obstacles.Length);
-        int randomPosX = Random.Range(0, obstacles[obstacle].posX.Length);
-        Vector3 pos = new Vector3(obstacles[obstacle].posX[randomPosX], 0f, objSpawnDistance);
+        int randomPosObstacleX = Random.Range(0, obstacles[obstacle].posX.Length);
+        Vector3 posObstacle = new Vector3(obstacles[obstacle].posX[randomPosObstacleX], 0f, objSpawnDistance);
 
-        newObstacle = Instantiate(obstacles[obstacle].prefab, pos, obstacles[obstacle].prefab.transform.rotation);
+        int randomPosCollectableX = Random.Range(0, collectable.posX.Length);
+        Vector3 posCollectable = new Vector3(collectable.posX[randomPosCollectableX], 0f, objSpawnDistance);
+
+
+        newObstacle = Instantiate(obstacles[obstacle].prefab, posObstacle, obstacles[obstacle].prefab.transform.rotation);
+        newCollectable = Instantiate(collectable.collectablePrefab, posCollectable, Quaternion.identity);
+
         GamePlayManager.Instance.objList.Add(newObstacle.GetComponent<MoveObstacle>());
+        GamePlayManager.Instance.objList.Add(newCollectable.GetComponent<MoveCollectable>());
 
-        yield return new WaitForSeconds(spawnObstacleDelay);
 
-        timeLeftSpawnObstacle = spawnObstacleDelay;
+        yield return new WaitForSecondsRealtime(spawnObstacleDelay);
 
         StartCoroutine(SpawnObstacle());
     }
 
-    IEnumerator SpawnCollectable()
+    //IEnumerator SpawnCollectable()
+    //{
+    //    yield return new WaitForSeconds(newtimerObstacle);
+
+    //    int randomPosCollectableX = Random.Range(0, collectable.posX.Length);
+    //    Vector3 posCollectable = new Vector3(collectable.posX[randomPosCollectableX], 0f, objSpawnDistance);
+
+    //    newCollectable = Instantiate(collectable.collectablePrefab, posCollectable, Quaternion.identity);
+    //    GamePlayManager.Instance.objList.Add(newCollectable.GetComponent<MoveCollectable>());
+    //    yield return new WaitForSeconds(spawnCollectableDelay);
+
+    //    StartCoroutine(SpawnCollectable());
+    //}
+
+
+    private void SetSpawnTimer()
     {
-        int randomPosX = Random.Range(0, collectable.posX.Length);
-        Vector3 pos = new Vector3(collectable.posX[randomPosX], 0f, objSpawnDistance);
+        myTimerObstacle -= Time.deltaTime;
+        //myTimerCollectable -= Time.deltaTime;
 
-        newCollectable = Instantiate(collectable.collectablePrefab, pos, Quaternion.identity);
-        GamePlayManager.Instance.objList.Add(newCollectable.GetComponent<MoveCollectable>());
+        if (myTimerObstacle <= 0)
+        {
+            myTimerObstacle = spawnObstacleDelay;
+        }
 
-
-        yield return new WaitForSeconds(spawnCollectableDelay);
-        StartCoroutine(SpawnCollectable());
-    }
-
-
-    private float VerifyingTimeLeftSpanwObstacle()
-    {
-        if (timeLeftSpawnObstacle != 0) return timeLeftSpawnObstacle;
-
-        return spawnObstacleDelay;
-    }
-
-    private float VerifyingTimeLeftSpanwCollectable()
-    {
-        if (timeLeftSpawnCollectable != 0) return timeLeftSpawnCollectable;
-
-        return spawnCollectableDelay;
+        //if (myTimerCollectable <= 0)
+        //{
+        //    myTimerCollectable = spawnObstacleDelay;
+        //}
     }
 }
 

@@ -27,10 +27,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundMask;
 
-    [Header("Graphics parameters")] // temporário até obj 3D
+    [Header("Graphics parameters")]
     [SerializeField] Transform GFX_transform;
-    [SerializeField] float GFX_ScaleOnRolling = 0.5f;
-    [SerializeField] float GFX_PositionOnRolling = -0.5f;
 
     // PRIVATES PARAMETERS 
     InputPlayerControsl input;
