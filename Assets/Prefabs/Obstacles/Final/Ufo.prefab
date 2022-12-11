@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8858549911919630653}
   m_Layer: 0
   m_Name: Ufo
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,8 +44,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 8.340902, y: 0.94000053, z: 7.8827553}
-  m_Center: {x: 0.6082659, y: 15.96, z: 0.9781089}
+  m_Size: {x: 8.340902, y: 4.1326866, z: 14.977391}
+  m_Center: {x: 0, y: 20.17335, z: 0.6530881}
 --- !u!114 &8858549911919630653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,7 +93,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3bffb959f1ca0f64c95ddb7621b9532d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3bffb959f1ca0f64c95ddb7621b9532d,
         type: 3}
@@ -167,8 +167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   freqPosition: 10
-  ampPosition: 0.01
-  freqRotationZ: 5
-  ampRotationZ: 0.1
-  freqRotationY: 0
-  ampRotationY: 0
+  ampPosition: 0.05
+  freqRotationZ: 0
+  ampRotationZ: 0
+  freqRotationY: 5
+  ampRotationY: 0.1

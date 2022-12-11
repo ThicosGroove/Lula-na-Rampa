@@ -18,11 +18,11 @@ public class MoveUfo : MonoBehaviour
 
     private void Update()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y + (Mathf.Sin(Time.deltaTime * freqPosition) * ampPosition), transform.position.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y + (Mathf.Sin(Time.time * freqPosition) * ampPosition), transform.position.z);
 
-        float rotationZ = Mathf.Sin(Time.time * freqRotationZ) * ampRotationZ;
-        float rotationY = Time.time * freqRotationY * ampRotationY;
-        Vector3 Rotation = new Vector3(0f, rotationY, 0f);
+        float rotationZ = Mathf.Sin(freqRotationZ) * ampRotationZ;
+        float rotationY =  freqRotationY * ampRotationY;
+        Vector3 Rotation = new Vector3(0f, rotationY, rotationZ);
         transform.Rotate(Rotation, Space.Self);
     }
  
