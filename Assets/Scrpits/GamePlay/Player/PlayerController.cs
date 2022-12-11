@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour
 
             transform.Translate(targetJumpPosition * jumpSpeed * Time.deltaTime);
 
-  
+
             if (transform.position.y >= targetJumpPosition.y && !CheckingGround())
             {
                 targetJumpPosition = Vector3.zero;
@@ -184,12 +184,18 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (state == PlayerState.WIN)
+        {
+            WinMovement();
+        }
+
+
         if (state != PlayerState.PLAYING || GamePlayManager.Instance.isGamePaused) return;
+        MoveHandle();
         MoveInput();
         Jump();
         Roll();
 
-        MoveHandle();
         updateSideSpeed();
     }
 
@@ -390,10 +396,22 @@ public class PlayerController : MonoBehaviour
 
     void OnPlayerWin()
     {
-        UpdatePlayerState(PlayerState.WIN);
-
-        // desabilita os inputs
-        // diminui a velocidade
-        // vai para a lane do meio
+        UpdatePlayerState(PlayerState.WIN);     
     }
+
+    void WinMovement()
+    {
+        Debug.LogWarning("MOVIMENTAAAA");
+        desiredLane = 1;
+        targetPosition = transform.position.x * Vector3.zero + Vector3.up * height;
+        transform.position = Vector3.Lerp(transform.position, targetPosition, slideSpeed * Time.deltaTime);
+
+        if (VerifyPosition(targetPosition))
+        {
+            isMoving = 0;
+            GFX_Rotation();
+        }
+    }
+
+
 }
