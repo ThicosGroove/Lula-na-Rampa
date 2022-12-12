@@ -56,7 +56,9 @@ public class SaveManager : MonoBehaviour
             playerData._email = null;
             playerData._playerID = null;
             playerData._keepMeConnected = false;
-
+            playerData._masterMusicVolume = -10f;
+            playerData._backgroundVolume = -10f;
+            playerData._sfxVolume = -10f;
             SaveData();
         }
 
@@ -65,6 +67,9 @@ public class SaveManager : MonoBehaviour
         playerData._email = LoadFile()._email;
         playerData._playerID = LoadFile()._playerID;
         playerData._keepMeConnected = LoadFile()._keepMeConnected;
+        playerData._masterMusicVolume = LoadFile()._masterMusicVolume;
+        playerData._backgroundVolume = LoadFile()._backgroundVolume;
+        playerData._sfxVolume = LoadFile()._sfxVolume;
     }
 
     public void SaveData()
@@ -92,5 +97,9 @@ public class SaveManager : MonoBehaviour
         public string _playerID;
 
         public bool _keepMeConnected;
+
+        public float _masterMusicVolume;
+        public float _backgroundVolume;
+        public float _sfxVolume;
     }
 }

@@ -99,4 +99,12 @@ public abstract class MoveBase : MonoBehaviour
     {
         speed = previousSpeed;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            //Play Audio
+        }
+    }
 }

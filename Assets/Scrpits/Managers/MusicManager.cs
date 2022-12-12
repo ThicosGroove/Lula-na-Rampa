@@ -2,21 +2,171 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
-public class MusicManager : MonoBehaviour
+public class MusicManager : Singleton<MusicManager>
 {
-    [SerializeField] AudioClip[] clips;
-    [SerializeField] AudioMixer mixer;
+    [SerializeField] public AudioClip[] BG_clips;
+    [SerializeField] public AudioClip[] SFX_clips;
+    [SerializeField] public AudioMixer mixer;
 
-    private AudioSource audioSource;
+    private AudioSource audioSourceBG;
 
-    private void Awake()
+    [Header("UI Elements")]
+    [SerializeField] Slider masterMusicSlider;
+    [SerializeField] Slider bgSlider;
+    [SerializeField] Slider sfxSlider;
+
+    private bool isBG_Muted = false;
+    private bool isSFX_Muted;
+    private float Master_Volume;
+    private float BG_Volume;
+    private float SFX_Volume;
+
+    protected override void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        base.Awake();
+
+        masterMusicSlider.onValueChanged.AddListener(SetMasterVolume);
+        bgSlider.onValueChanged.AddListener(SetBGVolume);
+        sfxSlider.onValueChanged.AddListener(SetSFXVolume);
     }
 
     private void Start()
     {
-        //audioSource.clip = clips[0];
+        audioSourceBG = GetComponent<AudioSource>();
+
+        audioSourceBG.clip = BG_clips[0];
+        audioSourceBG.Play();
+
+        Master_Volume = SaveManager.Instance.LoadFile()._masterMusicVolume;
+        BG_Volume = SaveManager.Instance.LoadFile()._backgroundVolume;
+        SFX_Volume = SaveManager.Instance.LoadFile()._sfxVolume;
+
+        //isBG_Muted = SaveManager.Instance.LoadFile().BGMusic_mute;
+        //isSFX_Muted = SaveManager.Instance.LoadFile().SFX_mute;
+
+        LoadValues();
     }
+
+    public void ChangeBGMusic(AudioClip clip)
+    {
+        audioSourceBG.clip = clip;
+        audioSourceBG.Play();
+    }
+
+    private void LoadValues()
+    {
+        masterMusicSlider.value = Master_Volume;
+        bgSlider.value = BG_Volume;
+        sfxSlider.value = SFX_Volume;
+
+        SetMasterVolume(Master_Volume);
+        SetBGVolume(BG_Volume);
+        SetSFXVolume(SFX_Volume);
+    }
+
+    //private void Update()
+    //{
+    //    if (!isBG_Muted)
+    //        UpdateBGVolume();
+    //    else
+    //        Mute();
+
+    //    if (!isSFX_Muted)
+    //        UpdateSFXVolume();
+    //    else
+    //        Mute();
+    //}
+
+    //private void UpdateMasterVolume()
+    //{
+    //    mixer.SetFloat(Const.MASTER_MIXER, Mathf.Log10(BG_Volume) * 20);
+
+    //}
+
+    //private void UpdateBGVolume()
+    //{
+    //    mixer.SetFloat(Const.BG_MIXER, Mathf.Log10(BG_Volume) * 20);
+    //}
+
+    //private void UpdateSFXVolume()
+    //{
+    //    mixer.SetFloat(Const.SFX_MIXER, Mathf.Log10(SFX_Volume) * 20);
+
+    //}
+
+    //private void Mute()
+    //{
+    //    if (isBG_Muted)
+    //        mixer.SetFloat(Const.BG_MIXER, -80f);
+    //    else
+    //        mixer.SetFloat(Const.BG_MIXER, Mathf.Log10(BG_Volume) * 20);
+
+
+    //    if (isSFX_Muted)
+    //        mixer.SetFloat(Const.SFX_MIXER, -80f);
+    //    else
+    //        mixer.SetFloat(Const.SFX_MIXER, Mathf.Log10(SFX_Volume) * 20);
+
+    //}
+
+    public void SetMasterVolume(float value)
+    {
+        Master_Volume = value;
+
+        if (Master_Volume <= -40f)
+        {
+            Master_Volume = -80f;
+        }
+
+        mixer.SetFloat(Const.MASTER_MIXER, Master_Volume);
+    }
+
+    public void SetBGVolume(float value)
+    {
+        BG_Volume = value;
+
+        if (BG_Volume <= -40f)
+        {
+            BG_Volume = -80f;
+        }
+
+        mixer.SetFloat(Const.BG_MIXER, BG_Volume);
+    }
+
+    public void SetSFXVolume(float value)
+    {
+        SFX_Volume = value;
+
+        if (SFX_Volume <= -40f)
+        {
+            SFX_Volume = -80f;
+        }
+
+        mixer.SetFloat(Const.SFX_MIXER, SFX_Volume);
+    }
+
+    //public void ToggleMuteBGMusic()
+    //{
+    //    isBG_Muted = !isBG_Muted;
+    //}
+
+    //public void ToggleMuteSFX()
+    //{
+    //    isSFX_Muted = !isSFX_Muted;
+    //}
+
+
+
+    public void ClickOnSaveOptions()
+    {
+        SaveManager.instance.playerData._masterMusicVolume = Master_Volume;
+        SaveManager.instance.playerData._backgroundVolume = BG_Volume;
+        SaveManager.instance.playerData._sfxVolume = SFX_Volume;
+
+        SaveManager.instance.SaveData();
+        Debug.LogWarning("Salvou");
+    }
+
 }

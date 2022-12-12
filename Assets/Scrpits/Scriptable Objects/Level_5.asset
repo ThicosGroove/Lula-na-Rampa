@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 5
   minDistChangeSpeed: 200
-  obstacle_Initial_Speed: 400
-  obstacle_Speed: 400
+  obstacle_Initial_Speed: 250
+  obstacle_Speed: 250
   obstacle_Spawn_Delay: 0.3
   collectable_Spawn_Delay: 0.4
   player_Slide_Speed: 10

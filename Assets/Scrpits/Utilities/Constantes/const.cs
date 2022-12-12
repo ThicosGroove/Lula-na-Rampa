@@ -21,6 +21,11 @@ public static class Const
     public static float LANE_DISTANCE = 15f;
     public static float PLAYER_ROTATION_MOVE = 45f;
 
+    //Audio
+    public static string MASTER_MIXER = "MasterAudioMixer";
+    public static string BG_MIXER = "BGAudioMixer";
+    public static string SFX_MIXER = "SFXAudioMixer";
+
     //Animation
     public static string JUMP_ANIMATION = "IsJump";
     public static string ROLL_ANIMATION = "IsRoll";
