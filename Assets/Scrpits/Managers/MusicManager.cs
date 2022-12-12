@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class MusicManager : Singleton<MusicManager>
+public class MusicManager : MonoBehaviour
 {
     [SerializeField] public AudioClip[] BG_clips;
     [SerializeField] public AudioClip[] SFX_clips;
@@ -23,9 +23,39 @@ public class MusicManager : Singleton<MusicManager>
     private float BG_Volume;
     private float SFX_Volume;
 
-    protected override void Awake()
+
+    #region SINGLETON PATTERN
+    public static MusicManager instance;
+    public static MusicManager Instance
     {
-        base.Awake();
+        get
+        {
+            if (instance == null)
+            {
+                instance = GameObject.FindObjectOfType<MusicManager>();
+
+                if (instance == null)
+                {
+                    GameObject container = new GameObject("MusicManager");
+                    instance = container.AddComponent<MusicManager>();
+                }
+            }
+
+            return instance;
+        }
+    }
+    #endregion
+
+    void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;//Avoid doing anything else
+        }
+
+        instance = this;
+        DontDestroyOnLoad(this.gameObject);
 
         masterMusicSlider.onValueChanged.AddListener(SetMasterVolume);
         bgSlider.onValueChanged.AddListener(SetBGVolume);
