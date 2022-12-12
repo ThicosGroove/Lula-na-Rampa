@@ -24,22 +24,34 @@ public class MainMenuUIManager : MonoBehaviour
     [SerializeField] TMP_Text volumeText;
     [SerializeField] Slider volumeSlider;
 
+    [Header("Camera Settings")]
+    [SerializeField] RawImage image;
+
+    [Header("Options Data")]
+    [SerializeField] OptionsSO optionsData;
+
 
     MusicManager musicManager;
-    int index = 0;
+    int musicIndex;
+    int cameraImageIndex ;
 
     private void Start()
     {
         CloseAllPanels();
         mainMenuPanel.SetActive(true);
 
-
         playButton.SetActive(false);
         musicManager = MusicManager.Instance;
 
+        musicIndex = SaveManager.instance.LoadFile()._musicIndex;
+        VerifyMusicName(musicIndex);
+
+        cameraImageIndex = SaveManager.instance.LoadFile()._cameraImageIndex;
+        image.texture = optionsData.cameraImages[cameraImageIndex];
+
         master_Sound_text.text = (SaveManager.instance.LoadFile()._masterMusicVolume + 40f).ToString("0.0");
         BG_Sound_text.text = (SaveManager.instance.LoadFile()._backgroundVolume + 40f).ToString("0.0");
-        SFX_Sound_text.text = (SaveManager.instance.LoadFile()._sfxVolume + 40f).ToString("0.0"); 
+        SFX_Sound_text.text = (SaveManager.instance.LoadFile()._sfxVolume + 40f).ToString("0.0");
     }
 
     #region Main Menu
@@ -79,34 +91,40 @@ public class MainMenuUIManager : MonoBehaviour
     #endregion Main Menu
 
     #region Options
+
+    #region Music Options
     public void ClickOnNextMusic()
     {
-        index++;
+        musicIndex++;
 
-        if (index > musicManager.BG_clips.Length - 1)
+        if (musicIndex > musicManager.BG_clips.Length - 1)
         {
-            index = 0;
+            musicIndex = 0;
         }
 
-        VerifyMusicName(index);
+        VerifyMusicName(musicIndex);
 
-        AudioClip newClip = musicManager.BG_clips[index];
+        AudioClip newClip = musicManager.BG_clips[musicIndex];
+
+        SaveManager.instance.playerData._musicIndex = musicIndex;
 
         musicManager.ChangeBGMusic(newClip);
     }
 
     public void ClickOnPreviousMusic()
     {
-        index--;
+        musicIndex--;
 
-        if (index < 0)
+        if (musicIndex < 0)
         {
-            index = musicManager.BG_clips.Length - 1;
+            musicIndex = musicManager.BG_clips.Length - 1;
         }
 
-        VerifyMusicName(index);
+        VerifyMusicName(musicIndex);
 
-        AudioClip newClip = musicManager.BG_clips[index];
+        AudioClip newClip = musicManager.BG_clips[musicIndex];
+
+        SaveManager.instance.playerData._musicIndex = musicIndex;
 
         musicManager.ChangeBGMusic(newClip);
     }
@@ -149,9 +167,51 @@ public class MainMenuUIManager : MonoBehaviour
                 break;
         }
     }
+    #endregion Music Options
 
+    #region Camera Options
+    public void ClickOnNextCameraSet()
+    {
+        cameraImageIndex++;
+
+        if (cameraImageIndex > optionsData.cameraImages.Length - 1)
+        {
+            cameraImageIndex = 0;
+        }
+
+        image.texture = optionsData.cameraImages[cameraImageIndex];
+
+        SaveManager.instance.playerData._cameraPosition = optionsData.cameraPosition[cameraImageIndex];
+        SaveManager.instance.playerData._cameraImageIndex = cameraImageIndex;
+    }
+
+    public void ClickOnPreviousCameraSet()
+    {
+        cameraImageIndex--;
+
+        if (cameraImageIndex < 0)
+        {
+            cameraImageIndex = optionsData.cameraImages.Length - 1;
+        }
+
+        image.texture = optionsData.cameraImages[cameraImageIndex];
+
+        SaveManager.instance.playerData._cameraPosition = optionsData.cameraPosition[cameraImageIndex];
+        SaveManager.instance.playerData._cameraImageIndex = cameraImageIndex;
+    }
+
+
+    #endregion Camera Options
+
+    public void ClickOnSaveOptions()
+    {
+        SaveManager.instance.SaveData();
+        Debug.LogWarning("Salvou");
+    }
 
     #endregion Options
+
+
 
     void CloseAllPanels()
     {

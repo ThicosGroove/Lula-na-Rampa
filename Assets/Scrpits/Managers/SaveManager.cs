@@ -59,6 +59,7 @@ public class SaveManager : MonoBehaviour
             playerData._masterMusicVolume = -10f;
             playerData._backgroundVolume = -10f;
             playerData._sfxVolume = -10f;
+            playerData._cameraPosition = new Vector3(0f, 26f, -47);
             SaveData();
         }
 
@@ -70,6 +71,7 @@ public class SaveManager : MonoBehaviour
         playerData._masterMusicVolume = LoadFile()._masterMusicVolume;
         playerData._backgroundVolume = LoadFile()._backgroundVolume;
         playerData._sfxVolume = LoadFile()._sfxVolume;
+        playerData._cameraPosition = LoadFile()._cameraPosition;
     }
 
     public void SaveData()
@@ -101,5 +103,9 @@ public class SaveManager : MonoBehaviour
         public float _masterMusicVolume;
         public float _backgroundVolume;
         public float _sfxVolume;
+
+        public Vector3 _cameraPosition;
+        public int _musicIndex;
+        public int _cameraImageIndex;
     }
 }

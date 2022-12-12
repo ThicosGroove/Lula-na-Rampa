@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6cf0eb6ac44a334daee56d0f9183ce0, type: 3}
+  m_Name: Options Data
+  m_EditorClassIdentifier: 
+  allBG_Music:
+  - {fileID: 8300000, guid: b391c2fcc79978c4f82626d421472c63, type: 3}
+  - {fileID: 8300000, guid: 6bd38555eb7c2654880c92cf4d546eb9, type: 3}
+  allSFX_Music:
+  - {fileID: 8300000, guid: fed5d996883a4f74194d6a5b1b3be05e, type: 3}
+  - {fileID: 8300000, guid: 722da3c1157fc43429fcee5e274c9390, type: 3}
+  - {fileID: 8300000, guid: f0ce1d14ef743004fb196ad8a8ad3403, type: 3}
+  - {fileID: 8300000, guid: b4101f0d29ac492409ff72a612af4824, type: 3}
+  - {fileID: 8300000, guid: 05587b9cc13734247ac4090c8c4b7522, type: 3}
+  - {fileID: 8300000, guid: 8547cffa78d04c249afbe9fb4969c60a, type: 3}
+  - {fileID: 8300000, guid: 937759078c8cf1246a8fcc9f0d7ee3e4, type: 3}
+  cameraPosition:
+  - {x: 0, y: 30, z: -54}
+  - {x: 0, y: 26, z: -47}
+  - {x: 0, y: 55, z: -100}
+  cameraImages:
+  - {fileID: 2800000, guid: 69171ee4d3286a5469eeedbdc8ca1468, type: 3}
+  - {fileID: 2800000, guid: 013077fc5a024c84397004ffb167310d, type: 3}
+  - {fileID: 2800000, guid: c4486dc5cc144b0449d0a97bd4feab84, type: 3}

@@ -32,6 +32,9 @@ public class GamePlayManager : Singleton<GamePlayManager>
     public bool testStartLevel_5;
     public int winScore;
 
+    [Header("Camera Settings")]
+    public Vector3[] cameraPositions; 
+
     public bool isGamePaused;
     public bool hasReach = false;
 

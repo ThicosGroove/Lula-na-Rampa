@@ -151,6 +151,7 @@ public class MusicManager : MonoBehaviour
         }
 
         mixer.SetFloat(Const.MASTER_MIXER, Master_Volume);
+        SaveManager.instance.playerData._masterMusicVolume = Master_Volume;
     }
 
     public void SetBGVolume(float value)
@@ -163,6 +164,7 @@ public class MusicManager : MonoBehaviour
         }
 
         mixer.SetFloat(Const.BG_MIXER, BG_Volume);
+        SaveManager.instance.playerData._backgroundVolume = BG_Volume;
     }
 
     public void SetSFXVolume(float value)
@@ -175,6 +177,7 @@ public class MusicManager : MonoBehaviour
         }
 
         mixer.SetFloat(Const.SFX_MIXER, SFX_Volume);
+        SaveManager.instance.playerData._sfxVolume = SFX_Volume;
     }
 
     //public void ToggleMuteBGMusic()
@@ -189,14 +192,5 @@ public class MusicManager : MonoBehaviour
 
 
 
-    public void ClickOnSaveOptions()
-    {
-        SaveManager.instance.playerData._masterMusicVolume = Master_Volume;
-        SaveManager.instance.playerData._backgroundVolume = BG_Volume;
-        SaveManager.instance.playerData._sfxVolume = SFX_Volume;
-
-        SaveManager.instance.SaveData();
-        Debug.LogWarning("Salvou");
-    }
 
 }
