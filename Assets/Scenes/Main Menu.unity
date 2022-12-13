@@ -1211,6 +1211,10 @@ MonoBehaviour:
   volumeText: {fileID: 867277000}
   volumeSlider: {fileID: 212161357}
   image: {fileID: 1225020884}
+  textures:
+  - {fileID: 2800000, guid: 013077fc5a024c84397004ffb167310d, type: 3}
+  - {fileID: 2800000, guid: 69171ee4d3286a5469eeedbdc8ca1468, type: 3}
+  - {fileID: 2800000, guid: c4486dc5cc144b0449d0a97bd4feab84, type: 3}
   optionsData: {fileID: 11400000, guid: a107acb53ed7f2f4e987ec6e123b7f32, type: 2}
 --- !u!4 &333738875
 Transform:

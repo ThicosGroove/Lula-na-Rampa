@@ -23,6 +23,7 @@ public class MusicManager : MonoBehaviour
     private float BG_Volume;
     private float SFX_Volume;
 
+    private int musicIndex;
 
     #region SINGLETON PATTERN
     public static MusicManager instance;
@@ -66,12 +67,16 @@ public class MusicManager : MonoBehaviour
     {
         audioSourceBG = GetComponent<AudioSource>();
 
-        audioSourceBG.clip = BG_clips[0];
+
+        musicIndex = SaveManager.instance.LoadFile()._musicIndex;
+        audioSourceBG.clip = BG_clips[musicIndex];
         audioSourceBG.Play();
 
         Master_Volume = SaveManager.Instance.LoadFile()._masterMusicVolume;
         BG_Volume = SaveManager.Instance.LoadFile()._backgroundVolume;
         SFX_Volume = SaveManager.Instance.LoadFile()._sfxVolume;
+
+
 
         //isBG_Muted = SaveManager.Instance.LoadFile().BGMusic_mute;
         //isSFX_Muted = SaveManager.Instance.LoadFile().SFX_mute;

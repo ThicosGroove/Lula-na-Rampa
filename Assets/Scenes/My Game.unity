@@ -1477,13 +1477,13 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_NearPlane: 0.1
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -1510,7 +1510,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -1529,7 +1529,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   m_LocalRotation: {x: 0.52640676, y: -0.21700716, z: 0.14105025, w: 0.8098819}
-  m_LocalPosition: {x: 68.2, y: 38.5, z: -27.7}
+  m_LocalPosition: {x: 9.3, y: 42.1, z: 74.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3219,7 +3219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentGameState: 0
   isNormalMode: 0
-  playerColliderOn: 1
+  playerColliderOn: 0
   testStartLevel_5: 0
   winScore: 100
   cameraPositions:

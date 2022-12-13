@@ -75,12 +75,6 @@ public class MainMenuUIManager : MonoBehaviour
         SceneManager.LoadScene(Const.GAME_SCENE);
     }
 
-    public void ClickOnOptionsButton(GameObject panelOut, GameObject panelIn)
-    {
-        panelOut.SetActive(false);
-        panelIn.SetActive(true);
-    }
-
     public void ClickOnLogOutButton()
     {
         SaveManager.Instance.playerData._keepMeConnected = false;
