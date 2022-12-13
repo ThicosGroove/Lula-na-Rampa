@@ -402,7 +402,14 @@ public class PlayerController : MonoBehaviour
 
     void OnPlayerWin()
     {
-        UpdatePlayerState(PlayerState.WIN);     
+        desiredLane = 1;
+        StartCoroutine(WinBehaviour());
+    }
+
+    IEnumerator WinBehaviour()
+    {
+        yield return new WaitForSeconds(0.5f);
+        UpdatePlayerState(PlayerState.WIN);
     }
 
     void WinMovement()

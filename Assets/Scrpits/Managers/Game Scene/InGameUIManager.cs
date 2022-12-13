@@ -125,7 +125,7 @@ public class InGameUIManager : MonoBehaviour
             InsertNameForScoreBoardPanel.SetActive(true);
         }
 
-        GameOverText.text = "Perdeu!!";
+        GameOverText.text = "LULA NÃO CONSEGUIU RECEBER A FAIXA";
     }
 
     private void OnWinUI()
@@ -133,7 +133,7 @@ public class InGameUIManager : MonoBehaviour
         CloseAllPanels();
         OnWinPanel.SetActive(true);
 
-        WinText.text = "Você Ganhou!!";
+        WinText.text = "LULÃO RECEBEU A FAIXA!!";
     }
 
     private void CloseAllPanels()
