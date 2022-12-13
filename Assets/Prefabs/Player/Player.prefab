@@ -86,10 +86,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   GFX_transform: {fileID: 5620704593805469361}
-  GFX_ScaleOnRolling: 0.5
-  GFX_PositionOnRolling: -0.5
+  isJump: 0
   rotateBackDelay: 5
   rotateBackSpeed: 10
+  isRolling: 0
 --- !u!114 &9134963213228494736
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,6 +14,11 @@ public class MoveCollectable : MoveBase
     [SerializeField] float freqRotationZ;
     [SerializeField] float ampRotationZ;
 
+    protected override void DieBehaviour()
+    {
+        throw new System.NotImplementedException();
+    }
+
     protected override void MoveBehaviour()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y + (Mathf.Sin(Time.time * freqPosition) * ampPosition), transform.position.z);

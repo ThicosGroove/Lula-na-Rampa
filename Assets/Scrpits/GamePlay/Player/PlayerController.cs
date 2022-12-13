@@ -371,10 +371,16 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag(Const.OBSTACLE_TAG))
         {
-            UpdatePlayerState(PlayerState.DEAD);
-
-            GamePlayManager.Instance.UpdateGameState(GameStates.GAMEOVER);
+            StartCoroutine(DieBehaviour());         
         }
+    }
+
+    IEnumerator DieBehaviour()
+    {
+        yield return new WaitForSeconds(0.1f);
+        UpdatePlayerState(PlayerState.DEAD);
+
+        GamePlayManager.Instance.UpdateGameState(GameStates.GAMEOVER);
     }
 
     bool CheckingGround()

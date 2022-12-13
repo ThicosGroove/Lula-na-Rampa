@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameEvents;
 
 public class PlayerAnimation : MonoBehaviour
 {
@@ -8,10 +9,24 @@ public class PlayerAnimation : MonoBehaviour
 
     Animator anim;
 
-
     void Start()
     {
         anim = GetComponent<Animator>();
+    }
+
+    private void OnEnable()
+    {
+        GameplayEvents.StartNewLevel += StartMovingAnimation;
+    }
+
+    private void OnDisable()
+    {
+        GameplayEvents.StartNewLevel -= StartMovingAnimation;        
+    }
+
+    private void StartMovingAnimation()
+    {
+        anim.SetBool(Const.RUN_ANIMATION, true);
     }
 
     void Update()

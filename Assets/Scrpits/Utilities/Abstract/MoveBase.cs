@@ -1,5 +1,6 @@
 using UnityEngine;
 using GameEvents;
+using UnityEngine.Audio;
 
 public abstract class MoveBase : MonoBehaviour
 {
@@ -13,10 +14,14 @@ public abstract class MoveBase : MonoBehaviour
     private float previousSpeed;
     private bool hasReach;
 
+    AudioSource audioSource;
+
     protected virtual void Start()
     {
         player = FindObjectOfType<PlayerController>().gameObject;
         speed = LevelManager.Instance.current_obstacleInitialSpeed;
+
+        audioSource = GetComponent<AudioSource>();
 
         hasReach = GamePlayManager.Instance.hasReach;
     }
@@ -66,6 +71,7 @@ public abstract class MoveBase : MonoBehaviour
     }
 
     protected abstract void MoveBehaviour();
+    protected abstract void DieBehaviour();
 
     void DestroyObjOnLeaveScreen()
     {
@@ -105,6 +111,8 @@ public abstract class MoveBase : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             //Play Audio
+            DieBehaviour();
+            
         }
     }
 }

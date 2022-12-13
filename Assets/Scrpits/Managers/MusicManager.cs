@@ -99,8 +99,6 @@ public class MusicManager : MonoBehaviour
 
     public void SetBGVolume(float value)
     {
-        Debug.LogWarning("SET BG VOLUME");
-
         BG_Volume = value;
 
         if (BG_Volume <= -40f)

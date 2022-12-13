@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44095755, g: 0.48968124, b: 0.56977856, a: 1}
+  m_IndirectSpecularColor: {r: 0.44160256, g: 0.4904821, b: 0.57048583, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1008,7 +1008,7 @@ MonoBehaviour:
     - 15
     - 0
     - -15
-  objSpawnDistance: 1000
+  objSpawnDistance: 1200
 --- !u!4 &436440146
 Transform:
   m_ObjectHideFlags: 0
@@ -1528,13 +1528,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.52640676, y: -0.21700716, z: 0.14105025, w: 0.8098819}
-  m_LocalPosition: {x: 9.3, y: 42.1, z: 74.4}
+  m_LocalRotation: {x: 0.51236445, y: -0.21940687, z: 0.13728765, w: 0.8188379}
+  m_LocalPosition: {x: 3462, y: -13, z: 2102}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 66.046, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 64.07, y: -30, z: 0}
 --- !u!1 &721862158
 GameObject:
   m_ObjectHideFlags: 0
@@ -3219,7 +3219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentGameState: 0
   isNormalMode: 0
-  playerColliderOn: 0
+  playerColliderOn: 1
   testStartLevel_5: 0
   winScore: 100
   cameraPositions:

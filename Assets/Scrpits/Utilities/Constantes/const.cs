@@ -29,8 +29,10 @@ public static class Const
     public static string SFX_MIXER = "SFXAudioMixer";
 
     //Animation
+    public static string RUN_ANIMATION = "IsRunning";
     public static string JUMP_ANIMATION = "IsJump";
     public static string ROLL_ANIMATION = "IsRoll";
+    public static string WIN_ANIMATION = "HasWin";
 
     // Save Files
     public static string SAVE_FILE_PATH = "/saveFile.json";

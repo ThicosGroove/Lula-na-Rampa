@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5829920230244570177}
   - component: {fileID: 8442234768084034814}
   - component: {fileID: -1726491027858668797}
-  - component: {fileID: 6065643171258633449}
+  - component: {fileID: -1237573817629997727}
   m_Layer: 0
   m_Name: "Caminh\xE3o Patriota"
   m_TagString: Obstacle
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f91ca5049300bac478ac7fa0d8ffa7ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!82 &6065643171258633449
+--- !u!82 &-1237573817629997727
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,8 +70,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1848535000228291818, guid: f1ecb5d1a40bb674199fa8cc36b798e3,
     type: 2}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 05587b9cc13734247ac4090c8c4b7522, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

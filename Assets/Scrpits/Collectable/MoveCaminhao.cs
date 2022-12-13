@@ -19,4 +19,9 @@ public class MoveCaminhao : MoveBase
             base.speed *= speedMultiplier;
         }
     }
+
+    protected override void DieBehaviour()
+    {
+        throw new System.NotImplementedException();
+    }
 }
