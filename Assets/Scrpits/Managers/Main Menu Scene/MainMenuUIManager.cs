@@ -14,15 +14,20 @@ public class MainMenuUIManager : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] GameObject playButton;
 
+    [Header("Volume Setting")]
+    [SerializeField] Slider masterMusicSlider;
+    [SerializeField] Slider bgSlider;
+    [SerializeField] Slider sfxSlider;
+    private float Master_Volume;
+    private float BG_Volume;
+    private float SFX_Volume;
+
     [Header("Texts")]
     [SerializeField] TMP_Text bgMusic_name;
     [SerializeField] TMP_Text master_Sound_text;
     [SerializeField] TMP_Text BG_Sound_text;
     [SerializeField] TMP_Text SFX_Sound_text;
-
-    [Header("Volume Setting")]
     [SerializeField] TMP_Text volumeText;
-    [SerializeField] Slider volumeSlider;
 
     [Header("Camera Settings")]
     [SerializeField] RawImage image;
@@ -37,6 +42,8 @@ public class MainMenuUIManager : MonoBehaviour
 
     private void Start()
     {
+       // GameManager.instance.UpdateSceneState(SceneState.MAIN_MENU);
+
         CloseAllPanels();
         mainMenuPanel.SetActive(true);
 
@@ -52,6 +59,17 @@ public class MainMenuUIManager : MonoBehaviour
         master_Sound_text.text = (SaveManager.instance.LoadFile()._masterMusicVolume + 40f).ToString("0.0");
         BG_Sound_text.text = (SaveManager.instance.LoadFile()._backgroundVolume + 40f).ToString("0.0");
         SFX_Sound_text.text = (SaveManager.instance.LoadFile()._sfxVolume + 40f).ToString("0.0");
+
+
+        Master_Volume = SaveManager.Instance.LoadFile()._masterMusicVolume;
+        BG_Volume = SaveManager.Instance.LoadFile()._backgroundVolume;
+        SFX_Volume = SaveManager.Instance.LoadFile()._sfxVolume;
+
+        masterMusicSlider.onValueChanged.AddListener(SetMasterVolumeText);
+        bgSlider.onValueChanged.AddListener(SetBGVolumeText);
+        sfxSlider.onValueChanged.AddListener(SetSFXVolumeText);
+
+        LoadSliderValue();
     }
 
     #region Main Menu
@@ -80,7 +98,7 @@ public class MainMenuUIManager : MonoBehaviour
         SaveManager.Instance.playerData._keepMeConnected = false;
         SaveManager.Instance.SaveData();
 
-        SceneManager.LoadScene(Const.HOME_SCENE);
+        SceneManager.LoadScene(Const.LOGIN_SCENE);
     }
     #endregion Main Menu
 
@@ -91,14 +109,14 @@ public class MainMenuUIManager : MonoBehaviour
     {
         musicIndex++;
 
-        if (musicIndex > musicManager.BG_clips.Length - 1)
+        if (musicIndex > optionsData.allBG_Music.Length - 1)
         {
             musicIndex = 0;
         }
 
         VerifyMusicName(musicIndex);
 
-        AudioClip newClip = musicManager.BG_clips[musicIndex];
+        AudioClip newClip = optionsData.allBG_Music[musicIndex];
 
         SaveManager.instance.playerData._musicIndex = musicIndex;
 
@@ -111,37 +129,50 @@ public class MainMenuUIManager : MonoBehaviour
 
         if (musicIndex < 0)
         {
-            musicIndex = musicManager.BG_clips.Length - 1;
+            musicIndex = optionsData.allBG_Music.Length - 1;
         }
 
         VerifyMusicName(musicIndex);
 
-        AudioClip newClip = musicManager.BG_clips[musicIndex];
+        AudioClip newClip = optionsData.allBG_Music[musicIndex];
 
         SaveManager.instance.playerData._musicIndex = musicIndex;
 
         musicManager.ChangeBGMusic(newClip);
     }
 
+    private void LoadSliderValue()
+    {
+        masterMusicSlider.value = Master_Volume;
+        bgSlider.value = BG_Volume;
+        sfxSlider.value = SFX_Volume;
+    }
+
     public void SetMasterVolumeText(float volume)
     {
         string volumeText = (volume + 40f).ToString("0.0");
-
         master_Sound_text.text = volumeText;
+
+        masterMusicSlider.value = volume;
+        musicManager.SetMasterVolume(volume);
     }
 
     public void SetBGVolumeText(float volume)
     {
         string volumeText = (volume + 40f).ToString("0.0");
-
         BG_Sound_text.text = volumeText;
+
+        bgSlider.value = volume;
+        musicManager.SetBGVolume(volume);
     }
 
     public void SetSFXVolumeText(float volume)
     {
         string volumeText = (volume + 40f).ToString("0.0");
-
         SFX_Sound_text.text = volumeText;
+
+        sfxSlider.value = volume;
+        musicManager.SetSFXVolume(volume);
     }
 
     private void VerifyMusicName(int index)

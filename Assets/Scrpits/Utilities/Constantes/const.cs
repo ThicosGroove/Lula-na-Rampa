@@ -2,15 +2,17 @@ public static class Const
 {
     public static string TITLE_ID = "E5C38";
 
-    //PLAYER PREFS
+    //PLAYER DATA
     public static string EMAIL = "EMAIL";
     public static string PASSWORD = "PASSWORD";
     public static string USERNAME = "USERNAME";
     public static string PLAYER_ID = "PLAYER_ID";
 
-    public static int HOME_SCENE = 0;
-    public static int MAIN_MENU_SCENE = 1;
-    public static int GAME_SCENE = 2;
+    //Scenes 
+    public static int TITLE_SCENE = 0;
+    public static int LOGIN_SCENE = 1;
+    public static int MAIN_MENU_SCENE = 2;
+    public static int GAME_SCENE = 3;
 
     public static string PLAYER_TAG = "Player";
     public static string OBSTACLE_TAG = "Obstacle";

@@ -6,16 +6,10 @@ using UnityEngine.UI;
 
 public class MusicManager : MonoBehaviour
 {
-    [SerializeField] public AudioClip[] BG_clips;
-    [SerializeField] public AudioClip[] SFX_clips;
+    [SerializeField] OptionsSO optionsData;
     [SerializeField] public AudioMixer mixer;
 
     private AudioSource audioSourceBG;
-
-    [Header("UI Elements")]
-    [SerializeField] Slider masterMusicSlider;
-    [SerializeField] Slider bgSlider;
-    [SerializeField] Slider sfxSlider;
 
     private bool isBG_Muted = false;
     private bool isSFX_Muted;
@@ -57,26 +51,19 @@ public class MusicManager : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(this.gameObject);
-
-        masterMusicSlider.onValueChanged.AddListener(SetMasterVolume);
-        bgSlider.onValueChanged.AddListener(SetBGVolume);
-        sfxSlider.onValueChanged.AddListener(SetSFXVolume);
     }
 
     private void Start()
     {
         audioSourceBG = GetComponent<AudioSource>();
 
-
         musicIndex = SaveManager.instance.LoadFile()._musicIndex;
-        audioSourceBG.clip = BG_clips[musicIndex];
+        audioSourceBG.clip = optionsData.allBG_Music[musicIndex];
         audioSourceBG.Play();
 
         Master_Volume = SaveManager.Instance.LoadFile()._masterMusicVolume;
         BG_Volume = SaveManager.Instance.LoadFile()._backgroundVolume;
         SFX_Volume = SaveManager.Instance.LoadFile()._sfxVolume;
-
-
 
         //isBG_Muted = SaveManager.Instance.LoadFile().BGMusic_mute;
         //isSFX_Muted = SaveManager.Instance.LoadFile().SFX_mute;
@@ -92,13 +79,50 @@ public class MusicManager : MonoBehaviour
 
     private void LoadValues()
     {
-        masterMusicSlider.value = Master_Volume;
-        bgSlider.value = BG_Volume;
-        sfxSlider.value = SFX_Volume;
-
         SetMasterVolume(Master_Volume);
         SetBGVolume(BG_Volume);
         SetSFXVolume(SFX_Volume);
+    }
+
+    public void SetMasterVolume(float value)
+    {
+        Master_Volume = value;
+
+        if (Master_Volume <= -40f)
+        {
+            Master_Volume = -80f;
+        }
+
+        mixer.SetFloat(Const.MASTER_MIXER, Master_Volume);
+        SaveManager.instance.playerData._masterMusicVolume = Master_Volume;
+    }
+
+    public void SetBGVolume(float value)
+    {
+        Debug.LogWarning("SET BG VOLUME");
+
+        BG_Volume = value;
+
+        if (BG_Volume <= -40f)
+        {
+            BG_Volume = -80f;
+        }
+
+        mixer.SetFloat(Const.BG_MIXER, BG_Volume);
+        SaveManager.instance.playerData._backgroundVolume = BG_Volume;
+    }
+
+    public void SetSFXVolume(float value)
+    {
+        SFX_Volume = value;
+
+        if (SFX_Volume <= -40f)
+        {
+            SFX_Volume = -80f;
+        }
+
+        mixer.SetFloat(Const.SFX_MIXER, SFX_Volume);
+        SaveManager.instance.playerData._sfxVolume = SFX_Volume;
     }
 
     //private void Update()
@@ -146,45 +170,6 @@ public class MusicManager : MonoBehaviour
 
     //}
 
-    public void SetMasterVolume(float value)
-    {
-        Master_Volume = value;
-
-        if (Master_Volume <= -40f)
-        {
-            Master_Volume = -80f;
-        }
-
-        mixer.SetFloat(Const.MASTER_MIXER, Master_Volume);
-        SaveManager.instance.playerData._masterMusicVolume = Master_Volume;
-    }
-
-    public void SetBGVolume(float value)
-    {
-        BG_Volume = value;
-
-        if (BG_Volume <= -40f)
-        {
-            BG_Volume = -80f;
-        }
-
-        mixer.SetFloat(Const.BG_MIXER, BG_Volume);
-        SaveManager.instance.playerData._backgroundVolume = BG_Volume;
-    }
-
-    public void SetSFXVolume(float value)
-    {
-        SFX_Volume = value;
-
-        if (SFX_Volume <= -40f)
-        {
-            SFX_Volume = -80f;
-        }
-
-        mixer.SetFloat(Const.SFX_MIXER, SFX_Volume);
-        SaveManager.instance.playerData._sfxVolume = SFX_Volume;
-    }
-
     //public void ToggleMuteBGMusic()
     //{
     //    isBG_Muted = !isBG_Muted;
@@ -194,8 +179,5 @@ public class MusicManager : MonoBehaviour
     //{
     //    isSFX_Muted = !isSFX_Muted;
     //}
-
-
-
 
 }

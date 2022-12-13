@@ -85,6 +85,7 @@ public class InGameUIManager : MonoBehaviour
             yield return new WaitForSeconds(6.5f); // Tempo total da cutscene
         }
 
+        GameplayEvents.OnStartNewLevel();
 
         if (GamePlayManager.Instance.isNormalMode == true)
         {
@@ -100,7 +101,6 @@ public class InGameUIManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
 
-        GameplayEvents.OnStartNewLevel();
         levelText.gameObject.SetActive(false);
     }
 

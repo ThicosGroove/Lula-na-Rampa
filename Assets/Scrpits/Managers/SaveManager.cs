@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
+[DefaultExecutionOrder(-1)]
 public class SaveManager : MonoBehaviour
 {
     public PlayerData playerData;

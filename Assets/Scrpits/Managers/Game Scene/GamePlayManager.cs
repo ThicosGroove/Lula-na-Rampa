@@ -61,6 +61,11 @@ public class GamePlayManager : Singleton<GamePlayManager>
         }
     }
 
+    private void Start()
+    {
+        GameManager.instance.UpdateSceneState(SceneState.GAME);
+    }
+
 
     public void UpdateGameState(GameStates newState)
     {
