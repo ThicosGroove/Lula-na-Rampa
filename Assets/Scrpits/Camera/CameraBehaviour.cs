@@ -23,12 +23,14 @@ public class CameraBehaviour : MonoBehaviour
     }
 
     void CanGoToPlace()
-    {        
+    {
+        Debug.LogWarning("Go To place camera");
         GoToPlace(camPos);
     }
 
     private void GoToPlace(Vector3 newPlace)
     {
         transform.position = newPlace;
+        transform.rotation = Quaternion.Euler(Vector3.right);
     }
 }

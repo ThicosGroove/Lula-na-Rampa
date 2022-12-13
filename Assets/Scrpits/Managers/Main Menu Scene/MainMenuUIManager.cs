@@ -10,6 +10,7 @@ public class MainMenuUIManager : MonoBehaviour
     [Header("Panels")]
     [SerializeField] GameObject mainMenuPanel;
     [SerializeField] GameObject optionsPanel;
+    [SerializeField] GameObject creditsPanel;
 
     [Header("Buttons")]
     [SerializeField] GameObject playButton;
@@ -242,5 +243,6 @@ public class MainMenuUIManager : MonoBehaviour
     {
         mainMenuPanel.SetActive(false);
         optionsPanel.SetActive(false);
+        creditsPanel.SetActive(false);
     }
 }
