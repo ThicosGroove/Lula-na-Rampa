@@ -28,6 +28,11 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] GameObject OnWinPanel;
     [SerializeField] TMP_Text WinText;
 
+    [Header("Play Menu Quit Buttons")]
+    [SerializeField] GameObject playButton;
+    [SerializeField] GameObject menuButton;
+    [SerializeField] GameObject quitButton;
+
     int totalScore;
     int currentLevel;
 
@@ -48,6 +53,7 @@ public class InGameUIManager : MonoBehaviour
 
         GameplayEvents.GameOver += OnGameOverUI;
         GameplayEvents.Win += OnWinUI;
+        GameplayEvents.EndGame += OnGameEndButtons;
     }
 
     private void OnDisable()
@@ -57,6 +63,7 @@ public class InGameUIManager : MonoBehaviour
 
         GameplayEvents.GameOver -= OnGameOverUI;
         GameplayEvents.Win -= OnWinUI;
+        GameplayEvents.EndGame -= OnGameEndButtons;
     }
 
 
@@ -136,6 +143,19 @@ public class InGameUIManager : MonoBehaviour
         WinText.text = "LULÃO RECEBEU A FAIXA!!";
     }
 
+    private void OnGameEndButtons()
+    {
+        StartCoroutine(TurnOnEndGameButtons());
+    }
+
+    IEnumerator TurnOnEndGameButtons()
+    {
+        yield return new WaitForSeconds(3f);
+        playButton.SetActive(true);
+        menuButton.SetActive(true);
+        quitButton.SetActive(true);
+    }
+
     private void CloseAllPanels()
     {
         OnPlayingPanel.SetActive(false);
@@ -145,6 +165,10 @@ public class InGameUIManager : MonoBehaviour
         ScoreBoardBox.SetActive(false);
         OnGameOverNormalPanel.SetActive(false);
         OnWinPanel.SetActive(false);
+
+        playButton.SetActive(false);
+        menuButton.SetActive(false);
+        quitButton.SetActive(false);
     }
 
 

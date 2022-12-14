@@ -61,6 +61,7 @@ public class SaveManager : MonoBehaviour
             playerData._sfxVolume = -10f;
             playerData._musicIndex = 0;
             playerData._cameraPosition = new Vector3(0f, 26f, -47);
+            playerData._cameraRotation = new Vector3(1f, 0f, 0f);
             playerData._cameraImageIndex = 0;
             SaveData();
         }
@@ -75,6 +76,7 @@ public class SaveManager : MonoBehaviour
         playerData._sfxVolume = LoadFile()._sfxVolume;
         playerData._musicIndex = LoadFile()._musicIndex;
         playerData._cameraPosition = LoadFile()._cameraPosition;
+        playerData._cameraRotation = LoadFile()._cameraRotation;
         playerData._cameraImageIndex = LoadFile()._cameraImageIndex;
     }
 
@@ -109,6 +111,7 @@ public class SaveManager : MonoBehaviour
         public float _sfxVolume;
 
         public Vector3 _cameraPosition;
+        public Vector3 _cameraRotation;
         public int _musicIndex;
         public int _cameraImageIndex;
     }

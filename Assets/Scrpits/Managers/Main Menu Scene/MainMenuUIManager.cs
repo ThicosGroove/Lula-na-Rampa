@@ -213,6 +213,7 @@ public class MainMenuUIManager : MonoBehaviour
         image.texture = optionsData.cameraImages[cameraImageIndex];
 
         SaveManager.instance.playerData._cameraPosition = optionsData.cameraPosition[cameraImageIndex];
+        SaveManager.instance.playerData._cameraRotation = optionsData.cameraRotation[cameraImageIndex];
         SaveManager.instance.playerData._cameraImageIndex = cameraImageIndex;
     }
 
@@ -228,6 +229,7 @@ public class MainMenuUIManager : MonoBehaviour
         image.texture = optionsData.cameraImages[cameraImageIndex];
 
         SaveManager.instance.playerData._cameraPosition = optionsData.cameraPosition[cameraImageIndex];
+        SaveManager.instance.playerData._cameraRotation = optionsData.cameraRotation[cameraImageIndex];
         SaveManager.instance.playerData._cameraImageIndex = cameraImageIndex;
     }
 

@@ -27,7 +27,17 @@ MonoBehaviour:
   - {x: 0, y: 30, z: -54}
   - {x: 0, y: 26, z: -47}
   - {x: 0, y: 55, z: -100}
+  - {x: 0, y: 40, z: -66}
+  - {x: 0, y: 41, z: -40}
+  cameraRotation:
+  - {x: 1, y: 0, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: 3, y: 0, z: 0}
+  - {x: 18, y: 0, z: 0}
   cameraImages:
   - {fileID: 2800000, guid: 69171ee4d3286a5469eeedbdc8ca1468, type: 3}
   - {fileID: 2800000, guid: 013077fc5a024c84397004ffb167310d, type: 3}
   - {fileID: 2800000, guid: c4486dc5cc144b0449d0a97bd4feab84, type: 3}
+  - {fileID: 2800000, guid: c515421864b3cb5469c1bb1abe2c1d2e, type: 3}
+  - {fileID: 2800000, guid: 1f99f2d87725d964c87c491fc4cff690, type: 3}

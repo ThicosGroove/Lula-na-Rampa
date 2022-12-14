@@ -39,6 +39,10 @@ namespace GameEvents
         public static event UnityAction DropFaixa;
         public static void OnDropFaixa() => DropFaixa?.Invoke();
 
+
+        public static event UnityAction EndGame;
+        public static void OnEndGame() => EndGame?.Invoke();
+
         //public static event UnityAction MainMenu;
         //public static void OnMainMenu() => MainMenu?.Invoke();
 

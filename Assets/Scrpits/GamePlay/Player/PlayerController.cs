@@ -413,21 +413,21 @@ public class PlayerController : MonoBehaviour
 
     void OnPlayerWin()
     {
+        slideSpeed *= 10;
         desiredLane = 1;
         StartCoroutine(WinBehaviour());
     }
 
     IEnumerator WinBehaviour()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.45f);
         UpdatePlayerState(PlayerState.WIN);
     }
 
     void WinMovement()
     {
-        Debug.LogWarning("MOVIMENTAAAA");
         desiredLane = 1;
-        targetPosition = transform.position.x * Vector3.zero + Vector3.up * height;
+        targetPosition = Vector3.zero;
         transform.position = Vector3.Lerp(transform.position, targetPosition, slideSpeed * Time.deltaTime);
 
         if (VerifyPosition(targetPosition))

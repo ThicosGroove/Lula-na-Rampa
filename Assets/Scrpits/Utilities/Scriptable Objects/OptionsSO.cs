@@ -14,6 +14,7 @@ public class OptionsSO : ScriptableObject
 
     [Header("Camera Set")]
     public Vector3[] cameraPosition;
+    public Vector3[] cameraRotation;
 
     [Header("Camera Images")]
     public Texture[] cameraImages;

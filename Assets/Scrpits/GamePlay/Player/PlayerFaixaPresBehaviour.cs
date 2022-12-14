@@ -37,7 +37,13 @@ public class PlayerFaixaPresBehaviour : MonoBehaviour
     {
         if (canMove)
         {
-            transform.position = Vector3.Lerp(transform.position, faixa_Pos.position, time);        
+            transform.position = Vector3.Lerp(transform.position, faixa_Pos.position, time);
+
+            if (transform.position.y <= faixa_Pos.position.y -0.5f)
+            {
+                Debug.LogWarning("FAIXA CHEGOOOOOU");
+            }
+                GameplayEvents.OnEndGame();
         }
     }
 }
