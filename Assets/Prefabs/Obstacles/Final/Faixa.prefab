@@ -165,7 +165,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<color=#0B610B>TODO MUNDO</color> TEM\\n <color=#10CB04>$107</color> IM\xD3VEIS"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ce86afd206acf544299cb27ac4a29707, type: 2}
   m_sharedMaterial: {fileID: -3284972579875978491, guid: ce86afd206acf544299cb27ac4a29707,
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2.7
+  m_fontSize: 4
   m_fontSizeBase: 4.26
   m_fontWeight: 400
   m_enableAutoSizing: 1

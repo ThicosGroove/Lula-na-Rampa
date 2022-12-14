@@ -71,6 +71,22 @@ public class MusicManager : MonoBehaviour
         LoadValues();
     }
 
+    private void Update()
+    {
+        if (!audioSourceBG.isPlaying)
+        {
+            int nextMusic = musicIndex + 1;
+
+            if (nextMusic > optionsData.allBG_Music.Length)
+            {
+                nextMusic = 0;
+            }
+
+            audioSourceBG.clip = optionsData.allBG_Music[nextMusic];
+            audioSourceBG.Play();
+        }
+    }
+
     public void ChangeBGMusic(AudioClip clip)
     {
         audioSourceBG.clip = clip;

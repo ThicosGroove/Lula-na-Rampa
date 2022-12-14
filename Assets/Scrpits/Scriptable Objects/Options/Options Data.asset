@@ -13,8 +13,13 @@ MonoBehaviour:
   m_Name: Options Data
   m_EditorClassIdentifier: 
   allBG_Music:
-  - {fileID: 8300000, guid: b391c2fcc79978c4f82626d421472c63, type: 3}
-  - {fileID: 8300000, guid: 6bd38555eb7c2654880c92cf4d546eb9, type: 3}
+  - {fileID: 8300000, guid: ddae11b5e4e70cb44be2774e019a4671, type: 3}
+  - {fileID: 8300000, guid: 48d183f182d8c82448a6dcb060c7e1ba, type: 3}
+  - {fileID: 8300000, guid: 34a94f6c4e0ab4149be132db12abfecf, type: 3}
+  - {fileID: 8300000, guid: a0ae2dbdaf581d149b72041f23856102, type: 3}
+  - {fileID: 8300000, guid: f5442bee002d67346b5d5a0c19591bcc, type: 3}
+  - {fileID: 8300000, guid: d561b84f664ee9d4d86e84d3b38de56c, type: 3}
+  - {fileID: 8300000, guid: cbb0f8594f0adb640843aad42b31a12b, type: 3}
   allSFX_Music:
   - {fileID: 8300000, guid: fed5d996883a4f74194d6a5b1b3be05e, type: 3}
   - {fileID: 8300000, guid: 722da3c1157fc43429fcee5e274c9390, type: 3}

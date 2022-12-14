@@ -186,13 +186,25 @@ public class MainMenuUIManager : MonoBehaviour
         switch (index)
         {
             case 0:
-                bgMusic_name.text = "OLE OLE OLÁ LULA";
+                bgMusic_name.text = "Jingle 1989";
                 break;
             case 1:
-                bgMusic_name.text = "TÔ COM SAUDADE DO TEMPO DE LULA";
+                bgMusic_name.text = "Ole Ole Olá Lula";
                 break;
             case 2:
-                bgMusic_name.text = "PABLITO";
+                bgMusic_name.text = "Jingle 2002 - Bote Fé";
+                break;
+            case 3:
+                bgMusic_name.text = "Ole Ole Olá - Guitarra";
+                break;
+            case 4:
+                bgMusic_name.text = "Jingle 2022";
+                break;
+            case 5:
+                bgMusic_name.text = "Ole Ole Olá\nFabiano TromPetista O Brabo";
+                break;
+            case 6:
+                bgMusic_name.text = "Jingle 2006 - Lula de Novo";
                 break;
             default:
                 break;
