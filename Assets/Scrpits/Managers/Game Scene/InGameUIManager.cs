@@ -82,7 +82,7 @@ public class InGameUIManager : MonoBehaviour
     {
         if (currentLevel == 1)
         {
-            yield return new WaitForSeconds(8f); // Tempo total da cutscene
+            yield return new WaitForSeconds(8.2f); // Tempo total da cutscene
         }
 
         GameplayEvents.OnStartNewLevel();

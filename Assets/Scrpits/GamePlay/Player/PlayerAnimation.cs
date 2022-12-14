@@ -9,6 +9,8 @@ public class PlayerAnimation : MonoBehaviour
 
     Animator anim;
 
+    private bool hasReach = false; 
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -17,16 +19,30 @@ public class PlayerAnimation : MonoBehaviour
     private void OnEnable()
     {
         GameplayEvents.StartNewLevel += StartMovingAnimation;
+        GameplayEvents.ReachPalace += WinPreparation;
+        GameplayEvents.DropFaixa += WinAnimation;
     }
 
     private void OnDisable()
     {
         GameplayEvents.StartNewLevel -= StartMovingAnimation;        
+        GameplayEvents.ReachPalace -= WinPreparation;
+        GameplayEvents.DropFaixa -= WinAnimation;
     }
 
     private void StartMovingAnimation()
     {
         anim.SetBool(Const.RUN_ANIMATION, true);
+    }
+
+    private void WinPreparation()
+    {
+        anim.SetBool(Const.RUN_ANIMATION, false);      
+    }
+
+    private void WinAnimation()
+    {       
+        anim.SetBool(Const.WIN_ANIMATION, true);
     }
 
     void Update()
@@ -48,6 +64,9 @@ public class PlayerAnimation : MonoBehaviour
         else
         {
             anim.SetBool(Const.ROLL_ANIMATION, false);
-        }        
+        }
+
+
+       
     }
 }

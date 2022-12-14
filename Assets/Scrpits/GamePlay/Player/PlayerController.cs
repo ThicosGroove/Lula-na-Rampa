@@ -58,6 +58,8 @@ public class PlayerController : MonoBehaviour
     float rollingDelay;
 
     int currentLevel;
+    bool hasReachPalace = false;
+    Vector3 lookToCamera = new Vector3(0, 180f, 0f);
 
     #region SetUp 
     private void Awake()
@@ -88,6 +90,7 @@ public class PlayerController : MonoBehaviour
     {
         GameplayEvents.StartNewLevel += GameStart;
         GameplayEvents.Win += OnPlayerWin;
+        GameplayEvents.ReachPalace += ReachPalaceRotateRotate;
 
         input.Enable();
     }
@@ -96,6 +99,7 @@ public class PlayerController : MonoBehaviour
     {
         GameplayEvents.StartNewLevel -= GameStart;
         GameplayEvents.Win -= OnPlayerWin;
+        GameplayEvents.ReachPalace -= ReachPalaceRotateRotate;
 
         input.Disable();
     }
@@ -187,6 +191,11 @@ public class PlayerController : MonoBehaviour
         if (state == PlayerState.WIN)
         {
             WinMovement();
+
+            if (hasReachPalace)
+            {
+                WinRotation();
+            }
         }
 
 
@@ -400,6 +409,8 @@ public class PlayerController : MonoBehaviour
 
     #endregion Colliders And Raycasts
 
+    #region Win Behaviour
+
     void OnPlayerWin()
     {
         desiredLane = 1;
@@ -426,5 +437,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void ReachPalaceRotateRotate()
+    {
+        hasReachPalace = true;       
+    }
 
+    void WinRotation()
+    {
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(lookToCamera), 0.01f);
+
+        if (transform.rotation.y <= lookToCamera.y - 5f)
+        {
+            GameplayEvents.OnDropFaixa();
+        }
+    }
+    #endregion WinBehaviour
 }

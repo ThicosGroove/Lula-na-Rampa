@@ -34,6 +34,8 @@ public static class Const
     public static string ROLL_ANIMATION = "IsRoll";
     public static string WIN_ANIMATION = "HasWin";
 
+
+
     // Save Files
     public static string SAVE_FILE_PATH = "/saveFile.json";
 

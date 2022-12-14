@@ -33,6 +33,12 @@ namespace GameEvents
         public static event UnityAction Win;
         public static void OnWin() => Win?.Invoke();
 
+        public static event UnityAction ReachPalace;
+        public static void OnReachPalace() => ReachPalace?.Invoke();
+
+        public static event UnityAction DropFaixa;
+        public static void OnDropFaixa() => DropFaixa?.Invoke();
+
         //public static event UnityAction MainMenu;
         //public static void OnMainMenu() => MainMenu?.Invoke();
 

@@ -29,6 +29,8 @@ public class PalacioBehaviour : MonoBehaviour
             {
                 hasWin = false;
                 palacioSpeed = 0f;
+
+                GameplayEvents.OnReachPalace();
             }
         }
     }

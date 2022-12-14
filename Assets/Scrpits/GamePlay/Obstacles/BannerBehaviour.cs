@@ -112,7 +112,7 @@ public class BannerBehaviour : MonoBehaviour
         "<color=#DB261D>UNIVERSIDADE</color> É PRA POUCOS",
         "<color=#DB261D>UNIVERSIDADE</color> É\n COISA DE RICO",
         "UM <color=#10CB04>DÓLAR</color> POR VACINA",
-        "GOLEIRO <color=red>BRUNO</color> ESTÁ CONOSCO!!",
+        "GOLEIRO <color=#002EFF>BRUNO</color> ESTÁ CONOSCO!!",
         "PROPINA NO PNEU",
         "<color=#0B610B>ENGAVETADOR</color> <color=#FFDC00>GERAL</color> DA <color=#002EFF>REPÚBLICA</color>",
         "REPÚBLICA DAS <color=#FFDC00>BANANAS</color>",

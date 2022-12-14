@@ -165,7 +165,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SOMOS <color=#0B610B>GADO</color>
+  m_text: "<color=#FFDC00>MONARQUIA</color> J\xC1!!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ce86afd206acf544299cb27ac4a29707, type: 2}
   m_sharedMaterial: {fileID: -3284972579875978491, guid: ce86afd206acf544299cb27ac4a29707,
