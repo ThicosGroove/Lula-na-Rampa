@@ -30,7 +30,9 @@ public class CameraBehaviour : MonoBehaviour
 
     private void GoToPlace(Vector3 newPlace)
     {
+
         transform.position = newPlace;
         transform.rotation = Quaternion.Euler(Vector3.right);
+        Debug.LogWarning("Chegou");
     }
 }

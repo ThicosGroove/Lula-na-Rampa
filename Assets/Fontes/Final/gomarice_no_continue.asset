@@ -102,9 +102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: gomarice_no_continue
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: 2071633625
   material: {fileID: -6835762254786041459}
-  materialHashCode: 0
+  materialHashCode: 948760921
   m_Version: 1.1.0
   m_SourceFontFileGUID: e19cbd3c1ec139045aaef97f2c843e0e
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: e19cbd3c1ec139045aaef97f2c843e0e,

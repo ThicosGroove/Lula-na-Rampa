@@ -36,6 +36,9 @@ public class MainMenuUIManager : MonoBehaviour
     [Header("Options Data")]
     [SerializeField] OptionsSO optionsData;
 
+    [Header("Save Settings")]
+    [SerializeField] Image saveIcon;
+
 
     MusicManager musicManager;
     int musicIndex;
@@ -47,6 +50,8 @@ public class MainMenuUIManager : MonoBehaviour
 
         CloseAllPanels();
         mainMenuPanel.SetActive(true);
+
+        saveIcon.enabled = false;
 
         playButton.SetActive(false);
         musicManager = MusicManager.Instance;
@@ -231,8 +236,17 @@ public class MainMenuUIManager : MonoBehaviour
 
     public void ClickOnSaveOptions()
     {
+        StartCoroutine(SaveIconFade());
         SaveManager.instance.SaveData();
         Debug.LogWarning("Salvou");
+
+    }
+
+    IEnumerator SaveIconFade()
+    {
+        saveIcon.enabled = true;
+        yield return new WaitForSeconds(1f);
+        saveIcon.enabled = false;
     }
 
     #endregion Options

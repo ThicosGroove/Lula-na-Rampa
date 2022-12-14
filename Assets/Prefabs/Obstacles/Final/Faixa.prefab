@@ -165,10 +165,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ACREDITAMOS NA HETEROSSEXUALIDADE DO CARLUXO!
+  m_text: SOMOS <color=#0B610B>GADO</color>
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f86a275db91c7d54abd4e4d0723ffaa5, type: 2}
-  m_sharedMaterial: {fileID: 917338649144360290, guid: f86a275db91c7d54abd4e4d0723ffaa5,
+  m_fontAsset: {fileID: 11400000, guid: ce86afd206acf544299cb27ac4a29707, type: 2}
+  m_sharedMaterial: {fileID: -3284972579875978491, guid: ce86afd206acf544299cb27ac4a29707,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -193,19 +193,19 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2.5
-  m_fontSizeBase: 2.5
+  m_fontSize: 4
+  m_fontSizeBase: 4.26
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 2.5
+  m_fontSizeMax: 4
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: -44.7
+  m_lineSpacing: -9.08
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
