@@ -302,7 +302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faixa_FBX: {fileID: 5449931226962812153}
   faixa_Pos: {fileID: 4217538017676103037}
-  time: 0.005
+  time: 0.007
 --- !u!1001 &5299180338878284122
 PrefabInstance:
   m_ObjectHideFlags: 0

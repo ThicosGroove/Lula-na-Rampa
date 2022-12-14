@@ -446,8 +446,9 @@ public class PlayerController : MonoBehaviour
     {
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(lookToCamera), 0.01f);
 
-        if (transform.rotation.y <= lookToCamera.y - 5f)
+        if (transform.rotation.y <= lookToCamera.y - 1f)
         {
+            Debug.LogWarning("Cai Faixa");
             GameplayEvents.OnDropFaixa();
         }
     }

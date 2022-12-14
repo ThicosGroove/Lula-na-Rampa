@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameEvents;
 
-public class PalacioBehaviour : MonoBehaviour
+public class CanvasTorcidaBehaviour : MonoBehaviour
 {
-    [SerializeField] float palacioSpeed;
+    [SerializeField] float torcidaSpeed;
     private bool hasWin;
 
     private void OnEnable()
@@ -15,22 +15,19 @@ public class PalacioBehaviour : MonoBehaviour
 
     private void OnDisable()
     {
-        GameplayEvents.Win -= WinBehaviour;        
+        GameplayEvents.Win -= WinBehaviour;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (hasWin)
         {
-            transform.Translate(Vector3.back * palacioSpeed * Time.deltaTime);
+            transform.Translate(Vector3.down * torcidaSpeed * Time.deltaTime);
 
-            if (transform.position.z <= 300f)
+            if (transform.position.z <= 0f)
             {
                 hasWin = false;
-                palacioSpeed = 0f;
-
-                GameplayEvents.OnReachPalace();
+                torcidaSpeed = 0f;
             }
         }
     }
