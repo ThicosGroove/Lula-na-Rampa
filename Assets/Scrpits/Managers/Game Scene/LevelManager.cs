@@ -9,6 +9,14 @@ public enum CurrentLevelState
     LEVEL_2 = 2,
     LEVEL_3 = 3,
     LEVEL_4 = 4,
+    LEVEL_5,
+    LEVEL_6,
+    LEVEL_7,
+    LEVEL_8,
+    LEVEL_9,
+    LEVEL_10,
+    LEVEL_11,
+    LEVEL_12,
     LEVEL_MAX
 }
 
@@ -38,6 +46,14 @@ public class LevelManager : Singleton<LevelManager>
     public int changeToLevel_3;
     public int changeToLevel_4;
     public int changeToLevel_5;
+    public int changeToLevel_6;
+    public int changeToLevel_7;
+    public int changeToLevel_8;
+    public int changeToLevel_9;
+    public int changeToLevel_10;
+    public int changeToLevel_11;
+    public int changeToLevel_12;
+    public int changeToLevel_13;
 
 
     private float previousSpeed;
@@ -90,7 +106,6 @@ public class LevelManager : Singleton<LevelManager>
 
     private IEnumerator SettingUpCurrentLevel(int level)
     {
-
         currentLevel = level;
         Debug.LogWarning($"Mudou level {currentLevel}");
 

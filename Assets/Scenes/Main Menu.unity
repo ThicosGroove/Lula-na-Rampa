@@ -5046,8 +5046,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Product Owner, Game Developer, Game programmer, Game Design, Gameplay
-    Designer, Idealizador '
+  m_text: Product Owner, Game Developer, Game programmer, Game Design, Gameplay Designer,
+    creator
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ce86afd206acf544299cb27ac4a29707, type: 2}
   m_sharedMaterial: {fileID: -3284972579875978491, guid: ce86afd206acf544299cb27ac4a29707,
@@ -5596,7 +5596,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1229058700
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8381,7 +8381,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1824357828
 RectTransform:
   m_ObjectHideFlags: 0

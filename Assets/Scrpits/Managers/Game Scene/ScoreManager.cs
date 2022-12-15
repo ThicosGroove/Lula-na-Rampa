@@ -9,6 +9,9 @@ public class ScoreManager : Singleton<ScoreManager>
     void Start()
     {
         totalScoreCurrentRun = 0;
+
+
+
     }
 
     private void OnEnable()
@@ -41,12 +44,12 @@ public class ScoreManager : Singleton<ScoreManager>
         {
             Debug.LogWarning("Win");
             GamePlayManager.Instance.UpdateGameState(GameStates.WIN);
-
         }
     }
 
     private void VerifyCurrentLevel()
     {
+
         if (totalScoreCurrentRun == LevelManager.Instance.changeToLevel_2)
         {
             LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_2);
@@ -63,6 +66,46 @@ public class ScoreManager : Singleton<ScoreManager>
         }
 
         if (totalScoreCurrentRun == LevelManager.Instance.changeToLevel_5)
+        {
+            LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_5);
+        }
+
+        if (totalScoreCurrentRun == LevelManager.Instance.changeToLevel_6)
+        {
+            LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_6);
+        }
+
+        if (totalScoreCurrentRun == LevelManager.Instance.changeToLevel_7)
+        {
+            LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_7);
+        }
+
+        if (totalScoreCurrentRun == LevelManager.Instance.changeToLevel_8)
+        {
+            LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_8);
+        }
+
+        if (totalScoreCurrentRun == LevelManager.Instance.changeToLevel_9)
+        {
+            LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_9);
+        }
+
+        if (totalScoreCurrentRun == LevelManager.Instance.changeToLevel_10)
+        {
+            LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_10);
+        }
+
+        if (totalScoreCurrentRun == LevelManager.Instance.changeToLevel_11)
+        {
+            LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_11);
+        }
+
+        if (totalScoreCurrentRun == LevelManager.Instance.changeToLevel_12)
+        {
+            LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_12);
+        }
+
+        if (totalScoreCurrentRun == LevelManager.Instance.changeToLevel_13)
         {
             LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_MAX);
         }

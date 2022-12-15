@@ -4667,6 +4667,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4b3b55858345f3345b900adf861537be, type: 2}
   - {fileID: 11400000, guid: bc9d3318f1a07be4fbd1f06be68f20d7, type: 2}
   - {fileID: 11400000, guid: 353b4003099b1d84a9cd43b9af1adc56, type: 2}
+  - {fileID: 11400000, guid: eb543481df961e44490cfe023430ee9c, type: 2}
+  - {fileID: 11400000, guid: 2577d0d9d67de824ca3138fe139a8c04, type: 2}
+  - {fileID: 11400000, guid: 900ed5d2f70c1af4c86be6040bd009ce, type: 2}
+  - {fileID: 11400000, guid: a26a12cb3190b694088dbb2746ad5e6f, type: 2}
+  - {fileID: 11400000, guid: 0191b28495914ef42a081ab3615d95ba, type: 2}
+  - {fileID: 11400000, guid: 4634de313e563c3469be11fc6914d7a9, type: 2}
+  - {fileID: 11400000, guid: bbc34c003eb12094cbcb8ee9f7ad08a9, type: 2}
+  - {fileID: 11400000, guid: 747ec5a6016edab4db8913b9689fb5d8, type: 2}
   - {fileID: 11400000, guid: ba4f6a27841a1fa4d9053346f1c9c3cd, type: 2}
   currentLevel: 0
   lerpToNextLevel: 0.8
@@ -4682,6 +4690,14 @@ MonoBehaviour:
   changeToLevel_3: 13
   changeToLevel_4: 19
   changeToLevel_5: 26
+  changeToLevel_6: 32
+  changeToLevel_7: 39
+  changeToLevel_8: 45
+  changeToLevel_9: 52
+  changeToLevel_10: 58
+  changeToLevel_11: 65
+  changeToLevel_12: 71
+  changeToLevel_13: 78
 --- !u!1 &1350879597
 GameObject:
   m_ObjectHideFlags: 0
