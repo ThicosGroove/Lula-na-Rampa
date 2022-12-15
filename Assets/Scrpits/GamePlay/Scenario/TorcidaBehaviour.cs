@@ -5,15 +5,12 @@ using GameEvents;
 
 public class TorcidaBehaviour : MonoBehaviour
 {
-    Camera mainCamera;
- 
     void Start()
     {
-        mainCamera = Camera.main;
-    }
+        float rndSpeed = Random.Range(3, 15);
+        float rndHeight = Random.Range(3, 10);
 
-    void Update()
-    {
-        transform.LookAt(mainCamera.transform);     
-    }    
+        iTween.Init(gameObject);
+        iTween.MoveBy(gameObject, iTween.Hash("y", rndHeight, "speed", rndSpeed, "looptype", iTween.LoopType.pingPong));
+    }
 }
