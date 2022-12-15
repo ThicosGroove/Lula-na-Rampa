@@ -5,12 +5,35 @@ using GameEvents;
 
 public class TorcidaBehaviour : MonoBehaviour
 {
-    void Start()
-    {
-        float rndSpeed = Random.Range(3, 15);
-        float rndHeight = Random.Range(3, 10);
+    [SerializeField] float Speed;
+    private bool hasWin;
 
-        iTween.Init(gameObject);
-        iTween.MoveBy(gameObject, iTween.Hash("y", rndHeight, "speed", rndSpeed, "looptype", iTween.LoopType.pingPong));
+    private void OnEnable()
+    {
+        GameplayEvents.Win += WinBehaviour;
+    }
+
+    private void OnDisable()
+    {
+        GameplayEvents.Win -= WinBehaviour;
+    }
+
+    void Update()
+    {
+        if (hasWin)
+        {
+            transform.Translate(Vector3.back * Speed * Time.deltaTime);
+
+            if (transform.position.z <= -700f)
+            {
+                hasWin = false;
+                Speed = 0f;
+            }
+        }
+    }
+
+    void WinBehaviour()
+    {
+        hasWin = true;
     }
 }
