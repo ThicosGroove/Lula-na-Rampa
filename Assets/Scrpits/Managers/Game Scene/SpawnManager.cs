@@ -32,9 +32,9 @@ public class SpawnManager : MonoBehaviour
     private GameObject newObstacle;
     private GameObject newCollectable;
 
-    private float myTimerObstacle, myTimerCollectable;
-    private float stopTimerObstacle, stopTimerCollectable;
-    private float newtimerObstacle, newTimerCollectable;
+    private float myTimerObstacle;
+    private float stopTimerObstacle;
+    private float newtimerObstacle;
 
     void Start()
     {
@@ -44,7 +44,6 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnObstacle());
 
         myTimerObstacle = spawnObstacleDelay;
-        myTimerCollectable = spawnCollectableDelay;
     }
 
     private void OnEnable()
@@ -85,9 +84,6 @@ public class SpawnManager : MonoBehaviour
 
         stopTimerObstacle = myTimerObstacle;
         newtimerObstacle = spawnObstacleDelay - stopTimerObstacle;
-
-        //stopTimerCollectable = myTimerCollectable;
-        //newTimerCollectable = spawnCollectableDelay - stopTimerCollectable;
     }
 
     private void ResumeAllCoroutines()
@@ -119,35 +115,15 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnObstacle());
     }
 
-    //IEnumerator SpawnCollectable()
-    //{
-    //    yield return new WaitForSeconds(newtimerObstacle);
-
-    //    int randomPosCollectableX = Random.Range(0, collectable.posX.Length);
-    //    Vector3 posCollectable = new Vector3(collectable.posX[randomPosCollectableX], 0f, objSpawnDistance);
-
-    //    newCollectable = Instantiate(collectable.collectablePrefab, posCollectable, Quaternion.identity);
-    //    GamePlayManager.Instance.objList.Add(newCollectable.GetComponent<MoveCollectable>());
-    //    yield return new WaitForSeconds(spawnCollectableDelay);
-
-    //    StartCoroutine(SpawnCollectable());
-    //}
-
 
     private void SetSpawnTimer()
     {
         myTimerObstacle -= Time.deltaTime;
-        //myTimerCollectable -= Time.deltaTime;
 
         if (myTimerObstacle <= 0)
         {
             myTimerObstacle = spawnObstacleDelay;
         }
-
-        //if (myTimerCollectable <= 0)
-        //{
-        //    myTimerCollectable = spawnObstacleDelay;
-        //}
     }
 }
 

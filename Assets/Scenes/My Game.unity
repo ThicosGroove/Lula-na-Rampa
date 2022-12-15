@@ -4584,7 +4584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentGameState: 0
   isNormalMode: 0
-  playerColliderOn: 1
+  playerColliderOn: 0
   testStartLevel_5: 0
   winScore: 1
   cameraPositions:
