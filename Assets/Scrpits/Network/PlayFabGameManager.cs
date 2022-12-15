@@ -27,7 +27,6 @@ public class PlayFabGameManager : Singleton<PlayFabGameManager>
 
     private void OnGameOver()
     {
-
         if (PlayFabClientAPI.IsClientLoggedIn() && GamePlayManager.Instance.isNormalMode == false)
         {
             StartCoroutine(SendAndGetLeaderBoard());

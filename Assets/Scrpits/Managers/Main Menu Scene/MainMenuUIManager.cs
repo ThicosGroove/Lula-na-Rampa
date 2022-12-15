@@ -11,6 +11,7 @@ public class MainMenuUIManager : MonoBehaviour
     [SerializeField] GameObject mainMenuPanel;
     [SerializeField] GameObject optionsPanel;
     [SerializeField] GameObject creditsPanel;
+    [SerializeField] GameObject rulesPanel;
 
     [Header("Buttons")]
     [SerializeField] GameObject playButton;
@@ -39,6 +40,8 @@ public class MainMenuUIManager : MonoBehaviour
     [Header("Save Settings")]
     [SerializeField] Image saveIcon;
 
+    [Header("Rules Menu")]
+    [SerializeField] TMP_Text emailText;
 
     MusicManager musicManager;
     int musicIndex;
@@ -66,7 +69,6 @@ public class MainMenuUIManager : MonoBehaviour
         BG_Sound_text.text = (SaveManager.instance.LoadFile()._backgroundVolume + 40f).ToString("0.0");
         SFX_Sound_text.text = (SaveManager.instance.LoadFile()._sfxVolume + 40f).ToString("0.0");
 
-
         Master_Volume = SaveManager.Instance.LoadFile()._masterMusicVolume;
         BG_Volume = SaveManager.Instance.LoadFile()._backgroundVolume;
         SFX_Volume = SaveManager.Instance.LoadFile()._sfxVolume;
@@ -76,6 +78,8 @@ public class MainMenuUIManager : MonoBehaviour
         sfxSlider.onValueChanged.AddListener(SetSFXVolumeText);
 
         LoadSliderValue();
+
+        ShowUserEmail();
     }
 
     #region Main Menu
@@ -265,12 +269,20 @@ public class MainMenuUIManager : MonoBehaviour
 
     #endregion Options
 
+    #region Rules 
+    private void ShowUserEmail()
+    {
+        string playerEmail = SaveManager.instance.LoadFile()._email;
+        emailText.text = $"Seu e-mail é <color=#DB261D>{playerEmail}</color> mesmo?";
+    }
 
+    #endregion
 
     void CloseAllPanels()
     {
         mainMenuPanel.SetActive(false);
         optionsPanel.SetActive(false);
         creditsPanel.SetActive(false);
+        rulesPanel.SetActive(false);
     }
 }

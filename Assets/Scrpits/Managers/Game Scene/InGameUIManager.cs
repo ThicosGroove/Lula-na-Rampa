@@ -35,6 +35,7 @@ public class InGameUIManager : MonoBehaviour
 
     int totalScore;
     int currentLevel;
+    string playerNewName;
 
     void Start()
     {
@@ -120,7 +121,7 @@ public class InGameUIManager : MonoBehaviour
         {
             OnGameOverNormalPanel.SetActive(true);
         }
-        else if (SaveManager.Instance.LoadFile()._playerID != null)
+        else if (SaveManager.Instance.LoadFile()._userName != null)
         {
             OnGameOverInfinityPanel.SetActive(true);
             ScoreBoardBox.SetActive(true);
@@ -175,28 +176,28 @@ public class InGameUIManager : MonoBehaviour
     #region Buttons
     public void InsertNewName(string name)
     {
-        // fazer uma chamada de evento para o Play Fab Game Manager
-        // On Display Name Update
-        PlayFabGameManager.Instance.OnUpdateDisplayNameRequest(name);
+        playerNewName = name;
     }
 
     public void OnClickConfirmNameButton()
     {
-        // Atualizar o nome do jogador lá no sistema
+        PlayFabGameManager.Instance.OnUpdateDisplayNameRequest(playerNewName);
+
+        InsertNameForScoreBoardPanel.SetActive(false);
         OnGameOverInfinityPanel.SetActive(true);
         ScoreBoardBox.SetActive(true);
     }
 
     public void OnClickPlayAgainButton()
     {
-        SceneManager.LoadScene(Const.GAME_SCENE); // TEMPORÁRIO
+        SceneManager.LoadScene(Const.GAME_SCENE);
     }
 
     public void OnClickCancelButton()
     {
-        // Deletar o jogador lá no sistema
-        // mostro o score board de qualquer forma??
-        // acho que sim, pra instigar a vontade do jogador
+        InsertNameForScoreBoardPanel.SetActive(false);
+        OnGameOverInfinityPanel.SetActive(true);
+        ScoreBoardBox.SetActive(true);
     }
 
     public void OnClickPauseButton()
