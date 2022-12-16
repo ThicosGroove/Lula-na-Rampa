@@ -9,6 +9,8 @@ public class InGameUIManager : MonoBehaviour
 {
     [Header("Playing Panel")]
     [SerializeField] GameObject OnPlayingPanel;
+    [SerializeField] GameObject progressNormal;
+    [SerializeField] GameObject progressInfinity;
     [SerializeField] TMP_Text scoreText;
     [SerializeField] TMP_Text levelText;
 
@@ -34,7 +36,8 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] GameObject quitButton;
 
     [Header("Progress Bar")]
-    [SerializeField] Image progressBar;
+    [SerializeField] Image progressBarNormal;
+    [SerializeField] Image progressBarInfinity;
     [SerializeField] Sprite[] progressSprite;
 
     int totalScore;
@@ -50,7 +53,8 @@ public class InGameUIManager : MonoBehaviour
         scoreText.text = "";
         levelText.text = "";
 
-        progressBar.sprite = progressSprite[0];
+        progressBarNormal.sprite = progressSprite[0];
+        progressBarInfinity.sprite = progressSprite[1];
     }
 
     private void OnEnable()
@@ -86,8 +90,14 @@ public class InGameUIManager : MonoBehaviour
     {
         totalScore += score;
 
-        progressBar.sprite = progressSprite[totalScore];
-        scoreText.text = "Estrelas: " + totalScore;
+        if (GamePlayManager.Instance.isNormalMode == true)
+        {
+            progressBarNormal.sprite = progressSprite[totalScore];
+        }
+        else
+        {
+            scoreText.text = totalScore.ToString();
+        }
     }
 
     private void UpdateLevelText(int newLevel)
@@ -108,13 +118,16 @@ public class InGameUIManager : MonoBehaviour
         if (GamePlayManager.Instance.isNormalMode == true)
         {
             levelText.text = "Pegue a Faixa !!";
+            progressNormal.SetActive(true);
         }
         else
         {
             levelText.text = "Level " + currentLevel;
+            progressBarInfinity.sprite = progressSprite[currentLevel];
+            progressInfinity.SetActive(true);
         }
 
-        scoreText.text = "Estrelas: " + totalScore;
+        scoreText.text = totalScore.ToString();
         levelText.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(1.5f);
@@ -171,6 +184,8 @@ public class InGameUIManager : MonoBehaviour
     {
         OnPlayingPanel.SetActive(false);
         OnPausePanel.SetActive(false);
+        progressNormal.SetActive(false);
+        progressInfinity.SetActive(false);
         OnGameOverInfinityPanel.SetActive(false);
         InsertNameForScoreBoardPanel.SetActive(false);
         ScoreBoardBox.SetActive(false);
