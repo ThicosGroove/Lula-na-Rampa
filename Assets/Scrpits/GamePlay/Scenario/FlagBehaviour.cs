@@ -28,7 +28,5 @@ public class FlagBehaviour : MonoBehaviour
             "speed", rotateRndSpeed,
             "easetype", iTween.EaseType.easeInOutCubic,
             "looptype", iTween.LoopType.pingPong));
-    }
-
- 
+    } 
 }

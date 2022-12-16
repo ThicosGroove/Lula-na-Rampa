@@ -133,6 +133,7 @@ public class BannerBehaviour : MonoBehaviour
         "FALA ALGUMA COISA, <color=#2433BB>OLAVO</color>!!",
         "FAZ ALGUMA COISA, <color=#2433BB>OLAVO</color>!!",
         "O <color=#0B610B>AGRO</color> CUIDA DO MEIO AMBIENTE SIM! <color=#0B610B>CONFIA</color>",
+        "O <color=#2433BB>GENERAL BENJAMIN ARROLA</color> VAI NOS SALVAR",
     };
 
     private void Start()

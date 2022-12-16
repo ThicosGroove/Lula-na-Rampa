@@ -43,8 +43,9 @@ MonoBehaviour:
   - {x: 3, y: 0, z: 0}
   - {x: 18, y: 0, z: 0}
   cameraImages:
-  - {fileID: 2800000, guid: 69171ee4d3286a5469eeedbdc8ca1468, type: 3}
-  - {fileID: 2800000, guid: 013077fc5a024c84397004ffb167310d, type: 3}
-  - {fileID: 2800000, guid: c4486dc5cc144b0449d0a97bd4feab84, type: 3}
-  - {fileID: 2800000, guid: c515421864b3cb5469c1bb1abe2c1d2e, type: 3}
-  - {fileID: 2800000, guid: 1f99f2d87725d964c87c491fc4cff690, type: 3}
+  - {fileID: 2800000, guid: c81dd16fe14d79c4591a28d2f4a74029, type: 3}
+  - {fileID: 2800000, guid: 53523cab3c459574c90e750660dd8bf4, type: 3}
+  - {fileID: 2800000, guid: dd2215fd097189649a52c3b427442063, type: 3}
+  - {fileID: 2800000, guid: 864be77dffd3c174aa04d8a07a6343b6, type: 3}
+  - {fileID: 2800000, guid: 37943a1cb62eefb448487d831596576b, type: 3}
+  - {fileID: 2800000, guid: 7b59e52cd26f49c4cabde341b04f3ea6, type: 3}
