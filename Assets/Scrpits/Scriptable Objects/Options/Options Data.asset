@@ -15,6 +15,7 @@ MonoBehaviour:
   allBG_Music:
   - {fileID: 8300000, guid: 53dec44fcdf518e4086351a0be9d213b, type: 3}
   - {fileID: 8300000, guid: ddae11b5e4e70cb44be2774e019a4671, type: 3}
+  - {fileID: 8300000, guid: a417f57bd022d5443ae75c7c369b9012, type: 3}
   - {fileID: 8300000, guid: 48d183f182d8c82448a6dcb060c7e1ba, type: 3}
   - {fileID: 8300000, guid: 34a94f6c4e0ab4149be132db12abfecf, type: 3}
   - {fileID: 8300000, guid: a0ae2dbdaf581d149b72041f23856102, type: 3}

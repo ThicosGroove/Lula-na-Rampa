@@ -24,7 +24,7 @@ public class CanvasTorcidaBehaviour : MonoBehaviour
         {
             transform.Translate(Vector3.down * torcidaSpeed * Time.deltaTime);
 
-            if (transform.position.z <= 0f)
+            if (transform.position.z <= -500f)
             {
                 hasWin = false;
                 torcidaSpeed = 0f;

@@ -33,6 +33,10 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] GameObject menuButton;
     [SerializeField] GameObject quitButton;
 
+    [Header("Progress Bar")]
+    [SerializeField] Image progressBar;
+    [SerializeField] Sprite[] progressSprite;
+
     int totalScore;
     int currentLevel;
     string playerNewName;
@@ -45,11 +49,14 @@ public class InGameUIManager : MonoBehaviour
         totalScore = 0;
         scoreText.text = "";
         levelText.text = "";
+
+        progressBar.sprite = progressSprite[0];
     }
 
     private void OnEnable()
     {
         ScoreEvents.ScoreGained += UpdateScoreText;
+        ScoreEvents.ScoreGained += UpdateProgressBar;
         ScoreEvents.ChangeLevel += UpdateLevelText;
 
         GameplayEvents.GameOver += OnGameOverUI;
@@ -60,6 +67,7 @@ public class InGameUIManager : MonoBehaviour
     private void OnDisable()
     {
         ScoreEvents.ScoreGained -= UpdateScoreText;
+        ScoreEvents.ScoreGained -= UpdateProgressBar;
         ScoreEvents.ChangeLevel -= UpdateLevelText;
 
         GameplayEvents.GameOver -= OnGameOverUI;
@@ -68,15 +76,17 @@ public class InGameUIManager : MonoBehaviour
     }
 
 
-    private void UpdateProgressBar()
+    private void UpdateProgressBar(int score)
     {
         // 13 diferentes sprites
+
     }
 
     private void UpdateScoreText(int score)
     {
         totalScore += score;
 
+        progressBar.sprite = progressSprite[totalScore];
         scoreText.text = "Estrelas: " + totalScore;
     }
 
