@@ -29,10 +29,12 @@ public static class Const
     public static string SFX_MIXER = "SFXAudioMixer";
 
     //Animation
-    public static string RUN_ANIMATION = "IsRunning";
-    public static string JUMP_ANIMATION = "IsJump";
-    public static string ROLL_ANIMATION = "IsRoll";
-    public static string WIN_ANIMATION = "HasWin";
+    public static string RUN_ANIMATION = "IsRunning_Anim";
+    public static string JUMP_ANIMATION = "IsJump_Anim";
+    public static string ROLL_ANIMATION = "IsRoll_Anim";
+    public static string WIN_ANIMATION = "HasWin_Anim";
+    public static string JUMP_SPEED_ANIMATION = "JumpSpeed_Anim";
+    public static string ROLL_SPEED_ANIMATION = "RollSpeed_Anim";
 
 
 

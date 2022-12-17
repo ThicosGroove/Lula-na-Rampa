@@ -6,6 +6,7 @@ using GameEvents;
 public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField] PlayerController playerController;
+    [SerializeField] LevelSO levelData;
 
     Animator anim;
 
@@ -40,6 +41,14 @@ public class PlayerAnimation : MonoBehaviour
         GameplayEvents.ReachPalace -= WinPreparation;
         GameplayEvents.DropFaixa -= WinAnimation;
     }
+    void Update()
+    {
+        UpdateAnimations();
+        if (!GamePlayManager.Instance.isNormalMode)
+        {
+            UpdateAnimationSpeedPerLevel();
+        }
+    }
 
     private void GameOverAnimation()
     {
@@ -49,7 +58,6 @@ public class PlayerAnimation : MonoBehaviour
     private void IdleAnimation()
     {
         anim.SetBool(Const.RUN_ANIMATION, false);
-
     }
 
     private void StartMovingAnimation()
@@ -67,7 +75,7 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetBool(Const.WIN_ANIMATION, true);
     }
 
-    void Update()
+    void UpdateAnimations()
     {
         if (playerController.isJump)
         {
@@ -87,8 +95,67 @@ public class PlayerAnimation : MonoBehaviour
         {
             anim.SetBool(Const.ROLL_ANIMATION, false);
         }
+    }
 
+    void UpdateAnimationSpeedPerLevel()
+    {
+        switch (levelData.level)
+        {
 
-
+            case 1:
+                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.5f);
+                break;
+            case 2:
+                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.5f);
+                break;
+            case 3:
+                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.5f);
+                break;
+            case 4:
+                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.5f);
+                break;
+            case 5:
+                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.5f);
+                break;
+            case 6:
+                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.5f);
+                break;
+            case 7:
+                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.3f);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.5f);
+                break;
+            case 8:
+                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.3f);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.5f);
+                break;
+            case 9:
+                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.3f);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.5f);
+                break;
+            case 10:
+                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.3f);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.5f);
+                break;
+            case 11:
+                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.5f);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.7f);
+                break;
+            case 12:
+                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.5f);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 2f);
+                break;
+            case 13:
+                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.8f);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 2.3f);
+                break;
+            default:
+                break;
+        }
     }
 }
