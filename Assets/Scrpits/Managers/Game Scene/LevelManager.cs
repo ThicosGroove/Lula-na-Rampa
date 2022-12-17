@@ -32,10 +32,8 @@ public class LevelManager : Singleton<LevelManager>
     public float lerpToNextLevel;
 
     [Header("Current Variables Apply")]
-    public float current_obstacleInitialSpeed;
     public float current_obstacleSpeed;
     public float current_obstacleSpawnDelay;
-    public float current_collectableSpawnDelay;
     public float current_playerSlideSpeed;
     public float current_playerJumpSpeed;
     public float current_playerRollingSpeed;
@@ -74,10 +72,8 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (GamePlayManager.Instance.isNormalMode == true)
         {
-            current_obstacleInitialSpeed = levelData[0].obstacle_Initial_Speed;
             current_obstacleSpeed = levelData[0].obstacle_Speed;
             current_obstacleSpawnDelay = levelData[0].obstacle_Spawn_Delay;
-            current_collectableSpawnDelay = levelData[0].collectable_Spawn_Delay; ;
             current_playerSlideSpeed = levelData[0].player_Slide_Speed;
             current_playerJumpSpeed = levelData[0].player_Jump_Speed;
             current_playerRollingSpeed = levelData[0].player_Roll_Speed;
@@ -86,10 +82,8 @@ public class LevelManager : Singleton<LevelManager>
         }
         else
         {
-            current_obstacleInitialSpeed = levelData[1].obstacle_Initial_Speed;
             current_obstacleSpeed = levelData[1].obstacle_Speed;
             current_obstacleSpawnDelay = levelData[1].obstacle_Spawn_Delay;
-            current_collectableSpawnDelay = levelData[1].collectable_Spawn_Delay;
             current_playerSlideSpeed = levelData[1].player_Slide_Speed;
             current_playerJumpSpeed = levelData[1].player_Jump_Speed;
             current_playerRollingSpeed = levelData[1].player_Roll_Speed;
@@ -111,10 +105,8 @@ public class LevelManager : Singleton<LevelManager>
 
         ScoreEvents.OnChangeLevel(currentLevel);
 
-        current_obstacleInitialSpeed = levelData[currentLevel].obstacle_Initial_Speed;
         current_obstacleSpeed = levelData[currentLevel].obstacle_Speed;
         current_obstacleSpawnDelay = levelData[currentLevel].obstacle_Spawn_Delay;
-        current_collectableSpawnDelay = levelData[currentLevel].collectable_Spawn_Delay;
         current_playerSlideSpeed = levelData[currentLevel].player_Slide_Speed;
         current_playerJumpSpeed = levelData[currentLevel].player_Jump_Speed;
         current_playerRollingSpeed = levelData[currentLevel].player_Roll_Speed;

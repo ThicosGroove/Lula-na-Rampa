@@ -19,7 +19,7 @@ public abstract class MoveBase : MonoBehaviour
     protected virtual void Start()
     {
         player = FindObjectOfType<PlayerController>().gameObject;
-        speed = LevelManager.Instance.current_obstacleInitialSpeed;
+        speed = LevelManager.Instance.current_obstacleSpeed;
 
         audioSource = GetComponent<AudioSource>();
 
@@ -51,14 +51,21 @@ public abstract class MoveBase : MonoBehaviour
     void Update()
     {
         BasicMovement();
+        UpdateSpeed();
         ReachSlowDownPoint();
         MoveBehaviour();
         DestroyObjOnLeaveScreen();
+
     }
 
     void BasicMovement()
     {
         transform.Translate(Vector3.back * speed * Time.deltaTime);
+    }
+
+    void UpdateSpeed()
+    {
+        speed = LevelManager.Instance.current_obstacleSpeed;
     }
 
     void ReachSlowDownPoint()

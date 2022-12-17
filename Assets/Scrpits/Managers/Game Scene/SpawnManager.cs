@@ -27,7 +27,6 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] float objSpawnDistance = 1000f;
 
     private float spawnObstacleDelay;
-    private float spawnCollectableDelay;
 
     private GameObject newObstacle;
     private GameObject newCollectable;
@@ -39,7 +38,6 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         spawnObstacleDelay = LevelManager.Instance.current_obstacleSpawnDelay;
-        spawnCollectableDelay = LevelManager.Instance.current_collectableSpawnDelay;
 
         StartCoroutine(SpawnObstacle());
 
@@ -75,7 +73,6 @@ public class SpawnManager : MonoBehaviour
     void LevelUp()
     {
         spawnObstacleDelay = LevelManager.Instance.current_obstacleSpawnDelay;
-        spawnCollectableDelay = LevelManager.Instance.current_collectableSpawnDelay;
     }
 
     private void StopAllTheCoroutines()

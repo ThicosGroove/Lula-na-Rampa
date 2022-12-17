@@ -13,12 +13,9 @@ MonoBehaviour:
   m_Name: Level_9
   m_EditorClassIdentifier: 
   level: 9
-  minDistChangeSpeed: 200
-  obstacle_Initial_Speed: 180
   obstacle_Speed: 180
   obstacle_Spawn_Delay: 0.7
-  collectable_Spawn_Delay: 0.7
   player_Slide_Speed: 5
-  player_Jump_Speed: 6
+  player_Jump_Speed: 7
   player_Roll_Speed: 0.7
   speedMulti: 1.7
