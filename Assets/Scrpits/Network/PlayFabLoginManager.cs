@@ -19,6 +19,7 @@ public class PlayFabLoginManager : MonoBehaviour
     public void Start()
     {
         CloseAllPanels();
+        loginPanel.SetActive(true);
 
         error_text.text = "";
 
@@ -72,15 +73,13 @@ public class PlayFabLoginManager : MonoBehaviour
 
                 PlayFabClientAPI.LoginWithIOSDeviceID(requestIOS, OnLoginMobileSuccess, OnLoginMobileFailure);
             }
-        }
-
-        loginPanel.SetActive(true);
+        }      
     }
 
     #region Connection
     private void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
-        CloseAllPanels();
+        //CloseAllPanels();
 
         SaveManager.Instance.playerData._userName = userName;
         SaveManager.Instance.playerData._email = userEmail;
