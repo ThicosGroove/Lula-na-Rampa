@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level_12
   m_EditorClassIdentifier: 
   level: 12
-  obstacle_Speed: 240
+  obstacle_Speed: 250
   obstacle_Spawn_Delay: 0.6
   player_Slide_Speed: 5
   player_Jump_Speed: 8

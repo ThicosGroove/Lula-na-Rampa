@@ -95,7 +95,7 @@ public class PlayFabLoginManager : MonoBehaviour
 
     private void OnLoginSuccess(LoginResult result)
     {
-        CloseAllPanels();
+        //CloseAllPanels();
 
         SaveManager.Instance.playerData._userName = userName;
         SaveManager.Instance.playerData._email = userEmail;

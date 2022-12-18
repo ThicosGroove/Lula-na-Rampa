@@ -123,6 +123,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5481787860142009300, guid: 90706b6b12f52cd428844909a9a1b76d,
         type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5481787860142009300, guid: 90706b6b12f52cd428844909a9a1b76d,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1fcac15004e641b4596988a51c0506e5, type: 2}
@@ -130,6 +135,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bandeira_pt
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630940672733084953, guid: 90706b6b12f52cd428844909a9a1b76d,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8630940672733084953, guid: 90706b6b12f52cd428844909a9a1b76d,
         type: 3}

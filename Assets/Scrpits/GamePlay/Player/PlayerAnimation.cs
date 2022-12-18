@@ -6,10 +6,10 @@ using GameEvents;
 public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField] PlayerController playerController;
-    [SerializeField] LevelSO levelData;
 
     Animator anim;
 
+    int currentLevel;
     private bool hasReach = false;
 
     void Start()
@@ -25,6 +25,7 @@ public class PlayerAnimation : MonoBehaviour
         GameplayEvents.StartNewLevel += StartMovingAnimation;
         GameplayEvents.GameOver += GameOverAnimation;
 
+        ScoreEvents.ChangeLevel += UpdateCurrentLevel;
 
         GameplayEvents.ReachPalace += WinPreparation;
         GameplayEvents.DropFaixa += WinAnimation;
@@ -35,8 +36,10 @@ public class PlayerAnimation : MonoBehaviour
         UtilityEvents.GamePause -= IdleAnimation;
         UtilityEvents.GameResume -= StartMovingAnimation;
 
-        GameplayEvents.GameOver -= GameOverAnimation;
         GameplayEvents.StartNewLevel -= StartMovingAnimation;
+        GameplayEvents.GameOver -= GameOverAnimation;
+
+        ScoreEvents.ChangeLevel -= UpdateCurrentLevel;
 
         GameplayEvents.ReachPalace -= WinPreparation;
         GameplayEvents.DropFaixa -= WinAnimation;
@@ -48,6 +51,11 @@ public class PlayerAnimation : MonoBehaviour
         {
             UpdateAnimationSpeedPerLevel();
         }
+    }
+
+    void UpdateCurrentLevel(int _)
+    {
+        currentLevel++;
     }
 
     private void GameOverAnimation()
@@ -99,36 +107,36 @@ public class PlayerAnimation : MonoBehaviour
 
     void UpdateAnimationSpeedPerLevel()
     {
-        switch (levelData.level)
+        switch (currentLevel)
         {
 
             case 1:
                 anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.5f);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1f);
                 break;
             case 2:
                 anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.5f);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1f);
                 break;
             case 3:
                 anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.5f);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.2f);
                 break;
             case 4:
                 anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.5f);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.2f);
                 break;
             case 5:
                 anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.5f);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.3f);
                 break;
             case 6:
-                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.5f);
+                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.2f);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.4f);
                 break;
             case 7:
                 anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.3f);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.5f);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.4f);
                 break;
             case 8:
                 anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.3f);
@@ -140,7 +148,7 @@ public class PlayerAnimation : MonoBehaviour
                 break;
             case 10:
                 anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.3f);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.5f);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.7f);
                 break;
             case 11:
                 anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.5f);
@@ -148,7 +156,7 @@ public class PlayerAnimation : MonoBehaviour
                 break;
             case 12:
                 anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.5f);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 2f);
+                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 2.2f);
                 break;
             case 13:
                 anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.8f);

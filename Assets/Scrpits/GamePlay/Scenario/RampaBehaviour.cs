@@ -13,15 +13,22 @@ public class RampaBehaviour : MonoBehaviour
     {
         GameplayEvents.StartNewLevel += StartMoving;
         GameplayEvents.Win += WinMovement;
+        GameplayEvents.GameOver += StopMoving;
         GameplayEvents.ReachPalace += StopMoving;
 
+        UtilityEvents.GamePause += StopMoving;
+        UtilityEvents.GameResume += StartMoving;
     }
 
     private void OnDisable()
     {
         GameplayEvents.StartNewLevel -= StartMoving;      
         GameplayEvents.Win += WinMovement;
+        GameplayEvents.GameOver -= StopMoving;
         GameplayEvents.ReachPalace -= StopMoving;
+
+        UtilityEvents.GamePause -= StopMoving;
+        UtilityEvents.GameResume -= StartMoving;
     }
 
     void StartMoving()

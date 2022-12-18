@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Level_13_MAX
   m_EditorClassIdentifier: 
   level: 13
-  obstacle_Speed: 260
-  obstacle_Spawn_Delay: 0.6
+  obstacle_Speed: 270
+  obstacle_Spawn_Delay: 0.55
   player_Slide_Speed: 5
   player_Jump_Speed: 9
   player_Roll_Speed: 0.5

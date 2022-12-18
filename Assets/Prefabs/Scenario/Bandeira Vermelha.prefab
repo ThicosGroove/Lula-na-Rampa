@@ -121,10 +121,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5481787860142009300, guid: 4335882662443664a9160edf1fe40de1,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4335882662443664a9160edf1fe40de1,
         type: 3}
       propertyPath: m_Name
       value: bandeira_vermelha
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630940672733084953, guid: 4335882662443664a9160edf1fe40de1,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8630940672733084953, guid: 4335882662443664a9160edf1fe40de1,
         type: 3}
