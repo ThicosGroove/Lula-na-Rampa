@@ -54,6 +54,5 @@ public class InputManager : Singleton<InputManager>
     {
         return Utils.ScreenToWorld(mainCamera, inputActions.Touch.PrimaryPosition.ReadValue<Vector2>());
     }
-
 }
 

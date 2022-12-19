@@ -10,7 +10,6 @@ public class PlayerAnimation : MonoBehaviour
     Animator anim;
 
     int currentLevel;
-    private bool hasReach = false;
 
     void Start()
     {
