@@ -16,6 +16,9 @@ enum PlayerState
 // MUDAR OS BOTOES
 public class PlayerController : MonoBehaviour
 {
+
+    [SerializeField] public bool isManualControl = true;
+
     [Header("Player current State")]
     [SerializeField] PlayerState state;
 
