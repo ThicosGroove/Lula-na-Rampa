@@ -1,3 +1,6 @@
+// 24/09/2025 AI-Tag
+// This was created with the help of Assistant, a Unity Artificial Intelligence product.
+
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
@@ -23,31 +26,45 @@ public class LulaAgent : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         // Coleta informações do ambiente
-        sensor.AddObservation(playerController.transform.position); // Posição do jogador
-        sensor.AddObservation(playerController.CheckingGround()); // Está no chão?
+        sensor.AddObservation(playerController.transform.position.x); // Posição do jogador
+        sensor.AddObservation(playerController.CheckingGround() ? 1 : 0); // Está no chão?
         sensor.AddObservation(playerController.desiredLane); // Faixa atual
     }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        // Processa as ações do agente
         int action = actions.DiscreteActions[0];
 
         switch (action)
         {
             case 0: // Mover para a esquerda
-                playerController.desiredLane--;
+                if (playerController.desiredLane > 0)
+                {
+                    playerController.desiredLane--;
+                }
                 break;
             case 1: // Mover para a direita
-                playerController.desiredLane++;
+                if (playerController.desiredLane < 2)
+                {
+                    playerController.desiredLane++;
+                }
                 break;
             case 2: // Pular
-                playerController.Jump();
+                if (playerController.CheckingGround())
+                {
+                    playerController.Jump();
+                }
                 break;
             case 3: // Deslizar
-                playerController.Roll();
+                if (playerController.CheckingGround())
+                {
+                    playerController.Roll();
+                }
                 break;
         }
+
+        // Atualiza a posição do jogador
+        playerController.MoveHandle();
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)

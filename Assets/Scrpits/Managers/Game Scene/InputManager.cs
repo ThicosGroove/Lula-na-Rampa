@@ -31,7 +31,6 @@ public class InputManager : Singleton<InputManager>
     private void OnDisable()
     {        
         inputActions.Disable();
-        Debug.LogWarning("Desabilitado");
     }
 
     void Start()
@@ -40,19 +39,14 @@ public class InputManager : Singleton<InputManager>
         inputActions.Touch.PrimaryContact.canceled += ctx => EndTouchPrimary(ctx);
     }
 
-    private void StartTouchPrimary(InputAction.CallbackContext cxt)
+    private void StartTouchPrimary(InputAction.CallbackContext ctx)
     {
-        if (OnStartTouch != null) OnStartTouch(Utils.ScreenToWorld(mainCamera, inputActions.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)cxt.startTime);       
+        OnStartTouch?.Invoke(Utils.ScreenToWorld(mainCamera, inputActions.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)ctx.startTime);
     }
 
-    private void EndTouchPrimary(InputAction.CallbackContext cxt)
+    private void EndTouchPrimary(InputAction.CallbackContext ctx)
     {
-        if (OnEndTouch != null) OnEndTouch(Utils.ScreenToWorld(mainCamera, inputActions.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)cxt.time);
-    }
-
-    public Vector2 PrimaryPosition()
-    {
-        return Utils.ScreenToWorld(mainCamera, inputActions.Touch.PrimaryPosition.ReadValue<Vector2>());
+        OnEndTouch?.Invoke(Utils.ScreenToWorld(mainCamera, inputActions.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)ctx.time);
     }
 }
 

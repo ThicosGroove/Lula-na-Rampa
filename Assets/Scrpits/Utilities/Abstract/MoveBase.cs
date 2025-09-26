@@ -18,7 +18,7 @@ public abstract class MoveBase : MonoBehaviour
 
     protected virtual void Start()
     {
-        player = FindObjectOfType<PlayerController>().gameObject;
+        player = FindFirstObjectByType<PlayerManager>().gameObject;
         speed = LevelManager.Instance.current_obstacleSpeed;
 
         audioSource = GetComponent<AudioSource>();

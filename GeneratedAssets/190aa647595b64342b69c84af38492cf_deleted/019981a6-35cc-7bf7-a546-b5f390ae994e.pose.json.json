@@ -1,0 +1,11 @@
+{
+    "asset": "190aa647595b64342b69c84af38492cf",
+    "fileName": "019981a6-35cc-7bf7-a546-b5f390ae994e.pose.json",
+    "prompt": "Rolling",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 1013849030,
+    "w3CTraceId": "ac40841c29b6a66ef5aaa05571da5278",
+    "isTrimmed": false
+}

@@ -1,0 +1,11 @@
+{
+    "asset": "190aa647595b64342b69c84af38492cf",
+    "fileName": "019981a6-d3e5-7d4c-bcf7-8dd54db813ec.pose.json",
+    "prompt": "Rolling foward, stay in place",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 1932748795,
+    "w3CTraceId": "3871ac9698b3f26a8f2c40cb1df5b40f",
+    "isTrimmed": false
+}

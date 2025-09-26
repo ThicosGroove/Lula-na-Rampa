@@ -1,22 +1,22 @@
-﻿using UnityEngine;
+﻿// 24/09/2025 AI-Tag
+// This was created with the help of Assistant, a Unity Artificial Intelligence product.
+
+using UnityEngine;
 using System.Collections;
 using GameEvents;
 
-enum PlayerState
-{
-    IDLE,
-    JUMP,
-    SLIDING,
-    PLAYING,
-    DEAD,
-    WIN
-}
+//public enum PlayerState
+//{
+//    IDLE,
+//    JUMP,
+//    SLIDING,
+//    PLAYING,
+//    DEAD,
+//    WIN
+//}
 
-// CRIAR UM PLAYER ANIMATION HANDLER P LIDAR COM AS ANIMAÇÕES
-// MUDAR OS BOTOES
 public class PlayerController : MonoBehaviour
 {
-
     [SerializeField] public bool isManualControl = true;
 
     [Header("Player current State")]
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
 
     // position parameters
     float height;
-    int desiredLane;
+    [HideInInspector] public int desiredLane;
     Vector3 targetPosition;
     Vector3 targetJumpPosition;
 
@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
         UpdatePlayerState(PlayerState.PLAYING);
     }
 
-    private void UpdatePlayerState(PlayerState newState)
+    public void UpdatePlayerState(PlayerState newState)
     {
         state = newState;
 
@@ -126,69 +126,6 @@ public class PlayerController : MonoBehaviour
 
     #region Movement
 
-    #region Mobilie
-    public void SwipeDirection(Vector2 direction)
-    {
-        if (GamePlayManager.Instance.isGamePaused) return;
-
-        if (Vector2.Dot(Vector2.left, direction) > directionThreshold) // Esquerda
-        {
-            desiredLane--;
-            if (desiredLane == -1)
-            {
-                desiredLane = 0;
-                return;
-            }
-
-
-            isMoving = 2;
-            GFX_Rotation();
-        }
-        else if (Vector2.Dot(Vector2.right, direction) > directionThreshold) // Direita
-        {
-            desiredLane++;
-            if (desiredLane == 3)
-            {
-                desiredLane = 2;
-                return;
-            }
-
-            isMoving = 1;
-            GFX_Rotation();
-        }
-        else if (Vector2.Dot(Vector2.up, direction) > directionThreshold) // Pulo
-        {
-            if (CheckingGround())
-            {
-                targetJumpPosition = Vector3.up * jumpHeight;
-                //isJump = true;
-            }
-
-            transform.Translate(targetJumpPosition * jumpSpeed * Time.deltaTime);
-
-
-            if (transform.position.y >= targetJumpPosition.y && !CheckingGround())
-            {
-                targetJumpPosition = Vector3.zero;
-            }
-        }
-        if (Vector2.Dot(Vector2.down, direction) > directionThreshold) // Abaixar
-        {
-            if (!isRolling && CheckingGround())
-            {
-                isRolling = true;
-                StartCoroutine(RollDelay());
-            }
-
-            if (Vector2.Dot(Vector2.down, direction) > directionThreshold && !CheckingGround())
-            {
-                targetJumpPosition = Vector3.zero;
-            }
-
-        }
-    }
-    #endregion Mobile
-
     void Update()
     {
         if (state == PlayerState.WIN)
@@ -201,12 +138,18 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
         if (state != PlayerState.PLAYING || GamePlayManager.Instance.isGamePaused) return;
+
+        // Processa movimentação e ações do jogador
         MoveHandle();
-        MoveInput();
-        Jump();
-        Roll();
+
+        // Apenas processa o input do jogador se o controle manual estiver ativo
+        if (isManualControl)
+        {
+            MoveInput();
+            Jump();
+            Roll();
+        }
 
         updateSideSpeed();
     }
@@ -217,7 +160,6 @@ public class PlayerController : MonoBehaviour
         jumpSpeed = LevelManager.Instance.current_playerJumpSpeed;
         rollingDelay = LevelManager.Instance.current_playerRollingSpeed;
     }
-
 
     #region Sideways
     public void MoveInput()
@@ -233,7 +175,6 @@ public class PlayerController : MonoBehaviour
 
             isMoving = 1;
             GFX_Rotation();
-
         }
         if (input.Movement.Left.triggered)
         {
@@ -249,7 +190,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void MoveHandle()
+    public void MoveHandle()
     {
         switch (desiredLane)
         {
@@ -276,43 +217,37 @@ public class PlayerController : MonoBehaviour
     }
     #endregion Sideways
 
-    #region Rotation
-    void GFX_Rotation()
+    #region Swipe Input
+    public void SwipeDirection(Vector2 direction)
     {
-        if (state != PlayerState.PLAYING) return;
-
-        if (isMoving != 0)
+        if (direction.y > directionThreshold)
         {
-            rotationAngleY = isMoving == 1 ? rotationAngleY : -rotationAngleY;
-            GFX_transform.Rotate(0, rotationAngleY, 0);
-            rotationAngleY = -rotationAngleY;
+            // Swipe para cima (pular)
+            Jump();
         }
-        else
+        else if (direction.y < -directionThreshold)
         {
-            var lookForward = Quaternion.Euler(0, 0, 0);
-            GFX_transform.rotation = Quaternion.Slerp(GFX_transform.rotation, lookForward, rotateBackSpeed * Time.deltaTime);
+            // Swipe para baixo (deslizar)
+            Roll();
         }
-        rotationAngleY = Const.PLAYER_ROTATION_MOVE;
+        else if (direction.x > directionThreshold)
+        {
+            // Swipe para a direita
+            desiredLane++;
+            if (desiredLane > 2) desiredLane = 2;
+        }
+        else if (direction.x < -directionThreshold)
+        {
+            // Swipe para a esquerda
+            desiredLane--;
+            if (desiredLane < 0) desiredLane = 0;
+        }
     }
+    #endregion Swipe Input
 
-    bool VerifyPosition(Vector3 newTargetPosition)
-    {
-        float targetMinX = newTargetPosition.x - rotateBackDelay;
-        float targetMaxX = newTargetPosition.x + rotateBackDelay;
-
-        bool isDirection = isMoving == 1 ? true : false; // true == Right   false == Left
-
-        if (isDirection && transform.position.x >= targetMinX) return true;
-
-        if (!isDirection && transform.position.x <= targetMaxX) return true;
-
-        return false;
-    }
-
-    #endregion Rotation
 
     #region Jump
-    void Jump()
+    public void Jump()
     {
         if (input.Movement.Jump.triggered && CheckingGround())
         {
@@ -323,7 +258,6 @@ public class PlayerController : MonoBehaviour
         {
             isJump = true;
         }
-
         else
         {
             isJump = false;
@@ -344,7 +278,7 @@ public class PlayerController : MonoBehaviour
     #endregion Jump
 
     #region Roll
-    void Roll()
+    public void Roll()
     {
         if (input.Movement.Roll.triggered && !isRolling && CheckingGround())
         {
@@ -364,7 +298,6 @@ public class PlayerController : MonoBehaviour
         coll.center = Vector3.Lerp(coll.center, colliderCenterOnRolling, 1f);
         coll.height = Mathf.Lerp(coll.height, colliderHeightOnRolling, 1f);
 
-
         yield return new WaitForSeconds(rollingDelay);
 
         coll.height = Mathf.Lerp(coll.height, normalColliderHeight, 1f);
@@ -373,6 +306,49 @@ public class PlayerController : MonoBehaviour
         isRolling = false;
     }
     #endregion Roll
+
+
+    void GFX_Rotation()
+    {
+        if (state != PlayerState.PLAYING) return;
+
+        if (isMoving != 0)
+        {
+            // Define o ângulo de rotação com base na direção do movimento
+            float rotationAngle = isMoving == 1 ? Const.PLAYER_ROTATION_MOVE : -Const.PLAYER_ROTATION_MOVE;
+
+            // Aplica a rotação ao transform gráfico
+            GFX_transform.Rotate(0, rotationAngle, 0);
+        }
+        else
+        {
+            // Retorna suavemente à rotação original
+            Quaternion lookForward = Quaternion.Euler(0, 0, 0);
+            GFX_transform.rotation = Quaternion.Slerp(GFX_transform.rotation, lookForward, rotateBackSpeed * Time.deltaTime);
+        }
+    }
+
+    bool VerifyPosition(Vector3 newTargetPosition)
+    {
+        // Define os limites de tolerância para a posição alvo
+        float targetMinX = newTargetPosition.x - rotateBackDelay;
+        float targetMaxX = newTargetPosition.x + rotateBackDelay;
+
+        // Verifica se o jogador está se movendo para a direita ou esquerda
+        bool isMovingRight = isMoving == 1; // 1 = Direita, 2 = Esquerda
+
+        // Verifica se o jogador atingiu a posição alvo dentro dos limites
+        if (isMovingRight && transform.position.x >= targetMinX && transform.position.x <= targetMaxX)
+        {
+            return true;
+        }
+        else if (!isMovingRight && transform.position.x <= targetMaxX && transform.position.x >= targetMinX)
+        {
+            return true;
+        }
+
+        return false;
+    }
 
     #endregion Movement
 
@@ -383,7 +359,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag(Const.OBSTACLE_TAG))
         {
-            StartCoroutine(DieBehaviour());         
+            StartCoroutine(DieBehaviour());
         }
     }
 
@@ -395,7 +371,7 @@ public class PlayerController : MonoBehaviour
         GamePlayManager.Instance.UpdateGameState(GameStates.GAMEOVER);
     }
 
-    bool CheckingGround()
+    public bool CheckingGround()
     {
         bool ray = Physics.CheckSphere(groundCheck.position, 1.5f, groundMask);
 
@@ -409,7 +385,6 @@ public class PlayerController : MonoBehaviour
 
         Gizmos.DrawSphere(groundCheck.position, 1.5f);
     }
-
     #endregion Colliders And Raycasts
 
     #region Win Behaviour
@@ -442,7 +417,7 @@ public class PlayerController : MonoBehaviour
 
     void ReachPalaceRotateRotate()
     {
-        hasReachPalace = true;       
+        hasReachPalace = true;
     }
 
     void WinRotation()
