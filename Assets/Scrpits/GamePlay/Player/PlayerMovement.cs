@@ -13,12 +13,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundMask;
 
-    private int desiredLane = 1; // 0 = esquerda, 1 = meio, 2 = direita
+    public int desiredLane = 1; // 0 = esquerda, 1 = meio, 2 = direita
     private Vector3 targetPosition;
-    private bool isRolling = false;
-    private bool isGrounded = false;
+    public bool isRolling = false;  //Usado no player animation
+    public bool isGrounded = false;  //Usado no player animation
     private float verticalVelocity = 0f;
-    
+
+    [Header("Rotation Parameters")]
+    [SerializeField] private float rotationSpeed = 100f;
+    [SerializeField] private float rotation = 40;
+    private Transform gfxTransform;
 
     private Rigidbody rb;
     private CapsuleCollider coll;
@@ -28,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        gfxTransform = GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
         coll = GetComponent<CapsuleCollider>();
         originalColliderHeight = coll.height;
@@ -37,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         HandleGravity();
+        HandleMovement();
     }
 
     public void HandleMovement()
@@ -49,6 +55,24 @@ public class PlayerMovement : MonoBehaviour
     {
         desiredLane += direction;
         desiredLane = Mathf.Clamp(desiredLane, 0, 2); // Garante que o jogador fique entre as 3 faixas
+        
+    }
+
+    public void HandleRotation(int dir)
+    {
+        float rot = dir > 0 ? rotation : -rotation;
+        Quaternion targetRotation = Quaternion.Euler(0, rot, 0);
+        gfxTransform.rotation = Quaternion.Slerp(gfxTransform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        StartCoroutine(RotationCoroutine());
+
+    }
+
+    private IEnumerator RotationCoroutine()
+    {
+        yield return new WaitForSeconds(0.3f);
+
+        gfxTransform.rotation = Quaternion.Slerp(gfxTransform.rotation, Quaternion.Euler(new Vector3(0,0,0)), rotationSpeed * Time.deltaTime);
     }
 
     public void Jump()

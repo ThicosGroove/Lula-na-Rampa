@@ -1,0 +1,29 @@
+{
+    "LulaAgent": {
+        "checkpoints": [
+            {
+                "steps": 960,
+                "file_path": "results\\Lularun\\LulaAgent\\LulaAgent-960.onnx",
+                "reward": null,
+                "creation_time": 1759086008.2265058,
+                "auxillary_file_paths": [
+                    "results\\Lularun\\LulaAgent\\LulaAgent-960.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 960,
+            "file_path": "results\\Lularun\\LulaAgent.onnx",
+            "reward": null,
+            "creation_time": 1759086008.2265058,
+            "auxillary_file_paths": [
+                "results\\Lularun\\LulaAgent\\LulaAgent-960.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.5.1+cu121"
+    }
+}

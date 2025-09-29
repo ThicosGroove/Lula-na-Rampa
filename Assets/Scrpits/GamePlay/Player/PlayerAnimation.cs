@@ -5,8 +5,7 @@ using GameEvents;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    [SerializeField] PlayerController playerController;
-
+   PlayerMovement playerMovement;
     Animator anim;
 
     int currentLevel;
@@ -14,6 +13,7 @@ public class PlayerAnimation : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void OnEnable()
@@ -84,19 +84,21 @@ public class PlayerAnimation : MonoBehaviour
 
     void UpdateAnimations()
     {
-        if (playerController.isJump)
-        {
-            anim.SetBool(Const.JUMP_ANIMATION, true);
-        }
-        else
+        if (playerMovement.isGrounded)
         {
             anim.SetBool(Const.JUMP_ANIMATION, false);
         }
+        else
+        {
+            Debug.Log("Animaçao pulou");
+            anim.SetBool(Const.JUMP_ANIMATION, true);
+        }
 
 
-        if (playerController.isRolling)
+        if (playerMovement.isRolling)
         {
             anim.SetBool(Const.ROLL_ANIMATION, true);
+            Debug.Log("Animaçao rolou");
         }
         else
         {

@@ -5,8 +5,6 @@ using GameEvents;
 public enum PlayerState
 {
     IDLE,
-    JUMP,
-    SLIDING,
     PLAYING,
     DEAD,
     WIN
@@ -14,23 +12,21 @@ public enum PlayerState
 
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerInputHandler))]
-[RequireComponent(typeof(PlayerRotation))]
+[RequireComponent(typeof(PlayerAnimation))]
+[RequireComponent(typeof(PlayerGameBehaviour))]
 public class PlayerManager : MonoBehaviour
 {
     [Header("Player State")]
     [SerializeField] private PlayerState state = PlayerState.IDLE;
 
     private PlayerMovement movement;
-    private PlayerInputHandler inputHandler;
-    private PlayerRotation rotation;
-
+    private PlayerGameBehaviour PlayerGameBehaviour;
     private bool isGamePaused = false;
 
     private void Awake()
     {
         movement = GetComponent<PlayerMovement>();
-        inputHandler = GetComponent<PlayerInputHandler>();
-        rotation = GetComponent<PlayerRotation>();
+        PlayerGameBehaviour = GetComponent<PlayerGameBehaviour>();
     }
 
     private void OnEnable()
@@ -54,9 +50,6 @@ public class PlayerManager : MonoBehaviour
     private void Update()
     {
         if (state != PlayerState.PLAYING || isGamePaused) return;
-
-        movement.HandleMovement();
-        rotation.HandleRotation();
     }
 
     private void OnGameStart()

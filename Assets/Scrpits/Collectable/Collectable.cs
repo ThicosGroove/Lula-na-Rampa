@@ -7,7 +7,7 @@ public class Collectable : MonoBehaviour, ICollectable
 {
     public void CollectMe()
     {
-        ScoreEvents.OnScoreGained(Const.SCORE_PER_COLLECTABLE);
+        
         Destroy(this.gameObject);
     }
 
@@ -26,6 +26,7 @@ public class Collectable : MonoBehaviour, ICollectable
         if (collision.gameObject.CompareTag(Const.PLAYER_TAG))
         {
             CollectMe();
+            Destroy(this.gameObject);
         }
     }
 

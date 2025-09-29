@@ -53,11 +53,13 @@ public class PlayerInputHandler : MonoBehaviour
     private void MoveRight()
     {
         movement.MoveToLane(1);
+        movement.HandleRotation(1);
     }
 
     private void MoveLeft()
     {
         movement.MoveToLane(-1);
+        movement.HandleRotation(-1);
     }
 
     private void Jump()

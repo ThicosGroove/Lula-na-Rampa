@@ -1,0 +1,226 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1458563928463000997
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7109382211092093872}
+  - component: {fileID: 5370064278520015002}
+  m_Layer: 0
+  m_Name: Spawn Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7109382211092093872
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458563928463000997}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: 0.00001005579, y: 0.6292543, z: 0}
+  m_LocalScale: {x: 0.0008686114, y: 0.0047281315, z: 0.020111583}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6043035782084577755}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &5370064278520015002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458563928463000997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 586db97db9522934684f302fdd3e9537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacles:
+  - name: Caminhao Patriota
+    prefab: {fileID: 3016741344685060480, guid: cd2006e9fbea03448b0c64523ec0d604,
+      type: 3}
+    posX:
+    - 13
+    - -15
+  - name: Boi
+    prefab: {fileID: 7944480823083047988, guid: ba3f307508af7eb4995b530506eb8617,
+      type: 3}
+    posX:
+    - 15
+    - 0
+    - -15
+  - name: Vaca
+    prefab: {fileID: 6788670865546778113, guid: 6e79fa8a8d7fedf41bbda91ee0d6b813,
+      type: 3}
+    posX:
+    - 15
+    - 0
+    - -15
+  - name: Pneu
+    prefab: {fileID: 3289771557835313809, guid: 6c9832869a08e7f49a2f85a5e726aac1,
+      type: 3}
+    posX:
+    - 0
+  - name: 'Faixa '
+    prefab: {fileID: 7864290718697336466, guid: 8069c1557d3886e42b9c3ff4caab5f18,
+      type: 3}
+    posX:
+    - 0
+  - name: Dois Gados
+    prefab: {fileID: 6833066449440278259, guid: e37c8c02ac953954dbc0bdea02445cd6,
+      type: 3}
+    posX:
+    - 9
+    - -9
+  - name: UFO
+    prefab: {fileID: 4418352027895873902, guid: f11dd235ff119c84bb7693d51daf4cdf,
+      type: 3}
+    posX:
+    - 0
+    - 13
+    - -13
+  collectable:
+    collectablePrefab: {fileID: 6758563964536805240, guid: abfef453204048b40940b207ef24634b,
+      type: 3}
+    posX:
+    - 15
+    - 0
+    - -15
+  objSpawnDistance: 1200
+--- !u!1 &3691589463342817207
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6043035782084577755}
+  - component: {fileID: 3330828676022184799}
+  - component: {fileID: 3743356038881733455}
+  - component: {fileID: 1215743029107083456}
+  - component: {fileID: 6331636610873288148}
+  m_Layer: 6
+  m_Name: Rampa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6043035782084577755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3691589463342817207}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0.0005, y: 0, z: 475.563}
+  m_LocalScale: {x: 49.7226, y: 1151.2628, z: 211.5}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7109382211092093872}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!33 &3330828676022184799
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3691589463342817207}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &3743356038881733455
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3691589463342817207}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 1d98704edcf8e724eb6bc184e7c4f7fa, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1215743029107083456
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3691589463342817207}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &6331636610873288148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3691589463342817207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d7278e5e047aef4fa7656eb08afe086, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vel: 0.75
+  quad: {fileID: 3743356038881733455}

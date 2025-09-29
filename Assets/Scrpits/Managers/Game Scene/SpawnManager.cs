@@ -24,7 +24,7 @@ public class SpawnManager : MonoBehaviour
     public ObstacleInfo[] obstacles;
     public CollectableInfo collectable;
 
-    [SerializeField] float objSpawnDistance = 1000f;
+    [SerializeField] float objSpawnDistance = 0;
 
     private float spawnObstacleDelay;
 
@@ -94,14 +94,17 @@ public class SpawnManager : MonoBehaviour
 
         int obstacle = Random.Range(0, obstacles.Length);
         int randomPosObstacleX = Random.Range(0, obstacles[obstacle].posX.Length);
-        Vector3 posObstacle = new Vector3(obstacles[obstacle].posX[randomPosObstacleX], 0f, objSpawnDistance);
+        Vector3 posObstacle = new Vector3(obstacles[obstacle].posX[randomPosObstacleX], 0f, this.transform.position.z);
 
         int randomPosCollectableX = Random.Range(0, collectable.posX.Length);
-        Vector3 posCollectable = new Vector3(collectable.posX[randomPosCollectableX], 0f, objSpawnDistance);
+        Vector3 posCollectable = new Vector3(collectable.posX[randomPosCollectableX], 0f, this.transform.position.z);
 
 
         newObstacle = Instantiate(obstacles[obstacle].prefab, posObstacle, obstacles[obstacle].prefab.transform.rotation);
         newCollectable = Instantiate(collectable.collectablePrefab, posCollectable, Quaternion.identity);
+
+        newObstacle.transform.SetParent(this.transform);
+        newCollectable.transform.SetParent(this.transform);
 
         GamePlayManager.Instance.objList.Add(newObstacle.GetComponent<MoveObstacle>());
         GamePlayManager.Instance.objList.Add(newCollectable.GetComponent<MoveCollectable>());

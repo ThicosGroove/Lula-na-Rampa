@@ -1,76 +1,73 @@
 // 24/09/2025 AI-Tag
 // This was created with the help of Assistant, a Unity Artificial Intelligence product.
 
-using UnityEngine;
 using Unity.MLAgents;
-using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
+using Unity.MLAgents.Sensors;
+using UnityEngine;
+using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 public class LulaAgent : Agent
 {
-    private PlayerController playerController;
+    private PlayerMovement playerMovement;
+    private float reward = 0;
 
     public override void Initialize()
     {
         // Referência ao PlayerController
-        playerController = GetComponent<PlayerController>();
+        playerMovement = GetComponent<PlayerMovement>();
+        Time.timeScale = 1.0f;
     }
 
     public override void OnEpisodeBegin()
     {
-        // Reinicia o estado do jogador e o ambiente
-        playerController.transform.position = Vector3.zero;
-        playerController.UpdatePlayerState(PlayerState.PLAYING);
+        Debug.Log("Start Episode");
+        transform.position = Vector3.zero;
+        playerMovement.desiredLane = 1;
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
+        Vector3 playerPosition = playerMovement.transform.position;
+        int isGrounded = playerMovement.isGrounded ? 1 : 0;
+        int currentLane = playerMovement.desiredLane;
+
         // Coleta informações do ambiente
-        sensor.AddObservation(playerController.transform.position.x); // Posição do jogador
-        sensor.AddObservation(playerController.CheckingGround() ? 1 : 0); // Está no chão?
-        sensor.AddObservation(playerController.desiredLane); // Faixa atual
+        sensor.AddObservation(playerPosition); // Posição do jogador
+        sensor.AddObservation(isGrounded); // Está no chão?
+        sensor.AddObservation(currentLane); // Faixa atual
     }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
         int action = actions.DiscreteActions[0];
 
+        Debug.Log($"Action Received: {action}");
         switch (action)
         {
             case 0: // Mover para a esquerda
-                if (playerController.desiredLane > 0)
-                {
-                    playerController.desiredLane--;
-                }
+                    playerMovement.MoveToLane(-1);               
                 break;
-            case 1: // Mover para a direita
-                if (playerController.desiredLane < 2)
-                {
-                    playerController.desiredLane++;
-                }
+            case 1: // Mover para a direita               
+                    playerMovement.MoveToLane(+1);
                 break;
             case 2: // Pular
-                if (playerController.CheckingGround())
-                {
-                    playerController.Jump();
-                }
+                    playerMovement.Jump();
                 break;
             case 3: // Deslizar
-                if (playerController.CheckingGround())
-                {
-                    playerController.Roll();
-                }
+                    playerMovement.Roll();
+                break;
+            case 4:
+                // Nao se mover
                 break;
         }
-
-        // Atualiza a posição do jogador
-        playerController.MoveHandle();
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         // Controle manual para testes
         var discreteActions = actionsOut.DiscreteActions;
+
         if (Input.GetKey(KeyCode.LeftArrow))
             discreteActions[0] = 0; // Esquerda
         else if (Input.GetKey(KeyCode.RightArrow))
@@ -79,5 +76,33 @@ public class LulaAgent : Agent
             discreteActions[0] = 2; // Pular
         else if (Input.GetKey(KeyCode.DownArrow))
             discreteActions[0] = 3; // Deslizar
+        //else
+        //    discreteActions[0] = 4; // nao fazer nada
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(Const.OBSTACLE_TAG))
+        {
+            // Game Over
+
+            Debug.Log("BATEU");
+
+            AddReward(-0.1f);
+            reward--;
+            // Teste para treinar IA
+        }
+        else if (other.CompareTag(Const.STAR_TAG))
+        {
+
+            AddReward(0.3f);
+            reward += 0.1f;
+        }
+
+        if (reward < 0)
+        {
+            EndEpisode();
+        }
+
     }
 }
