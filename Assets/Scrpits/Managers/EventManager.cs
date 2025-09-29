@@ -72,10 +72,22 @@ namespace GameEvents
         public static event UnityAction GameResume;
         public static void OnGameResume() => GameResume?.Invoke();
 
-    //    public static event UnityAction<bool> SFXToggle;
-    //    public static void OnMuteSFXToggle(bool isMute) => SFXToggle?.Invoke(isMute);
+        //    public static event UnityAction<bool> SFXToggle;
+        //    public static void OnMuteSFXToggle(bool isMute) => SFXToggle?.Invoke(isMute);
 
-    //    public static event UnityAction<bool> BGMusicToggle;
-    //    public static void OnBGMusicToggle(bool isMute) => BGMusicToggle?.Invoke(isMute);
+        //    public static event UnityAction<bool> BGMusicToggle;
+        //    public static void OnBGMusicToggle(bool isMute) => BGMusicToggle?.Invoke(isMute);
+    }
+
+    public static class TrainingEvents
+    {
+        public static event UnityAction RewardLoss;
+        public static void OnRewardLoss() => RewardLoss?.Invoke();
+
+        public static event UnityAction RewardWin;
+        public static void OnRewardWin() => RewardWin?.Invoke();
+
+        public static event UnityAction GetStar;
+        public static void OnGetStar() => GetStar?.Invoke();
     }
 }

@@ -25,7 +25,6 @@ public class InputManager : Singleton<InputManager>
     private void OnEnable()
     {
         inputActions.Enable();
-        Debug.LogWarning("Habilitado");
     }
 
     private void OnDisable()

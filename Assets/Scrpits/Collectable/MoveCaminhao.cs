@@ -22,6 +22,6 @@ public class MoveCaminhao : MoveBase
 
     protected override void DieBehaviour()
     {
-        
+        Destroy(this.gameObject);
     }
 }

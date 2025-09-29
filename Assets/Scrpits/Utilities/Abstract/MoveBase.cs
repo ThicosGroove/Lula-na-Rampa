@@ -120,6 +120,7 @@ public abstract class MoveBase : MonoBehaviour
             //Play Audio
             DieBehaviour();
             
+            Destroy(this.gameObject);
         }
     }
 }

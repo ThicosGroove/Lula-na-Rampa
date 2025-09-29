@@ -17,6 +17,7 @@ public static class Const
     public static string PLAYER_TAG = "Player";
     public static string OBSTACLE_TAG = "Obstacle";
     public static string STAR_TAG = "Star";
+    public static string REWARD_TAG = "Reward";
 
     //Game Play
     public static int SCORE_PER_COLLECTABLE = 1;

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using GameEvents;
+using UnityEngine.Rendering;
 
 public enum PlayerState
 {
@@ -36,6 +37,7 @@ public class PlayerManager : MonoBehaviour
         GameplayEvents.Win += OnPlayerWin;
         UtilityEvents.GamePause += OnGamePause;
         UtilityEvents.GameResume += OnGameResume;
+        TrainingEvents.RewardLoss += TrainingRewardLoss;
     }
 
     private void OnDisable()
@@ -45,6 +47,7 @@ public class PlayerManager : MonoBehaviour
         GameplayEvents.Win -= OnPlayerWin;
         UtilityEvents.GamePause -= OnGamePause;
         UtilityEvents.GameResume -= OnGameResume;
+        TrainingEvents.RewardLoss -= TrainingRewardLoss;
     }
 
     private void Update()
@@ -83,5 +86,10 @@ public class PlayerManager : MonoBehaviour
     public void UpdatePlayerState(PlayerState newState)
     {
         state = newState;
+    }
+
+    private void TrainingRewardLoss()
+    {
+
     }
 }

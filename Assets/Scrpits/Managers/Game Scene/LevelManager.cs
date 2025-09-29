@@ -101,7 +101,6 @@ public class LevelManager : Singleton<LevelManager>
     private IEnumerator SettingUpCurrentLevel(int level)
     {
         currentLevel = level;
-        Debug.LogWarning($"Mudou level {currentLevel}");
 
         ScoreEvents.OnChangeLevel(currentLevel);
 

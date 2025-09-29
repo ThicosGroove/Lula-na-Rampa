@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1381871498356198899
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9207217797931204557}
+  - component: {fileID: 6891885107870812015}
+  m_Layer: 0
+  m_Name: Spawn Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9207217797931204557
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381871498356198899}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1200}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6891885107870812015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381871498356198899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 586db97db9522934684f302fdd3e9537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacles:
+  - name: Caminhao Patriota
+    prefab: {fileID: 3016741344685060480, guid: cd2006e9fbea03448b0c64523ec0d604,
+      type: 3}
+    posX:
+    - 13
+    - -15
+  - name: Boi
+    prefab: {fileID: 7944480823083047988, guid: ba3f307508af7eb4995b530506eb8617,
+      type: 3}
+    posX:
+    - 15
+    - 0
+    - -15
+  - name: Vaca
+    prefab: {fileID: 6788670865546778113, guid: 6e79fa8a8d7fedf41bbda91ee0d6b813,
+      type: 3}
+    posX:
+    - 15
+    - 0
+    - -15
+  - name: Pneu
+    prefab: {fileID: 3289771557835313809, guid: 6c9832869a08e7f49a2f85a5e726aac1,
+      type: 3}
+    posX:
+    - 0
+  - name: 'Faixa '
+    prefab: {fileID: 7864290718697336466, guid: 8069c1557d3886e42b9c3ff4caab5f18,
+      type: 3}
+    posX:
+    - 0
+  - name: Dois Gados
+    prefab: {fileID: 6833066449440278259, guid: e37c8c02ac953954dbc0bdea02445cd6,
+      type: 3}
+    posX:
+    - 9
+    - -9
+  - name: UFO
+    prefab: {fileID: 4418352027895873902, guid: f11dd235ff119c84bb7693d51daf4cdf,
+      type: 3}
+    posX:
+    - 0
+    - 13
+    - -13
+  collectable:
+    collectablePrefab: {fileID: 6758563964536805240, guid: abfef453204048b40940b207ef24634b,
+      type: 3}
+    posX:
+    - 15
+    - 0
+    - -15

@@ -15,8 +15,6 @@ public class CameraBehaviour : MonoBehaviour
     {
         camPos = SaveManager.instance.LoadFile()._cameraPosition;
         camRot = SaveManager.instance.LoadFile()._cameraRotation;
-
-        Debug.LogWarning($"Cam Pos {camPos}  Cam Rot {camRot}");
     }
 
     private void OnEnable()
@@ -33,20 +31,17 @@ public class CameraBehaviour : MonoBehaviour
 
     void CanGoToPlace()
     {
-        Debug.LogWarning("Go To place camera");
         GoToPlace(camPos, camRot);
     }
 
     void CanReceiveFaixa()
     {
-        Debug.LogWarning("Go To place camera Receive Faixa");
         GoToPlace(receiveFaixaPos, receiveFaixaRot);
     }
     private void GoToPlace(Vector3 pos , Vector3 rot)
     {
         transform.position = pos;
         transform.rotation = Quaternion.Euler(rot);
-        Debug.LogWarning("Chegou");
     }
 
 

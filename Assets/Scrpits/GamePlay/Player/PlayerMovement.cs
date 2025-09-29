@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using GameEvents;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -28,10 +29,12 @@ public class PlayerMovement : MonoBehaviour
     private CapsuleCollider coll;
     private float originalColliderHeight;
     private Vector3 originalColliderCenter;
+    private Vector3 initialPos;
 
 
     private void Awake()
     {
+        initialPos = transform.position;
         gfxTransform = GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
         coll = GetComponent<CapsuleCollider>();
@@ -48,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     public void HandleMovement()
     {
         targetPosition = new Vector3((desiredLane - 1) * Const.LANE_DISTANCE, transform.position.y, transform.position.z);
-        transform.position = Vector3.Lerp(transform.position, targetPosition, slideSpeed * Time.deltaTime);
+        transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, slideSpeed * Time.deltaTime);
     }
 
     public void MoveToLane(int direction)
@@ -77,21 +80,17 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump()
     {
-        Debug.Log($"Is Grounded {isGrounded}");
         if (isGrounded)
         {
             isGrounded = false;
 
             verticalVelocity = Mathf.Sqrt(2 * jumpHeight * gravity); // Calcula a velocidade inicial necessária para o pulo
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, verticalVelocity, rb.linearVelocity.z); // Aplica a velocidade no eixo Y
-            Debug.Log($"Vertical = {verticalVelocity}");
-            Debug.Log($"RB VELOCITY = {rb.linearVelocity.y}");
         }
     }
 
     public void Roll()
     {
-        Debug.Log($"Is Grounded {isGrounded}");
         if (!isRolling && isGrounded)
         {
             isRolling = true;
@@ -134,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void ResetPosition()
     {
-        transform.position = Vector3.zero;
+        transform.position = initialPos;
         desiredLane = 1;
     }
 
@@ -146,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
     public void WinMovement()
     {
         desiredLane = 1;
-        targetPosition = Vector3.zero;
+        targetPosition = initialPos;
         transform.position = Vector3.Lerp(transform.position, targetPosition, slideSpeed * Time.deltaTime);
     }
 }

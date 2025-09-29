@@ -9,6 +9,15 @@ public class RampaBehaviour : MonoBehaviour
 	public Renderer quad;
 	bool canMove = false;
 
+    [SerializeField] Material[] material;
+    private MeshRenderer mesh;
+
+    private void Start()
+    {
+        mesh = GetComponent<MeshRenderer>();
+    }
+
+
     private void OnEnable()
     {
         GameplayEvents.StartNewLevel += StartMoving;
@@ -18,6 +27,10 @@ public class RampaBehaviour : MonoBehaviour
 
         UtilityEvents.GamePause += StopMoving;
         UtilityEvents.GameResume += StartMoving;
+
+        //TrainingEvents.RewardLoss += RewardLoss; 
+        //TrainingEvents.GetStar += GetStar;
+        //TrainingEvents.RewardWin += RewardWin;
     }
 
     private void OnDisable()
@@ -29,6 +42,10 @@ public class RampaBehaviour : MonoBehaviour
 
         UtilityEvents.GamePause -= StopMoving;
         UtilityEvents.GameResume -= StartMoving;
+
+        //TrainingEvents.RewardLoss -= RewardLoss;
+        //TrainingEvents.GetStar -= GetStar;
+        //TrainingEvents.RewardWin -= RewardWin;
     }
 
     void StartMoving()
@@ -54,4 +71,32 @@ public class RampaBehaviour : MonoBehaviour
             quad.material.mainTextureOffset += offset;
         }		
 	}
+
+    public void RewardLoss()
+    {
+        mesh.material = material[1];
+
+        StartCoroutine(SetMeshBack());
+    }
+
+    public void RewardWin()
+    {
+        mesh.material = material[2];
+
+        StartCoroutine(SetMeshBack());
+    }
+
+    public void GetStar()
+    {
+        mesh.material = material[3];
+
+        StartCoroutine(SetMeshBack());
+    }
+
+    IEnumerator SetMeshBack()
+    {
+        yield return new WaitForSeconds(0.4f);
+
+        mesh.material = material[0];
+    }
 }
