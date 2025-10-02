@@ -12,6 +12,7 @@ public class LulaAgent : Agent
 {
     private PlayerMovement playerMovement;
     private float reward = 0;
+    private int osbtacle = 0;
 
     private Vector3 initialPos;
 
@@ -23,7 +24,7 @@ public class LulaAgent : Agent
     {
         // Referência ao PlayerController
         playerMovement = GetComponent<PlayerMovement>();
-        initialPos = transform.position;
+        //initialPos = transform.position;
         Time.timeScale = 1.0f;
 
         sensor3D = GetComponentsInChildren<RayPerceptionSensorComponent3D>();
@@ -33,8 +34,8 @@ public class LulaAgent : Agent
     public override void OnEpisodeBegin()
     {
         Debug.Log("Start Episode");
-        transform.position = initialPos;
-        playerMovement.desiredLane = 1;
+        //transform.position = initialPos;
+        //playerMovement.desiredLane = 1;
     }
 
     private void CheckRaycastPerception()
@@ -110,12 +111,10 @@ public class LulaAgent : Agent
                     playerMovement.Jump();
                 break;
             case 3: // Deslizar
-                Debug.Log("Rolou");
                     playerMovement.Roll();
                 break;
             case 4:
                 // Nao se mover
-                Debug.Log("Nao fez nada");
                 break;
         }
     }
@@ -145,6 +144,7 @@ public class LulaAgent : Agent
 
             AddReward(-0.2f);
             reward--;
+            osbtacle++;
             // Teste para treinar IA
 
             rampa.RewardLoss();
@@ -156,6 +156,7 @@ public class LulaAgent : Agent
 
             AddReward(0.3f);
             reward += 0.3f;
+            osbtacle++;
 
             rampa.GetStar();
 
@@ -165,14 +166,16 @@ public class LulaAgent : Agent
         {
             reward += 0.1f;
             AddReward(0.1f);
+            osbtacle++;
 
             rampa.RewardWin();
 
             //TrainingEvents.OnRewardWin();
         }
 
-        if (reward < 0)
+        if (osbtacle <= 10)
         {
+            osbtacle = 0;
             EndEpisode();
         }
 

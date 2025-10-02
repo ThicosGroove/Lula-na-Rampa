@@ -103,13 +103,13 @@ public class SpawnManager : MonoBehaviour
 
 
         newObstacle = Instantiate(obstacles[obstacle].prefab, posObstacle, obstacles[obstacle].prefab.transform.rotation);
-        //newCollectable = Instantiate(collectable.collectablePrefab, posCollectable, Quaternion.identity);
+        newCollectable = Instantiate(collectable.collectablePrefab, posCollectable, Quaternion.identity);
 
         newObstacle.transform.SetParent(this.transform);
-        //newCollectable.transform.SetParent(this.transform);
+        newCollectable.transform.SetParent(this.transform);
 
         GamePlayManager.Instance.objList.Add(newObstacle.GetComponent<MoveObstacle>());
-        //GamePlayManager.Instance.objList.Add(newCollectable.GetComponent<MoveCollectable>());
+        GamePlayManager.Instance.objList.Add(newCollectable.GetComponent<MoveCollectable>());
 
 
         yield return new WaitForSecondsRealtime(spawnObstacleDelay);

@@ -5,14 +5,14 @@ using GameEvents;
 
 public class PlayerAnimation : MonoBehaviour
 {
-   PlayerMovement playerMovement;
-    Animator anim;
+    PlayerMovement playerMovement;
+    [SerializeField] Animator anim;
 
     int currentLevel;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
     }
 

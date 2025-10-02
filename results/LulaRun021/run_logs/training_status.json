@@ -1,0 +1,65 @@
+{
+    "LulaAgent": {
+        "checkpoints": [
+            {
+                "steps": 133240,
+                "file_path": "results\\LulaRun021\\LulaAgent\\LulaAgent-133240.onnx",
+                "reward": null,
+                "creation_time": 1759351892.6926343,
+                "auxillary_file_paths": [
+                    "results\\LulaRun021\\LulaAgent\\LulaAgent-133240.pt"
+                ]
+            },
+            {
+                "steps": 144087,
+                "file_path": "results\\LulaRun021\\LulaAgent\\LulaAgent-144087.onnx",
+                "reward": null,
+                "creation_time": 1759352405.5044026,
+                "auxillary_file_paths": [
+                    "results\\LulaRun021\\LulaAgent\\LulaAgent-144087.pt"
+                ]
+            },
+            {
+                "steps": 147415,
+                "file_path": "results\\LulaRun021\\LulaAgent\\LulaAgent-147415.onnx",
+                "reward": null,
+                "creation_time": 1759352653.4366086,
+                "auxillary_file_paths": [
+                    "results\\LulaRun021\\LulaAgent\\LulaAgent-147415.pt"
+                ]
+            },
+            {
+                "steps": 150001,
+                "file_path": "results\\LulaRun021\\LulaAgent\\LulaAgent-150001.onnx",
+                "reward": 0.07608695857334828,
+                "creation_time": 1759353083.911569,
+                "auxillary_file_paths": [
+                    "results\\LulaRun021\\LulaAgent\\LulaAgent-150001.pt"
+                ]
+            },
+            {
+                "steps": 200001,
+                "file_path": "results\\LulaRun021\\LulaAgent\\LulaAgent-200001.onnx",
+                "reward": 0.08835821167301776,
+                "creation_time": 1759354718.4056077,
+                "auxillary_file_paths": [
+                    "results\\LulaRun021\\LulaAgent\\LulaAgent-200001.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 200001,
+            "file_path": "results\\LulaRun021\\LulaAgent.onnx",
+            "reward": 0.08835821167301776,
+            "creation_time": 1759354718.4056077,
+            "auxillary_file_paths": [
+                "results\\LulaRun021\\LulaAgent\\LulaAgent-200001.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.5.1+cu121"
+    }
+}

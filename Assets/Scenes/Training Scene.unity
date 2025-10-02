@@ -286,6 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215dc4970693aaf45ba13a95076f7099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
+  anim: {fileID: 0}
 --- !u!1 &69556323
 GameObject:
   m_ObjectHideFlags: 0
@@ -925,6 +926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215dc4970693aaf45ba13a95076f7099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
+  anim: {fileID: 0}
 --- !u!1 &125517198
 GameObject:
   m_ObjectHideFlags: 0
@@ -1438,6 +1440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215dc4970693aaf45ba13a95076f7099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
+  anim: {fileID: 0}
 --- !u!1001 &200890211
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2391,6 +2394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215dc4970693aaf45ba13a95076f7099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
+  anim: {fileID: 0}
 --- !u!1001 &291057932
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2570,6 +2574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215dc4970693aaf45ba13a95076f7099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
+  anim: {fileID: 0}
 --- !u!4 &332632416 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1725827378496261665, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
@@ -4058,6 +4063,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215dc4970693aaf45ba13a95076f7099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
+  anim: {fileID: 0}
 --- !u!1001 &663176131
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5154,6 +5160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215dc4970693aaf45ba13a95076f7099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
+  anim: {fileID: 0}
 --- !u!1 &867856731
 GameObject:
   m_ObjectHideFlags: 0
@@ -6079,6 +6086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215dc4970693aaf45ba13a95076f7099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
+  anim: {fileID: 0}
 --- !u!1001 &1073687776
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8866,6 +8874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215dc4970693aaf45ba13a95076f7099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
+  anim: {fileID: 0}
 --- !u!1 &1503226740
 GameObject:
   m_ObjectHideFlags: 0
@@ -9259,6 +9268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215dc4970693aaf45ba13a95076f7099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
+  anim: {fileID: 0}
 --- !u!1 &1534976690
 GameObject:
   m_ObjectHideFlags: 0
@@ -9722,6 +9732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215dc4970693aaf45ba13a95076f7099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
+  anim: {fileID: 0}
 --- !u!114 &1652290732 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5239282514068230146, guid: a9317646f81b4a540aa30644483daed5,
@@ -10265,6 +10276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215dc4970693aaf45ba13a95076f7099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
+  anim: {fileID: 0}
 --- !u!1 &1723132734
 GameObject:
   m_ObjectHideFlags: 0
@@ -11018,6 +11030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215dc4970693aaf45ba13a95076f7099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
+  anim: {fileID: 0}
 --- !u!1 &1833811621
 GameObject:
   m_ObjectHideFlags: 0

@@ -128,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         // Verifica se há colisão com o chão usando Physics.OverlapSphere
-        return isGrounded = Physics.CheckSphere(groundCheck.position, 0.5f, groundMask);
+        return isGrounded = Physics.CheckSphere(groundCheck.position, 1f, groundMask);
     }
 
     public void ResetPosition()
