@@ -84,7 +84,7 @@ public abstract class MoveBase : MonoBehaviour
     {
         if (transform.position.z < player.transform.position.z - 50f)
         {
-            GamePlayManager.Instance.objList.Remove(this);
+            GamePlayManager.Instance.objList.Remove(this.gameObject);
             Destroy(this.gameObject);
         }
     }
@@ -98,7 +98,7 @@ public abstract class MoveBase : MonoBehaviour
 
     void DestroyOnGameOver()
     {
-        GamePlayManager.Instance.objList.Remove(this);
+        GamePlayManager.Instance.objList.Remove(this.gameObject);
         Destroy(this.gameObject);
     }
 

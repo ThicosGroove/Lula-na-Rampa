@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
   state: 0
+  isTraining: 1
 --- !u!114 &5716023774702928839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 860f124dd236fee4a8b141a4cd54df71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInputHandler
+  canMove: 0
 --- !u!114 &200712972927882581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerGameBehaviour
   reward: 0
+  stars: 0
 --- !u!114 &4813330578219873268
 MonoBehaviour:
   m_ObjectHideFlags: 0

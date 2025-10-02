@@ -18,16 +18,21 @@ public enum PlayerState
 public class PlayerManager : MonoBehaviour
 {
     [Header("Player State")]
-    [SerializeField] private PlayerState state = PlayerState.IDLE;
+    [SerializeField] public PlayerState state = PlayerState.IDLE;
+
+    [Header("Training")]
+    [SerializeField] public bool isTraining = false;
 
     private PlayerMovement movement;
     private PlayerGameBehaviour PlayerGameBehaviour;
     private bool isGamePaused = false;
+    private PlayerInputHandler playerInputHandler;
 
     private void Awake()
     {
         movement = GetComponent<PlayerMovement>();
         PlayerGameBehaviour = GetComponent<PlayerGameBehaviour>();
+        playerInputHandler = GetComponent<PlayerInputHandler>();
     }
 
     private void OnEnable()
@@ -58,29 +63,34 @@ public class PlayerManager : MonoBehaviour
     private void OnGameStart()
     {
         state = PlayerState.PLAYING;
+        playerInputHandler.canMove = true;
         movement.ResetPosition();
     }
 
     private void OnGameOver()
     {
         state = PlayerState.DEAD;
+        playerInputHandler.canMove = false;
         movement.StopMovement();
     }
 
     private void OnPlayerWin()
     {
         state = PlayerState.WIN;
+        playerInputHandler.canMove = false;
         movement.WinMovement();
     }
 
     private void OnGamePause()
     {
         isGamePaused = true;
+        playerInputHandler.canMove = false;
     }
 
     private void OnGameResume()
     {
         isGamePaused = false;
+        playerInputHandler.canMove = true;
     }
 
     public void UpdatePlayerState(PlayerState newState)

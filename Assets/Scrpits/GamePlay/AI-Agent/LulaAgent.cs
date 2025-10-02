@@ -16,6 +16,10 @@ public class LulaAgent : Agent
 
     private Vector3 initialPos;
 
+    private PlayerInputHandler playerInputHandler;
+    private PlayerManager playerManager;
+
+    [Header("Training")]
     [SerializeField] private RampaBehaviour rampa;
 
     private RayPerceptionSensorComponent3D[] sensor3D;
@@ -23,7 +27,9 @@ public class LulaAgent : Agent
     public override void Initialize()
     {
         // Referência ao PlayerController
+        playerManager = GetComponent<PlayerManager>();
         playerMovement = GetComponent<PlayerMovement>();
+        playerInputHandler = GetComponent<PlayerInputHandler>();
         //initialPos = transform.position;
         Time.timeScale = 1.0f;
 
@@ -99,6 +105,8 @@ public class LulaAgent : Agent
     {
         int action = actions.DiscreteActions[0];
 
+        if (!playerInputHandler.canMove) { return; }
+
         switch (action)
         {
             case 0: // Mover para a esquerda
@@ -119,22 +127,22 @@ public class LulaAgent : Agent
         }
     }
 
-    public override void Heuristic(in ActionBuffers actionsOut)
-    {
-        // Controle manual para testes
-        var discreteActions = actionsOut.DiscreteActions;
+    //public override void Heuristic(in ActionBuffers actionsOut)
+    //{
+    //    // Controle manual para testes
+    //    var discreteActions = actionsOut.DiscreteActions;
 
-        if (Input.GetKey(KeyCode.LeftArrow))
-            discreteActions[0] = 0; // Esquerda
-        else if (Input.GetKey(KeyCode.RightArrow))
-            discreteActions[0] = 1; // Direita
-        else if (Input.GetKey(KeyCode.UpArrow))
-            discreteActions[0] = 2; // Pular
-        else if (Input.GetKey(KeyCode.DownArrow))
-            discreteActions[0] = 3; // Deslizar
-        else
-            discreteActions[0] = 4; // nao fazer nada
-    }
+    //    if (Input.GetKey(KeyCode.LeftArrow))
+    //        discreteActions[0] = 0; // Esquerda
+    //    else if (Input.GetKey(KeyCode.RightArrow))
+    //        discreteActions[0] = 1; // Direita
+    //    else if (Input.GetKey(KeyCode.UpArrow))
+    //        discreteActions[0] = 2; // Pular
+    //    else if (Input.GetKey(KeyCode.DownArrow))
+    //        discreteActions[0] = 3; // Deslizar
+    //    else
+    //        discreteActions[0] = 4; // nao fazer nada
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -147,18 +155,19 @@ public class LulaAgent : Agent
             osbtacle++;
             // Teste para treinar IA
 
-            rampa.RewardLoss();
+            if (playerManager.isTraining) { rampa.RewardLoss(); }
 
             //TrainingEvents.OnRewardLoss();
         }
         else if (other.CompareTag(Const.STAR_TAG))
         {
 
-            AddReward(0.3f);
-            reward += 0.3f;
+            AddReward(1f);
+            reward += 1f;
             osbtacle++;
 
-            rampa.GetStar();
+            if (playerManager.isTraining) { rampa.GetStar(); }
+            
 
             //TrainingEvents.OnGetStar();
         }
@@ -168,7 +177,7 @@ public class LulaAgent : Agent
             AddReward(0.1f);
             osbtacle++;
 
-            rampa.RewardWin();
+            if (playerManager.isTraining) { rampa.RewardWin(); }
 
             //TrainingEvents.OnRewardWin();
         }

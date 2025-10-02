@@ -38,8 +38,8 @@ public class GamePlayManager : Singleton<GamePlayManager>
     public bool isGamePaused;
     public bool hasReach = false;
 
-    [HideInInspector]
-    public List<MoveBase> objList = new List<MoveBase>();
+    [Header("Object List")]
+    public List<GameObject> objList = new List<GameObject>();
 
     protected override void Awake()
     {
@@ -64,6 +64,14 @@ public class GamePlayManager : Singleton<GamePlayManager>
     private void Start()
     {
         GameManager.instance.UpdateSceneState(SceneState.GAME);
+    }
+
+    private void Update()
+    {
+        if (objList.Count > 200)
+        {
+            Utils.ClearList();
+        }
     }
 
 

@@ -8,15 +8,26 @@ public class PlayerGameBehaviour : MonoBehaviour
     [SerializeField] private int reward = 0;
     [SerializeField] private int stars = 0;
 
+    private PlayerManager playerManager;
+
+    private void Start()
+    {
+        playerManager = GetComponent<PlayerManager>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(Const.OBSTACLE_TAG))
         {
+            reward--;
             // Game Over
+            
+            if (playerManager.isTraining) { return; }
+
+            GameplayEvents.OnGameOver();
+            
 
             // Teste para treinar IA
-            reward--;
 
         }
         else if (other.CompareTag(Const.REWARD_TAG))
@@ -27,7 +38,10 @@ public class PlayerGameBehaviour : MonoBehaviour
         else if (other.CompareTag(Const.STAR_TAG))
         {
             stars++;
-            //ScoreEvents.OnScoreGained(Const.SCORE_PER_COLLECTABLE);
+            if (playerManager.isTraining) { return; }
+            
+            ScoreEvents.OnScoreGained(Const.SCORE_PER_COLLECTABLE);
+            
         }
     }
 }

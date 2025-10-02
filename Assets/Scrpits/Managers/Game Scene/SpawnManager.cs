@@ -108,8 +108,8 @@ public class SpawnManager : MonoBehaviour
         newObstacle.transform.SetParent(this.transform);
         newCollectable.transform.SetParent(this.transform);
 
-        GamePlayManager.Instance.objList.Add(newObstacle.GetComponent<MoveObstacle>());
-        GamePlayManager.Instance.objList.Add(newCollectable.GetComponent<MoveCollectable>());
+        GamePlayManager.Instance.objList.Add(newObstacle);
+        GamePlayManager.Instance.objList.Add(newCollectable);
 
 
         yield return new WaitForSecondsRealtime(spawnObstacleDelay);

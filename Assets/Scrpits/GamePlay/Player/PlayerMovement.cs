@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump()
     {
-        if (isGrounded)
+        if (isGrounded && !isRolling)
         {
             isGrounded = false;
 

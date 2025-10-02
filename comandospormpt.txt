@@ -1,0 +1,8 @@
+Ativar o python enviroment -
+	Lula-na-Rampa/mlagents-env/Scripts activate
+
+Tensor Board -
+	tensorboard --logdir=results
+
+Treinar o agent -
+	mlagents-learn LulaAgentConfig.yaml --run-id=LulaRun021 --resume

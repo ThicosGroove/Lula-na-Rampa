@@ -25323,24 +25323,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 870503361}
   m_SourcePrefab: {fileID: 100100000, guid: 1ee3c5d90e65c274d99283878cfcb1c2, type: 3}
---- !u!1 &332632407 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1725827378496261679, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
-    type: 3}
-  m_PrefabInstance: {fileID: 1073687776}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &332632415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 332632407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 215dc4970693aaf45ba13a95076f7099, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
 --- !u!1 &333328108 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6064158303852357833, guid: 1ee3c5d90e65c274d99283878cfcb1c2,
@@ -26545,6 +26527,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  rampa: {fileID: 0}
 --- !u!114 &358467683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31616,6 +31599,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vel: 0.75
   quad: {fileID: 414575680}
+  material:
+  - {fileID: 2100000, guid: 1d98704edcf8e724eb6bc184e7c4f7fa, type: 2}
+  - {fileID: 2100000, guid: 5672bdc136a5dd24382bc34358776687, type: 2}
+  - {fileID: 2100000, guid: 4932b2f1b4e0f0749b84301c85742d08, type: 2}
+  - {fileID: 2100000, guid: 0941106922de1c64ea27853aae45c8d2, type: 2}
 --- !u!64 &414575679
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -33559,7 +33547,6 @@ MonoBehaviour:
     - 15
     - 0
     - -15
-  objSpawnDistance: 1200
 --- !u!4 &436440146
 Transform:
   m_ObjectHideFlags: 0
@@ -79400,9 +79387,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4588765700886081772, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
+      propertyPath: rampa
+      value: 
+      objectReference: {fileID: 414575678}
+    - target: {fileID: 4588765700886081772, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
+        type: 3}
       propertyPath: MaxStep
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4588765700886081772, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
+        type: 3}
+      propertyPath: isTraining
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813330578219873268, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 3c3401928dc9ab04487d7b54086887b0,
+        type: 3}
     - target: {fileID: 5716023774702928839, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: rotation
@@ -79413,6 +79416,11 @@ PrefabInstance:
       propertyPath: rotationSpeed
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 5927221634260586739, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
+        type: 3}
+      propertyPath: isTraining
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7256645143964107240, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: m_Icon
@@ -79421,11 +79429,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1725827378496261679, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
-        type: 3}
-      insertIndex: 9
-      addedObject: {fileID: 332632415}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cd7ae1bf8bba9140bd49df64758a1cc, type: 3}
 --- !u!1 &1074505293 stripped
 GameObject:
@@ -84777,6 +84781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215dc4970693aaf45ba13a95076f7099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
 --- !u!1001 &1151960314
 PrefabInstance:
   m_ObjectHideFlags: 0

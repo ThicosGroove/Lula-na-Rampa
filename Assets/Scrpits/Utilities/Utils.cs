@@ -7,4 +7,9 @@ public class Utils : MonoBehaviour
         position.z = camera.nearClipPlane;
         return camera.ScreenToWorldPoint(position);
     }
+
+    public static void  ClearList()
+    {
+        GamePlayManager.Instance.objList.RemoveAll(item => item == null);
+    }
 }

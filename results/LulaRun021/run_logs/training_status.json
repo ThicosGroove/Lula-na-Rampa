@@ -2,58 +2,58 @@
     "LulaAgent": {
         "checkpoints": [
             {
-                "steps": 133240,
-                "file_path": "results\\LulaRun021\\LulaAgent\\LulaAgent-133240.onnx",
-                "reward": null,
-                "creation_time": 1759351892.6926343,
+                "steps": 250012,
+                "file_path": "results\\LulaRun021\\LulaAgent\\LulaAgent-250012.onnx",
+                "reward": 0.32850678791018095,
+                "creation_time": 1759414604.6113336,
                 "auxillary_file_paths": [
-                    "results\\LulaRun021\\LulaAgent\\LulaAgent-133240.pt"
+                    "results\\LulaRun021\\LulaAgent\\LulaAgent-250012.pt"
                 ]
             },
             {
-                "steps": 144087,
-                "file_path": "results\\LulaRun021\\LulaAgent\\LulaAgent-144087.onnx",
-                "reward": null,
-                "creation_time": 1759352405.5044026,
+                "steps": 251117,
+                "file_path": "results\\LulaRun021\\LulaAgent\\LulaAgent-251117.onnx",
+                "reward": 0.23521126796242217,
+                "creation_time": 1759417268.3298993,
                 "auxillary_file_paths": [
-                    "results\\LulaRun021\\LulaAgent\\LulaAgent-144087.pt"
+                    "results\\LulaRun021\\LulaAgent\\LulaAgent-251117.pt"
                 ]
             },
             {
-                "steps": 147415,
-                "file_path": "results\\LulaRun021\\LulaAgent\\LulaAgent-147415.onnx",
-                "reward": null,
-                "creation_time": 1759352653.4366086,
+                "steps": 252476,
+                "file_path": "results\\LulaRun021\\LulaAgent\\LulaAgent-252476.onnx",
+                "reward": 0.09062499995343387,
+                "creation_time": 1759417479.4760914,
                 "auxillary_file_paths": [
-                    "results\\LulaRun021\\LulaAgent\\LulaAgent-147415.pt"
+                    "results\\LulaRun021\\LulaAgent\\LulaAgent-252476.pt"
                 ]
             },
             {
-                "steps": 150001,
-                "file_path": "results\\LulaRun021\\LulaAgent\\LulaAgent-150001.onnx",
-                "reward": 0.07608695857334828,
-                "creation_time": 1759353083.911569,
+                "steps": 253421,
+                "file_path": "results\\LulaRun021\\LulaAgent\\LulaAgent-253421.onnx",
+                "reward": 0.2618181821974841,
+                "creation_time": 1759417535.841444,
                 "auxillary_file_paths": [
-                    "results\\LulaRun021\\LulaAgent\\LulaAgent-150001.pt"
+                    "results\\LulaRun021\\LulaAgent\\LulaAgent-253421.pt"
                 ]
             },
             {
-                "steps": 200001,
-                "file_path": "results\\LulaRun021\\LulaAgent\\LulaAgent-200001.onnx",
-                "reward": 0.08835821167301776,
-                "creation_time": 1759354718.4056077,
+                "steps": 300003,
+                "file_path": "results\\LulaRun021\\LulaAgent\\LulaAgent-300003.onnx",
+                "reward": 0.3199588483345116,
+                "creation_time": 1759418671.8278403,
                 "auxillary_file_paths": [
-                    "results\\LulaRun021\\LulaAgent\\LulaAgent-200001.pt"
+                    "results\\LulaRun021\\LulaAgent\\LulaAgent-300003.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 200001,
+            "steps": 300003,
             "file_path": "results\\LulaRun021\\LulaAgent.onnx",
-            "reward": 0.08835821167301776,
-            "creation_time": 1759354718.4056077,
+            "reward": 0.3199588483345116,
+            "creation_time": 1759418671.8278403,
             "auxillary_file_paths": [
-                "results\\LulaRun021\\LulaAgent\\LulaAgent-200001.pt"
+                "results\\LulaRun021\\LulaAgent\\LulaAgent-300003.pt"
             ]
         }
     },

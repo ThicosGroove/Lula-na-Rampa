@@ -6,13 +6,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-
+    private PlayerManager playerManager;
     private Camera mainCamera;
     private PlayerMovement movement;
     private PlayerInputActions inputActions;
     private Vector2 startTouchPosition;
     private Vector2 endTouchPosition;
     private float swipeThreshold = 0.05f;
+
+    public bool canMove = false;
 
     private void Awake()
     {
@@ -52,23 +54,31 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void MoveRight()
     {
+        if (!canMove) { return;  }
+
         movement.MoveToLane(1);
         movement.HandleRotation(1);
     }
 
     private void MoveLeft()
     {
+        if (!canMove) { return; }
+
         movement.MoveToLane(-1);
         movement.HandleRotation(-1);
     }
 
     private void Jump()
     {
+        if (!canMove) { return; }
+
         movement.Jump();
     }
 
     private void Roll()
     {
+        if (!canMove) { return; }
+
         movement.Roll();
     }
 

@@ -248,6 +248,11 @@ PrefabInstance:
       propertyPath: rotationSpeed
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 5927221634260586739, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
+        type: 3}
+      propertyPath: isTraining
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7256645143964107240, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: m_Icon
@@ -1095,7 +1100,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.27400002, y: 0}
   m_AnchorMax: {x: 0.855, y: 1}
-  m_AnchoredPosition: {x: 0.19995117, y: 0}
+  m_AnchoredPosition: {x: 0.20019531, y: 0}
   m_SizeDelta: {x: -1.9804077, y: 21.634697}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &134429529
@@ -3519,7 +3524,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -70.6001, y: 0}
+  m_AnchoredPosition: {x: -70.59961, y: 0}
   m_SizeDelta: {x: 140, y: 44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &559660954
@@ -5584,7 +5589,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.097}
   m_AnchorMin: {x: 0, y: 0.8904792}
   m_AnchorMax: {x: 1, y: 0.9405209}
-  m_AnchoredPosition: {x: -0.5, y: 0.7001953}
+  m_AnchoredPosition: {x: -0.5, y: 0.69921875}
   m_SizeDelta: {x: 1, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &937663104
@@ -6194,7 +6199,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5022602860645237092, guid: 78580fb7bbc8f4a4fade06253b737ccb,
+        type: 3}
     - target: {fileID: 4813330578219873268, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: m_BrainParameters.NumStackedVectorObservations
