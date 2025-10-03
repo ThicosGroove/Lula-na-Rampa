@@ -7,13 +7,12 @@ public class Collectable : MonoBehaviour, ICollectable
 {
     public void CollectMe()
     {
-        
-        Destroy(this.gameObject);
+        ObjectPoolManager.ReturnObjectToPool(this.gameObject);
     }
 
     public void WrongSpawn()
     {
-        Destroy(this.gameObject);
+        ObjectPoolManager.ReturnObjectToPool(this.gameObject);
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -26,7 +25,8 @@ public class Collectable : MonoBehaviour, ICollectable
         if (collision.gameObject.CompareTag(Const.PLAYER_TAG))
         {
             CollectMe();
-            Destroy(this.gameObject);
+
+            ObjectPoolManager.ReturnObjectToPool(this.gameObject);
         }
     }
 

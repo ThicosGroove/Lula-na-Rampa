@@ -26,9 +26,6 @@ public class SpawnManager : MonoBehaviour
 
     private float spawnObstacleDelay;
 
-    private GameObject newObstacle;
-    private GameObject newCollectable;
-
     private float myTimerObstacle;
     private float stopTimerObstacle;
     private float newtimerObstacle;
@@ -101,16 +98,14 @@ public class SpawnManager : MonoBehaviour
         int randomPosCollectableX = Random.Range(0, collectable.posX.Length);
         Vector3 posCollectable = new Vector3(collectable.posX[randomPosCollectableX] + thisPos.x, 0f, thisPos.z);
 
+        GameObject newObstacle = ObjectPoolManager.SpawnObject(obstacles[obstacle].prefab, posObstacle, obstacles[obstacle].prefab.transform.rotation, ObjectPoolManager.PoolType.Obstacle);
+        GameObject newCollectable = ObjectPoolManager.SpawnObject(collectable.collectablePrefab, posCollectable, Quaternion.identity, ObjectPoolManager.PoolType.Star);
 
-        newObstacle = Instantiate(obstacles[obstacle].prefab, posObstacle, obstacles[obstacle].prefab.transform.rotation);
-        newCollectable = Instantiate(collectable.collectablePrefab, posCollectable, Quaternion.identity);
+        if (newObstacle != null)
+            newObstacle.transform.SetParent(this.transform);
 
-        newObstacle.transform.SetParent(this.transform);
-        newCollectable.transform.SetParent(this.transform);
-
-        GamePlayManager.Instance.objList.Add(newObstacle);
-        GamePlayManager.Instance.objList.Add(newCollectable);
-
+        if (newCollectable != null)
+            newCollectable.transform.SetParent(this.transform);
 
         yield return new WaitForSecondsRealtime(spawnObstacleDelay);
 

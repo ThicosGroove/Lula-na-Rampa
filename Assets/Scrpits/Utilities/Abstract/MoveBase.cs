@@ -16,6 +16,8 @@ public abstract class MoveBase : MonoBehaviour
 
     AudioSource audioSource;
 
+    private string poolKey;
+
     protected virtual void Start()
     {
         player = FindFirstObjectByType<PlayerManager>().gameObject;
@@ -24,6 +26,8 @@ public abstract class MoveBase : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         hasReach = GamePlayManager.Instance.hasReach;
+
+        poolKey = gameObject.name.Replace("(Clone)", "").Trim();
     }
 
     private void OnEnable()
@@ -54,8 +58,7 @@ public abstract class MoveBase : MonoBehaviour
         UpdateSpeed();
         ReachSlowDownPoint();
         MoveBehaviour();
-        DestroyObjOnLeaveScreen();
-
+        ReturnToPoolOnLeaveScreen();
     }
 
     void BasicMovement()
@@ -80,26 +83,23 @@ public abstract class MoveBase : MonoBehaviour
     protected abstract void MoveBehaviour();
     protected abstract void DieBehaviour();
 
-    void DestroyObjOnLeaveScreen()
+    void ReturnToPoolOnLeaveScreen()
     {
         if (transform.position.z < player.transform.position.z - 50f)
         {
-            GamePlayManager.Instance.objList.Remove(this.gameObject);
-            Destroy(this.gameObject);
+            ObjectPoolManager.ReturnObjectToPool(this.gameObject);
         }
     }
 
     void DestroyOnNewLevel(int _)
     {
         //Debug.LogWarning("Nao destrói");
-        //GamePlayManager.Instance.objList.Remove(this);
-        //Destroy(this.gameObject);
     }
 
     void DestroyOnGameOver()
     {
-        GamePlayManager.Instance.objList.Remove(this.gameObject);
-        Destroy(this.gameObject);
+
+        ObjectPoolManager.ReturnObjectToPool(this.gameObject);
     }
 
     void StopMovement()
@@ -118,9 +118,8 @@ public abstract class MoveBase : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             //Play Audio
-            DieBehaviour();
-            
-            Destroy(this.gameObject);
+
+            ObjectPoolManager.ReturnObjectToPool(this.gameObject);
         }
     }
 }

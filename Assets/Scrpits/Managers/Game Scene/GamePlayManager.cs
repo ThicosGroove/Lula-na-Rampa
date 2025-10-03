@@ -70,7 +70,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
     {
         if (objList.Count > 200)
         {
-            Utils.ClearList();
+            //Utils.ClearList();
         }
     }
 
