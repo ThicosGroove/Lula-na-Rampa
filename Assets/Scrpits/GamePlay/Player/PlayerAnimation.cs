@@ -90,7 +90,6 @@ public class PlayerAnimation : MonoBehaviour
         }
         else
         {
-            Debug.Log("Animaçao pulou");
             anim.SetBool(Const.JUMP_ANIMATION, true);
         }
 
@@ -98,7 +97,6 @@ public class PlayerAnimation : MonoBehaviour
         if (playerMovement.isRolling)
         {
             anim.SetBool(Const.ROLL_ANIMATION, true);
-            Debug.Log("Animaçao rolou");
         }
         else
         {

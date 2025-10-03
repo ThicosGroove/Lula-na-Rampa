@@ -87,7 +87,14 @@ public abstract class MoveBase : MonoBehaviour
     {
         if (transform.position.z < player.transform.position.z - 50f)
         {
-            ObjectPoolManager.ReturnObjectToPool(this.gameObject);
+            if (this.CompareTag(Const.STAR_TAG))
+            {
+                ObjectPoolManager.ReturnObjectToPool(this.gameObject, ObjectPoolManager.PoolType.Star);
+            }
+            else if(this.CompareTag(Const.OBSTACLE_TAG))
+            {
+                ObjectPoolManager.ReturnObjectToPool(this.gameObject, ObjectPoolManager.PoolType.Obstacle);
+            }
         }
     }
 
@@ -99,7 +106,14 @@ public abstract class MoveBase : MonoBehaviour
     void DestroyOnGameOver()
     {
 
-        ObjectPoolManager.ReturnObjectToPool(this.gameObject);
+        if (this.CompareTag(Const.STAR_TAG))
+        {
+            ObjectPoolManager.ReturnObjectToPool(this.gameObject, ObjectPoolManager.PoolType.Star);
+        }
+        else if (this.CompareTag(Const.OBSTACLE_TAG))
+        {
+            ObjectPoolManager.ReturnObjectToPool(this.gameObject, ObjectPoolManager.PoolType.Obstacle);
+        }
     }
 
     void StopMovement()
@@ -119,7 +133,14 @@ public abstract class MoveBase : MonoBehaviour
         {
             //Play Audio
 
-            ObjectPoolManager.ReturnObjectToPool(this.gameObject);
+            if (this.CompareTag(Const.STAR_TAG))
+            {
+                ObjectPoolManager.ReturnObjectToPool(this.gameObject, ObjectPoolManager.PoolType.Star);
+            }
+            else if (this.CompareTag(Const.OBSTACLE_TAG))
+            {
+                ObjectPoolManager.ReturnObjectToPool(this.gameObject, ObjectPoolManager.PoolType.Obstacle);
+            }
         }
     }
 }

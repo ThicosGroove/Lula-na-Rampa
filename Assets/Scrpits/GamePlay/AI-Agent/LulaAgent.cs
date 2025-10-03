@@ -39,7 +39,6 @@ public class LulaAgent : Agent
 
     public override void OnEpisodeBegin()
     {
-        Debug.Log("Start Episode");
         //transform.position = initialPos;
         //playerMovement.desiredLane = 1;
     }
