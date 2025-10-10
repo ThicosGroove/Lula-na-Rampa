@@ -7,12 +7,12 @@ public class Collectable : MonoBehaviour, ICollectable
 {
     public void CollectMe()
     {
-        ObjectPoolManager.ReturnObjectToPool(this.gameObject, ObjectPoolManager.PoolType.Star);
+        //ObjectPoolManager.ReturnObjectToPool(this.gameObject, ObjectPoolManager.PoolType.Star);
     }
 
     public void WrongSpawn()
     {
-        ObjectPoolManager.ReturnObjectToPool(this.gameObject, ObjectPoolManager.PoolType.Star);
+        //ObjectPoolManager.ReturnObjectToPool(this.gameObject, ObjectPoolManager.PoolType.Star);
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -24,7 +24,6 @@ public class Collectable : MonoBehaviour, ICollectable
 
         if (collision.gameObject.CompareTag(Const.PLAYER_TAG))
         {
-            CollectMe();
 
             ObjectPoolManager.ReturnObjectToPool(this.gameObject, ObjectPoolManager.PoolType.Star);
         }

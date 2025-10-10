@@ -14,10 +14,10 @@ public class MoveCaminhao : MoveBase
 
     protected override void MoveBehaviour()
     {
-        if (isInReach)
-        {
-            base.speed *= speedMultiplier;
-        }
+        //if (isInReach)
+        //{
+        //    base.speed *= speedMultiplier;
+        //}
     }
 
     protected override void DieBehaviour()

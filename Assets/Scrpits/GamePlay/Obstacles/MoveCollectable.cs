@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveCollectable : MoveBase
+public class MoveCollectable : MoveBase, ICollectable
 {
     [Header("Star parameters")]
 
@@ -13,6 +13,16 @@ public class MoveCollectable : MoveBase
     [Header("rotation parameters")]
     [SerializeField] float freqRotationZ;
     [SerializeField] float ampRotationZ;
+
+    public void CollectMe()
+    {
+        
+    }
+
+    public void WrongSpawn()
+    {
+        //ObjectPoolManager.ReturnObjectToPool(this.gameObject, ObjectPoolManager.PoolType.Star);
+    }
 
     protected override void DieBehaviour()
     {

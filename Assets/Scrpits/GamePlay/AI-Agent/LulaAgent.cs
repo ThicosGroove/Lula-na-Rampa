@@ -126,22 +126,22 @@ public class LulaAgent : Agent
         }
     }
 
-    //public override void Heuristic(in ActionBuffers actionsOut)
-    //{
-    //    // Controle manual para testes
-    //    var discreteActions = actionsOut.DiscreteActions;
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        // Controle manual para testes
+        var discreteActions = actionsOut.DiscreteActions;
 
-    //    if (Input.GetKey(KeyCode.LeftArrow))
-    //        discreteActions[0] = 0; // Esquerda
-    //    else if (Input.GetKey(KeyCode.RightArrow))
-    //        discreteActions[0] = 1; // Direita
-    //    else if (Input.GetKey(KeyCode.UpArrow))
-    //        discreteActions[0] = 2; // Pular
-    //    else if (Input.GetKey(KeyCode.DownArrow))
-    //        discreteActions[0] = 3; // Deslizar
-    //    else
-    //        discreteActions[0] = 4; // nao fazer nada
-    //}
+        if (Input.GetKey(KeyCode.LeftArrow))
+            discreteActions[0] = 0; // Esquerda
+        else if (Input.GetKey(KeyCode.RightArrow))
+            discreteActions[0] = 1; // Direita
+        else if (Input.GetKey(KeyCode.UpArrow))
+            discreteActions[0] = 2; // Pular
+        else if (Input.GetKey(KeyCode.DownArrow))
+            discreteActions[0] = 3; // Deslizar
+        else
+            discreteActions[0] = 4; // nao fazer nada
+    }
 
     private void OnTriggerEnter(Collider other)
     {

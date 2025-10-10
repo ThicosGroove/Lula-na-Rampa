@@ -112,7 +112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8255922178381762210}
   - component: {fileID: 1147489537875321543}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Reward
   m_TagString: Reward
   m_Icon: {fileID: 0}
@@ -346,11 +346,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 46.824066, y: 9.273676, z: 1}
+  m_Size: {x: 49.4, y: 9.273676, z: 1}
   m_Center: {x: -0.6279526, y: 10.236842, z: 0}
 --- !u!65 &7863283794588771835
 BoxCollider:
@@ -367,7 +367,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -388,7 +388,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

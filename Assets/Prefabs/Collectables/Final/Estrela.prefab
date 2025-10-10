@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7195221798163145947}
   - component: {fileID: 2659459078908568175}
   - component: {fileID: 722082173774590409}
-  - component: {fileID: 945176368432986966}
   m_Layer: 0
   m_Name: Estrela
   m_TagString: Star
@@ -100,18 +99,6 @@ MonoBehaviour:
   ampPosition: 0.01
   freqRotationZ: 5
   ampRotationZ: 0.1
---- !u!114 &945176368432986966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6758563964536805240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90c317d0e7e93f74b9adaf07ed749d21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3572375641206225742
 PrefabInstance:
   m_ObjectHideFlags: 0

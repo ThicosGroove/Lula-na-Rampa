@@ -188,8 +188,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 5
-    NumStackedVectorObservations: 1
+    VectorObservationSize: 15
+    NumStackedVectorObservations: 10
     m_ActionSpec:
       m_NumContinuousActions: 0
       BranchSizes: 05000000
@@ -353,7 +353,7 @@ MonoBehaviour:
   m_RayLength: 200
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967283
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 0.06149602, g: 1, b: 0, a: 1}
@@ -372,14 +372,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Sensors.RayPerceptionSensorComponent3D
   m_SensorName: RayPerceptionSensor2
-  m_DetectableTags: []
+  m_DetectableTags:
+  - Obstacle
+  - Star
   m_RaysPerDirection: 1
   m_MaxRayDegrees: 7.5
   m_SphereCastRadius: 0.5
   m_RayLength: 200
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967283
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 0.9521127, g: 0, b: 1, a: 1}

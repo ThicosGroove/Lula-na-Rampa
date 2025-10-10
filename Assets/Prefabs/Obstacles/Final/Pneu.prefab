@@ -1536,7 +1536,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6683466732181158231}
   - component: {fileID: 3262009407051575756}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Reward
   m_TagString: Reward
   m_Icon: {fileID: 0}

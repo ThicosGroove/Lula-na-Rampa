@@ -14,20 +14,17 @@ public abstract class MoveBase : MonoBehaviour
     private float previousSpeed;
     private bool hasReach;
 
-    AudioSource audioSource;
-
-    private string poolKey;
+    //AudioSource audioSource;
 
     protected virtual void Start()
     {
         player = FindFirstObjectByType<PlayerManager>().gameObject;
         speed = LevelManager.Instance.current_obstacleSpeed;
 
-        audioSource = GetComponent<AudioSource>();
+        //audioSource = GetComponent<AudioSource>();
+        //audioSource.gameObject.SetActive(false);
 
         hasReach = GamePlayManager.Instance.hasReach;
-
-        poolKey = gameObject.name.Replace("(Clone)", "").Trim();
     }
 
     private void OnEnable()
@@ -87,14 +84,7 @@ public abstract class MoveBase : MonoBehaviour
     {
         if (transform.position.z < player.transform.position.z - 50f)
         {
-            if (this.CompareTag(Const.STAR_TAG))
-            {
-                ObjectPoolManager.ReturnObjectToPool(this.gameObject, ObjectPoolManager.PoolType.Star);
-            }
-            else if(this.CompareTag(Const.OBSTACLE_TAG))
-            {
-                ObjectPoolManager.ReturnObjectToPool(this.gameObject, ObjectPoolManager.PoolType.Obstacle);
-            }
+            ReturnToPool();
         }
     }
 
@@ -105,15 +95,7 @@ public abstract class MoveBase : MonoBehaviour
 
     void DestroyOnGameOver()
     {
-
-        if (this.CompareTag(Const.STAR_TAG))
-        {
-            ObjectPoolManager.ReturnObjectToPool(this.gameObject, ObjectPoolManager.PoolType.Star);
-        }
-        else if (this.CompareTag(Const.OBSTACLE_TAG))
-        {
-            ObjectPoolManager.ReturnObjectToPool(this.gameObject, ObjectPoolManager.PoolType.Obstacle);
-        }
+        ReturnToPool();
     }
 
     void StopMovement()
@@ -129,18 +111,27 @@ public abstract class MoveBase : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag(Const.PLAYER_TAG))
         {
             //Play Audio
+            ReturnToPool();
+        }
 
-            if (this.CompareTag(Const.STAR_TAG))
-            {
-                ObjectPoolManager.ReturnObjectToPool(this.gameObject, ObjectPoolManager.PoolType.Star);
-            }
-            else if (this.CompareTag(Const.OBSTACLE_TAG))
-            {
-                ObjectPoolManager.ReturnObjectToPool(this.gameObject, ObjectPoolManager.PoolType.Obstacle);
-            }
+        else if (this.CompareTag(Const.STAR_TAG) && other.CompareTag(Const.OBSTACLE_TAG))
+        {
+            ReturnToPool();
+        }
+    }
+
+    private void ReturnToPool()
+    {
+        if (this.CompareTag(Const.STAR_TAG))
+        {
+            ObjectPoolManager.ReturnObjectToPool(this.gameObject, ObjectPoolManager.PoolType.Star);
+        }
+        else if (this.CompareTag(Const.OBSTACLE_TAG))
+        {
+            ObjectPoolManager.ReturnObjectToPool(this.gameObject, ObjectPoolManager.PoolType.Obstacle);
         }
     }
 }
