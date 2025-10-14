@@ -6,15 +6,11 @@ using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using UnityEngine;
-using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 public class LulaAgent : Agent
 {
     private PlayerMovement playerMovement;
-    private float reward = 0;
     private int osbtacle = 0;
-
-    private Vector3 initialPos;
 
     private PlayerInputHandler playerInputHandler;
     private PlayerManager playerManager;
@@ -22,7 +18,11 @@ public class LulaAgent : Agent
     [Header("Training")]
     [SerializeField] private RampaBehaviour rampa;
 
-    private RayPerceptionSensorComponent3D[] sensor3D;
+    private float r_hitObstacle = -3f;
+    private float r_dodgeObstacle = +0.1f;
+    private float r_getStar = +0.5f;
+    private float r_keepLaneOne = +0.005f;
+
 
     public override void Initialize()
     {
@@ -32,9 +32,11 @@ public class LulaAgent : Agent
         playerInputHandler = GetComponent<PlayerInputHandler>();
         //initialPos = transform.position;
         Time.timeScale = 1.0f;
+    }
 
-        sensor3D = GetComponentsInChildren<RayPerceptionSensorComponent3D>();
-        //sensor3D = GetComponentInChildren<RayPerceptionSensorComponent3D>();
+    private void FixedUpdate()
+    {
+        BetterAgentBehaviourReward();
     }
 
     public override void OnEpisodeBegin()
@@ -42,49 +44,6 @@ public class LulaAgent : Agent
         //transform.position = initialPos;
         //playerMovement.desiredLane = 1;
     }
-
-    private void CheckRaycastPerception()
-    {
-        // Get the raw raycast results from the sensor component
-        var rayOutputs1 = RayPerceptionSensor.Perceive(sensor3D[0].GetRayPerceptionInput()).RayOutputs;
-
-        for (int i = 0; i < rayOutputs1.Length; i++)
-        {
-            GameObject goHit = rayOutputs1[i].HitGameObject;
-            if (goHit != null)
-            {
-                // Calculate the hit distance based on the normalized fraction
-                float rayHitDistance = rayOutputs1[i].HitFraction * sensor3D[0].RayLength;
-
-                // Log detailed information about the hit object
-                Debug.Log($"Sensor 1 Ray {i} hit: {goHit.name} at distance: {rayHitDistance:F2} with tag: {goHit.tag}");
-            }
-            else
-            {
-                Debug.Log($" Ray {i} did not hit anything.");
-            }
-        }
-
-        var rayOutputs2 = RayPerceptionSensor.Perceive(sensor3D[1].GetRayPerceptionInput()).RayOutputs;
-
-        for (int i = 0; i < rayOutputs2.Length; i++)
-        {
-            GameObject goHit = rayOutputs2[i].HitGameObject;
-            if (goHit != null)
-            {
-                // Calculate the hit distance based on the normalized fraction
-                float rayHitDistance = rayOutputs2[i].HitFraction * sensor3D[1].RayLength;
-
-                // Log detailed information about the hit object
-                Debug.Log($"Sensor 2 Ray {i} hit: {goHit.name} at distance: {rayHitDistance:F2} with tag: {goHit.tag}");
-            }
-            else
-            {
-                Debug.Log($"Ray {i} did not hit anything.");
-            }
-        }
-    }
-
 
     public override void CollectObservations(VectorSensor sensor)
     {
@@ -149,8 +108,7 @@ public class LulaAgent : Agent
         {
             // Game Over
 
-            AddReward(-0.2f);
-            reward--;
+            AddReward(r_hitObstacle);
             osbtacle++;
             // Teste para treinar IA
 
@@ -161,8 +119,7 @@ public class LulaAgent : Agent
         else if (other.CompareTag(Const.STAR_TAG))
         {
 
-            AddReward(1f);
-            reward += 1f;
+            AddReward(r_getStar);
             osbtacle++;
 
             if (playerManager.isTraining) { rampa.GetStar(); }
@@ -172,8 +129,7 @@ public class LulaAgent : Agent
         }
         else if (other.CompareTag(Const.REWARD_TAG))
         {
-            reward += 0.1f;
-            AddReward(0.1f);
+            AddReward(r_dodgeObstacle);
             osbtacle++;
 
             if (playerManager.isTraining) { rampa.RewardWin(); }
@@ -186,6 +142,13 @@ public class LulaAgent : Agent
             osbtacle = 0;
             EndEpisode();
         }
+    }
 
+    private void BetterAgentBehaviourReward()
+    {
+        if (playerMovement.desiredLane == 1)
+        {
+            AddReward(r_keepLaneOne * Time.fixedDeltaTime);
+        }
     }
 }
