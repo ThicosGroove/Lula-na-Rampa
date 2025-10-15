@@ -22,6 +22,7 @@ public class LulaAgent : Agent
     private float r_dodgeObstacle = +0.1f;
     private float r_getStar = +0.5f;
     private float r_keepLaneOne = +0.005f;
+    private float r_movement = -0.05f;
 
 
     public override void Initialize()
@@ -68,16 +69,18 @@ public class LulaAgent : Agent
         switch (action)
         {
             case 0: // Mover para a esquerda
-                    playerMovement.MoveToLane(-1);               
+                    playerMovement.MoveToLane(-1);
                 break;
             case 1: // Mover para a direita               
                     playerMovement.MoveToLane(+1);
                 break;
             case 2: // Pular
                     playerMovement.Jump();
+                    AddReward(r_movement);
                 break;
             case 3: // Deslizar
                     playerMovement.Roll();
+                    AddReward(r_movement);
                 break;
             case 4:
                 // Nao se mover
