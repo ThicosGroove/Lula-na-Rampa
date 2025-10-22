@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 7498329489306854149}
   - component: {fileID: 5392225754857147057}
   - component: {fileID: 7809976268835018800}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Faixa
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

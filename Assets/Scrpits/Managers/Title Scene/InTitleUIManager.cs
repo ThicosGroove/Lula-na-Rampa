@@ -7,7 +7,7 @@ public class InTitleUIManager : MonoBehaviour
 {
     public void ClickOnTitleScreen()
     {
-        SceneManager.LoadScene(Const.LOGIN_SCENE);
+        SceneManager.LoadScene(Const.MAIN_MENU_SCENE);
     }
 
 }

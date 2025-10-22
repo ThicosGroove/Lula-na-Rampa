@@ -2,6 +2,7 @@
 // This was created with the help of Assistant, a Unity Artificial Intelligence product.
 
 using GameEvents;
+using System;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
@@ -11,6 +12,8 @@ public class LulaAgent : Agent
 {
     private PlayerMovement playerMovement;
     private int osbtacle = 0;
+    private int obstaclesDodged = 0; // Contador de obstáculos desviados
+    private float totalReward = 0f; // Acumula o reward total durante o episódio
 
     private PlayerInputHandler playerInputHandler;
     private PlayerManager playerManager;
@@ -23,6 +26,8 @@ public class LulaAgent : Agent
     private float r_getStar = +0.5f;
     private float r_keepLaneOne = +0.005f;
     private float r_movement = -0.05f;
+    private float r_jumpWrong = -0.2f;
+    private bool isFaixa = false;
 
 
     public override void Initialize()
@@ -42,8 +47,9 @@ public class LulaAgent : Agent
 
     public override void OnEpisodeBegin()
     {
-        //transform.position = initialPos;
-        //playerMovement.desiredLane = 1;
+        osbtacle = 0;
+        obstaclesDodged = 0;
+        totalReward = 0f;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -57,7 +63,46 @@ public class LulaAgent : Agent
         sensor.AddObservation(isGrounded); // Está no chão?
         sensor.AddObservation(currentLane); // Faixa atual
 
-        //CheckRaycastPerception();
+        CheckRaycastPerception();
+    }
+
+
+
+    private void CheckRaycastPerception()
+    {
+        int faixaLayerIndex = LayerMask.NameToLayer(Const.LAYER_FAIXA);
+        int faixaLayerMask = 1 << faixaLayerIndex;
+
+        // Obtém todos os sensores RayPerceptionSensorComponent3D nos filhos do agente
+        RayPerceptionSensorComponent3D[] sensors = GetComponentsInChildren<RayPerceptionSensorComponent3D>();
+
+        foreach (var sensor in sensors)
+        {
+            // Avalia os raios lançados pelo sensor
+            var rayInput = sensor.GetRayPerceptionInput();
+            var rayOutput = RayPerceptionSensor.Perceive(rayInput);
+
+            // Itera sobre os resultados dos raios
+            foreach (var rayResult in rayOutput.RayOutputs)
+            {
+                if (rayResult.HasHit)
+                {
+                    // Verifica se o objeto atingido está na layer desejada
+                    if (((1 << rayResult.HitGameObject.layer) & faixaLayerMask) != 0)
+                    {
+                        isFaixa = true;
+                        Debug.Log(isFaixa);
+
+                        Debug.Log($"Objeto detectado na layer: {LayerMask.LayerToName(rayResult.HitGameObject.layer)} - Objeto: {rayResult.HitGameObject.name}");
+                    }
+                    else
+                    {
+                        isFaixa = false;
+                        Debug.Log(isFaixa);
+                    }
+                }
+            }
+        }
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -77,6 +122,7 @@ public class LulaAgent : Agent
             case 2: // Pular
                     playerMovement.Jump();
                     AddReward(r_movement);
+                    if (isFaixa) { AddReward(r_jumpWrong); }  
                 break;
             case 3: // Deslizar
                     playerMovement.Roll();
@@ -133,6 +179,7 @@ public class LulaAgent : Agent
         else if (other.CompareTag(Const.REWARD_TAG))
         {
             AddReward(r_dodgeObstacle);
+            obstaclesDodged++;
             osbtacle++;
 
             if (playerManager.isTraining) { rampa.RewardWin(); }
@@ -140,9 +187,11 @@ public class LulaAgent : Agent
             //TrainingEvents.OnRewardWin();
         }
 
-        if (osbtacle <= 10)
+        if (osbtacle >= 10)
         {
-            osbtacle = 0;
+            float multiplier = 1f + (obstaclesDodged * 0.1f); // Exemplo: 10% de bônus por obstáculo desviado
+            float finalReward = totalReward * multiplier;
+            AddReward(finalReward);
             EndEpisode();
         }
     }

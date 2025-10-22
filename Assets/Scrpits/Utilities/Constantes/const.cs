@@ -25,6 +25,9 @@ public static class Const
     public static float LANE_DISTANCE = 15f;
     public static float PLAYER_ROTATION_MOVE = 45f;
 
+    //Layers
+    public static string LAYER_FAIXA = "Faixa";
+
     //Audio
     public static string MASTER_MIXER = "MasterAudioMixer";
     public static string BG_MIXER = "BGAudioMixer";
