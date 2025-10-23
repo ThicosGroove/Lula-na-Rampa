@@ -49,7 +49,7 @@ public class SaveManager : MonoBehaviour
     {
         playerData = new PlayerData();
 
-        if (!File.Exists(Application.dataPath + Const.SAVE_FILE_PATH))
+        if (!File.Exists(Const.GetSaveFilePath()))
         {
             playerData._isNormalMode = false;
             playerData._userName = null;
@@ -84,14 +84,14 @@ public class SaveManager : MonoBehaviour
     {
         string json = JsonUtility.ToJson(playerData);
 
-        File.WriteAllText(Application.dataPath + Const.SAVE_FILE_PATH, json);
+        File.WriteAllText(Const.GetSaveFilePath(), json);
     }
 
     public PlayerData LoadFile()
     {
-        if (Const.SAVE_FILE_PATH == null) return null;
+        if (Const.GetSaveFilePath() == null) return null;
 
-        string json = File.ReadAllText(Application.dataPath + Const.SAVE_FILE_PATH);
+        string json = File.ReadAllText(Const.GetSaveFilePath());
         PlayerData loadPlayerData = JsonUtility.FromJson<PlayerData>(json);
         return loadPlayerData;
     }

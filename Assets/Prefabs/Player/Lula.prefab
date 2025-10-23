@@ -525,7 +525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faixa_FBX: {fileID: 5449931226962812153}
   faixa_Pos: {fileID: 4217538017676103037}
-  time: 0.007
+  time: 0.01
 --- !u!4 &8100475470151327297 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4612127427859811092, guid: 9458738f78500c844893ad0586290baf,

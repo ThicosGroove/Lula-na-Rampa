@@ -29,7 +29,7 @@ public class PlayFabLoginManager : MonoBehaviour
             PlayFabSettings.TitleId = Const.TITLE_ID; // Please change this value to your own titleId from PlayFab Game Manager
         }
 
-        if (File.Exists(Application.dataPath + Const.SAVE_FILE_PATH))
+        if (File.Exists(Const.GetSaveFilePath()))
         {
             userName = SaveManager.Instance.LoadFile()._userName;
             userEmail = SaveManager.Instance.LoadFile()._email;

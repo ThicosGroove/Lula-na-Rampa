@@ -12,9 +12,11 @@ public class MainMenuUIManager : MonoBehaviour
     [SerializeField] GameObject optionsPanel;
     [SerializeField] GameObject creditsPanel;
     [SerializeField] GameObject rulesPanel;
+    [SerializeField] GameObject IAPanel;
 
     [Header("Buttons")]
     [SerializeField] GameObject playButton;
+    [SerializeField] GameObject activateIAButton;
 
     [Header("Volume Setting")]
     [SerializeField] Slider masterMusicSlider;
@@ -30,6 +32,7 @@ public class MainMenuUIManager : MonoBehaviour
     [SerializeField] TMP_Text BG_Sound_text;
     [SerializeField] TMP_Text SFX_Sound_text;
     [SerializeField] TMP_Text volumeText;
+    [SerializeField] TMP_Text iaButton_text;
 
     [Header("Camera Settings")]
     [SerializeField] RawImage image;
@@ -45,7 +48,9 @@ public class MainMenuUIManager : MonoBehaviour
 
     MusicManager musicManager;
     int musicIndex;
-    int cameraImageIndex ;
+    int cameraImageIndex;
+    bool isIAActivated = false;
+
 
     private void Start()
     {
@@ -285,11 +290,35 @@ public class MainMenuUIManager : MonoBehaviour
 
     #endregion
 
+    #region IA Panel
+    public void OpenIAPanel()
+    {
+        IAPanel.SetActive(true);
+    }
+
+    public void ClickOnActivateIA()
+    {
+        isIAActivated = !isIAActivated;
+
+        if (isIAActivated)
+        {
+            activateIAButton.GetComponent<Button>().image.color = Color.red;
+            iaButton_text.text = "Ativado";
+        }
+        else
+        {
+            activateIAButton.GetComponent<Button>().image.color = Color.blue;
+            iaButton_text.text = "Ativar";
+        }
+    }
+    #endregion
+
     void CloseAllPanels()
     {
         mainMenuPanel.SetActive(false);
         optionsPanel.SetActive(false);
         creditsPanel.SetActive(false);
         rulesPanel.SetActive(false);
+        IAPanel.SetActive(false);
     }
 }

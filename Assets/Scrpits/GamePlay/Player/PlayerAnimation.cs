@@ -9,6 +9,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] Animator anim;
 
     int currentLevel;
+    bool hasWin = false;
 
     void Start()
     {
@@ -50,6 +51,11 @@ public class PlayerAnimation : MonoBehaviour
         {
             UpdateAnimationSpeedPerLevel();
         }
+
+        if (hasWin)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(0, 180, 0)), 0.01f);
+        }
     }
 
     void UpdateCurrentLevel(int _)
@@ -74,11 +80,17 @@ public class PlayerAnimation : MonoBehaviour
 
     private void WinPreparation()
     {
+        Debug.Log("Win Preparation");
         anim.SetBool(Const.RUN_ANIMATION, false);
+
+        GameplayEvents.OnDropFaixa();
     }
 
     private void WinAnimation()
     {
+        Debug.Log("Set Anim Win True");
+        hasWin = true;
+        
         anim.SetBool(Const.WIN_ANIMATION, true);
     }
 

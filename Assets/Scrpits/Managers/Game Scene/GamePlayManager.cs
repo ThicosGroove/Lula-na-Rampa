@@ -46,7 +46,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
         base.Awake();
         UpdateGameState(GameStates.PLAYING);
 
-        if (File.Exists(Application.dataPath + Const.SAVE_FILE_PATH))
+        if (File.Exists(Const.GetSaveFilePath()))
         {
             isNormalMode = SaveManager.Instance.LoadFile()._isNormalMode;
         }

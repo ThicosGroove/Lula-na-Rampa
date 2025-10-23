@@ -14,7 +14,7 @@ public class InLobbyUIManager : MonoBehaviour
 
     private void Start()
     {
-        if (File.Exists(Application.dataPath + Const.SAVE_FILE_PATH))
+        if (File.Exists(Const.GetSaveFilePath()))
         {     
             useName_Text.GetComponent<TMP_InputField>().text = SaveManager.Instance.LoadFile()._userName;
             email_Text.GetComponent<TMP_InputField>().text = SaveManager.Instance.LoadFile()._email;

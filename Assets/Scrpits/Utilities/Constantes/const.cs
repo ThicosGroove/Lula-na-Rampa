@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public static class Const
 {
     public static string TITLE_ID = "E5C38";
@@ -44,7 +46,14 @@ public static class Const
 
 
     // Save Files
-    public static string SAVE_FILE_PATH = "/saveFile.json";
+    public static string GetSaveFilePath()
+    {
+#if UNITY_STANDALONE_WIN
+            return Application.dataPath + "/saveFile.json";
+#else
+        return Application.persistentDataPath + "/saveFile.json";
+#endif
+    }
 
     // PLAYFAB 
     public static string SCOREBOARD_NAME = "Global Scoreboard";
