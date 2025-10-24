@@ -18,6 +18,12 @@ public enum GameStates
     WIN
 }
 
+//public enum AgentState
+//{
+//    DEACTIVATED = 0,
+//    ACTIVATED = 1
+//}
+
 
 [DefaultExecutionOrder(1)]
 public class GamePlayManager : Singleton<GamePlayManager>
@@ -25,6 +31,10 @@ public class GamePlayManager : Singleton<GamePlayManager>
     [Header("Game State")]
     public GameStates currentGameState = GameStates.MAIN_MENU;
     public static event Action<GameStates> OnGameStateChanged;
+
+    [Header("Agent State")]
+    //public AgentState currentAgentState = AgentState.DEACTIVATED;
+    public bool currentAgentState = false;
 
     [Header("Game Mode and Testing")]
     public bool isNormalMode;
@@ -51,29 +61,17 @@ public class GamePlayManager : Singleton<GamePlayManager>
             isNormalMode = SaveManager.Instance.LoadFile()._isNormalMode;
         }
 
-        if (testStartLevel_5)
-        {
-            LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_MAX);
-        }
-        else
-        {
-            LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_1);
-        }
+        LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_1);      
     }
 
     private void Start()
     {
         GameManager.instance.UpdateSceneState(SceneState.GAME);
-    }
 
-    private void Update()
-    {
-        if (objList.Count > 200)
-        {
-            //Utils.ClearList();
-        }
-    }
+        currentAgentState = SaveManager.instance.LoadFile()._agentState;
 
+        Debug.Log($"Agent state = {currentAgentState}");
+    }
 
     public void UpdateGameState(GameStates newState)
     {

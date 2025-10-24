@@ -3,18 +3,24 @@ using UnityEngine;
 public class Singleton<T> : MonoBehaviour where T : Component
 {
     private static T instance;
+    private static bool applicationIsQuitting = false;
+
     public static T Instance
     {
         get
         {
+            if (applicationIsQuitting)
+            {
+                Debug.LogWarning($"[Singleton] Instance of {typeof(T).Name} is being accessed after the application is quitting. Returning null.");
+                return null;
+            }
+
             if (instance == null)
             {
-                // Debug.Log("Trying to find singleton " + typeof(T).Name + "...");
-                instance = FindObjectOfType<T>();
+                instance = FindFirstObjectByType<T>();
 
                 if (instance == null)
                 {
-                    // Debug.Log("Singleton " + typeof(T).Name + " not found; Creating new singleton...");
                     GameObject obj = new GameObject();
                     obj.name = typeof(T).Name;
                     instance = obj.AddComponent<T>();
@@ -28,14 +34,18 @@ public class Singleton<T> : MonoBehaviour where T : Component
     {
         if (instance == null)
         {
-            // Debug.Log("Singleton " + typeof(T).Name + " successfully created on Awake.");
             instance = this as T;
-            //DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(this.gameObject); // Preserva o objeto entre cenas
         }
-        else
+        else if (instance != this)
         {
+            Debug.LogWarning($"[Singleton] Another instance of {typeof(T).Name} already exists. Destroying this instance.");
             Destroy(gameObject);
-            // Debug.Log("Tried to override singleton " + typeof(T).Name + " on awake!");
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        applicationIsQuitting = true;
     }
 }

@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 using GameEvents;
 using UnityEngine.Rendering;
+using Unity.MLAgents.Policies;
+using Unity.MLAgents;
 
 public enum PlayerState
 {
@@ -15,6 +17,7 @@ public enum PlayerState
 [RequireComponent(typeof(PlayerInputHandler))]
 [RequireComponent(typeof(PlayerAnimation))]
 [RequireComponent(typeof(PlayerGameBehaviour))]
+[DefaultExecutionOrder(2)]
 public class PlayerManager : MonoBehaviour
 {
     [Header("Player State")]
@@ -28,11 +31,19 @@ public class PlayerManager : MonoBehaviour
     private bool isGamePaused = false;
     private PlayerInputHandler playerInputHandler;
 
+    private BehaviorParameters BehaviorParameters;
+    private LulaAgent lulaAgent;
+    private DecisionRequester DecisionRequester ;
+
     private void Awake()
     {
         movement = GetComponent<PlayerMovement>();
         PlayerGameBehaviour = GetComponent<PlayerGameBehaviour>();
         playerInputHandler = GetComponent<PlayerInputHandler>();
+
+        BehaviorParameters = GetComponent<BehaviorParameters>();
+        lulaAgent = GetComponent<LulaAgent>();
+        DecisionRequester = GetComponent<DecisionRequester>();
     }
 
     private void OnEnable()
@@ -42,7 +53,6 @@ public class PlayerManager : MonoBehaviour
         GameplayEvents.Win += OnPlayerWin;
         UtilityEvents.GamePause += OnGamePause;
         UtilityEvents.GameResume += OnGameResume;
-        TrainingEvents.RewardLoss += TrainingRewardLoss;
     }
 
     private void OnDisable()
@@ -52,12 +62,36 @@ public class PlayerManager : MonoBehaviour
         GameplayEvents.Win -= OnPlayerWin;
         UtilityEvents.GamePause -= OnGamePause;
         UtilityEvents.GameResume -= OnGameResume;
-        TrainingEvents.RewardLoss -= TrainingRewardLoss;
+    }
+
+    private void Start()
+    {
+        AgentVerify();
     }
 
     private void Update()
     {
         if (state != PlayerState.PLAYING || isGamePaused) return;
+    }
+
+    private void AgentVerify()
+    {
+        //if (GamePlayManager.Instance.currentAgentState == AgentState.DEACTIVATED)
+        if (GamePlayManager.Instance.currentAgentState == false)
+        {
+
+            Debug.Log("Agent está DESATIVADO");
+            BehaviorParameters.enabled = false;
+            lulaAgent.enabled = false;
+            DecisionRequester.enabled = false; 
+        }
+        else
+        {
+            
+            Debug.Log("Agent está ATIVADO");
+
+            
+        }
     }
 
     private void OnGameStart()
@@ -96,10 +130,5 @@ public class PlayerManager : MonoBehaviour
     public void UpdatePlayerState(PlayerState newState)
     {
         state = newState;
-    }
-
-    private void TrainingRewardLoss()
-    {
-
     }
 }

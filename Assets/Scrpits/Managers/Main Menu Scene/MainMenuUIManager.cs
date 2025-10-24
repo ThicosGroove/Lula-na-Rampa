@@ -299,16 +299,20 @@ public class MainMenuUIManager : MonoBehaviour
     public void ClickOnActivateIA()
     {
         isIAActivated = !isIAActivated;
+        //AgentState agent = isIAActivated ? AgentState.ACTIVATED : AgentState.DEACTIVATED;
+
+        SaveManager.instance.playerData._agentState = isIAActivated;
+        SaveManager.instance.SaveData();
 
         if (isIAActivated)
         {
-            activateIAButton.GetComponent<Button>().image.color = Color.red;
-            iaButton_text.text = "Ativado";
+            activateIAButton.GetComponent<Button>().image.color = Color.yellowGreen;
+            iaButton_text.text = "LIGADO";
         }
         else
         {
-            activateIAButton.GetComponent<Button>().image.color = Color.blue;
-            iaButton_text.text = "Ativar";
+            activateIAButton.GetComponent<Button>().image.color = Color.blueViolet;
+            iaButton_text.text = "DESLIGADO";
         }
     }
     #endregion

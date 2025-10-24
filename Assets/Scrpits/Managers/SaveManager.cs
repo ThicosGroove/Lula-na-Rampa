@@ -51,6 +51,7 @@ public class SaveManager : MonoBehaviour
 
         if (!File.Exists(Const.GetSaveFilePath()))
         {
+            playerData._agentState = false;
             playerData._isNormalMode = false;
             playerData._userName = null;
             playerData._email = null;
@@ -66,6 +67,7 @@ public class SaveManager : MonoBehaviour
             SaveData();
         }
 
+        playerData._agentState = LoadFile()._agentState;
         playerData._isNormalMode = LoadFile()._isNormalMode;
         playerData._userName = LoadFile()._userName;
         playerData._email = LoadFile()._email;
@@ -98,6 +100,8 @@ public class SaveManager : MonoBehaviour
 
     public class PlayerData
     {
+
+        public bool _agentState;
         public bool _isNormalMode;
 
         public string _userName;

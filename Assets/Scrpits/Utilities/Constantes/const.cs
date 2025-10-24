@@ -48,11 +48,23 @@ public static class Const
     // Save Files
     public static string GetSaveFilePath()
     {
-#if UNITY_STANDALONE_WIN
-            return Application.dataPath + "/saveFile.json";
-#else
-        return Application.persistentDataPath + "/saveFile.json";
-#endif
+        return Application.dataPath + "/saveFile.json";
+//#if UNITY_EDITOR
+//        // Caminho para o Unity Editor
+//        return Application.dataPath + "/saveFile.json";
+//#elif UNITY_STANDALONE_WIN
+//            // Caminho para Windows Standalone
+//            return Application.dataPath + "/saveFile.json";
+//#elif UNITY_ANDROID
+//            // Caminho para Android
+//            return Application.persistentDataPath + "/saveFile.json";
+//#elif UNITY_IOS
+//            // Caminho para iOS
+//            return Application.persistentDataPath + "/saveFile.json";
+//#else
+//            // Caminho padrão para outras plataformas
+//            return Application.persistentDataPath + "/saveFile.json";
+//#endif
     }
 
     // PLAYFAB 
