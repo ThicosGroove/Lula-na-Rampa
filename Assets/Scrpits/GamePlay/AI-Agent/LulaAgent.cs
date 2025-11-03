@@ -3,6 +3,8 @@
 
 using GameEvents;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
@@ -37,7 +39,7 @@ public class LulaAgent : Agent
         playerMovement = GetComponent<PlayerMovement>();
         playerInputHandler = GetComponent<PlayerInputHandler>();
         //initialPos = transform.position;
-        Time.timeScale = 1.0f;
+        //Time.timeScale = 1.0f;
     }
 
     private void FixedUpdate()
@@ -52,6 +54,8 @@ public class LulaAgent : Agent
         totalReward = 0f;
     }
 
+   
+
     public override void CollectObservations(VectorSensor sensor)
     {
         Vector3 playerPosition = playerMovement.transform.position;
@@ -62,8 +66,6 @@ public class LulaAgent : Agent
         sensor.AddObservation(playerPosition); // Posição do jogador
         sensor.AddObservation(isGrounded); // Está no chão?
         sensor.AddObservation(currentLane); // Faixa atual
-
-        CheckRaycastPerception();
     }
 
 
@@ -182,7 +184,7 @@ public class LulaAgent : Agent
             obstaclesDodged++;
             osbtacle++;
 
-            if (playerManager.isTraining) { rampa.RewardWin(); }
+            //if (playerManager.isTraining) { rampa.RewardWin(); }
 
             //TrainingEvents.OnRewardWin();
         }

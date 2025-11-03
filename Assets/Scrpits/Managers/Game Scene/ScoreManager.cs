@@ -40,8 +40,7 @@ public class ScoreManager : Singleton<ScoreManager>
 
     private void VerifyWin()
     {
-        //if (totalScoreCurrentRun == GamePlayManager.Instance.winScore)
-        if (totalScoreCurrentRun == 1)
+        if (totalScoreCurrentRun == GamePlayManager.Instance.winScore)
         {
             Debug.LogWarning("Win");
             GamePlayManager.Instance.UpdateGameState(GameStates.WIN);

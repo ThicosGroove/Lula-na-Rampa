@@ -76,8 +76,8 @@ public class PlayerManager : MonoBehaviour
 
     private void AgentVerify()
     {
-        //if (GamePlayManager.Instance.currentAgentState == AgentState.DEACTIVATED)
-        if (GamePlayManager.Instance.currentAgentState == false)
+        //if (GamePlayManager.Instance.currentAgentState == false)
+        if (GamePlayManager.Instance.currentAgentState == AgentState.DEACTIVATED)
         {
 
             Debug.Log("Agent está DESATIVADO");

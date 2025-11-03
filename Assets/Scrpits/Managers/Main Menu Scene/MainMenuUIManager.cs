@@ -299,9 +299,11 @@ public class MainMenuUIManager : MonoBehaviour
     public void ClickOnActivateIA()
     {
         isIAActivated = !isIAActivated;
-        //AgentState agent = isIAActivated ? AgentState.ACTIVATED : AgentState.DEACTIVATED;
+        AgentState agent = isIAActivated ? AgentState.ACTIVATED : AgentState.DEACTIVATED;
 
-        SaveManager.instance.playerData._agentState = isIAActivated;
+        Debug.Log($"Agente {agent}");
+
+        SaveManager.instance.playerData._agentState = agent;
         SaveManager.instance.SaveData();
 
         if (isIAActivated)

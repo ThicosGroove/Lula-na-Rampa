@@ -51,7 +51,7 @@ public class SaveManager : MonoBehaviour
 
         if (!File.Exists(Const.GetSaveFilePath()))
         {
-            playerData._agentState = false;
+            playerData._agentState = AgentState.DEACTIVATED;
             playerData._isNormalMode = false;
             playerData._userName = null;
             playerData._email = null;
@@ -101,7 +101,7 @@ public class SaveManager : MonoBehaviour
     public class PlayerData
     {
 
-        public bool _agentState;
+        public AgentState _agentState;
         public bool _isNormalMode;
 
         public string _userName;

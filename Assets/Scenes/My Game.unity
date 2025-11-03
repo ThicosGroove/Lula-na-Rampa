@@ -79353,12 +79353,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 548e3ac29e8a0ba4eb2677e9a6ed230c,
+      objectReference: {fileID: 5022602860645237092, guid: a5a48e1893434a140a9ef1f99891ca43,
         type: 3}
     - target: {fileID: 4813330578219873268, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813330578219873268, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 122
       objectReference: {fileID: 0}
     - target: {fileID: 5716023774702928839, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
@@ -97655,6 +97660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGameState: 0
+  currentAgentState: 0
   isNormalMode: 0
   playerColliderOn: 1
   testStartLevel_5: 0

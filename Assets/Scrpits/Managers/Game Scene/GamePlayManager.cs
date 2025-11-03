@@ -18,11 +18,11 @@ public enum GameStates
     WIN
 }
 
-//public enum AgentState
-//{
-//    DEACTIVATED = 0,
-//    ACTIVATED = 1
-//}
+public enum AgentState
+{
+    DEACTIVATED = 0,
+    ACTIVATED = 1
+}
 
 
 [DefaultExecutionOrder(1)]
@@ -33,8 +33,8 @@ public class GamePlayManager : Singleton<GamePlayManager>
     public static event Action<GameStates> OnGameStateChanged;
 
     [Header("Agent State")]
-    //public AgentState currentAgentState = AgentState.DEACTIVATED;
-    public bool currentAgentState = false;
+    public AgentState currentAgentState = AgentState.DEACTIVATED;
+    //public bool currentAgentState = false;
 
     [Header("Game Mode and Testing")]
     public bool isNormalMode;

@@ -72,6 +72,7 @@ ExportedObj/
 
 # Ignorar arquivos do ambiente virtual do Python
 mlagents-env/
+mlagents-v39/
 .venv/
 
 # Unity3D generated file on crash reports

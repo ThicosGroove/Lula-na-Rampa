@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         {
             if (instance == null)
             {
-                instance = GameObject.FindObjectOfType<GameManager>();
+                instance = GameObject.FindFirstObjectByType<GameManager>();
 
                 if (instance == null)
                 {
