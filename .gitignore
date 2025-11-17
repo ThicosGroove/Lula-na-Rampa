@@ -69,10 +69,11 @@ ExportedObj/
 *.pidb.meta
 *.pdb.meta
 *.mdb.meta
+Assets/_Recovery/
+
 
 # Ignorar arquivos do ambiente virtual do Python
-mlagents-env/
-mlagents-v39/
+mlagents-venv/
 .venv/
 
 # Unity3D generated file on crash reports
