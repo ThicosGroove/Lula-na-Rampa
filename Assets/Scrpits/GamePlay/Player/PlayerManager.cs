@@ -24,7 +24,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] public PlayerState state = PlayerState.IDLE;
 
     [Header("Training")]
-    [SerializeField] public bool isTraining = false;
+    [SerializeField] public bool isTraining = true;
 
     private PlayerMovement movement;
     private PlayerGameBehaviour PlayerGameBehaviour;
@@ -76,6 +76,8 @@ public class PlayerManager : MonoBehaviour
 
     private void AgentVerify()
     {
+        if (isTraining == true) return;
+
         //if (GamePlayManager.Instance.currentAgentState == false)
         if (GamePlayManager.Instance.currentAgentState == AgentState.DEACTIVATED)
         {

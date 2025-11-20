@@ -1,10 +1,4 @@
-// 24/09/2025 AI-Tag
-// This was created with the help of Assistant, a Unity Artificial Intelligence product.
-
 using GameEvents;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
@@ -12,195 +6,168 @@ using UnityEngine;
 
 public class LulaAgent : Agent
 {
+    [Header("References")]
     private PlayerMovement playerMovement;
-    private int obstaclesDodged = 0;
-
     private PlayerInputHandler playerInputHandler;
     private PlayerManager playerManager;
-
-    [Header("Training")]
     [SerializeField] private RampaBehaviour rampa;
 
-    private float r_hitObstacle = -5.0f;
-    private float r_dodgeObstacle = +0.2f;
-    private float r_getStar = +0.5f;
-    private float r_keepLaneOne = +0.005f;
-    private float r_movement = -0.05f;
-    private float r_jumpWrong = -0.5f;
-    private float r_winTraining = 5.0f;
-    private bool isFaixa = false;
+    [Header("Training Settings")]
+    private int obstaclesDodged = 0;
+    private const int TARGET_OBSTACLES_TO_WIN = 20; // Meta para completar o episódio com sucesso
 
+    // --- Configuração de Recompensas ---
+    // Punições
+    private float r_hitObstacle = -5.0f;      // Bater é catastrófico
+    private float r_fallDeath = -5.0f;        // Cair é catastrófico
+    // Incentivos
+    private float r_winTraining = 10.0f;       // Grande prêmio por vencer
+    private float r_dodgeObstacle = +1.0f;    // Pequeno incentivo por progresso
+    private float r_getStar = +0.5f;          // Incentivo secundário (opcional)
+    private float r_survival = +0.0001f;       // Recompensa constante por se manter vivo
+
+    // --- Custos de Energia (Hierarquia de Movimento) ---
+    // Incentiva a IA a fazer o movimento "mais barato" possível para resolver o problema
+    private float cost_move_side = -0.001f;  // Barato
+    private float cost_action_heavy = -0.005f;// Caro (Pular/Rolar)
 
     public override void Initialize()
     {
-        // Referência ao PlayerController
         playerManager = GetComponent<PlayerManager>();
         playerMovement = GetComponent<PlayerMovement>();
         playerInputHandler = GetComponent<PlayerInputHandler>();
-        //initialPos = transform.position;
-        //Time.timeScale = 1.0f;
-    }
-
-    private void FixedUpdate()
-    {
-        BetterAgentBehaviourReward();
     }
 
     public override void OnEpisodeBegin()
     {
+        // Apenas reseta o contador de progresso da IA.
+        // O reset de posição/física deve ser tratado pelo seu GameManager/PlayerMovement
+        // quando ele detectar que o jogo reiniciou.
         obstaclesDodged = 0;
     }
 
-   
-
     public override void CollectObservations(VectorSensor sensor)
     {
+        // Total Observations: 5
+        // Certifique-se que no Inspector: Vector Observation > Space Size = 5
 
-        CheckRaycastPerception();
+        // 1. Posição do Jogador (3 floats: x, y, z)
+        sensor.AddObservation(transform.position);
 
-        Vector3 playerPosition = playerMovement.transform.position;
-        int isGrounded = playerMovement.isGrounded ? 1 : 0;
-        int currentLane = playerMovement.desiredLane;
+        // 2. Está no chão? (1 float)
+        sensor.AddObservation(playerMovement.isGrounded ? 1 : 0);
 
-        // Coleta informações do ambiente
-        sensor.AddObservation(playerPosition); // Posição do jogador
-        sensor.AddObservation(isGrounded); // Está no chão?
-        sensor.AddObservation(currentLane); // Faixa atual
-
-        sensor.AddObservation(isFaixa ? 1 : 0);
-    }
-
-
-
-    private void CheckRaycastPerception()
-    {
-        int faixaLayerIndex = LayerMask.NameToLayer(Const.LAYER_FAIXA);
-        int faixaLayerMask = 1 << faixaLayerIndex;
-
-        // Obtém todos os sensores RayPerceptionSensorComponent3D nos filhos do agente
-        RayPerceptionSensorComponent3D[] sensors = GetComponentsInChildren<RayPerceptionSensorComponent3D>();
-
-        foreach (var sensor in sensors)
-        {
-            // Avalia os raios lançados pelo sensor
-            var rayInput = sensor.GetRayPerceptionInput();
-            var rayOutput = RayPerceptionSensor.Perceive(rayInput);
-
-            // Itera sobre os resultados dos raios
-            foreach (var rayResult in rayOutput.RayOutputs)
-            {
-                if (rayResult.HasHit)
-                {
-                    // Verifica se o objeto atingido está na layer desejada
-                    if (((1 << rayResult.HitGameObject.layer) & faixaLayerMask) != 0)
-                    {
-                        isFaixa = true;
-                    }
-                    else
-                    {
-                        isFaixa = false;
-                    }
-                }
-            }
-        }
+        // 3. Em qual faixa estou? (1 float)
+        sensor.AddObservation(playerMovement.desiredLane);
     }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        int action = actions.DiscreteActions[0];
-
+        // Se o input do jogador estiver travado (jogo pausado ou não iniciado), ignora.
         if (!playerInputHandler.canMove) { return; }
+
+        int action = actions.DiscreteActions[0];
+        float currentActionCost = 0f;
 
         switch (action)
         {
-            case 0: // Mover para a esquerda
-                    playerMovement.MoveToLane(-1);
+            case 0: // Esquerda
+                playerMovement.MoveToLane(-1);
+                currentActionCost = cost_move_side;
                 break;
-            case 1: // Mover para a direita               
-                    playerMovement.MoveToLane(+1);
+
+            case 1: // Direita
+                playerMovement.MoveToLane(+1);
+                currentActionCost = cost_move_side;
                 break;
+
             case 2: // Pular
-                    playerMovement.Jump();
-                    AddReward(r_movement);
-                    if (isFaixa) { AddReward(r_jumpWrong); }  
+                playerMovement.Jump();
+                currentActionCost = cost_action_heavy;
                 break;
+
             case 3: // Deslizar
-                    playerMovement.Roll();
-                    AddReward(r_movement);
+                playerMovement.Roll();
+                currentActionCost = cost_action_heavy;
                 break;
-            case 4:
-                // Nao se mover
+
+            case 4: // Idle (Não fazer nada)
+                currentActionCost = 0f; // Grátis (Melhor opção se não houver perigo)
                 break;
         }
+
+        // Aplica o custo da ação (penalidade leve) para incentivar a precisão
+        AddReward(currentActionCost);
     }
 
-    //public override void Heuristic(in ActionBuffers actionsOut)
-    //{
-
-
-    //    // Controle manual para testes
-    //    var discreteActions = actionsOut.DiscreteActions;
-
-    //    if (Input.GetKey(KeyCode.LeftArrow))
-    //        discreteActions[0] = 0; // Esquerda
-    //    else if (Input.GetKey(KeyCode.RightArrow))
-    //        discreteActions[0] = 1; // Direita
-    //    else if (Input.GetKey(KeyCode.UpArrow))
-    //        discreteActions[0] = 2; // Pular
-    //    else if (Input.GetKey(KeyCode.DownArrow))
-    //        discreteActions[0] = 3; // Deslizar
-    //    else
-    //        discreteActions[0] = 4; // nao fazer nada
-    //}
+    private void FixedUpdate()
+    {
+        // Recompensa de Sobrevivência
+        // Incentiva o agente a querer continuar jogando.
+        // Valor (+0.005) é maior que o custo de pular (-0.002), então ele pulará para sobreviver.
+        if (playerInputHandler.canMove)
+        {
+            AddReward(r_survival);
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(Const.OBSTACLE_TAG))
         {
-            // Game Over
-
+            // Game Over (Batida)
             AddReward(r_hitObstacle);
-            // Teste para treinar IA
 
             if (playerManager.isTraining) { rampa.RewardLoss(); }
 
             EndEpisode();
+        }
+        else if (other.CompareTag("DeathBarrier"))
+        {
+            // Game Over (Queda no Vazio)
+            // Precisamos punir a queda para ele aprender a não se jogar da rampa
+            AddReward(r_fallDeath);
 
-            //TrainingEvents.OnRewardLoss();
+            // Avisa o ML-Agents que acabou.
+            // O seu script externo de controle deve detectar essa colisão também 
+            // e resetar a posição do boneco.
+            EndEpisode();
         }
         else if (other.CompareTag(Const.STAR_TAG))
         {
-
+            // Bônus
             AddReward(r_getStar);
-
             if (playerManager.isTraining) { rampa.GetStar(); }
-            
-
-            //TrainingEvents.OnGetStar();
         }
         else if (other.CompareTag(Const.REWARD_TAG))
         {
+            // Sucesso (Desviou)
             AddReward(r_dodgeObstacle);
             obstaclesDodged++;
-
-            //if (playerManager.isTraining) { rampa.RewardWin(); }
-
-            //TrainingEvents.OnRewardWin();
         }
 
-        if (obstaclesDodged >= 10)
+        // Condição de Vitória (Curriculum Learning)
+        if (obstaclesDodged >= TARGET_OBSTACLES_TO_WIN)
         {
-            
             AddReward(r_winTraining);
             EndEpisode();
         }
     }
 
-    private void BetterAgentBehaviourReward()
+    // Controles Manuais para Teste (Debugging)
+    // Ative "Heuristic Only" no Behavior Parameters para usar
+    public override void Heuristic(in ActionBuffers actionsOut)
     {
-        if (playerMovement.desiredLane == 1)
-        {
-            AddReward(r_keepLaneOne * Time.fixedDeltaTime);
-        }
+        var discreteActions = actionsOut.DiscreteActions;
+        discreteActions[0] = 4; // Padrão: Nada
+
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            discreteActions[0] = 0;
+        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+            discreteActions[0] = 1;
+        else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space))
+            discreteActions[0] = 2;
+        else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+            discreteActions[0] = 3;
     }
 }

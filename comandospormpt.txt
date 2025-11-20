@@ -8,4 +8,4 @@ Treinar o agent -
 	mlagents-learn LulaAgentConfig.yaml --run-id=LulaRun021 --resume
 
 Headless Training - ATENÇÃO NO NOME DA PASTA
-mlagents-learn LulaAgentConfig.yaml --env="C:\\Users\\Unity Projects\\Builds\\Agent-Training-Headless\\H_01\\lula na Rampa.exe" --run-id=H_01 --no-graphics
+mlagents-learn LulaAgentConfig.yaml --env="D:\Thicos Groove\Unity Projects\Builds\Agent-Training-Headless\H_26\lula na Rampa.exe" --run-id=H_01 --no-graphics

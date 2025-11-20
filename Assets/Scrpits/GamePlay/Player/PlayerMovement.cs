@@ -148,4 +148,12 @@ public class PlayerMovement : MonoBehaviour
         targetPosition = initialPos;
         transform.position = Vector3.Lerp(transform.position, targetPosition, slideSpeed * Time.deltaTime);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("DeathBarrier"))
+        {
+            ResetPosition();
+        }
+    }
 }
