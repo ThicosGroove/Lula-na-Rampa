@@ -33480,6 +33480,7 @@ MonoBehaviour:
     - 15
     - 0
     - -15
+  spawnDistanceInterval: 100
 --- !u!4 &436440146
 Transform:
   m_ObjectHideFlags: 0
@@ -79307,7 +79308,7 @@ PrefabInstance:
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: m_Constraints
-      value: 122
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
@@ -97755,26 +97756,25 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bbc34c003eb12094cbcb8ee9f7ad08a9, type: 2}
   - {fileID: 11400000, guid: 747ec5a6016edab4db8913b9689fb5d8, type: 2}
   - {fileID: 11400000, guid: ba4f6a27841a1fa4d9053346f1c9c3cd, type: 2}
-  currentLevel: 0
-  lerpToNextLevel: 0.8
+  currentLevelIndex: 0
   current_obstacleSpeed: 0
   current_obstacleSpawnDelay: 0
   current_playerSlideSpeed: 0
   current_playerJumpSpeed: 0
   current_playerRollingSpeed: 0
   current_caminhaoMulti: 0
-  changeToLevel_2: 10
-  changeToLevel_3: 20
-  changeToLevel_4: 30
-  changeToLevel_5: 40
-  changeToLevel_6: 50
-  changeToLevel_7: 60
-  changeToLevel_8: 70
-  changeToLevel_9: 80
-  changeToLevel_10: 90
-  changeToLevel_11: 100
-  changeToLevel_12: 110
-  changeToLevel_13: 120
+  changeToLevel_2: 3
+  changeToLevel_3: 5
+  changeToLevel_4: 7
+  changeToLevel_5: 9
+  changeToLevel_6: 13
+  changeToLevel_7: 15
+  changeToLevel_8: 17
+  changeToLevel_9: 19
+  changeToLevel_10: 21
+  changeToLevel_11: 24
+  changeToLevel_12: 25
+  changeToLevel_13: 30
 --- !u!114 &1346951841
 MonoBehaviour:
   m_ObjectHideFlags: 0

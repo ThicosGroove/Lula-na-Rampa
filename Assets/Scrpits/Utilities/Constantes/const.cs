@@ -21,6 +21,9 @@ public static class Const
     public static string STAR_TAG = "Star";
     public static string REWARD_TAG = "Reward";
 
+    //Cutscenes
+    public static float CUTSECNE_TIME = 8.2f;
+
     //Game Play
     public static int SCORE_PER_COLLECTABLE = 1;
     public static int PLAYER_INITIAL_LANE = 1;
@@ -42,6 +45,7 @@ public static class Const
     public static string WIN_ANIMATION = "HasWin_Anim";
     public static string JUMP_SPEED_ANIMATION = "JumpSpeed_Anim";
     public static string ROLL_SPEED_ANIMATION = "RollSpeed_Anim";
+    public static string RUN_SPEED_ANIMATION = "RunSpeed_Anim";
 
 
 

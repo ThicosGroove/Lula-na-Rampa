@@ -23,9 +23,6 @@ public class PlayerManager : MonoBehaviour
     [Header("Player State")]
     [SerializeField] public PlayerState state = PlayerState.IDLE;
 
-    [Header("Training")]
-    [SerializeField] public bool isTraining = true;
-
     private PlayerMovement movement;
     private PlayerGameBehaviour PlayerGameBehaviour;
     private bool isGamePaused = false;
@@ -53,6 +50,8 @@ public class PlayerManager : MonoBehaviour
         GameplayEvents.Win += OnPlayerWin;
         UtilityEvents.GamePause += OnGamePause;
         UtilityEvents.GameResume += OnGameResume;
+
+        ScoreEvents.ChangeLevel += UpdateCurrentSpeed;
     }
 
     private void OnDisable()
@@ -62,6 +61,7 @@ public class PlayerManager : MonoBehaviour
         GameplayEvents.Win -= OnPlayerWin;
         UtilityEvents.GamePause -= OnGamePause;
         UtilityEvents.GameResume -= OnGameResume;
+        ScoreEvents.ChangeLevel -= UpdateCurrentSpeed;
     }
 
     private void Start()
@@ -76,9 +76,6 @@ public class PlayerManager : MonoBehaviour
 
     private void AgentVerify()
     {
-        if (isTraining == true) return;
-
-        //if (GamePlayManager.Instance.currentAgentState == false)
         if (GamePlayManager.Instance.currentAgentState == AgentState.DEACTIVATED)
         {
 
@@ -96,6 +93,10 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    private void UpdateCurrentSpeed(int newLevel)
+    {
+        movement.LevelChanged(newLevel);
+    }
     private void OnGameStart()
     {
         state = PlayerState.PLAYING;

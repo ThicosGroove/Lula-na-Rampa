@@ -23,13 +23,13 @@ public class LulaAgent : Agent
     // Incentivos
     private float r_winTraining = 10.0f;       // Grande prêmio por vencer
     private float r_dodgeObstacle = +1.0f;    // Pequeno incentivo por progresso
-    private float r_getStar = +0.5f;          // Incentivo secundário (opcional)
+    private float r_getStar = +1.0f;          // Incentivo secundário (opcional)
     private float r_survival = +0.0001f;       // Recompensa constante por se manter vivo
 
     // --- Custos de Energia (Hierarquia de Movimento) ---
     // Incentiva a IA a fazer o movimento "mais barato" possível para resolver o problema
     private float cost_move_side = -0.001f;  // Barato
-    private float cost_action_heavy = -0.005f;// Caro (Pular/Rolar)
+    private float cost_action_heavy = -0.01f;// Caro (Pular/Rolar)
 
     public override void Initialize()
     {
@@ -44,6 +44,25 @@ public class LulaAgent : Agent
         // O reset de posição/física deve ser tratado pelo seu GameManager/PlayerMovement
         // quando ele detectar que o jogo reiniciou.
         obstaclesDodged = 0;
+
+        // --- CURRICULUM LEARNING ---
+        // Pergunta ao Python: "Qual a dificuldade atual?"
+        // Se não estiver treinando (valor padrão), usa 0.
+        float difficulty = Academy.Instance.EnvironmentParameters.GetWithDefault("level_difficulty", 0.0f);
+
+        // Aplica a dificuldade (converte float para int)
+        SetLevelDifficulty((int)difficulty);
+    }
+
+    private void SetLevelDifficulty(int levelIndex)
+    {
+        // Só aplica se o nível mudar, para não spamar eventos
+        if (LevelManager.Instance.currentLevelIndex != levelIndex)
+        {
+            // Converte o índice int de volta para o Enum (opcional, ou passa int direto)
+            CurrentLevelState newLevel = (CurrentLevelState)levelIndex;
+            LevelManager.Instance.UpdateLevel(newLevel);
+        }
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -64,7 +83,7 @@ public class LulaAgent : Agent
     public override void OnActionReceived(ActionBuffers actions)
     {
         // Se o input do jogador estiver travado (jogo pausado ou não iniciado), ignora.
-        if (!playerInputHandler.canMove) { return; }
+        //if (!playerInputHandler.canMove) { return; }
 
         int action = actions.DiscreteActions[0];
         float currentActionCost = 0f;
@@ -118,7 +137,7 @@ public class LulaAgent : Agent
             // Game Over (Batida)
             AddReward(r_hitObstacle);
 
-            if (playerManager.isTraining) { rampa.RewardLoss(); }
+            if (GamePlayManager.Instance.isTraining) { rampa.RewardLoss(); }
 
             EndEpisode();
         }
@@ -137,7 +156,7 @@ public class LulaAgent : Agent
         {
             // Bônus
             AddReward(r_getStar);
-            if (playerManager.isTraining) { rampa.GetStar(); }
+            if (GamePlayManager.Instance.isTraining) { rampa.GetStar(); }
         }
         else if (other.CompareTag(Const.REWARD_TAG))
         {

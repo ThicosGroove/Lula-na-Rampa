@@ -8,13 +8,11 @@ using System.IO;
 
 public enum GameStates
 {
+    START_GAME,
+    PLAYING,
     PAUSED,
     RESUME,
-    PREPLAY,
     GAMEOVER,
-    MAIN_MENU,
-    OPTION_MENU,
-    PLAYING,
     WIN
 }
 
@@ -29,7 +27,7 @@ public enum AgentState
 public class GamePlayManager : Singleton<GamePlayManager>
 {
     [Header("Game State")]
-    public GameStates currentGameState = GameStates.MAIN_MENU;
+    public GameStates currentGameState = GameStates.START_GAME;
     public static event Action<GameStates> OnGameStateChanged;
 
     [Header("Agent State")]
@@ -38,6 +36,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
 
     [Header("Game Mode and Testing")]
     public bool isNormalMode;
+    public bool isTraining;
     public bool playerColliderOn;
     public bool testStartLevel_5;
     public int winScore;
@@ -54,11 +53,13 @@ public class GamePlayManager : Singleton<GamePlayManager>
     protected override void Awake()
     {
         base.Awake();
-        UpdateGameState(GameStates.PLAYING);
+        UpdateGameState(GameStates.START_GAME);
 
         if (File.Exists(Const.GetSaveFilePath()))
         {
             isNormalMode = SaveManager.Instance.LoadFile()._isNormalMode;
+
+            if (isTraining) { currentAgentState = AgentState.ACTIVATED; }
         }
 
         LevelManager.Instance.UpdateLevel(CurrentLevelState.LEVEL_1);      
@@ -80,14 +81,11 @@ public class GamePlayManager : Singleton<GamePlayManager>
 
         switch (currentGameState)
         {
-            case GameStates.MAIN_MENU:
-                break;
-            case GameStates.PREPLAY:
+            case GameStates.START_GAME:
+                StartCoroutine(StartAfterCutscene());
                 break;
             case GameStates.PLAYING:
-                
-                break;
-            case GameStates.OPTION_MENU:
+
                 break;
             case GameStates.PAUSED:
                 isGamePaused = true;
@@ -107,5 +105,15 @@ public class GamePlayManager : Singleton<GamePlayManager>
             default:
                 break;
         }
+    }
+
+    IEnumerator StartAfterCutscene()
+    {
+        yield return new WaitForSeconds(Const.CUTSECNE_TIME);
+
+        GameplayEvents.OnStartNewLevel();
+        UpdateGameState(GameStates.PLAYING);
+
+
     }
 }

@@ -57,7 +57,6 @@ public class PlayerInputHandler : MonoBehaviour
         if (!canMove) { return;  }
 
         movement.MoveToLane(1);
-        movement.HandleRotation(1);
     }
 
     private void MoveLeft()
@@ -65,7 +64,6 @@ public class PlayerInputHandler : MonoBehaviour
         if (!canMove) { return; }
 
         movement.MoveToLane(-1);
-        movement.HandleRotation(-1);
     }
 
     private void Jump()

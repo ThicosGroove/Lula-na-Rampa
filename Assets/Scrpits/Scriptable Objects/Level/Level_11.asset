@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: Level_11
   m_EditorClassIdentifier: 
   level: 11
-  obstacle_Speed: 220
-  obstacle_Spawn_Delay: 0.6
-  player_Slide_Speed: 5
-  player_Jump_Speed: 8
-  player_Roll_Speed: 0.6
-  speedMulti: 1.7
+  player_Slide_Speed: 9
+  player_Jump_Height: 6.5
+  player_Gravity: 180
+  player_Roll_Speed: 2.05
+  obstacle_Speed: 135
+  obstacle_Spawn_Distance: 100
+  anim_Jump_Speed_Multi: 1.34
+  anim_Roll_Speed_Multi: 1.64
+  anim_Run_Speed_Multi: 1.62

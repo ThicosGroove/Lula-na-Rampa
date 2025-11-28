@@ -4,8 +4,14 @@ Ativar o python enviroment -
 Tensor Board -
 	tensorboard --logdir=results
 
+
+set PYTHONUTF8=1
+
 Treinar o agent -
-	mlagents-learn LulaAgentConfig.yaml --run-id=LulaRun021 --resume
+	mlagents-learn LulaAgentConfig.yaml --run-id=LulaRun021 --resume --time-scale=1.0
 
 Headless Training - ATENÇÃO NO NOME DA PASTA
-mlagents-learn LulaAgentConfig.yaml --env="D:\Thicos Groove\Unity Projects\Builds\Agent-Training-Headless\H_26\lula na Rampa.exe" --run-id=H_01 --no-graphics
+mlagents-learn LulaAgentConfig.yaml --env="D:\Thicos Groove\Unity Projects\Builds\Agent-Training-Headless\H_29\lula na Rampa.exe" --run-id=H_34 --no-graphics --time-scale=1.0
+
+Headless Training Progressivo
+mlagents-learn LulaAgentCurriculum.yaml --env="D:\Thicos Groove\Unity Projects\Builds\Agent-Training-Headless\01_H-P\lula na Rampa.exe" --run-id=01_H-P --no-graphics

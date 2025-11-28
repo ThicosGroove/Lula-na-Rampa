@@ -5,39 +5,38 @@ using GameEvents;
 
 public enum CurrentLevelState
 {
-    LEVEL_1 = 1,
-    LEVEL_2 = 2,
-    LEVEL_3 = 3,
-    LEVEL_4 = 4,
-    LEVEL_5,
-    LEVEL_6,
-    LEVEL_7,
-    LEVEL_8,
-    LEVEL_9,
-    LEVEL_10,
-    LEVEL_11,
-    LEVEL_12,
-    LEVEL_MAX
+    LEVEL_1 = 0,
+    LEVEL_2 = 1,
+    LEVEL_3 = 2,
+    LEVEL_4 = 3,
+    LEVEL_5 = 4,
+    LEVEL_6 = 5,
+    LEVEL_7 = 6,
+    LEVEL_8 = 7,
+    LEVEL_9 = 8,
+    LEVEL_10 = 9,
+    LEVEL_11 = 10,
+    LEVEL_12 = 11,
+    LEVEL_MAX = 12
 }
 
-[DefaultExecutionOrder(-1)]
+[DefaultExecutionOrder(-50)]
 public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField] LevelSO[] levelData;
 
     private CurrentLevelState currentLevelState = CurrentLevelState.LEVEL_1;
-
-    public int currentLevel;
-
-    public float lerpToNextLevel;
+    public int currentLevelIndex;
 
     [Header("Current Variables Apply")]
     public float current_obstacleSpeed;
-    public float current_obstacleSpawnDelay;
+
+    // NOVA VARIÁVEL CENTRALIZADA
+    public float current_obstacleSpawnDistance;
+
     public float current_playerSlideSpeed;
-    public float current_playerJumpSpeed;
+    public float current_playerJumpHeight;
     public float current_playerRollingSpeed;
-    public float current_caminhaoMulti;
 
     [Header("Set Score per Level")]
     public int changeToLevel_2;
@@ -53,8 +52,8 @@ public class LevelManager : Singleton<LevelManager>
     public int changeToLevel_12;
     public int changeToLevel_13;
 
-
     private float previousSpeed;
+    private bool isPaused = false;
 
     private void OnEnable()
     {
@@ -70,58 +69,67 @@ public class LevelManager : Singleton<LevelManager>
 
     private void Start()
     {
-        if (GamePlayManager.Instance.isNormalMode == true)
+        if (GamePlayManager.Instance != null && GamePlayManager.Instance.isNormalMode)
         {
-            current_obstacleSpeed = levelData[0].obstacle_Speed;
-            current_obstacleSpawnDelay = levelData[0].obstacle_Spawn_Delay;
-            current_playerSlideSpeed = levelData[0].player_Slide_Speed;
-            current_playerJumpSpeed = levelData[0].player_Jump_Speed;
-            current_playerRollingSpeed = levelData[0].player_Roll_Speed;
-            current_caminhaoMulti = levelData[0].speedMulti;
-
+            ApplyLevelData(0);
         }
         else
         {
-            current_obstacleSpeed = levelData[1].obstacle_Speed;
-            current_obstacleSpawnDelay = levelData[1].obstacle_Spawn_Delay;
-            current_playerSlideSpeed = levelData[1].player_Slide_Speed;
-            current_playerJumpSpeed = levelData[1].player_Jump_Speed;
-            current_playerRollingSpeed = levelData[1].player_Roll_Speed;
-            current_caminhaoMulti = levelData[1].speedMulti;
+            ApplyLevelData(1);
         }
     }
 
     public void UpdateLevel(CurrentLevelState newLevel)
     {
         currentLevelState = newLevel;
-
-        StartCoroutine(SettingUpCurrentLevel((int)currentLevelState));
+        int levelIndex = (int)currentLevelState;
+        StartCoroutine(SettingUpCurrentLevel(levelIndex));
     }
 
-    private IEnumerator SettingUpCurrentLevel(int level)
+    private IEnumerator SettingUpCurrentLevel(int levelIndex)
     {
-        currentLevel = level;
-
-        ScoreEvents.OnChangeLevel(currentLevel);
-
-        current_obstacleSpeed = levelData[currentLevel].obstacle_Speed;
-        current_obstacleSpawnDelay = levelData[currentLevel].obstacle_Spawn_Delay;
-        current_playerSlideSpeed = levelData[currentLevel].player_Slide_Speed;
-        current_playerJumpSpeed = levelData[currentLevel].player_Jump_Speed;
-        current_playerRollingSpeed = levelData[currentLevel].player_Roll_Speed;
-        current_caminhaoMulti = levelData[currentLevel].speedMulti;
+        ApplyLevelData(levelIndex);
+        ScoreEvents.OnChangeLevel(levelIndex);
         yield return null;
+    }
+
+    private void ApplyLevelData(int index)
+    {
+        if (index >= levelData.Length) index = levelData.Length - 1;
+
+        currentLevelIndex = index;
+
+        current_obstacleSpeed = levelData[index].obstacle_Speed;
+        current_obstacleSpawnDistance = levelData[index].obstacle_Spawn_Distance;
+        current_playerSlideSpeed = levelData[index].player_Slide_Speed;
+        current_playerJumpHeight = levelData[index].player_Jump_Height;
+        current_playerRollingSpeed = levelData[index].player_Roll_Speed;
+    }
+
+    // Métodos auxiliares
+    public LevelSO GetLevelData(int index)
+    {
+        if (index >= 0 && index < levelData.Length) return levelData[index];
+        return levelData[levelData.Length - 1];
+    }
+
+    public int GetCurrentLevelIndex()
+    {
+        return currentLevelIndex;
     }
 
     private void StopMovement()
     {
+        if (isPaused) return;
         previousSpeed = current_obstacleSpeed;
         current_obstacleSpeed = 0;
+        isPaused = true;
     }
 
     private void ResumeMovement()
     {
+        if (!isPaused) return;
         current_obstacleSpeed = previousSpeed;
+        isPaused = false;
     }
-
 }

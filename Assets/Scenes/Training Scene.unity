@@ -186,7 +186,7 @@ PrefabInstance:
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: m_Constraints
-      value: 122
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
@@ -808,7 +808,7 @@ PrefabInstance:
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: m_Constraints
-      value: 122
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
@@ -1352,7 +1352,7 @@ PrefabInstance:
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: m_Constraints
-      value: 122
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
@@ -2283,7 +2283,7 @@ PrefabInstance:
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: m_Constraints
-      value: 122
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
@@ -3910,7 +3910,7 @@ PrefabInstance:
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: m_Constraints
-      value: 122
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
@@ -5006,7 +5006,7 @@ PrefabInstance:
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: m_Constraints
-      value: 122
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
@@ -5894,7 +5894,7 @@ PrefabInstance:
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: m_Constraints
-      value: 122
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
@@ -6038,7 +6038,7 @@ PrefabInstance:
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: m_Constraints
-      value: 122
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
@@ -6089,8 +6089,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 160200188095cb447a737298ebd49604,
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813330578219873268, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
+      propertyPath: m_BehaviorType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4813330578219873268, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: m_InferenceDevice
@@ -6099,7 +6103,7 @@ PrefabInstance:
     - target: {fileID: 4845862758778315228, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: DecisionPeriod
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5716023774702928839, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
@@ -6110,6 +6114,11 @@ PrefabInstance:
         type: 3}
       propertyPath: rotationSpeed
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927221634260586739, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
+        type: 3}
+      propertyPath: isTraining
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7256645143964107240, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
@@ -7616,6 +7625,7 @@ MonoBehaviour:
   currentGameState: 0
   currentAgentState: 0
   isNormalMode: 0
+  isTraining: 1
   playerColliderOn: 1
   testStartLevel_5: 0
   winScore: 13
@@ -7709,14 +7719,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bbc34c003eb12094cbcb8ee9f7ad08a9, type: 2}
   - {fileID: 11400000, guid: 747ec5a6016edab4db8913b9689fb5d8, type: 2}
   - {fileID: 11400000, guid: ba4f6a27841a1fa4d9053346f1c9c3cd, type: 2}
-  currentLevel: 0
-  lerpToNextLevel: 0.8
+  currentLevelIndex: 0
   current_obstacleSpeed: 0
-  current_obstacleSpawnDelay: 0
+  current_obstacleSpawnDistance: 0
   current_playerSlideSpeed: 0
-  current_playerJumpSpeed: 0
+  current_playerJumpHeight: 0
   current_playerRollingSpeed: 0
-  current_caminhaoMulti: 0
   changeToLevel_2: 10
   changeToLevel_3: 20
   changeToLevel_4: 30
@@ -8677,7 +8685,7 @@ PrefabInstance:
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: m_Constraints
-      value: 122
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
@@ -9033,7 +9041,7 @@ PrefabInstance:
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: m_Constraints
-      value: 122
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
@@ -9474,7 +9482,7 @@ PrefabInstance:
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: m_Constraints
-      value: 122
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
@@ -9995,7 +10003,7 @@ PrefabInstance:
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: m_Constraints
-      value: 122
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
@@ -10726,7 +10734,7 @@ PrefabInstance:
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}
       propertyPath: m_Constraints
-      value: 122
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1725827378496261677, guid: 2cd7ae1bf8bba9140bd49df64758a1cc,
         type: 3}

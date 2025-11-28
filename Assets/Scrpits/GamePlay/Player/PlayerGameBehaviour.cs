@@ -22,7 +22,7 @@ public class PlayerGameBehaviour : MonoBehaviour
             reward--;
             // Game Over
             
-            if (playerManager.isTraining) { return; }
+            if (GamePlayManager.Instance.isTraining) { return; }
 
             GameplayEvents.OnGameOver();
             
@@ -38,7 +38,7 @@ public class PlayerGameBehaviour : MonoBehaviour
         else if (other.CompareTag(Const.STAR_TAG))
         {
             stars++;
-            if (playerManager.isTraining) { return; }
+            if (GamePlayManager.Instance.isTraining) { return; }
             
             ScoreEvents.OnScoreGained(Const.SCORE_PER_COLLECTABLE);
             

@@ -5,27 +5,33 @@ using GameEvents;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    PlayerMovement playerMovement;
-    [SerializeField] Animator anim;
+    private PlayerMovement playerMovement;
+    [SerializeField] private Animator anim;
 
-    int currentLevel;
-    bool hasWin = false;
+    private bool hasWin = false;
 
     void Start()
     {
-        anim = GetComponentInChildren<Animator>();
+        // Garante que pegamos o Animator (seja no objeto ou filhos)
+        if (anim == null) anim = GetComponentInChildren<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
+
+        // Inicializa com os dados do nível atual assim que o jogo abre
+        if (LevelManager.Instance != null)
+        {
+            UpdateAnimSpeedsFromData(LevelManager.Instance.GetCurrentLevelIndex());
+        }
     }
 
     private void OnEnable()
     {
         UtilityEvents.GamePause += IdleAnimation;
         UtilityEvents.GameResume += StartMovingAnimation;
-
         GameplayEvents.StartNewLevel += StartMovingAnimation;
         GameplayEvents.GameOver += GameOverAnimation;
 
-        ScoreEvents.ChangeLevel += UpdateCurrentLevel;
+        // Evento de mudança de nível
+        ScoreEvents.ChangeLevel += OnLevelChanged;
 
         GameplayEvents.ReachPalace += WinPreparation;
         GameplayEvents.DropFaixa += WinAnimation;
@@ -35,32 +41,55 @@ public class PlayerAnimation : MonoBehaviour
     {
         UtilityEvents.GamePause -= IdleAnimation;
         UtilityEvents.GameResume -= StartMovingAnimation;
-
         GameplayEvents.StartNewLevel -= StartMovingAnimation;
         GameplayEvents.GameOver -= GameOverAnimation;
 
-        ScoreEvents.ChangeLevel -= UpdateCurrentLevel;
+        ScoreEvents.ChangeLevel -= OnLevelChanged;
 
         GameplayEvents.ReachPalace -= WinPreparation;
         GameplayEvents.DropFaixa -= WinAnimation;
     }
+
     void Update()
     {
-        UpdateAnimations();
-        if (!GamePlayManager.Instance.isNormalMode)
-        {
-            UpdateAnimationSpeedPerLevel();
-        }
+        // Apenas lógica de estados (Booleanos) fica no Update
+        UpdateAnimationStates();
 
         if (hasWin)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(0, 180, 0)), 0.01f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(0, 180, 0)), 5f * Time.deltaTime);
         }
     }
 
-    void UpdateCurrentLevel(int _)
+    // --- NOVA LÓGICA: Sincronização via Scriptable Object ---
+
+    void OnLevelChanged(int levelIndex)
     {
-        currentLevel++;
+        UpdateAnimSpeedsFromData(levelIndex);
+    }
+
+    void UpdateAnimSpeedsFromData(int levelIndex)
+    {
+        if (LevelManager.Instance == null) return;
+
+        // Pega o SO do nível atual através do Manager
+        LevelSO data = LevelManager.Instance.GetLevelData(levelIndex);
+
+        if (data != null && anim != null)
+        {
+            // Aplica os valores que você configurou no arquivo do nível
+            anim.SetFloat(Const.JUMP_SPEED_ANIMATION, data.anim_Jump_Speed_Multi);
+            anim.SetFloat(Const.ROLL_SPEED_ANIMATION, data.anim_Roll_Speed_Multi);
+            anim.SetFloat(Const.RUN_SPEED_ANIMATION, data.anim_Run_Speed_Multi);
+        }
+    }
+    
+
+    void UpdateAnimationStates()
+    {
+        // Lógica simplificada
+        anim.SetBool(Const.JUMP_ANIMATION, !playerMovement.isGrounded);
+        anim.SetBool(Const.ROLL_ANIMATION, playerMovement.isRolling);
     }
 
     private void GameOverAnimation()
@@ -80,101 +109,13 @@ public class PlayerAnimation : MonoBehaviour
 
     private void WinPreparation()
     {
-        Debug.Log("Win Preparation");
         anim.SetBool(Const.RUN_ANIMATION, false);
-
         GameplayEvents.OnDropFaixa();
     }
 
     private void WinAnimation()
     {
-        Debug.Log("Set Anim Win True");
         hasWin = true;
-        
         anim.SetBool(Const.WIN_ANIMATION, true);
-    }
-
-    void UpdateAnimations()
-    {
-        if (playerMovement.isGrounded)
-        {
-            anim.SetBool(Const.JUMP_ANIMATION, false);
-        }
-        else
-        {
-            anim.SetBool(Const.JUMP_ANIMATION, true);
-        }
-
-
-        if (playerMovement.isRolling)
-        {
-            anim.SetBool(Const.ROLL_ANIMATION, true);
-        }
-        else
-        {
-            anim.SetBool(Const.ROLL_ANIMATION, false);
-        }
-    }
-
-    void UpdateAnimationSpeedPerLevel()
-    {
-        switch (currentLevel)
-        {
-
-            case 1:
-                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1f);
-                break;
-            case 2:
-                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1f);
-                break;
-            case 3:
-                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.2f);
-                break;
-            case 4:
-                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.2f);
-                break;
-            case 5:
-                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.3f);
-                break;
-            case 6:
-                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.2f);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.4f);
-                break;
-            case 7:
-                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.3f);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.4f);
-                break;
-            case 8:
-                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.3f);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.5f);
-                break;
-            case 9:
-                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.3f);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.5f);
-                break;
-            case 10:
-                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.3f);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.7f);
-                break;
-            case 11:
-                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.5f);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 1.7f);
-                break;
-            case 12:
-                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.5f);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 2.2f);
-                break;
-            case 13:
-                anim.SetFloat(Const.JUMP_SPEED_ANIMATION, 1.8f);
-                anim.SetFloat(Const.ROLL_SPEED_ANIMATION, 2.3f);
-                break;
-            default:
-                break;
-        }
     }
 }

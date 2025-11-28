@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Normal_Mode
   m_EditorClassIdentifier: 
   level: 0
-  minDistChangeSpeed: 200
-  obstacle_Initial_Speed: 80
-  obstacle_Speed: 80
-  obstacle_Spawn_Delay: 1.5
-  collectable_Spawn_Delay: 1.5
   player_Slide_Speed: 5
-  player_Jump_Speed: 7
+  player_Jump_Height: 7
+  player_Gravity: 100
   player_Roll_Speed: 0.8
-  speedMulti: 1.5
+  obstacle_Speed: 80
+  obstacle_Spawn_Distance: 100
+  anim_Jump_Speed_Multi: 1
+  anim_Roll_Speed_Multi: 1.25
+  anim_Run_Speed_Multi: 1

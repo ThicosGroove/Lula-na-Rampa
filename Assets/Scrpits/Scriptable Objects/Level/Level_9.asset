@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: Level_9
   m_EditorClassIdentifier: 
   level: 9
-  obstacle_Speed: 180
-  obstacle_Spawn_Delay: 0.7
-  player_Slide_Speed: 5
-  player_Jump_Speed: 7.5
-  player_Roll_Speed: 0.7
-  speedMulti: 1.7
+  player_Slide_Speed: 8
+  player_Jump_Height: 6.6
+  player_Gravity: 160
+  player_Roll_Speed: 1.85
+  obstacle_Speed: 120
+  obstacle_Spawn_Distance: 100
+  anim_Jump_Speed_Multi: 1.26
+  anim_Roll_Speed_Multi: 1.48
+  anim_Run_Speed_Multi: 1.5

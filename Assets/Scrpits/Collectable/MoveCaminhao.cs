@@ -9,15 +9,11 @@ public class MoveCaminhao : MoveBase
     protected override void Start()
     {
         base.Start();
-        speedMultiplier = LevelManager.Instance.current_caminhaoMulti;
     }
 
     protected override void MoveBehaviour()
     {
-        //if (isInReach)
-        //{
-        //    base.speed *= speedMultiplier;
-        //}
+     
     }
 
     protected override void DieBehaviour()

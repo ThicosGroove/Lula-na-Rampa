@@ -9,9 +9,6 @@ public class ScoreManager : Singleton<ScoreManager>
     void Start()
     {
         totalScoreCurrentRun = 0;
-
-
-
     }
 
     private void OnEnable()
